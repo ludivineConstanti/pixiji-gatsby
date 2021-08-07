@@ -3,12 +3,14 @@ import { combineReducers } from "redux"
 
 import kanjisArrSlice from "./slices/kanjisArrSlice"
 import globalSlice from "./slices/globalSlice"
+import quizSlice from "./slices/quizSlice"
 
 // We export the result of all the combined reducers
 // to use it in createStore
 
 export default combineReducers({
   global: globalSlice,
+  quiz: quizSlice,
   kanjisArr: kanjisArrSlice,
 })
 
