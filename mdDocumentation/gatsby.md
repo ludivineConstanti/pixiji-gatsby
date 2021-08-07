@@ -33,3 +33,5 @@ when just trying to have an empty store (I tried first with the store I use in P
    return <Provider store={store}>{element}</Provider>;
  };
 ```
+
+that worked better, I got an other bug because I put configureStore inside of a function (in store/index) but once I removed the function and put configureStore directly, it worked.
