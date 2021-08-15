@@ -8,11 +8,34 @@ module.exports = {
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
+    // allow absolute paths
     {
       resolve: "gatsby-plugin-root-import",
       options: {
         src: path.join(__dirname, "src"),
         pages: path.join(__dirname, "src/pages"),
+      },
+    },
+    // yaml files
+    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-yaml`,
+      options: {
+        // Conditionally set the typeName so that we both use a lowercased and capitalized type name
+        typeName: ({ node }) => {
+          const name = node.sourceInstanceName
+          if (name === `quizzes`) {
+            return `Quiz`
+          }
+          return name
+        },
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/content/quizzes`,
+        name: `quizzes`,
       },
     },
     `gatsby-plugin-react-helmet`,

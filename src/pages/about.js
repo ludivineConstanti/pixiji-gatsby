@@ -1,17 +1,16 @@
 import * as React from "react"
 
 import Layout from "src/components/a_Root/Layout"
-import Home from "src/components/b_Pages/Home"
+import About from "src/components/b_Pages/About"
 import Seo from "src/components/seo"
 
-const IndexPage = props => {
-  console.log(props)
+const AboutPage = () => {
   return (
     <Layout>
-      <Seo title="Home" />
-      <Home />
+      <Seo title="About" />
+      <About />
     </Layout>
   )
 }
 
-export default IndexPage
+export default AboutPage

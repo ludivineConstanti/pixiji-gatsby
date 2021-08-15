@@ -1,16 +1,17 @@
 import * as React from "react"
-import { Link } from "gatsby"
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import Layout from "src/components/a_Root/Layout"
+import ReadMe from "src/components/b_Pages/ReadMe"
+import Seo from "src/components/seo"
 
-const SecondPage = () => (
-  <Layout>
-    <Seo title="Page two" />
-    <h1>Hi from the second page</h1>
-    <p>Welcome to page 2</p>
-    <Link to="/">Go back to the homepage</Link>
-  </Layout>
-)
+const ReadMePage = props => {
+  console.log(props)
+  return (
+    <Layout>
+      <Seo title="Read me" />
+      <ReadMe />
+    </Layout>
+  )
+}
 
-export default SecondPage
+export default ReadMePage

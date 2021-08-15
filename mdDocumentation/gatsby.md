@@ -35,3 +35,39 @@ when just trying to have an empty store (I tried first with the store I use in P
 ```
 
 that worked better, I got an other bug because I put configureStore inside of a function (in store/index) but once I removed the function and put configureStore directly, it worked.
+
+## Adding pages dynamically
+
+There's various ways to dynamically add routes with gatsby, one of them is with [collection routes](https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/#collection-routes).  
+
+To create a collection route, there is 3 places where code needs to be added.
+
+1. There should be a file providing data to gatsby for it to know which route it needs to create. In my case I used a yaml file called quiz.yaml  
+
+2. The gatsby-config.js should be modified to process this file correctly
+
+```Javascript
+`gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-yaml`,
+      options: {
+        // Conditionally set the typeName so that we both use a lowercased and capitalized type name
+        typeName: ({ node }) => {
+          const name = node.sourceInstanceName
+          if (name === `quizzes`) {
+            return `Quiz`
+          }
+          return name
+        },
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/content/quizzes`,
+        name: `quizzes`,
+      },
+    },
+```
+
+3. The file rendering the component, in the page folder, should have the right name, between brackets. The name is linked with what was configured above, in the gatsby-config.js file and should also indicate which property of the yaml file it wants to use for the slug.

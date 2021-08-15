@@ -5,7 +5,7 @@ import { useMotionValue } from "framer-motion"
 
 // == Import
 import { SStarContainer } from "./SStars"
-import { createStar, createVStar, createTranslate } from "./helpers"
+import { createStar, createVStar, useCreateTranslate } from "./helpers"
 
 // Ref for animation => https://framerbook.com/animation/example-animations/24-cursor/
 
@@ -52,12 +52,12 @@ const Stars = ({ color }) => {
     }
   }, [])
 
-  const translateX = createTranslate(x, window.innerWidth, 35)
-  const translateY = createTranslate(y, window.innerHeight, 35)
-  const tXM = createTranslate(x, window.innerWidth, 22.5)
-  const tYM = createTranslate(y, window.innerHeight, 22.5)
-  const tXL = createTranslate(x, window.innerWidth, 10)
-  const tYL = createTranslate(y, window.innerHeight, 10)
+  const translateX = useCreateTranslate(x, window.innerWidth, 35)
+  const translateY = useCreateTranslate(y, window.innerHeight, 35)
+  const tXM = useCreateTranslate(x, window.innerWidth, 22.5)
+  const tYM = useCreateTranslate(y, window.innerHeight, 22.5)
+  const tXL = useCreateTranslate(x, window.innerWidth, 10)
+  const tYL = useCreateTranslate(y, window.innerHeight, 10)
 
   return (
     <>
