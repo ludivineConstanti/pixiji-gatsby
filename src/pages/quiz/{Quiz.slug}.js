@@ -2,7 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "src/components/a_Root/Layout"
-import Quizzes from "src/components/b_Pages/Quizzes"
+import Quiz from "src/components/b_Pages/Quiz"
 import Seo from "src/components/seo"
 
 // <Quizzes currentQuiz={params.slug} />
@@ -10,7 +10,7 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <Seo title="Quizzes" />
-      <Quizzes
+      <Quiz
         currentQuiz={{
           id: data.quiz.meta.id,
           title: data.quiz.title,
