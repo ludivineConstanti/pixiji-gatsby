@@ -18,7 +18,7 @@ export const tTitle = `
     ${breakPointD} {
       font-size: 64px;
       line-height: 62px;
-      letter-spacing: 4px;
+      letter-spacing: 2px;
     }
 `
 export const tText = `
@@ -100,4 +100,19 @@ export const tBInTLetterSpacing = 4
 
 export const tButtonInText = `
   ${boldUppercase}
+`
+
+// Input
+
+export const tInput = `
+  letter-spacing: 2px;
+`
+
+export const tInputLabel = `
+font-size: 10px;
+letter-spacing: 2px;
+`
+
+export const tInputPlaceholder = `
+  ${tInput}
 `

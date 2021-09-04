@@ -8,5 +8,5 @@ export default styled(motion.div)`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: calc(100vw - ${buttonWidth});
+  width: calc(100% - ${buttonWidth});
 `

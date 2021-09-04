@@ -2,10 +2,10 @@ const path = require("path")
 
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
+    title: `Pixiji`,
+    description: `Website to practice Japanes Kanjis.`,
+    author: `@ludivineConstanti`,
+    siteUrl: `https://www.linkedin.com/in/ludivine-constanti`,
   },
   plugins: [
     // allow absolute paths

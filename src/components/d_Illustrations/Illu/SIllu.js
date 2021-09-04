@@ -12,7 +12,7 @@ const background = `
 `
 
 export const SPColorMain = styled.div`
-  width: 100vw;
+  width: 100%;
   ${background}
   background-color: ${props => props.s.color};
 `

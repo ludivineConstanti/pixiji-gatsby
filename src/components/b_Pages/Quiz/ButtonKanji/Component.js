@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 // == Import
 import { strokeWidth } from "src/styles/g"
-import SButtonKanji from "./SButtonKanji"
+import SButtonKanji, { SText } from "./SButtonKanji"
 import { lQuiz, tIdQuiz } from "src/assets/querySelectors"
 
 const ButtonKanji = ({
@@ -96,7 +96,7 @@ const ButtonKanji = ({
           : tIdQuiz.wrongAnswer
       }
     >
-      {possibleAnswer.kanji}
+      <SText>{possibleAnswer.kanji}</SText>
     </SButtonKanji>
   )
 }

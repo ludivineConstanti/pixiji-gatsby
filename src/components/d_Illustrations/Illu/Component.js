@@ -23,7 +23,7 @@ const Illu = ({
   useEffect(() => {
     setVsColorMain({
       initial: { width: "0vw" },
-      animate: { width: "100vw", transition: { mass: 5 } },
+      animate: { width: "100%", transition: { mass: 5 } },
     })
 
     const colorIlluL1 = colorIllu

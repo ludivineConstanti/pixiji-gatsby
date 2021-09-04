@@ -14,9 +14,9 @@ export const buttonKanjiSizeGap = "24px"
 // partials
 export const contentLWidth = `calc(${buttonKanjiSize} * 3 + ${buttonKanjiSizeGap} * 2)`
 export const contentLWidthR = `
-  width: calc(100vw - ${buttonWidth});
+  width: calc(100% - ${buttonWidth});
   ${breakPointT} {
-    width: calc(100vw - ${buttonWidth} * 2);
+    width: calc(100% - ${buttonWidth} * 2);
     max-width: 450px;
   }
   ${breakPointD} {

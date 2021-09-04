@@ -20,7 +20,7 @@ export default styled.div`
   position: fixed;
 `
 export const SContent = styled(motion.div)`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   position: fixed;
   display: flex;

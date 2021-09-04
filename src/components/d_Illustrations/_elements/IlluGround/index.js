@@ -8,7 +8,7 @@ import SIlluGround from "./SIlluGround"
 const CraneSunset = ({ color }) => {
   const vIlluGround = {
     initial: { width: "0vw" },
-    animate: { width: "100vw" },
+    animate: { width: "100%" },
   }
   return (
     <SIlluGround

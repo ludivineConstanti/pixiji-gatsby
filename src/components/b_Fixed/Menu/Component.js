@@ -34,8 +34,9 @@ const Menu = ({
               <MenuLink text="Home" path="/" />
               <MenuLink text="Read me" path="/read-me" />
               <MenuLink text="Quizzes" path={`/quizzes/${quizzesSlug}`} />
+              <MenuLink text="Register" path="/create-my-account" />
+              <MenuLink text="Login" path="/login" />
               <MenuLink text="About" path="/about" />
-              <MenuLink text="404" path="/404-not-found" />
             </SContainer>
           </SLinks>
           <div>

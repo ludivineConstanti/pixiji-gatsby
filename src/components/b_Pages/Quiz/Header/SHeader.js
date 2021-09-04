@@ -6,7 +6,7 @@ import { tQuizHeader } from "src/styles/typo"
 // initial css before comes in transition
 export default styled.header`
   ${tQuizHeader}
-  width: calc(100vw - ${buttonWidth});
+  width: calc(100% - ${buttonWidth});
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -17,6 +17,6 @@ export default styled.header`
     height: ${buttonWidth};
   }
   ${breakPointD} {
-    width: 100vw;
+    width: 100%;
   }
 `

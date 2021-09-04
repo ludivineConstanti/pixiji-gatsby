@@ -7,9 +7,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle />
-
       <Menu />
-
       {children}
     </>
   )

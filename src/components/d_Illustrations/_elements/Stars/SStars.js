@@ -27,7 +27,7 @@ export const SStar = styled(motion.div)`
 `
 
 export const SStarContainer = styled(motion.div)`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   position: fixed;
 `

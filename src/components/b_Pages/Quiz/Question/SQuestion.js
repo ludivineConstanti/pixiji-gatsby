@@ -23,20 +23,14 @@ export const SText = styled.h2`
   margin-bottom: 24px;
 `
 
-const optionsWidth = `100vw - ${buttonWidth}`
-
 export const SOptions = styled(motion.div)`
   display: grid;
-  width: calc(${optionsWidth});
-  height: calc(
-    (((${optionsWidth} - (${buttonKanjiSizeGap} * 3)) / 4) * 3) +
-      ${buttonKanjiSizeGap} * 2
-  );
+  width: 100%;
+  height: auto;
   grid-template: repeat(3, 1fr) / repeat(4, 1fr);
   gap: ${buttonKanjiSizeGap};
   ${breakPointT} {
     width: auto;
-    height: auto;
     grid-template-columns: repeat(4, ${buttonKanjiSize});
   }
   ${breakPointD} {

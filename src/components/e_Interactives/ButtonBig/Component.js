@@ -9,6 +9,8 @@ import Arrow from "src/components/e_Interactives/Arrow"
 import { buttonArrowHT, buttonArrowHX } from "src/styles/animation"
 import SButtonBig, { SButton, SComment, SText } from "./SButtonBig"
 
+const MArrow = motion(Arrow)
+
 const ButtonBig = ({
   comment,
   text,
@@ -23,8 +25,6 @@ const ButtonBig = ({
     initial: { [side]: -200, color: "#FFF", transition: { duration: 0.25 } },
     animate: { [side]: 0, color: colorMain, transition: { duration: 0.25 } },
   }
-
-  const MArrow = motion(Arrow)
 
   const vArrow = {
     initial: { borderStyle: "none" },
@@ -58,8 +58,8 @@ const ButtonBig = ({
   return (
     <>
       {path ? (
-        <Link href={path} aria-label={text}>
-          <a>{content}</a>
+        <Link to={path} aria-label={text}>
+          {content}
         </Link>
       ) : (
         <SButton onClick={onClick} type="button" s={{ side }} aria-label={text}>

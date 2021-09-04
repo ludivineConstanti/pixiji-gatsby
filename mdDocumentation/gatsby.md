@@ -71,3 +71,7 @@ To create a collection route, there is 3 places where code needs to be added.
 ```
 
 3. The file rendering the component, in the page folder, should have the right name, between brackets. The name is linked with what was configured above, in the gatsby-config.js file and should also indicate which property of the yaml file it wants to use for the slug.
+
+## Querying data
+
+Gatsby can query data with dynamic variables, but only on page queries.
