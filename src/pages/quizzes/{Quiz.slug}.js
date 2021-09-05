@@ -9,7 +9,7 @@ import Seo from "src/components/seo"
 const IndexPage = ({ data }) => {
   return (
     <Layout>
-      <Seo title="Quizzes" />
+      <Seo title={data.quiz.slug} />
       <Quizzes
         currentQuiz={{
           id: data.quiz.meta.id,

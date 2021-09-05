@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "Pixiji",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A website to test your knowledge of Japanese kanjis",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Ludivine Constanti",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
     "framer-motion": "^4.1.17",

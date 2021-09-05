@@ -5,21 +5,11 @@ import { AnimatePresence } from "framer-motion"
 
 // == Import
 import MenuIcon from "./MenuIcon"
-import MenuLink from "./MenuLink"
-import MenuSetting from "./MenuSetting"
-import SMenu, { SContent, SLinks, SContainer, STitle, variants } from "./SMenu"
+import MenuLinks from "./MenuLinks"
+import MenuSettings from "./MenuSettings"
+import SMenu, { SContent, variants } from "./SMenu"
 
-const Menu = ({
-  isPlaying,
-  colorMainL1,
-  menuIsOpen,
-  cheating,
-  finishedQuiz,
-  quizzesSlug,
-  currentQuizId,
-  updateValueGlobal,
-  cheatingButtonFinishQuiz,
-}) => (
+const Menu = ({ menuIsOpen, isPlaying }) => (
   <SMenu>
     <AnimatePresence exitBeforeEnter>
       {menuIsOpen && (
@@ -29,34 +19,8 @@ const Menu = ({
           animate="animate"
           exit="initial"
         >
-          <SLinks>
-            <SContainer>
-              <MenuLink text="Home" path="/" />
-              <MenuLink text="Read me" path="/read-me" />
-              <MenuLink text="Quizzes" path={`/quizzes/${quizzesSlug}`} />
-              <MenuLink text="Register" path="/create-my-account" />
-              <MenuLink text="Login" path="/login" />
-              <MenuLink text="About" path="/about" />
-            </SContainer>
-          </SLinks>
-          <div>
-            <STitle s={{ colorMainL1 }}>settings</STitle>
-            <MenuSetting
-              text="Cheat mode"
-              hasSwitch
-              onClick={() => {
-                updateValueGlobal({ prop: ["cheating"], value: [!cheating] })
-              }}
-            />
-            {isPlaying && (
-              <MenuSetting
-                text={finishedQuiz ? "Restart quiz" : "Finish quiz"}
-                onClick={() => {
-                  cheatingButtonFinishQuiz({ quizId: currentQuizId })
-                }}
-              />
-            )}
-          </div>
+          <MenuLinks />
+          <MenuSettings isPlaying={isPlaying} />
         </SContent>
       )}
     </AnimatePresence>
@@ -65,15 +29,8 @@ const Menu = ({
 )
 
 Menu.propTypes = {
-  isPlaying: PropTypes.bool.isRequired,
-  colorMainL1: PropTypes.string.isRequired,
   menuIsOpen: PropTypes.bool.isRequired,
-  cheating: PropTypes.bool.isRequired,
-  finishedQuiz: PropTypes.bool.isRequired,
-  quizzesSlug: PropTypes.string.isRequired,
-  currentQuizId: PropTypes.number.isRequired,
-  updateValueGlobal: PropTypes.func.isRequired,
-  cheatingButtonFinishQuiz: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
 }
 
 // == Export

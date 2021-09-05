@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { motion } from "framer-motion"
 
 import { strokeWidth } from "src/styles/g"
 import { tInput, tInputPlaceholder, tInputLabel } from "src/styles/typo"

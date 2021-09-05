@@ -32,8 +32,8 @@ const QuizzesNav = ({ prevQuiz, nextQuiz, currentQuizId, quizzesData }) => {
 QuizzesNav.propTypes = {
   currentQuizId: PropTypes.number.isRequired,
   quizzesData: PropTypes.array.isRequired,
-  prevQuiz: PropTypes.bool.isRequired,
-  nextQuiz: PropTypes.bool.isRequired,
+  prevQuiz: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]).isRequired,
+  nextQuiz: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]).isRequired,
 }
 
 // == Export

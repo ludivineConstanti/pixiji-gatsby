@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 // == Import
 import createIllustration from "src/components/d_Illustrations/_helpers/createIllustration"
-import arrDataIllu from "src/components/d_Illustrations/_data/dataIndex"
+import { data as arrDataIllu } from "src/components/d_Illustrations/_data/dataIndex"
 import IlluIndex from "src/components/d_Illustrations/_compIllus/IlluIndex"
 import { SPColorMain, SColorMain } from "./SIllu"
 

@@ -1,4 +1,4 @@
-export default [
+export const quizzes = [
   {
     id: 1,
     slug: "first-grade",

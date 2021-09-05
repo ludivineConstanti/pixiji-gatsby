@@ -1,7 +1,7 @@
-import kanjis from "src/assets/dataQuiz/kanjis"
-import quizFormatter from "src/helpers/formatters/quizFormatter"
-import kanjisInitial from "src/assets/dataQuiz/kanjisInitial"
-import quizzes from "src/assets/dataQuiz/quizzes"
+import { kanjis } from "src/assets/dataQuiz/kanjis"
+import { quizFormatter } from "src/helpers/formatters/quizFormatter"
+import { kanjisInitial } from "src/assets/dataQuiz/kanjisInitial"
+import { quizzes } from "src/assets/dataQuiz/quizzes"
 
 export const initialStateQuiz = quizId => {
   const currentQuiz = kanjis.filter(e => e.quizId === quizId)

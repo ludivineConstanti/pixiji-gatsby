@@ -1,5 +1,5 @@
-import kanjis from "src/assets/dataQuiz/kanjis"
-import shuffle from "../shuffle"
+import { kanjis } from "src/assets/dataQuiz/kanjis"
+import { shuffle } from "../shuffle"
 
 // need to make a copy of the array by spreading it (otherwise it's a dynamic copy and it's useless)
 // this way it doesn't mess up the data for the quizzes

@@ -7,7 +7,7 @@ import { arrKodomoNoHi, colorKodomoNoHi } from "./kodomoNoHi"
 import { arrCloudDragon, colorCloudDragon } from "./cloudDragon"
 
 // naming with useCase and index is also used in the IlluIndex in _compuIllus
-export default {
+export const data = {
   home: [{ arrIllu: arrRabbitOnMoon, colorIllu: colorRabbitOnMoon }],
   readMe: [{ arrIllu: arrKodomoNoHi, colorIllu: colorKodomoNoHi }],
   about: [{ arrIllu: arrKaguyaHime, colorIllu: colorKaguyaHime }],

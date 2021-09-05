@@ -9,7 +9,7 @@ import Illu from "src/components/d_Illustrations/Illu"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
 import Input from "src/components/e_Interactives/Input"
 
-const CreateMyAccount = ({ kanjisArr }) => (
+const Register = ({ kanjisArr, quizzesSlug }) => (
   <>
     <Illu useCase="about" kanjisArr={kanjisArr} />
     <TextWrapper>
@@ -22,16 +22,21 @@ const CreateMyAccount = ({ kanjisArr }) => (
           label="Password confirmation"
           isLast={true}
         />
-        <ButtonInText text="Register" path="" />
+        <ButtonInText
+          text="Register"
+          path={`/quizzes/${quizzesSlug}`}
+          buttonType="submit"
+        />
       </form>
     </TextWrapper>
     <ButtonBig text="Login" path="/login" />
   </>
 )
 
-CreateMyAccount.propTypes = {
+Register.propTypes = {
   kanjisArr: PropTypes.array.isRequired,
+  quizzesSlug: PropTypes.string.isRequired,
 }
 
 // == Export
-export default CreateMyAccount
+export default Register

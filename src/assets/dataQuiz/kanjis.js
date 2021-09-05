@@ -1,7 +1,7 @@
 // https://en.wikipedia.org/wiki/Ky%C5%8Diku_kanji#First_grade_(80_kanji)
 // https://jisho.org/
 
-export default [
+export const kanjis = [
   {
     id: 1,
     kanji: "一",

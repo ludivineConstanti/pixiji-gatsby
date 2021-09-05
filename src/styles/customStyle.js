@@ -1,7 +1,6 @@
 import { css } from "styled-components"
 
 export const customStyle = css`
-  @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap");
   body {
     font-family: "Montserrat", sans-serif;
     color: white;
@@ -14,5 +13,6 @@ export const customStyle = css`
   }
   button {
     border: none;
+    color: white;
   }
 `

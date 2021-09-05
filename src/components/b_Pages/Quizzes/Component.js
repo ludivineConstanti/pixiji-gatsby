@@ -54,7 +54,7 @@ const Quizzes = ({
           text={[textIntro, textFirstTry, textWrongAnswers]}
           button={{
             text: kanjisArr.length > 0 ? "Continue" : "Start",
-            path: `quiz/${currentQuiz.slug}`,
+            path: `/quiz/${currentQuiz.slug}`,
           }}
         />
         <QuizzesNav

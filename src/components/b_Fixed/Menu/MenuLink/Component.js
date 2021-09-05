@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react"
 import PropTypes from "prop-types"
 import { motion } from "framer-motion"
-import { Link } from "gatsby"
 
 // == Import
 import { tMLLetterSpacing } from "src/styles/typo"
@@ -43,21 +42,20 @@ const MenuLink = ({
   }, [colorMain])
 
   return (
-    <Link to={path}>
-      <SMenuLink
-        onClick={() => {
-          updateValueGlobal({ prop: ["menuIsOpen"], value: [false] })
-        }}
-        s={{ colorMainL1 }}
-        variants={vMenuLink}
-        initial="initial"
-        animate="animate"
-        whileHover="whileHover"
-      >
-        <motion.div variants={vSquare} className="menuLink__square" />
-        {text}
-      </SMenuLink>
-    </Link>
+    <SMenuLink
+      to={path}
+      onClick={() => {
+        updateValueGlobal({ prop: ["menuIsOpen"], value: [false] })
+      }}
+      s={{ colorMainL1 }}
+      variants={vMenuLink}
+      initial="initial"
+      animate="animate"
+      whileHover="whileHover"
+    >
+      <motion.div variants={vSquare} className="menuLink__square" />
+      {text}
+    </SMenuLink>
   )
 }
 

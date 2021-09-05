@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-import kanjisInitial from "src/assets/dataQuiz/kanjisInitial"
-import quizFormatter from "src/helpers/formatters/quizFormatter"
+import { kanjisInitial } from "src/assets/dataQuiz/kanjisInitial"
+import { quizFormatter } from "src/helpers/formatters/quizFormatter"
 import { initialState, emptyAnswer, initialize } from "./helpers"
 
 export const quizSlice = createSlice({

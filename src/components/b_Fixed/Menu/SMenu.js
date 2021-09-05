@@ -1,13 +1,7 @@
 import styled from "styled-components"
 import { motion } from "framer-motion"
 
-import {
-  zImenu,
-  contentMenuWidth,
-  buttonWidth,
-  breakPointD,
-} from "src/styles/g"
-import { tMenuSettingsTitle } from "src/styles/typo"
+import { zImenu, contentMenuWidth, breakPointD } from "src/styles/g"
 
 export const variants = {
   initial: { left: `calc((${contentMenuWidth} + 10px) * -1)` },
@@ -29,29 +23,4 @@ export const SContent = styled(motion.div)`
   ${breakPointD} {
     width: ${contentMenuWidth};
   }
-`
-// flex grow => takes maximum height available
-export const SLinks = styled.nav`
-  margin-top: calc(${buttonWidth} / 2);
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  ${breakPointD} {
-    align-items: flex-start;
-    margin-left: ${buttonWidth};
-  }
-`
-export const SContainer = styled.ul`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`
-
-export const STitle = styled.h1`
-  ${tMenuSettingsTitle}
-  margin-left: 24px;
-  margin-bottom: 12px;
-  color: ${props => props.s.colorMainL1};
 `

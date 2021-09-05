@@ -1,36 +1,13 @@
-// == Import npm
 import React from "react"
 import PropTypes from "prop-types"
 import { motion } from "framer-motion"
 
-// == Import
 import Arrow from "src/components/e_Interactives/Arrow"
 import { tBInTFontSize, tBInTLetterSpacing } from "src/styles/typo"
-import { strokeWidth } from "src/styles/g"
 import { buttonArrowHT, buttonArrowHX } from "src/styles/animation"
-import SButtonInText, { SText } from "./SButtonInText"
+import { SText } from "./SButtonInText"
+import ButtonWrapper from "./ButtonWrapper"
 
-const vButtonInText = {
-  initial: {
-    x: 500,
-    width: "0%",
-    padding: 0,
-    border: "0px solid #FFF",
-  },
-  animate: {
-    x: 0,
-    width: "100%",
-    padding: "24px",
-    border: `${strokeWidth} solid #FFF`,
-    transition: { delay: 0.3 },
-  },
-  exit: {
-    x: -250,
-    width: "0%",
-    padding: 0,
-    border: "0px solid #FFF",
-  },
-}
 const vText = {
   initial: { fontSize: 0, letterSpacing: 0 },
   animate: {
@@ -59,26 +36,24 @@ const vArrow = {
   },
 }
 
-const ButtonInText = ({ text, path }) => {
+const ButtonInText = ({ text, path, buttonType }) => {
   return (
-    <SButtonInText
-      to={`/${path}`}
-      variants={vButtonInText}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      whileHover="whileHover"
-    >
+    <ButtonWrapper buttonType={buttonType} path={path}>
       <SText variants={vText}>{text}</SText>
       <MArrow variants={vArrow} isWhite />
-    </SButtonInText>
+    </ButtonWrapper>
   )
 }
 
 ButtonInText.propTypes = {
   text: PropTypes.string.isRequired,
-  path: PropTypes.string.isRequired,
+  path: PropTypes.string,
+  buttonType: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
 }
 
-// == Export
+ButtonInText.defaultProps = {
+  buttonType: false,
+  path: "",
+}
+
 export default ButtonInText

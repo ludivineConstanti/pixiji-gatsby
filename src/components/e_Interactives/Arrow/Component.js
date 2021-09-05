@@ -1,8 +1,6 @@
-// == Import npm
 import React from "react"
 import PropTypes from "prop-types"
 
-// == Import
 import { SArrow, SStroke, SEnd } from "./SArrow"
 
 const Arrow = React.forwardRef(({ pointsToward, colorMain, isWhite }, ref) => (
@@ -23,5 +21,4 @@ Arrow.defaultProps = {
   isWhite: false,
 }
 
-// == Export
 export default Arrow

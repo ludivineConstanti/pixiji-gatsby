@@ -1,4 +1,4 @@
-export default [
+export const kanjisInitial = [
   {
     id: 1,
     kanji: "?",

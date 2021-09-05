@@ -1,6 +1,6 @@
-import shuffle from "../shuffle"
+import { shuffle } from "../shuffle"
 
-export default dataQuiz => {
+export const quizFormatter = dataQuiz => {
   shuffle(dataQuiz)
   const answers11 = 11 - (dataQuiz.length % 12) + 1
   if (answers11 - 1 > dataQuiz.length / 12) {

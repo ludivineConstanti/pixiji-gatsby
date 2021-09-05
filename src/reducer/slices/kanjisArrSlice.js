@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import kanjisArrFormatter, {
   getKanjisNum,
 } from "src/helpers/formatters/kanjisArrFormatter"
-import data from "src/components/d_Illustrations/_data/dataIndex"
+import { data } from "src/components/d_Illustrations/_data/dataIndex"
 
 export const kanjisArrSlice = createSlice({
   name: "kanjisArr",
