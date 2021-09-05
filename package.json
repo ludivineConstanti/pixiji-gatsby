@@ -6,6 +6,8 @@
   "author": "Ludivine Constanti",
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
+    "axios": "^0.21.3",
+    "dotenv": "^10.0.0",
     "framer-motion": "^4.1.17",
     "gatsby": "^3.11.0",
     "gatsby-plugin-gatsby-cloud": "^2.11.0",
