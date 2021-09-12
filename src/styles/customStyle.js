@@ -4,6 +4,8 @@ export const customStyle = css`
   body {
     font-family: "Montserrat", sans-serif;
     color: white;
+    overflow-x: hidden;
+    overflow-y: hidden;
   }
   input {
     color: white;
@@ -14,5 +16,8 @@ export const customStyle = css`
   button {
     border: none;
     color: white;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
   }
 `

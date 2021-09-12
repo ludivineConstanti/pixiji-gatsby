@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 // == Import
 import { tMLLetterSpacing } from "src/styles/typo"
-import SMenuLink from "./SMenuLink"
+import SMenuLink, { SMenuButton } from "./SMenuLink"
 
 const MenuLink = ({
   path,
@@ -13,6 +13,7 @@ const MenuLink = ({
   colorMainL1,
   colorMain,
   updateValueGlobal,
+  onClick,
 }) => {
   const [vMenuLink, setVMenuLink] = useState({
     initial: { letterSpacing: "0px" },
@@ -41,7 +42,7 @@ const MenuLink = ({
     })
   }, [colorMain])
 
-  return (
+  return path ? (
     <SMenuLink
       to={path}
       onClick={() => {
@@ -56,15 +57,36 @@ const MenuLink = ({
       <motion.div variants={vSquare} className="menuLink__square" />
       {text}
     </SMenuLink>
+  ) : (
+    <SMenuButton
+      onClick={() => {
+        onClick()
+        updateValueGlobal({ prop: ["menuIsOpen"], value: [false] })
+      }}
+      s={{ colorMainL1 }}
+      variants={vMenuLink}
+      initial="initial"
+      animate="animate"
+      whileHover="whileHover"
+    >
+      <motion.div variants={vSquare} className="menuLink__square" />
+      {text}
+    </SMenuButton>
   )
 }
 
 MenuLink.propTypes = {
-  path: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   colorMainL1: PropTypes.string.isRequired,
   colorMain: PropTypes.string.isRequired,
   updateValueGlobal: PropTypes.func.isRequired,
+  path: PropTypes.string,
+  onClick: PropTypes.func,
+}
+
+MenuLink.defaultProps = {
+  path: "",
+  onClick: () => {},
 }
 
 // == Export

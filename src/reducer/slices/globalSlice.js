@@ -4,6 +4,7 @@ export const globalSlice = createSlice({
   name: "global",
   initialState: {
     isLoggedIn: false,
+    email: "",
     cheating: true,
     colorMainL1: "#0A2846",
     colorMain: "#0A2846",

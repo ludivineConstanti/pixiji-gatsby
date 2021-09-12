@@ -1,5 +1,6 @@
 // pink light
 const pinkL1 = "#F2BEDD"
+// pink
 const pink = "#EB8DC5"
 // pink dark
 const pinkD1 = "#C94D98"

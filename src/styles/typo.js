@@ -1,5 +1,9 @@
 import { breakPointD } from "./g"
 
+const sizes = {
+  small: 10,
+}
+
 const blackUppercase = `
   text-transform: uppercase;
   font-weight: 900;
@@ -44,7 +48,7 @@ export const tMenuSetting = `
 
 export const tMenuSettingOnOff = `
   ${blackUppercase}
-  font-size: 10px;
+  font-size: ${sizes.small}px;
 `
 
 export const tMenuSettingsTitle = `
@@ -56,7 +60,7 @@ export const tMenuSettingsTitle = `
 // QUIZ
 export const tQuizHeader = `
   ${boldUppercase}
-  font-size: 10px;
+  font-size: ${sizes.small}px;
   letter-spacing: 6px;
   line-height: 16px;
 `
@@ -81,7 +85,7 @@ export const tMSquareInfosBottom = `
 
 // BUTTON BIG
 export const tButtonBigComment = `
-  font-size: 10px;
+  font-size: ${sizes.small}px;
   letter-spacing: 0.3vw;
   font-weight: 700;
 `
@@ -109,10 +113,18 @@ export const tInput = `
 `
 
 export const tInputLabel = `
-font-size: 10px;
+font-size: ${sizes.small}px;
 letter-spacing: 2px;
 `
 
 export const tInputPlaceholder = `
   ${tInput}
+`
+
+// Form
+
+export const tFeedback = `
+font-size: ${sizes.small}px;
+line-height: 16px;
+letter-spacing: 2px;
 `

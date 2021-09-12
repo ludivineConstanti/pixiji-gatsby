@@ -7,6 +7,7 @@ import RabbitOnMoon from "src/components/d_Illustrations/_compIllus/RabbitOnMoon
 import SnowMonkeys from "src/components/d_Illustrations/_compIllus/SnowMonkeys"
 import CraneSunset from "src/components/d_Illustrations/_compIllus/CraneSunset"
 import SakuraDeer from "src/components/d_Illustrations/_compIllus/SakuraDeer"
+import SakuraBirds from "src/components/d_Illustrations/_compIllus/SakuraBirds"
 import KaguyaHime from "src/components/d_Illustrations/_compIllus/KaguyaHime"
 import KodomoNoHi from "src/components/d_Illustrations/_compIllus/KodomoNoHi"
 import CloudDragon from "src/components/d_Illustrations/_compIllus/CloudDragon"
@@ -31,6 +32,7 @@ const IlluIndex = ({ useCase, index, data, kanjis, arrNumKanjis }) => {
         totalKanjis={arrNumKanjis[arrNumKanjis.length - 1]}
       />
     ),
+    register0: <SakuraBirds data={data} />,
     error4040: (
       <CloudDragon
         data={data}

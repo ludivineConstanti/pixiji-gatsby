@@ -1,9 +1,12 @@
 const path = require("path")
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
   siteMetadata: {
     title: `Pixiji`,
-    description: `Website to practice Japanes Kanjis.`,
+    description: `Website to practice Japanese Kanjis.`,
     author: `@ludivineConstanti`,
     siteUrl: `https://www.linkedin.com/in/ludivine-constanti`,
   },

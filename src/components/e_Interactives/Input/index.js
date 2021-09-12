@@ -5,7 +5,7 @@ import SInput, { SLabel } from "./SInput"
 
 const Input = ({ isLast, placeholder, type, label }) => (
   <>
-    <SLabel for={label}>{label}:</SLabel>
+    <SLabel htmlFor={label}>{label}:</SLabel>
     <SInput type={type} placeholder={placeholder} s={{ isLast }} id={label} />
   </>
 )

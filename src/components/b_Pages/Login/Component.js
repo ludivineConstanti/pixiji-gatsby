@@ -7,14 +7,32 @@ import ButtonInText from "src/components/e_Interactives/ButtonInText"
 import Illu from "src/components/d_Illustrations/Illu"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
 import Input from "src/components/e_Interactives/Input"
+import FeedbackMessage from "src/components/f_Statics/FeedbackMessage"
 
-const onSubmit = e => {
+const email = "I am a dynamic email"
+const password = "I am a dynamic password"
+
+const onSubmit = async e => {
   e.preventDefault()
-  console.log("submitted")
-  const queryResult = await axios.post(Constants.GRAPHQL_API, {
-    query: Constatns.query,
+  console.log("e", e)
+  console.log(e.target[0].value)
+  console.log(e.target[1].value)
+  const result = await axios({
+    url: process.env.GATSBY_API,
+    method: "post",
+    data: {
+      query: `mutation createUser($email: String!, $password: String!) {
+      createUser(user: {email: $email, password: $password}){
+        email
+      }
+    }
+      `,
+      variables: {
+        email,
+        password,
+      },
+    },
   })
-  console.log("result", queryResult.data.data)
 }
 
 const Login = ({ kanjisArr, quizzesSlug }) => {

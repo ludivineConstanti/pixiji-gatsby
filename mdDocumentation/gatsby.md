@@ -38,11 +38,11 @@ that worked better, I got an other bug because I put configureStore inside of a 
 
 ## Adding pages dynamically
 
-There's various ways to dynamically add routes with gatsby, one of them is with [collection routes](https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/#collection-routes).  
+There's various ways to dynamically add routes with gatsby, one of them is with [collection routes](https://www.gatsbyjs.com/docs/reference/routing/file-system-route-api/#collection-routes).
 
 To create a collection route, there is 3 places where code needs to be added.
 
-1. There should be a file providing data to gatsby for it to know which route it needs to create. In my case I used a yaml file called quiz.yaml  
+1. There should be a file providing data to gatsby for it to know which route it needs to create. In my case I used a yaml file called quiz.yaml
 
 2. The gatsby-config.js should be modified to process this file correctly
 
@@ -75,3 +75,11 @@ To create a collection route, there is 3 places where code needs to be added.
 ## Querying data
 
 Gatsby can query data with dynamic variables, but only on page queries.
+
+## Adding .env
+
+[Link to documentation](https://www.gatsbyjs.com/docs/how-to/local-development/environment-variables/)
+
+## Custop API
+
+[Link to documentation](https://www.gatsbyjs.com/plugins/gatsby-source-custom-api/)

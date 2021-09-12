@@ -11,6 +11,7 @@ export const kanjisArrSlice = createSlice({
     home: kanjisArrFormatter(getKanjisNum(data.home[0].arrIllu)),
     readMe: kanjisArrFormatter(getKanjisNum(data.readMe[0].arrIllu)),
     about: kanjisArrFormatter(getKanjisNum(data.about[0].arrIllu)),
+    register: kanjisArrFormatter(getKanjisNum(data.register[0].arrIllu)),
     error404: kanjisArrFormatter(getKanjisNum(data.error404[0].arrIllu)),
   },
 
