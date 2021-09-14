@@ -9,6 +9,7 @@ const mapStateToProps = state => {
     colorMain: state.global.colorMain,
     colorMainD1: state.global.colorMainD1,
     cheating: state.global.cheating,
+    email: state.global.email,
     correctAnswer:
       state.quiz[current].dataQuiz[0].arrAnswers[
         state.quiz[current].dataQuiz[0].infosAnswer.answerIndex

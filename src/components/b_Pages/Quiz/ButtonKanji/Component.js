@@ -1,11 +1,36 @@
 // == Import npm
 import React, { useState, useEffect } from "react"
 import PropTypes from "prop-types"
+import axios from "axios"
 
 // == Import
 import { strokeWidth } from "src/styles/g"
 import SButtonKanji, { SText } from "./SButtonKanji"
 import { lQuiz, tIdQuiz } from "src/assets/querySelectors"
+
+const sendToAPI = async (email, kanjiId, quizId, isCorrect) => {
+  const result = await axios({
+    url: process.env.GATSBY_API,
+    method: "post",
+    data: {
+      query: `mutation setScore($email: String!, $kanjiId: String!, $quizId: String!, $isCorrect: Boolean!) {
+        setScore(score: {email: $email, kanjiId: $kanjiId, quizId: $quizId, isCorrect: $isCorrect}, ){
+        success
+        message
+      }
+    }
+      `,
+      variables: {
+        email,
+        kanjiId: `${kanjiId}`,
+        quizId: `${quizId}`,
+        isCorrect,
+      },
+    },
+  })
+
+  console.log(result)
+}
 
 const ButtonKanji = ({
   quizId,
@@ -15,8 +40,11 @@ const ButtonKanji = ({
   colorMainD1,
   correctAnswer,
   cheating,
+  email,
   answeredQuestionQuiz,
 }) => {
+  const isCorrect = possibleAnswer.id === correctAnswer.id
+
   const [wasClicked, setWasClicked] = useState(false)
 
   const [vButtonKanji, setVButtonKanji] = useState({
@@ -31,14 +59,14 @@ const ButtonKanji = ({
       ...vButtonKanji,
       // eslint-disable-next-line no-nested-ternary
       animate:
-        !wasClicked && possibleAnswer.id === correctAnswer.id && cheating
+        !wasClicked && isCorrect && cheating
           ? {
               ...vButtonKanji.animate,
               scale: 0.6,
               border: `${strokeWidth} solid rgba(255, 255, 255, 1)`,
             }
           : // eslint-disable-next-line no-nested-ternary
-          wasClicked && possibleAnswer.id === correctAnswer.id
+          wasClicked && isCorrect
           ? {
               ...vButtonKanji.animate,
               scale: 1,
@@ -75,13 +103,16 @@ const ButtonKanji = ({
     <SButtonKanji
       type="button"
       onClick={() => {
+        if (email) {
+          sendToAPI(email, possibleAnswer.id, quizId, isCorrect)
+        }
         answeredQuestionQuiz({ quizId, answer: possibleAnswer })
         setWasClicked(true)
       }}
       disabled={disabled}
       s={{
         colorMain,
-        isWrong: possibleAnswer.id !== correctAnswer.id && cheating,
+        isWrong: !isCorrect && cheating,
         cheating,
       }}
       variants={vButtonKanji}
@@ -90,11 +121,7 @@ const ButtonKanji = ({
       exit="exit"
       whileHover={disabled ? "whileHoverOff" : "whileHoverOn"}
       aria-label={lQuiz.buttonKanji}
-      data-testid={
-        possibleAnswer.id === correctAnswer.id
-          ? tIdQuiz.rightAnswer
-          : tIdQuiz.wrongAnswer
-      }
+      data-testid={isCorrect ? tIdQuiz.rightAnswer : tIdQuiz.wrongAnswer}
     >
       <SText>{possibleAnswer.kanji}</SText>
     </SButtonKanji>
@@ -112,6 +139,11 @@ ButtonKanji.propTypes = {
   }).isRequired,
   cheating: PropTypes.bool.isRequired,
   answeredQuestionQuiz: PropTypes.func.isRequired,
+  email: PropTypes.string,
+}
+
+ButtonKanji.defaultProps = {
+  email: "",
 }
 
 // == Export

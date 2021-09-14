@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit"
 export const globalSlice = createSlice({
   name: "global",
   initialState: {
-    isLoggedIn: false,
     email: "",
     cheating: true,
     colorMainL1: "#0A2846",

@@ -8,7 +8,6 @@ import {
   buttonKanjiSizeGap,
   breakPointT,
   breakPointD,
-  buttonWidth,
 } from "src/styles/g"
 import { tText } from "src/styles/typo"
 

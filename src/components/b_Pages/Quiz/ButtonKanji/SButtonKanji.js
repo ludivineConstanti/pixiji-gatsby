@@ -14,7 +14,8 @@ export default styled(motion.button)`
       : props.s.cheating
       ? `calc(${strokeWidth} * 1.5) solid rgba(255, 255, 255, 1)`
       : `${strokeWidth} solid rgba(255, 255, 255, 1)`};
-  color: ${props => (props.s.isWrong ? "rgba(255, 255, 255, 0.5)" : "white")};
+  color: ${props =>
+    props.s.isWrong ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
   font-size: 18px;
   background-color: ${props => props.s.colorMain};
   width: 100%;

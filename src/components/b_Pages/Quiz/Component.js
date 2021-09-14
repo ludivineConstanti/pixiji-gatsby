@@ -9,6 +9,7 @@ import SQuiz from "./SQuiz"
 import Header from "./Header"
 import StatePlaying from "./StatePlaying"
 import StateFinished from "./StateFinished"
+import Warning from "./Warning"
 
 const Quiz = ({
   finishedQuiz,
@@ -16,6 +17,7 @@ const Quiz = ({
   currentQuiz,
   updateIdQuiz,
   initializeQuiz,
+  isLoggedIn,
 }) => {
   useEffect(() => {
     updateIdQuiz({ quizId: currentQuiz.id, slug: currentQuiz.slug })
@@ -26,6 +28,7 @@ const Quiz = ({
       <Illu useCase="quiz" index={currentQuiz.id - 1} kanjisArr={kanjisArr} />
       <SQuiz>
         <Header />
+        {!isLoggedIn && <Warning />}
         <AnimatePresence exitBeforeEnter>
           {finishedQuiz ? <StateFinished /> : <StatePlaying />}
         </AnimatePresence>
@@ -44,6 +47,7 @@ Quiz.propTypes = {
   }).isRequired,
   updateIdQuiz: PropTypes.func.isRequired,
   initializeQuiz: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
 }
 
 // == Export

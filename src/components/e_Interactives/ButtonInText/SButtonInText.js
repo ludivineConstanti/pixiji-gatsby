@@ -1,9 +1,9 @@
 import styled from "styled-components"
 import { motion } from "framer-motion"
 
-import { tButtonInText } from "src/styles/typo"
+import { tButtonInText, tButtonSmallInText } from "src/styles/typo"
 
 export const SText = styled(motion.p)`
-  ${tButtonInText}
+  ${p => (p.s.size === "small" ? tButtonSmallInText : tButtonInText)}
   margin-right: 12px;
 `

@@ -12,8 +12,8 @@ const mapDispatchToProps = dispatch => ({
   setIsLoggedIn: payload =>
     dispatch(
       updateValueGlobal({
-        prop: ["isLoggedIn", "email"],
-        value: [true, payload],
+        prop: ["email"],
+        value: [payload],
       })
     ),
 })

@@ -67,6 +67,12 @@ export const tQuizHeader = `
 export const tQuizButtonKanji = `
   font-size: 20px;
 `
+
+export const tWarning = `
+${tQuizHeader}
+font-weight: 500;
+`
+
 // MAIN SQUARE
 export const tMSquareKanji = `
   ${tQuizButtonKanji}
@@ -100,10 +106,16 @@ export const tButtonBigText = `
 `
 // BUTTON IN TEXT
 export const tBInTFontSize = "14px"
+export const tbInTSmallFontSize = "10px"
 export const tBInTLetterSpacing = 4
 
 export const tButtonInText = `
   ${boldUppercase}
+`
+
+export const tButtonSmallInText = `
+  text-transform: uppercase;
+  font-weight: 500;
 `
 
 // Input

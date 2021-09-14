@@ -8,6 +8,7 @@ const mapStateToProps = state => {
   return {
     finishedQuiz: state.quiz[current].finished,
     kanjisArr: state.quiz[current].rightAnswers,
+    isLoggedIn: !!state.global.email,
   }
 }
 

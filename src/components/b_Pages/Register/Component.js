@@ -8,18 +8,18 @@ import ButtonInText from "src/components/e_Interactives/ButtonInText"
 import Illu from "src/components/d_Illustrations/Illu"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
 import Input from "src/components/e_Interactives/Input"
-import { feedbackSuccess, onSubmit } from "./utils"
+import { onSubmit } from "./utils"
 import FeedbackMessage from "src/components/f_Statics/FeedbackMessage"
 
 const Register = ({ kanjisArr, quizzesSlug, setIsLoggedIn }) => {
-  const [feedback, setFeedback] = useState("")
+  const [feedback, setFeedback] = useState({ success: false, message: "" })
   return (
     <>
       <Illu useCase="register" kanjisArr={kanjisArr} />
       <TextWrapper>
         <form
           onSubmit={e => {
-            onSubmit(e, setFeedback, setIsLoggedIn)
+            onSubmit(e, feedback, setFeedback, setIsLoggedIn)
           }}
         >
           <Input type="email" placeholder="Your email address" label="Email" />
@@ -32,13 +32,11 @@ const Register = ({ kanjisArr, quizzesSlug, setIsLoggedIn }) => {
           />
           <ButtonInText text="Register" buttonType="submit" />
         </form>
-        {feedback && <FeedbackMessage content={feedback} />}
+        {feedback.message && <FeedbackMessage content={feedback.message} />}
       </TextWrapper>
       <ButtonBig
-        text={feedback === feedbackSuccess ? "Quizzes" : "Login"}
-        path={
-          feedback === feedbackSuccess ? `/quizzes/${quizzesSlug}` : "/login"
-        }
+        text={feedback.success ? "Quizzes" : "Login"}
+        path={feedback.success ? `/quizzes/${quizzesSlug}` : "/login"}
       />
     </>
   )
