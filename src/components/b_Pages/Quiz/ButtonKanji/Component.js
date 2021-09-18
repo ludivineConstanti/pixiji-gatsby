@@ -9,7 +9,7 @@ import SButtonKanji, { SText } from "./SButtonKanji"
 import { lQuiz, tIdQuiz } from "src/assets/querySelectors"
 
 const sendToAPI = async (email, kanjiId, quizId, isCorrect) => {
-  const result = await axios({
+  await axios({
     url: process.env.GATSBY_API,
     method: "post",
     data: {
@@ -28,8 +28,6 @@ const sendToAPI = async (email, kanjiId, quizId, isCorrect) => {
       },
     },
   })
-
-  console.log(result)
 }
 
 const ButtonKanji = ({
@@ -103,11 +101,11 @@ const ButtonKanji = ({
     <SButtonKanji
       type="button"
       onClick={() => {
+        answeredQuestionQuiz({ quizId, answer: possibleAnswer })
+        setWasClicked(true)
         if (email) {
           sendToAPI(email, possibleAnswer.id, quizId, isCorrect)
         }
-        answeredQuestionQuiz({ quizId, answer: possibleAnswer })
-        setWasClicked(true)
       }}
       disabled={disabled}
       s={{

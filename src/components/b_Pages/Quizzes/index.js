@@ -6,7 +6,7 @@ import Component from "./Component"
 const mapStateToProps = (state, ownProps) => ({
   dataQuizzes: state.quiz.dataQuizzes,
   totalOptions: state.quiz[`quiz${ownProps.currentQuiz.id}`].totalOptions,
-  kanjisArr: state.quiz[`quiz${ownProps.currentQuiz.id}`].wrongAnswers,
+  kanjisArr: state.quiz[`quiz${ownProps.currentQuiz.id}`].wrongAnswersDisplayed,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -15,6 +15,7 @@ export const initialStateQuiz = quizId => {
     answeredCorrectly: false,
     rightAnswers: [],
     wrongAnswers: [],
+    wrongAnswersDisplayed: [],
   }
 }
 
@@ -54,4 +55,17 @@ export const initialize = (state, payload) => {
   cQ.answeredQuestion = false
   cQ.answeredCorrectly = false
   cQ.rightAnswers = []
+}
+
+export const getWrongAnsweredDisplayed = (rightAnswers, wrongAnswers) => {
+  const tempWrongAnswers = []
+
+  for (let i = 0; i < rightAnswers.length; i++) {
+    if (wrongAnswers[i]) {
+      tempWrongAnswers.push(wrongAnswers[i])
+    } else {
+      tempWrongAnswers.push(emptyAnswer)
+    }
+  }
+  return tempWrongAnswers
 }
