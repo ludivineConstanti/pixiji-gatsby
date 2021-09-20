@@ -5,7 +5,6 @@ import Login from "src/components/b_Pages/Login"
 import Seo from "src/components/seo"
 
 const LoginPage = props => {
-  console.log(props)
   return (
     <Layout>
       <Seo title="Log in" />

@@ -6,6 +6,7 @@ import Component from "./Component"
 const mapStateToProps = state => {
   const current = `quiz${state.quiz.currentQuizId}`
   return {
+    answeredQuestion: !!state.quiz[current].answeredQuestion,
     colorMain: state.global.colorMain,
     colorMainD1: state.global.colorMainD1,
     cheating: state.global.cheating,

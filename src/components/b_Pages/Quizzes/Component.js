@@ -44,7 +44,7 @@ const Quizzes = ({
       : `This quiz contains the ${totalOptions} kanjis that are taught in the ${currentQuiz.title}, in Japan.`
   useEffect(() => {
     updateIdQuiz({ quizId: currentQuiz.id, slug: currentQuiz.slug })
-  }, [])
+  }, [currentQuiz.id, currentQuiz.slug, updateIdQuiz])
   return (
     <>
       <Illu useCase="quiz" index={currentQuiz.id - 1} kanjisArr={kanjisArr} />

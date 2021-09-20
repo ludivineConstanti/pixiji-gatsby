@@ -18,12 +18,12 @@ export const SArrow = styled.div`
 
 export const SStroke = styled.div`
   width: 100%;
-  height: ${strokeWidth};
+  height: ${strokeWidth}px;
   background-color: ${p => p.s.colorMain};
 `
 
-const borderOnR = `${strokeWidth} ${strokeWidth} 0 0`
-const borderOnL = `0 0 ${strokeWidth} ${strokeWidth}`
+const borderOnR = `${strokeWidth}px ${strokeWidth}px 0 0`
+const borderOnL = `0 0 ${strokeWidth}px ${strokeWidth}px`
 
 export const SEnd = styled.div`
   border-width: ${p => (p.s.pointsToward === "right" ? borderOnR : borderOnL)};

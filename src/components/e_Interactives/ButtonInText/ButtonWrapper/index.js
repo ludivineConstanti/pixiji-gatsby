@@ -16,7 +16,7 @@ const ButtonWrapper = ({ buttonType, path, size, children }) => {
       x: 0,
       width: size === "small" ? "160px" : "100%",
       padding: size === "small" ? "8px" : "24px",
-      border: `${strokeWidth} solid rgba(255, 255, 255, 1)`,
+      border: `${strokeWidth}px solid rgba(255, 255, 255, 1)`,
       transition: { delay: 0.3 },
     },
     exit: {

@@ -14,7 +14,7 @@ export const onSubmit = async (e, feedback, setFeedback, setIsLoggedIn) => {
   if (!/[0-9]/.test(password1)) {
     arrPasswordProblems.push("Contain at least 1 number")
   }
-  if (!/[$&+,:;=?@#|'"§<>.\-_^\/\*()%!`]/.test(password1)) {
+  if (!/[$&+,:;=?@#|'"§<>.\-_^/*()%!`]/.test(password1)) {
     arrPasswordProblems.push("Contain at least 1 special character")
   }
   if (password1.length < 8) {
@@ -44,7 +44,7 @@ export const onSubmit = async (e, feedback, setFeedback, setIsLoggedIn) => {
     method: "post",
     data: {
       query: `mutation createUser($email: String!, $password: String!) {
-      createUser(user: {email: $email, password: $password}) {
+      createUser(input: {email: $email, password: $password}) {
         success
         message
       }

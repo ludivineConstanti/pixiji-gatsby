@@ -1,4 +1,4 @@
-import mapIllu from "src/components/d_Illustrations/_helpers/mapIllu"
+import { mapIllu } from "src/components/d_Illustrations/_helpers/mapIllu"
 
 export const colorMoon = "#EFC491"
 

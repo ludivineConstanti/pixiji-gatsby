@@ -22,7 +22,13 @@ const Quiz = ({
   useEffect(() => {
     updateIdQuiz({ quizId: currentQuiz.id, slug: currentQuiz.slug })
     initializeQuiz({ quizId: currentQuiz.id, title: currentQuiz.title })
-  }, [])
+  }, [
+    currentQuiz.id,
+    currentQuiz.slug,
+    currentQuiz.title,
+    initializeQuiz,
+    updateIdQuiz,
+  ])
   return (
     <>
       <Illu useCase="quiz" index={currentQuiz.id - 1} kanjisArr={kanjisArr} />

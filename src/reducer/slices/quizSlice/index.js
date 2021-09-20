@@ -4,9 +4,9 @@ import { kanjisInitial } from "src/assets/dataQuiz/kanjisInitial"
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
 import {
   initialState,
-  emptyAnswer,
+  sortWrongAnswers,
   initialize,
-  getWrongAnsweredDisplayed,
+  emptyAnswer,
 } from "./helpers"
 
 export const quizSlice = createSlice({
@@ -36,43 +36,43 @@ export const quizSlice = createSlice({
     },
     answeredQuestionQuiz: (state, { payload }) => {
       // {quizId: num, answer: answerObj}
-      const cQ = state[`quiz${payload.quizId}`]
+      const { quizId, answer } = payload
+      const cQ = state[`quiz${quizId}`]
 
-      cQ.answeredQuestion = payload.answer.id
+      cQ.answeredQuestion = answer.id
 
       const { infosAnswer } = cQ.dataQuiz[0]
 
       const answeredRight =
-        payload.answer.id ===
-        cQ.dataQuiz[0].arrAnswers[infosAnswer.answerIndex].id
+        answer.id === cQ.dataQuiz[0].arrAnswers[infosAnswer.answerIndex].id
 
       if (answeredRight) {
         cQ.answeredCorrectly = true
         cQ.dataQuiz[0].infosAnswer.answeredRight += 1
-        cQ.rightAnswers = [
-          ...cQ.rightAnswers,
-          { answer: payload.answer, infosAnswer },
-        ]
+        infosAnswer.answeredRight += 1
+        cQ.rightAnswers = [...cQ.rightAnswers, { answer, infosAnswer }]
         if (cQ.totalQuestions === cQ.rightAnswers.length) {
           cQ.finished = true
         }
+        if (cQ.wrongAnswers.length < cQ.rightAnswers.length) {
+          cQ.wrongAnswers = [...cQ.wrongAnswers, emptyAnswer]
+        }
       }
       if (!answeredRight) {
-        cQ.dataQuiz[0].infosAnswer.answeredWrong += 1
-        cQ.wrongAnswers = [
-          ...cQ.wrongAnswers,
-          { answer: payload.answer, infosAnswer },
-        ]
+        const wrongAnswer = cQ.wrongAnswers.filter(
+          e => e.answer.id === answer.id
+        )[0]
+        if (!wrongAnswer) {
+          cQ.dataQuiz[0].infosAnswer.answeredWrong += 1
+          infosAnswer.answeredWrong += 1
+          cQ.wrongAnswers = [...cQ.wrongAnswers, { answer, infosAnswer }]
+        }
+        if (wrongAnswer) {
+          wrongAnswer.infosAnswer.answeredWrong += 1
+        }
       }
 
-      cQ.wrongAnswers = cQ.wrongAnswers.sort(
-        (a, b) => a.infosAnswer.answeredWrong - b.infosAnswer.answeredWrong
-      )
-
-      cQ.wrongAnswersDisplayed = getWrongAnsweredDisplayed(
-        cQ.rightAnswers,
-        cQ.wrongAnswers
-      )
+      cQ.wrongAnswers = sortWrongAnswers(cQ.wrongAnswers)
     },
     nextQuestionQuiz: (state, { payload }) => {
       // {quizId: num}
@@ -97,19 +97,21 @@ export const quizSlice = createSlice({
             infosAnswer: { ...e.infosAnswer, answerIndex },
           })
         })
-        cQ.wrongAnswers = cQ.wrongAnswers.sort(
-          (a, b) => a.infosAnswer.answeredWrong - b.infosAnswer.answeredWrong
-        )
-
-        cQ.wrongAnswersDisplayed = getWrongAnsweredDisplayed(
-          cQ.rightAnswers,
-          cQ.wrongAnswers
-        )
+        cQ.wrongAnswers = sortWrongAnswers(cQ.wrongAnswers)
 
         cQ.dataQuiz = quizFormatter(kanjisInitial)
         cQ.finished = true
       } else {
         initialize(state, { quizId: payload.quizId })
+      }
+    },
+    updateWrongAnswers: (state, { payload }) => {
+      for (let i = 1; i < 4; i++) {
+        const cQ = state[`quiz${i}`]
+        cQ.wrongAnswers = sortWrongAnswers([
+          ...payload[`quiz${i}`],
+          ...cQ.wrongAnswers,
+        ])
       }
     },
   },
@@ -123,6 +125,7 @@ export const {
   answeredQuestionQuiz,
   nextQuestionQuiz,
   cheatingButtonFinishQuiz,
+  updateWrongAnswers,
 } = quizSlice.actions
 
 export default quizSlice.reducer

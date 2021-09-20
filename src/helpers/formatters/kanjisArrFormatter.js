@@ -9,7 +9,7 @@ import { shuffle } from "../shuffle"
 // there will be missing characters for the quiz).
 const kanjisCopy = [...kanjis]
 
-export default kanjisNum => {
+export const kanjisArrFormatter = kanjisNum => {
   shuffle(kanjisCopy)
   const kanjisArr = []
   for (let i = 0; i < kanjisNum; i += 1) {

@@ -12,24 +12,27 @@ const StatePlaying = ({
   answeredCorrectly,
   currentQuizId,
   nextQuestionQuiz,
-}) => (
-  <>
-    <Question quizId={currentQuizId} />
-    {!!answeredQuestion && (
-      <ButtonBig
-        comment={answeredCorrectly ? tQuiz.answeredRight : tQuiz.answeredWrong}
-        text={tQuiz.buttonNext}
-        onClick={() => {
-          nextQuestionQuiz({ quizId: currentQuizId })
-        }}
-      />
-    )}
-  </>
-)
+}) => {
+  return (
+    <>
+      <Question quizId={currentQuizId} />
+      {answeredQuestion && (
+        <ButtonBig
+          comment={
+            answeredCorrectly ? tQuiz.answeredRight : tQuiz.answeredWrong
+          }
+          text={tQuiz.buttonNext}
+          onClick={() => {
+            nextQuestionQuiz({ quizId: currentQuizId })
+          }}
+        />
+      )}
+    </>
+  )
+}
 
 StatePlaying.propTypes = {
-  answeredQuestion: PropTypes.oneOfType([PropTypes.bool, PropTypes.number])
-    .isRequired,
+  answeredQuestion: PropTypes.bool.isRequired,
   answeredCorrectly: PropTypes.bool.isRequired,
   currentQuizId: PropTypes.number.isRequired,
   nextQuestionQuiz: PropTypes.func.isRequired,

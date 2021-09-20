@@ -6,7 +6,12 @@ import PropTypes from "prop-types"
 import MenuLink from "../MenuLink"
 import SMenuLinks, { SContainer } from "./SMenuLinks"
 
-const MenuLinks = ({ isLoggedIn, quizzesSlug, setIsLoggedOut }) => (
+const MenuLinks = ({
+  isLoggedIn,
+  quizzesSlug,
+  setIsLoggedOut,
+  resetStateQuiz,
+}) => (
   <SMenuLinks>
     <SContainer>
       <MenuLink text="Home" path="/" />
@@ -14,7 +19,13 @@ const MenuLinks = ({ isLoggedIn, quizzesSlug, setIsLoggedOut }) => (
       <MenuLink text="Quizzes" path={`/quizzes/${quizzesSlug}`} />
       <MenuLink text="About" path="/about" />
       {isLoggedIn ? (
-        <MenuLink text="Logout" onClick={setIsLoggedOut} />
+        <MenuLink
+          text="Logout"
+          onClick={() => {
+            setIsLoggedOut()
+            resetStateQuiz()
+          }}
+        />
       ) : (
         <>
           <MenuLink text="Register" path="/register" />
@@ -29,6 +40,7 @@ MenuLinks.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   quizzesSlug: PropTypes.string.isRequired,
   setIsLoggedOut: PropTypes.func.isRequired,
+  resetStateQuiz: PropTypes.func.isRequired,
 }
 
 // == Export

@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, memo } from "react"
 import PropTypes from "prop-types"
 import axios from "axios"
 
@@ -8,13 +8,13 @@ import { strokeWidth } from "src/styles/g"
 import SButtonKanji, { SText } from "./SButtonKanji"
 import { lQuiz, tIdQuiz } from "src/assets/querySelectors"
 
-const sendToAPI = async (email, kanjiId, quizId, isCorrect) => {
+const sendToAPI = async (email, kanjiId, isCorrect) => {
   await axios({
     url: process.env.GATSBY_API,
     method: "post",
     data: {
-      query: `mutation setScore($email: String!, $kanjiId: String!, $quizId: String!, $isCorrect: Boolean!) {
-        setScore(score: {email: $email, kanjiId: $kanjiId, quizId: $quizId, isCorrect: $isCorrect}, ){
+      query: `mutation setScore($email: String!, $kanjiId: String!, $isCorrect: Boolean!) {
+        setScore(input: {email: $email, kanjiId: $kanjiId, isCorrect: $isCorrect}, ){
         success
         message
       }
@@ -23,7 +23,6 @@ const sendToAPI = async (email, kanjiId, quizId, isCorrect) => {
       variables: {
         email,
         kanjiId: `${kanjiId}`,
-        quizId: `${quizId}`,
         isCorrect,
       },
     },
@@ -40,6 +39,7 @@ const ButtonKanji = ({
   cheating,
   email,
   answeredQuestionQuiz,
+  answeredQuestion,
 }) => {
   const isCorrect = possibleAnswer.id === correctAnswer.id
 
@@ -56,31 +56,35 @@ const ButtonKanji = ({
     setVButtonKanji({
       ...vButtonKanji,
       // eslint-disable-next-line no-nested-ternary
-      animate:
-        !wasClicked && isCorrect && cheating
-          ? {
-              ...vButtonKanji.animate,
-              scale: 0.6,
-              border: `${strokeWidth} solid rgba(255, 255, 255, 1)`,
-            }
-          : // eslint-disable-next-line no-nested-ternary
-          wasClicked && isCorrect
-          ? {
-              ...vButtonKanji.animate,
-              scale: 1,
-              border: `calc(${strokeWidth} * 2) solid rgba(255, 255, 255, 1)`,
-            }
-          : wasClicked
-          ? {
-              ...vButtonKanji.animate,
-              scale: 1,
-              border: `${strokeWidth} solid rgba(255, 255, 255, 0.25)`,
-            }
-          : {
-              ...vButtonKanji.animate,
-              scale: 0.6,
-              border: `${strokeWidth} solid rgba(255, 255, 255, 0.25)`,
-            },
+      animate: !answeredQuestion
+        ? {
+            ...vButtonKanji.animate,
+            scale: 1,
+          }
+        : !wasClicked && isCorrect && cheating
+        ? {
+            ...vButtonKanji.animate,
+            scale: 0.6,
+            border: `${strokeWidth} solid rgba(255, 255, 255, 1)`,
+          }
+        : // eslint-disable-next-line no-nested-ternary
+        wasClicked && isCorrect
+        ? {
+            ...vButtonKanji.animate,
+            scale: 1,
+            border: `${strokeWidth * 2} solid rgba(255, 255, 255, 1)`,
+          }
+        : wasClicked
+        ? {
+            ...vButtonKanji.animate,
+            scale: 1,
+            border: `${strokeWidth} solid rgba(255, 255, 255, 0.25)`,
+          }
+        : {
+            ...vButtonKanji.animate,
+            scale: 0.6,
+            border: `${strokeWidth} solid rgba(255, 255, 255, 0.25)`,
+          },
     })
     if (!disabled) {
       setWasClicked(false)
@@ -104,7 +108,7 @@ const ButtonKanji = ({
         answeredQuestionQuiz({ quizId, answer: possibleAnswer })
         setWasClicked(true)
         if (email) {
-          sendToAPI(email, possibleAnswer.id, quizId, isCorrect)
+          sendToAPI(email, possibleAnswer.id, isCorrect)
         }
       }}
       disabled={disabled}
@@ -137,6 +141,7 @@ ButtonKanji.propTypes = {
   }).isRequired,
   cheating: PropTypes.bool.isRequired,
   answeredQuestionQuiz: PropTypes.func.isRequired,
+  answeredQuestion: PropTypes.bool.isRequired,
   email: PropTypes.string,
 }
 
@@ -145,4 +150,4 @@ ButtonKanji.defaultProps = {
 }
 
 // == Export
-export default ButtonKanji
+export default memo(ButtonKanji)

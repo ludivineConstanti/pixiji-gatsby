@@ -4,7 +4,7 @@ export const breakPointD = "@media only screen and (min-width: 992px)"
 
 // SIZES
 // general
-export const strokeWidth = "2px"
+export const strokeWidth = 2
 // buttons
 export const buttonWidth = "calc(3.7vw + 64px)"
 export const buttonMenuIconSize = `calc(${buttonWidth} / 3)`

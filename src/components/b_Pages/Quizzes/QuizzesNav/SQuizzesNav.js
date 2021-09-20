@@ -24,7 +24,7 @@ export default styled(motion.nav)`
 `
 
 export const SNavSquare = styled(motion(Link))`
-  border: ${strokeWidth} solid #fff;
+  border: ${strokeWidth}px solid #fff;
   height: 24px;
   width: 24px;
   background-color: ${props => props.s.color};

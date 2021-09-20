@@ -9,6 +9,7 @@ import {
 } from "src/styles/typo"
 
 export default styled(motion.div)`
+  transform-origin: ${p => p.s.position};
   background-color: ${props => props.s.color};
   grid-column-start: ${props => props.s.columnStart};
   grid-row-start: ${props => props.s.rowStart};

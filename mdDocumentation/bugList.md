@@ -48,3 +48,7 @@ and removed the following code from the customStyle file:
 ```Javascript
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap");
 ```
+
+## VM878 react_devtools_backend.js:4049 You are trying to animate transformOrigin from "" to "23.7px 23.7px". is not an animatable value - to enable this animation set to a value animatable to 23.7px 23.7px via the `style` property.
+
+I thought it was necessary to animate the transform-origin property, but actually it is possible to put it in the initial css, which avoids the incompatible types.

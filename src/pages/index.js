@@ -5,7 +5,6 @@ import Home from "src/components/b_Pages/Home"
 import Seo from "src/components/seo"
 
 const IndexPage = props => {
-  console.log(props)
   return (
     <Layout>
       <Seo title="Home" />

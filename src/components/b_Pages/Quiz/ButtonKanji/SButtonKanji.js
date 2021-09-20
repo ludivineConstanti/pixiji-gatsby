@@ -8,12 +8,12 @@ import { tQuizButtonKanji } from "src/styles/typo"
 export default styled(motion.button)`
   position: relative;
   ${tQuizButtonKanji}
-  border: ${props =>
+  outline: ${props =>
     props.s.isWrong
-      ? `${strokeWidth} solid rgba(255, 255, 255, 0.25)`
+      ? `${strokeWidth}px solid rgba(255, 255, 255, 0.25)`
       : props.s.cheating
-      ? `calc(${strokeWidth} * 1.5) solid rgba(255, 255, 255, 1)`
-      : `${strokeWidth} solid rgba(255, 255, 255, 1)`};
+      ? `${strokeWidth * 1.5}px solid rgba(255, 255, 255, 1)`
+      : `${strokeWidth}px solid rgba(255, 255, 255, 1)`};
   color: ${props =>
     props.s.isWrong ? "rgba(255, 255, 255, 0.5)" : "rgba(255, 255, 255, 1)"};
   font-size: 18px;

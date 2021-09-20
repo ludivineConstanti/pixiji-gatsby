@@ -6,7 +6,7 @@ import Component from "./Component"
 const mapStateToProps = state => {
   const current = `quiz${state.quiz.currentQuizId}`
   return {
-    answeredQuestion: state.quiz[current].answeredQuestion,
+    answeredQuestion: !!state.quiz[current].answeredQuestion,
     answeredCorrectly: state.quiz[current].answeredCorrectly,
     currentQuizId: state.quiz.currentQuizId,
   }

@@ -1,5 +1,5 @@
 // == Import npm
-import React from "react"
+import React, { memo } from "react"
 import PropTypes from "prop-types"
 
 // == Import
@@ -60,4 +60,4 @@ IlluIndex.defaultProps = {
 }
 
 // == Export
-export default IlluIndex
+export default memo(IlluIndex)

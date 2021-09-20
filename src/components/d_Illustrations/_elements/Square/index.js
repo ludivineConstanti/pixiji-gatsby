@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 // == Import
 import SSquare from "./SSquare"
-import iVSquare from "./animation"
+import { iVSquare } from "./animation"
 import { lIllu } from "src/assets/querySelectors"
 
 const Square = ({

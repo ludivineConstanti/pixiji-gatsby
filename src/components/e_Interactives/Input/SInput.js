@@ -6,7 +6,7 @@ import { tInput, tInputPlaceholder, tInputLabel } from "src/styles/typo"
 // initial css before comes in
 export default styled.input`
   ${tInput}
-  border: ${strokeWidth} solid white;
+  border: ${strokeWidth}px solid white;
   width: 100%;
   background-color: rgba(255, 255, 255, 0.15);
   margin-bottom: ${props => (props.s.isLast ? 0 : "16px")};

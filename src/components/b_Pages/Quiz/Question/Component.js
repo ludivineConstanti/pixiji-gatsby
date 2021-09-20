@@ -1,5 +1,5 @@
 // == Import npm
-import React from "react"
+import React, { memo } from "react"
 import PropTypes from "prop-types"
 
 // == Import
@@ -40,4 +40,4 @@ Question.propTypes = {
 }
 
 // == Export
-export default Question
+export default memo(Question)

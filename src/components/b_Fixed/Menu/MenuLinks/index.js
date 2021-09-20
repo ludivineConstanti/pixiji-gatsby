@@ -1,6 +1,7 @@
 import { connect } from "react-redux"
 
 import { updateValueGlobal } from "src/reducer/slices/globalSlice"
+import { resetStateQuiz } from "src/reducer/slices/quizSlice"
 import Component from "./Component"
 
 const mapStateToProps = state => ({
@@ -9,13 +10,14 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  setIsLoggedOut: payload =>
+  setIsLoggedOut: () =>
     dispatch(
       updateValueGlobal({
         prop: ["email"],
         value: [""],
       })
     ),
+  resetStateQuiz: () => dispatch(resetStateQuiz()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component)

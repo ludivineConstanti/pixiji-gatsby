@@ -7,7 +7,7 @@ import { tMenuSetting, tMenuSettingOnOff } from "src/styles/typo"
 // initial css before comes in transition
 export default styled(motion.button)`
   ${tMenuSetting}
-  border: ${strokeWidth} solid white;
+  border: ${strokeWidth}px solid white;
   border-top: 0 solid white;
   color: white;
   width: 100%;

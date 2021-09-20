@@ -4,7 +4,12 @@ import React from "react"
 import MainSquare from "src/components/d_Illustrations/_elements/MainSquare"
 import Square from "src/components/d_Illustrations/_elements/Square"
 
-export default (data, groupIndex, numPreviousGroups = 0, kanjisArr) => {
+export const createIllustration = (
+  data,
+  groupIndex,
+  numPreviousGroups = 0,
+  kanjisArr
+) => {
   const formattedData = []
   let counter = 0
   for (let i = 0; i < data.length; i += 1) {

@@ -1,9 +1,9 @@
 // == Import npm
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, memo } from "react"
 import PropTypes from "prop-types"
 
 // == Import
-import createIllustration from "src/components/d_Illustrations/_helpers/createIllustration"
+import { createIllustration } from "src/components/d_Illustrations/_helpers/createIllustration"
 import { data as arrDataIllu } from "src/components/d_Illustrations/_data/dataIndex"
 import IlluIndex from "src/components/d_Illustrations/_compIllus/IlluIndex"
 import { SPColorMain, SColorMain } from "./SIllu"
@@ -36,7 +36,7 @@ const Illu = ({
     setTimeout(() => {
       updateValueGlobal({ prop: ["pColorMain"], value: [colorIllu] })
     }, 1000)
-  }, [])
+  }, [colorIllu, updateValueGlobal])
 
   const arrIlluFormatted = []
   // need the number at the end so that it doesn't always start from 0
@@ -91,4 +91,4 @@ Illu.defaultProps = {
 }
 
 // == Export
-export default Illu
+export default memo(Illu)

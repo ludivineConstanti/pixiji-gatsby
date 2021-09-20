@@ -12,7 +12,7 @@ export const vLinkIcon = {
 
 // initial css before comes in
 export default styled(motion.a)`
-  border: ${strokeWidth} solid white;
+  border: ${strokeWidth}px solid white;
   height: span 1;
   width: span 1;
   display: block;

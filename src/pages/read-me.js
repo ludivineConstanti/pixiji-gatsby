@@ -5,7 +5,6 @@ import ReadMe from "src/components/b_Pages/ReadMe"
 import Seo from "src/components/seo"
 
 const ReadMePage = props => {
-  console.log(props)
   return (
     <Layout>
       <Seo title="Read me" />
