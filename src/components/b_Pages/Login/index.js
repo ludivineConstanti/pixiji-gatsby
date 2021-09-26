@@ -5,7 +5,7 @@ import { updateWrongAnswers } from "src/reducer/slices/quizSlice"
 import Component from "./Component"
 
 const mapStateToProps = state => ({
-  kanjisArr: state.kanjisArr.about,
+  kanjisArr: state.kanjisArr.login,
   quizzesSlug: state.quiz.currentSlug,
 })
 

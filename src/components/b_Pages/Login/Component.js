@@ -98,7 +98,7 @@ const Login = ({ kanjisArr, quizzesSlug, setIsLoggedIn, updateQuizzes }) => {
   const [feedback, setFeedback] = useState({ success: false, message: "" })
   return (
     <>
-      <Illu useCase="about" kanjisArr={kanjisArr} />
+      <Illu useCase="login" kanjisArr={kanjisArr} />
       <TextWrapper>
         <form
           onSubmit={e =>

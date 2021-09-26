@@ -72,7 +72,7 @@ export const contentL = `
 `
 
 // for Illustrations
-export const illuDimensions = (height, width) => `
+export const illuDimensions = (height: number, width: number) => `
   position: fixed;
   display: grid;
   grid-template: repeat(${height}, 1fr) / repeat(${width}, 1fr);
@@ -91,7 +91,21 @@ export const illuDimensions = (height, width) => `
   }
   `
 
-export const illuCustomPos = objProp => {
+interface Position {
+  pos: number[]
+  sc: "buttonWidth"
+}
+
+interface ObjProps {
+  top: Position
+  right: Position
+  bottom: Position
+  left: Position
+}
+
+type KeyObjProps = keyof ObjProps
+
+export const illuCustomPos = (objProp: ObjProps) => {
   // need an object with the properties that you want to use
   // those properties have an array of 3 coordinates (mobile, tablet, desktop)
   // and an other property to say if you need the buttonMargin to be added or not
@@ -101,28 +115,24 @@ export const illuCustomPos = objProp => {
   // so the minimum prop you need to give as an argument { right: { pos: [3] }}
   const result = {}
   const arrPos = Object.keys(objProp)
-  for (let i = 0; i < arrPos.length; i += 1) {
+  for (const key of arrPos) {
     // eslint-disable-next-line no-nested-ternary
     const marginButton =
-      objProp[arrPos[i]].sC === "buttonWidth"
+      objProp[key].sC === "buttonWidth"
         ? `+ ${buttonWidth}`
-        : objProp[arrPos[i]].sC === "illuMarginL"
+        : objProp[key].sC === "illuMarginL"
         ? `+ ${illuMarginL}`
         : ""
-    result[arrPos[i]] = `
-      ${arrPos[i]}: calc(${
-      objProp[arrPos[i]].pos[0]
-    } * ${squareUnitM} ${marginButton});
+    result[key] = `
+      ${key}: calc(${objProp[key].pos[0]} * ${squareUnitM} ${marginButton});
       ${breakPointT} {
-        ${arrPos[i]}: calc(${
-      objProp[arrPos[i]].pos[1] || objProp[arrPos[i]].pos[0]
+        ${key}: calc(${
+      objProp[key].pos[1] || objProp[key].pos[0]
     } * ${squareUnitT} ${marginButton});
       }
       ${breakPointD} {
-        ${arrPos[i]}: calc(${
-      objProp[arrPos[i]].pos[2] ||
-      objProp[arrPos[i]].pos[1] ||
-      objProp[arrPos[i]].pos[0]
+        ${key}: calc(${
+      objProp[key].pos[2] || objProp[key].pos[1] || objProp[key].pos[0]
     } * ${squareUnit} ${marginButton});
       }
     `
