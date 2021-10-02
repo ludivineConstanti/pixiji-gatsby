@@ -22,7 +22,6 @@
     "gatsby-transformer-remark": "^4.8.0",
     "gatsby-transformer-sharp": "^3.11.0",
     "gatsby-transformer-yaml": "^3.11.0",
-    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
@@ -31,6 +30,7 @@
     "styled-components": "^5.3.0"
   },
   "devDependencies": {
+    "@types/react-helmet": "^6.1.2",
     "@types/styled-components": "^5.1.14",
     "prettier": "2.3.2"
   },

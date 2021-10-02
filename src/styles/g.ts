@@ -93,17 +93,15 @@ export const illuDimensions = (height: number, width: number) => `
 
 interface Position {
   pos: number[]
-  sc: "buttonWidth"
+  sC?: "buttonWidth" | "illuMarginL"
 }
 
 interface ObjProps {
-  top: Position
-  right: Position
-  bottom: Position
-  left: Position
+  top?: Position
+  right?: Position
+  bottom?: Position
+  left?: Position
 }
-
-type KeyObjProps = keyof ObjProps
 
 export const illuCustomPos = (objProp: ObjProps) => {
   // need an object with the properties that you want to use
@@ -113,8 +111,13 @@ export const illuCustomPos = (objProp: ObjProps) => {
   // the array works with 1, 2 or 3 values, and sC can be skipped
   // 1 value => same value for all, 2 values => 1rst value for mobile, 2nd for tablet and desktop
   // so the minimum prop you need to give as an argument { right: { pos: [3] }}
-  const result = {}
-  const arrPos = Object.keys(objProp)
+  const result: {
+    right?: string
+    left?: string
+    top?: string
+    bottom?: string
+  } = {}
+  const arrPos = Object.keys(objProp) as Array<keyof typeof objProp>
   for (const key of arrPos) {
     // eslint-disable-next-line no-nested-ternary
     const marginButton =
