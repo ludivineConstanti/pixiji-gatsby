@@ -14,8 +14,8 @@ import { onSubmit } from "./utils"
 import FeedbackMessage from "src/components/f_Statics/FeedbackMessage"
 import SakuraBirds from "src/components/d_Illustrations/_compIllus/SakuraBirds"
 import {
-  arrSakuraBirds,
-  colorSakuraBirds,
+  arrIllu,
+  colorIllu,
 } from "src/components/d_Illustrations/_data/sakuraBirds"
 
 const Register = () => {
@@ -23,10 +23,7 @@ const Register = () => {
 
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
-  const kanjisArr = useMemo(
-    () => kanjisArrFormatter(getKanjisNum(arrSakuraBirds)),
-    []
-  )
+  const kanjisArr = useMemo(() => kanjisArrFormatter(getKanjisNum(arrIllu)), [])
 
   const [feedback, setFeedback] = useState({ success: false, message: "" })
   return (
@@ -35,7 +32,7 @@ const Register = () => {
         useCase="register"
         kanjisArr={kanjisArr}
         renderIllu={data => <SakuraBirds data={data} />}
-        arrDataIllu={{ arrIllu: arrSakuraBirds, colorIllu: colorSakuraBirds }}
+        arrDataIllu={{ arrIllu, colorIllu }}
       />
       <TextWrapper>
         <form

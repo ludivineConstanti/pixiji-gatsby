@@ -48,7 +48,6 @@ const ButtonKanji = ({
   const dispatch = useAppDispatch()
 
   const colorMain = useAppSelector(state => state.global.color.main)
-  const colorMainD1 = useAppSelector(state => state.global.color.darker)
   const email = useAppSelector(state => state.global.email)
   const cheating = useAppSelector(state => state.global.cheating)
   const answeredQuestion = useAppSelector(
@@ -69,7 +68,7 @@ const ButtonKanji = ({
     initial: { scaleX: 0, x: 150 },
     animate: { scaleX: 1, x: 0 },
     exit: { scaleX: 0, x: -150 },
-    whileHoverOn: { scale: 1.25, backgroundColor: colorMainD1 },
+    whileHoverOn: { scale: 1.25, backgroundColor: colorMain },
   })
 
   useEffect(() => {

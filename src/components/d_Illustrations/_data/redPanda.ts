@@ -634,5 +634,5 @@ const panda = [
   ],
 ]
 
-export const arrRedPanda = [panda]
-export const colorRedPanda = "#004459"
+export const arrIllu = [panda]
+export const colorIllu = "#004459"

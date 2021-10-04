@@ -5,14 +5,14 @@ import {
   getKanjisNum,
 } from "src/helpers/formatters/kanjisArrFormatter"
 import PageWithText from "src/components/c_Partials/PageWithText"
-import KaguyaHime from "src/components/d_Illustrations/_compIllus/KaguyaHime"
+import SeaTurtles from "src/components/d_Illustrations/_compIllus/SeaTurtles"
 import {
   arrIllu,
   colorIllu,
-} from "src/components/d_Illustrations/_data/kaguyaHime"
+} from "src/components/d_Illustrations/_data/seaTurtles"
 import { useAppSelector } from "src/store"
 
-const About = () => {
+const MyProfile = () => {
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
   const kanjisArr = useMemo(
@@ -25,13 +25,11 @@ const About = () => {
       <PageWithText
         illu={{
           kanjisArr,
-          renderIllu: (data, kanjis) => (
-            <KaguyaHime data={data} kanjis={kanjis} totalKanjis={kanjis} />
-          ),
+          renderIllu: data => <SeaTurtles data={data} />,
           arrDataIllu: { arrIllu, colorIllu },
         }}
         textWithTitle={{
-          title: "About",
+          title: "My profile",
           text: [
             "The informations for the quizzes and their answers was taken from wikipedia and jisho.org.",
             "The illustrations are self-made.",
@@ -43,4 +41,4 @@ const About = () => {
   )
 }
 
-export default About
+export default MyProfile

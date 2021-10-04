@@ -1,4 +1,4 @@
-const fishMaker = hue => {
+const fishMaker = (hue: number) => {
   const lightL1 = `hsl(${hue}, 4%, 95%)`
   const light = `hsl(${hue}, 15%, 85%)`
   const colorL1 = `hsl(${hue}, 33%, 67%)`
@@ -346,5 +346,5 @@ const fish0 = fishMaker(150)
 const fish1 = fishMaker(190)
 const fish2 = fishMaker(359)
 
-export const arrKodomoNoHi = [fish0, fish1, fish2]
-export const colorKodomoNoHi = "#050024"
+export const arrIllu = [fish0, fish1, fish2]
+export const colorIllu = "#050024"

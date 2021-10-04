@@ -226,5 +226,5 @@ const hime = [
   ],
 ]
 
-export const arrKaguyaHime = [moon, hime]
-export const colorKaguyaHime = "#02312E"
+export const arrIllu = [moon, hime]
+export const colorIllu = "#02312E"

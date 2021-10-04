@@ -9,8 +9,8 @@ import PageWithText from "src/components/c_Partials/PageWithText"
 import LinkIcon from "src/components/e_Interactives/LinkIcon/index"
 import CloudDragon from "src/components/d_Illustrations/_compIllus/CloudDragon"
 import {
-  arrCloudDragon,
-  colorCloudDragon,
+  arrIllu,
+  colorIllu,
 } from "src/components/d_Illustrations/_data/cloudDragon"
 import SLinkIconContainer from "./SError404"
 
@@ -18,8 +18,8 @@ const Error404 = () => {
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(getKanjisNum(arrCloudDragon)),
-    [arrCloudDragon]
+    () => kanjisArrFormatter(getKanjisNum(arrIllu)),
+    [arrIllu]
   )
 
   return (
@@ -28,7 +28,7 @@ const Error404 = () => {
         illu={{
           kanjisArr,
           renderIllu: data => <CloudDragon data={data} />,
-          arrDataIllu: { arrIllu: arrCloudDragon, colorIllu: colorCloudDragon },
+          arrDataIllu: { arrIllu, colorIllu },
         }}
         textWithTitle={{
           title: "404",

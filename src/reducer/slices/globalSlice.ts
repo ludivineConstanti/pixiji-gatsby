@@ -7,7 +7,6 @@ export const globalSlice = createSlice({
     cheating: true,
     color: {
       previous: "#0A2846",
-      darker: "#0A2846",
       main: "#0A2846",
       lighter: "#0A2846",
     },

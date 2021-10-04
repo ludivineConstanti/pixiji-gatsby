@@ -7,15 +7,12 @@ import {
 import PageWithText from "src/components/c_Partials/PageWithText"
 import RabbitOnMoon from "src/components/d_Illustrations/_compIllus/RabbitOnMoon"
 import {
-  arrRabbitOnMoon,
-  colorRabbitOnMoon,
+  arrIllu,
+  colorIllu,
 } from "src/components/d_Illustrations/_data/rabbitOnMoon"
 
 const Home = () => {
-  const kanjisArr = useMemo(
-    () => kanjisArrFormatter(getKanjisNum(arrRabbitOnMoon)),
-    []
-  )
+  const kanjisArr = useMemo(() => kanjisArrFormatter(getKanjisNum(arrIllu)), [])
 
   return (
     <>
@@ -24,8 +21,8 @@ const Home = () => {
           kanjisArr,
           renderIllu: data => <RabbitOnMoon data={data} />,
           arrDataIllu: {
-            arrIllu: arrRabbitOnMoon,
-            colorIllu: colorRabbitOnMoon,
+            arrIllu,
+            colorIllu,
           },
         }}
         textWithTitle={{

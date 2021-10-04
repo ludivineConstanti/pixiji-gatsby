@@ -850,5 +850,5 @@ const cloudBR = [
   ],
 ]
 
-export const arrCloudDragon = [cloudTop, dragon, cloudDragon, cloudBL, cloudBR]
-export const colorCloudDragon = "#002A51"
+export const arrIllu = [cloudTop, dragon, cloudDragon, cloudBL, cloudBR]
+export const colorIllu = "#002A51"

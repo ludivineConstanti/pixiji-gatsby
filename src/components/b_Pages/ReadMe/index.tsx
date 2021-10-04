@@ -7,8 +7,8 @@ import {
 } from "src/helpers/formatters/kanjisArrFormatter"
 import KodomoNoHi from "src/components/d_Illustrations/_compIllus/KodomoNoHi"
 import {
-  arrKodomoNoHi,
-  colorKodomoNoHi,
+  arrIllu,
+  colorIllu,
 } from "src/components/d_Illustrations/_data/kodomoNoHi"
 import PageWithText from "src/components/c_Partials/PageWithText"
 
@@ -16,8 +16,8 @@ const About = () => {
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(getKanjisNum(arrKodomoNoHi)),
-    [arrKodomoNoHi]
+    () => kanjisArrFormatter(getKanjisNum(arrIllu)),
+    [arrIllu]
   )
 
   return (
@@ -28,7 +28,7 @@ const About = () => {
           renderIllu: (data, kanjis, arrNumKanjis) => (
             <KodomoNoHi data={data} kanjis={kanjis} numKanjis={arrNumKanjis} />
           ),
-          arrDataIllu: { arrIllu: arrKodomoNoHi, colorIllu: colorKodomoNoHi },
+          arrDataIllu: { arrIllu, colorIllu },
         }}
         textWithTitle={{
           title: "Read me",

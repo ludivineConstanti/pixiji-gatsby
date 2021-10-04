@@ -13,8 +13,8 @@ import Input from "src/components/e_Interactives/Input"
 import FeedbackMessage from "src/components/f_Statics/FeedbackMessage"
 import RedPanda from "src/components/d_Illustrations/_compIllus/RedPanda"
 import {
-  arrRedPanda,
-  colorRedPanda,
+  arrIllu,
+  colorIllu,
 } from "src/components/d_Illustrations/_data/redPanda"
 import { onSubmit } from "./utils"
 
@@ -23,10 +23,7 @@ const Login = () => {
 
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
-  const kanjisArr = useMemo(
-    () => kanjisArrFormatter(getKanjisNum(arrRedPanda)),
-    []
-  )
+  const kanjisArr = useMemo(() => kanjisArrFormatter(getKanjisNum(arrIllu)), [])
 
   const [feedback, setFeedback] = useState({ success: false, message: "" })
   return (
@@ -35,7 +32,7 @@ const Login = () => {
         useCase="login"
         kanjisArr={kanjisArr}
         renderIllu={data => <RedPanda data={data} />}
-        arrDataIllu={{ arrIllu: arrRedPanda, colorIllu: colorRedPanda }}
+        arrDataIllu={{ arrIllu, colorIllu }}
       />
       <TextWrapper>
         <form onSubmit={e => onSubmit(e, feedback, setFeedback, dispatch)}>

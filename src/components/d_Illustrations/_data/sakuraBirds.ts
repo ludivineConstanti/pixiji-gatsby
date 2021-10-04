@@ -420,5 +420,5 @@ const flowers2 = [
   ],
 ]
 
-export const arrSakuraBirds = [flowers0, flowers1, flowers2]
-export const colorSakuraBirds = "#008181"
+export const arrIllu = [flowers0, flowers1, flowers2]
+export const colorIllu = "#008181"

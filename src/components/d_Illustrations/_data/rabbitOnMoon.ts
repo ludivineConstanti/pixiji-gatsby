@@ -789,5 +789,5 @@ const moon = [
   ],
 ]
 
-export const arrRabbitOnMoon = [planet, rabbit, moon]
-export const colorRabbitOnMoon = "#0A2846"
+export const arrIllu = [planet, rabbit, moon]
+export const colorIllu = "#0A2846"
