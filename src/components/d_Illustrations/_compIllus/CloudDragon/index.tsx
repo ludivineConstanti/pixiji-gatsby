@@ -12,13 +12,11 @@ import {
 
 interface CloudDragonProps {
   data: JSX.Element[][]
-  kanjis: number
-  totalKanjis: number
 }
 
-const CloudDragon = ({ data, kanjis, totalKanjis }: CloudDragonProps) => (
+const CloudDragon = ({ data }: CloudDragonProps) => (
   <>
-    {totalKanjis >= kanjis && <Stars color={orangeL2} />}
+    <Stars color={orangeL2} />
     <SCloudTop>{data[0]}</SCloudTop>
     <SDragon>{data[1]}</SDragon>
     <SCloudDragon>{data[2]}</SCloudDragon>

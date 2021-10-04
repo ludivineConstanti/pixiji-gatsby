@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, memo } from "react"
 import { useMotionValue } from "framer-motion"
 
 import { SStarContainer } from "./SStars"
@@ -30,12 +30,12 @@ const Stars = ({ color }: StarsProps) => {
     const arrStars = { s: [], m: [], l: [] }
 
     for (let i = 0; i < 11; i += 1) {
-      createStar(arrStars.s, 0.25, vStar.s, `sStar${i}`, color)
+      createStar(arrStars.s, 0.125, vStar.s, `sStar${i}`, color)
       if (i >= 6) {
-        createStar(arrStars.m, 0.5, vStar.m, `mStar${i}`, color)
+        createStar(arrStars.m, 0.25, vStar.m, `mStar${i}`, color)
       }
       if (i >= 7) {
-        createStar(arrStars.l, 1, vStar.l, `lStar${i}`, color)
+        createStar(arrStars.l, 0.5, vStar.l, `lStar${i}`, color)
       }
     }
 
@@ -53,8 +53,8 @@ const Stars = ({ color }: StarsProps) => {
     }
   }, [])
 
-  const translateX = useCreateTranslate(x, window.innerWidth, 35)
-  const translateY = useCreateTranslate(y, window.innerHeight, 35)
+  const translateX = useCreateTranslate(x, window.innerWidth, 50)
+  const translateY = useCreateTranslate(y, window.innerHeight, 50)
   const tXM = useCreateTranslate(x, window.innerWidth, 22.5)
   const tYM = useCreateTranslate(y, window.innerHeight, 22.5)
   const tXL = useCreateTranslate(x, window.innerWidth, 10)
@@ -93,4 +93,4 @@ const Stars = ({ color }: StarsProps) => {
   )
 }
 
-export default Stars
+export default memo(Stars)

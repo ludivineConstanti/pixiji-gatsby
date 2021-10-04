@@ -1,8 +1,13 @@
-import React from "react"
+import React, { useMemo } from "react"
 
 import SProgressBar from "./SProgressBar"
 import ProgressSquare from "../ProgressSquare"
 import { useAppSelector } from "src/store"
+
+const vProgressBar = {
+  initial: { marginTop: 0 },
+  animate: { marginTop: "16px" },
+}
 
 const ProgressBar = () => {
   const questionNumber = useAppSelector(
@@ -15,22 +20,22 @@ const ProgressBar = () => {
     )
   })
 
-  const squaresArr = []
+  const squaresArr = useMemo(() => {
+    const arrTemp = []
 
-  const vProgressBar = {
-    initial: { marginTop: 0 },
-    animate: { marginTop: "16px" },
-  }
+    for (let i = 0; i < questionNumber; i += 1) {
+      arrTemp.push(
+        <ProgressSquare
+          key={`progressSquare${i}`}
+          squareNum={i}
+          currentQuestion={currentNumber}
+        />
+      )
+    }
 
-  for (let i = 0; i < questionNumber; i += 1) {
-    squaresArr.push(
-      <ProgressSquare
-        key={`progressSquare${i}`}
-        squareNum={i}
-        currentQuestion={currentNumber}
-      />
-    )
-  }
+    return arrTemp
+  }, [questionNumber, currentNumber])
+
   return (
     <SProgressBar
       variants={vProgressBar}

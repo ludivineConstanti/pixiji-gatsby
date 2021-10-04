@@ -15,7 +15,7 @@ interface KodomoNoHiProps {
 const KodomoNoHi = ({ data, kanjis, numKanjis }: KodomoNoHiProps) => {
   return (
     <>
-      {numKanjis[numKanjis.length - 1] >= kanjis && <Stars color="#FFED48" />}
+      <Stars color="#FFED48" />
       <IlluDecoOnGround
         color={poleColor}
         side="right"

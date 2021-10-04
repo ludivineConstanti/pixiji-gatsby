@@ -1,16 +1,35 @@
-import React from "react"
+import React, { useMemo } from "react"
 
 import { useAppSelector } from "src/store"
+import {
+  kanjisArrFormatter,
+  getKanjisNum,
+} from "src/helpers/formatters/kanjisArrFormatter"
+import KodomoNoHi from "src/components/d_Illustrations/_compIllus/KodomoNoHi"
+import {
+  arrKodomoNoHi,
+  colorKodomoNoHi,
+} from "src/components/d_Illustrations/_data/kodomoNoHi"
 import PageWithText from "src/components/c_Partials/PageWithText"
 
 const About = () => {
-  const kanjisArr = useAppSelector(state => state.kanjisArr.readMe)
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
+
+  const kanjisArr = useMemo(
+    () => kanjisArrFormatter(getKanjisNum(arrKodomoNoHi)),
+    [arrKodomoNoHi]
+  )
 
   return (
     <>
       <PageWithText
-        illu={{ useCase: "readMe", kanjisArr }}
+        illu={{
+          kanjisArr,
+          renderIllu: (data, kanjis, arrNumKanjis) => (
+            <KodomoNoHi data={data} kanjis={kanjis} numKanjis={arrNumKanjis} />
+          ),
+          arrDataIllu: { arrIllu: arrKodomoNoHi, colorIllu: colorKodomoNoHi },
+        }}
         textWithTitle={{
           title: "Read me",
           text: [
@@ -18,7 +37,7 @@ const About = () => {
             {
               text: "You can learn more on",
               link: "the read me page of this project, on GitHub.",
-              path: "https://github.com/ludivineConstanti/Pixiji/blob/main/README.md",
+              path: "https://github.com/ludivineConstanti/pixiji-gatsby#readme",
             },
           ],
         }}

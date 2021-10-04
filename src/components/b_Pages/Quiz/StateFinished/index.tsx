@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 
 import { useAppDispatch, useAppSelector } from "src/store"
 import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
@@ -14,7 +14,10 @@ const Quiz = () => {
   )
   const dataQuizzes = useAppSelector(state => state.quiz.dataQuizzes)
 
-  const nextQuiz = dataQuizzes.filter(quiz => quiz.id === currentQuizId + 1)
+  const nextQuiz = useMemo(
+    () => dataQuizzes.filter(quiz => quiz.id === currentQuizId + 1),
+    [dataQuizzes, currentQuizId]
+  )
   return (
     <>
       <TextWithTitle

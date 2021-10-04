@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 
 import SSquare from "./SSquare"
 import { iVSquare } from "./animation"
@@ -35,4 +35,4 @@ const Square = ({
   />
 )
 
-export default Square
+export default memo(Square)

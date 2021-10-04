@@ -1,12 +1,16 @@
 import styled from "styled-components"
 import { motion } from "framer-motion"
 
-export default styled(motion.div)<{
+interface Attrs {
   s: { color: string; columnStart: number; rowStart: number; size: number }
-}>`
-  background-color: ${props => props.s.color};
-  grid-column-start: ${props => props.s.columnStart};
-  grid-row-start: ${props => props.s.rowStart};
-  grid-column-end: span ${props => props.s.size};
-  grid-row-end: span ${props => props.s.size};
-`
+}
+
+export default styled(motion.div).attrs<Attrs>(props => ({
+  style: {
+    backgroundColor: props.s.color,
+    gridColumnStart: props.s.columnStart,
+    gridRowStart: props.s.rowStart,
+    gridColumnEnd: `span ${props.s.size}`,
+    gridRowEnd: `span ${props.s.size}`,
+  },
+}))<Attrs>``

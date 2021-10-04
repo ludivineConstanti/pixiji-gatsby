@@ -1,18 +1,35 @@
-import React from "react"
+import React, { useMemo } from "react"
 
+import {
+  kanjisArrFormatter,
+  getKanjisNum,
+} from "src/helpers/formatters/kanjisArrFormatter"
 import { useAppSelector } from "src/store"
 import PageWithText from "src/components/c_Partials/PageWithText"
 import LinkIcon from "src/components/e_Interactives/LinkIcon/index"
+import CloudDragon from "src/components/d_Illustrations/_compIllus/CloudDragon"
+import {
+  arrCloudDragon,
+  colorCloudDragon,
+} from "src/components/d_Illustrations/_data/cloudDragon"
 import SLinkIconContainer from "./SError404"
 
 const Error404 = () => {
-  const kanjisArr = useAppSelector(state => state.kanjisArr.about)
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
+
+  const kanjisArr = useMemo(
+    () => kanjisArrFormatter(getKanjisNum(arrCloudDragon)),
+    [arrCloudDragon]
+  )
 
   return (
     <>
       <PageWithText
-        illu={{ useCase: "error404", kanjisArr }}
+        illu={{
+          kanjisArr,
+          renderIllu: data => <CloudDragon data={data} />,
+          arrDataIllu: { arrIllu: arrCloudDragon, colorIllu: colorCloudDragon },
+        }}
         textWithTitle={{
           title: "404",
           text: [

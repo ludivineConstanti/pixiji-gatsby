@@ -5,13 +5,11 @@ import Stars from "src/components/d_Illustrations/_elements/Stars"
 
 interface RabbitOnMoonProps {
   data: JSX.Element[][]
-  kanjis: number
-  totalKanjis: number
 }
 
-const RabbitOnMoon = ({ data, kanjis, totalKanjis }: RabbitOnMoonProps) => (
+const RabbitOnMoon = ({ data }: RabbitOnMoonProps) => (
   <>
-    {totalKanjis >= kanjis && <Stars color="#FFF8BB" />}
+    <Stars color="#FFF8BB" />
     <SPlanet>{data[0]}</SPlanet>
     <SRabbit>{data[1]}</SRabbit>
     <SMoon>{data[2]}</SMoon>

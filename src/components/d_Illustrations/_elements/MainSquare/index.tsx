@@ -1,5 +1,5 @@
 // == Import npm
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, memo } from "react"
 import { motion } from "framer-motion"
 
 import { zIMainSquareHover } from "src/styles/g"
@@ -60,9 +60,9 @@ const MainSquare = ({
         scale: scaleFactor,
         zIndex: zIMainSquareHover,
         padding: `${8 / scaleFactor}px`,
-        backgroundColor: `rgb(${darkerColor(colorRGB.r)}, ${darkerColor(
-          colorRGB.g
-        )}, ${darkerColor(colorRGB.b)})`,
+        backgroundColor: `rgb(${darkerColor(colorRGB).r}, ${
+          darkerColor(colorRGB).g
+        }, ${darkerColor(colorRGB).b})`,
         transition: { type: "spring", damping: 15 },
       },
     })
@@ -153,4 +153,4 @@ const MainSquare = ({
   )
 }
 
-export default MainSquare
+export default memo(MainSquare)

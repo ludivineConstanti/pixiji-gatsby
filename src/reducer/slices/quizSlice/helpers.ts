@@ -9,7 +9,26 @@ export const initialStateQuiz = (quizId: number) => {
   const rightAnswers: [] = []
   const wrongAnswers: [] = []
 
-  return {
+  interface ReturnedState {
+    dataQuiz: {
+      infosAnswer: {
+        answerIndex: number
+        answeredRight: number
+        answeredWrong: number
+      }
+      arrAnswers: any
+    }[]
+    totalQuestions: number
+    totalOptions: number
+    title: string
+    finished: boolean
+    answeredQuestion: boolean
+    answeredCorrectly: boolean
+    rightAnswers: any
+    wrongAnswers: any
+  }
+
+  const returnedState: ReturnedState = {
     dataQuiz: quizFormatter(kanjisInitial),
     totalQuestions: 0,
     totalOptions: currentQuiz.length,
@@ -20,6 +39,8 @@ export const initialStateQuiz = (quizId: number) => {
     rightAnswers,
     wrongAnswers,
   }
+
+  return returnedState
 }
 
 export const initialState = {

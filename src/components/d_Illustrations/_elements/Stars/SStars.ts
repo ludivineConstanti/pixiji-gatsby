@@ -9,15 +9,25 @@ import {
   breakPointD,
 } from "src/styles/g"
 
-export const SStar = styled(motion.div)<{
-  s: { color: string; size: number; top: number; left: number }
-}>`
+interface Attrs {
+  s: {
+    color: string
+    size: number
+    top: number
+    left: number
+  }
+}
+
+export const SStar = styled(motion.div).attrs<Attrs>(props => ({
+  style: {
+    backgroundColor: props.s.color,
+    height: `calc(${squareUnitM} * ${props.s.size})`,
+    width: `calc(${squareUnitM} * ${props.s.size})`,
+    top: `${props.s.top}vh`,
+    left: `${props.s.left}vw`,
+  },
+}))<Attrs>`
   position: absolute;
-  background-color: ${props => props.s.color};
-  height: calc(${squareUnitM} * ${props => props.s.size});
-  width: calc(${squareUnitM} * ${props => props.s.size});
-  top: ${props => props.s.top}vh;
-  left: ${props => props.s.left}vw;
   ${breakPointT} {
     height: calc(${squareUnitT} * ${props => props.s.size});
     width: calc(${squareUnitT} * ${props => props.s.size});

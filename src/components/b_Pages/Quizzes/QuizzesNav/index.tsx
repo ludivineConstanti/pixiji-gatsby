@@ -3,6 +3,12 @@ import React from "react"
 import SSQuizzesNav, { SNavSquare } from "./SQuizzesNav"
 import { useAppSelector } from "src/store"
 
+const vNavSquare = {
+  initial: { scale: 0 },
+  animate: { scale: 1 },
+  whileHover: { scale: 1.25 },
+}
+
 interface QuizzesNavProps {
   currentQuizId: number
   prevQuiz: number | boolean
@@ -12,11 +18,6 @@ interface QuizzesNavProps {
 const QuizzesNav = ({ prevQuiz, nextQuiz, currentQuizId }: QuizzesNavProps) => {
   const quizzesData = useAppSelector(state => state.quiz.dataQuizzes)
 
-  const vNavSquare = {
-    initial: { scale: 0 },
-    animate: { scale: 1 },
-    whileHover: { scale: 1.25 },
-  }
   return (
     <SSQuizzesNav s={{ prevQuiz, nextQuiz }}>
       {quizzesData.map(quiz => (

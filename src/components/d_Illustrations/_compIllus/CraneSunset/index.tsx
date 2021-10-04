@@ -13,8 +13,6 @@ import {
 
 interface CraneSunsetProps {
   data: JSX.Element[][]
-  kanjis: number
-  numKanjis: number[]
 }
 
 const CraneSunset = ({ data }: CraneSunsetProps) => (

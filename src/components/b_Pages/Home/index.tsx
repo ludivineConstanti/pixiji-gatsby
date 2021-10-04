@@ -1,15 +1,33 @@
-import React from "react"
+import React, { useMemo, memo } from "react"
 
-import { useAppSelector } from "src/store"
+import {
+  kanjisArrFormatter,
+  getKanjisNum,
+} from "src/helpers/formatters/kanjisArrFormatter"
 import PageWithText from "src/components/c_Partials/PageWithText"
+import RabbitOnMoon from "src/components/d_Illustrations/_compIllus/RabbitOnMoon"
+import {
+  arrRabbitOnMoon,
+  colorRabbitOnMoon,
+} from "src/components/d_Illustrations/_data/rabbitOnMoon"
 
 const Home = () => {
-  const kanjisArr = useAppSelector(state => state.kanjisArr.home)
+  const kanjisArr = useMemo(
+    () => kanjisArrFormatter(getKanjisNum(arrRabbitOnMoon)),
+    []
+  )
 
   return (
     <>
       <PageWithText
-        illu={{ useCase: "home", kanjisArr }}
+        illu={{
+          kanjisArr,
+          renderIllu: data => <RabbitOnMoon data={data} />,
+          arrDataIllu: {
+            arrIllu: arrRabbitOnMoon,
+            colorIllu: colorRabbitOnMoon,
+          },
+        }}
         textWithTitle={{
           title: "Pixiji",
           text: [
@@ -22,4 +40,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default memo(Home)

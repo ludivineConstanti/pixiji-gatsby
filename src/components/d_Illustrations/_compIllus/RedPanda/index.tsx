@@ -1,4 +1,4 @@
-import React from "react"
+import React, { memo } from "react"
 
 import { SRedPanda } from "./SRedPanda"
 import Stars from "src/components/d_Illustrations/_elements/Stars"
@@ -16,4 +16,4 @@ const RedPanda = ({ data }: RedPandaProps) => {
   )
 }
 
-export default RedPanda
+export default memo(RedPanda)

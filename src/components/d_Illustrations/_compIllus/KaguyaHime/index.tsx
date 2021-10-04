@@ -21,7 +21,7 @@ interface KaguyaHimeProps {
 
 const KaguyaHime = ({ data, kanjis, totalKanjis }: KaguyaHimeProps) => (
   <>
-    {totalKanjis >= kanjis && <Stars color={colorMoon} />}
+    <Stars color={colorMoon} />
     <IlluGround color={bambooColors[2]} />
     {bSettings.map((bamboo, i) => (
       <IlluDecoOnGround

@@ -8,7 +8,7 @@ import {
   tMSquareInfosBottom,
 } from "src/styles/typo"
 
-export default styled(motion.div)<{
+interface Attrs {
   s: {
     position: number
     color: string
@@ -16,13 +16,18 @@ export default styled(motion.div)<{
     rowStart: number
     size: number
   }
-}>`
-  transform-origin: ${p => p.s.position};
-  background-color: ${props => props.s.color};
-  grid-column-start: ${props => props.s.columnStart};
-  grid-row-start: ${props => props.s.rowStart};
-  grid-column-end: span ${props => props.s.size};
-  grid-row-end: span ${props => props.s.size};
+}
+
+export default styled(motion.div).attrs<Attrs>(props => ({
+  style: {
+    transformOrigin: props.s.position,
+    backgroundColor: props.s.color,
+    gridColumnStart: props.s.columnStart,
+    gridRowStart: props.s.rowStart,
+    gridColumnEnd: `span ${props.s.size}`,
+    gridRowEnd: `span ${props.s.size}`,
+  },
+}))<Attrs>`
   z-index: ${zIMainSquare};
   display: flex;
   align-items: center;

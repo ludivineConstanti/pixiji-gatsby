@@ -3,7 +3,7 @@ import { AnimatePresence } from "framer-motion"
 
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateIdQuiz, initializeQuiz } from "src/reducer/slices/quizSlice"
-import Illu from "src/components/d_Illustrations/Illu"
+import IlluQuiz from "src/components/d_Illustrations/IlluQuiz"
 import SQuiz from "./SQuiz"
 import Header from "./Header"
 import StatePlaying from "./StatePlaying"
@@ -12,7 +12,7 @@ import Warning from "./Warning"
 
 interface QuizProps {
   currentQuiz: {
-    id: number
+    id: 1 | 2 | 3
     title: string
     slug: string
   }
@@ -38,7 +38,7 @@ const Quiz = ({ currentQuiz }: QuizProps) => {
 
   return (
     <>
-      <Illu useCase="quiz" index={currentQuiz.id - 1} kanjisArr={kanjisArr} />
+      <IlluQuiz currentQuizId={currentQuiz.id} kanjisArr={kanjisArr} />
       <SQuiz>
         <Header />
         {!isLoggedIn && <Warning />}

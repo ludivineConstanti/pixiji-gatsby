@@ -3,32 +3,16 @@ import React, { useEffect, useState, memo } from "react"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateColor } from "src/reducer/slices/globalSlice"
 import { createIllustration } from "src/components/d_Illustrations/_helpers/createIllustration"
-import { data as arrDataIllu } from "src/components/d_Illustrations/_data/dataIndex"
-import IlluIndex from "src/components/d_Illustrations/_compIllus/IlluIndex"
 import { SPColorMain, SColorMain } from "./SIllu"
+import { IlluProps } from "src/models"
 
-interface Kanji {
-  id: number
-  kanji: string
-  en: string
-  kana: string
-  kanaEn: string
-  quizId: number
-}
-
-interface IlluProps {
-  useCase: string
-  index?: number
-  kanjisArr?: Kanji[]
-}
-
-const Illu = ({ useCase, index = 0, kanjisArr = [] }: IlluProps) => {
+const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
   const dispatch = useAppDispatch()
 
   const pColorMain = useAppSelector(state => state.global.color.previous)
   const colorMain = useAppSelector(state => state.global.color.main)
 
-  const { arrIllu, colorIllu } = arrDataIllu[useCase][index]
+  const { arrIllu, colorIllu } = arrDataIllu
 
   const [vSColorMain, setVsColorMain] = useState({})
 
@@ -80,13 +64,7 @@ const Illu = ({ useCase, index = 0, kanjisArr = [] }: IlluProps) => {
         initial="initial"
         animate="animate"
       />
-      <IlluIndex
-        useCase={useCase}
-        index={index}
-        data={arrIlluFormatted}
-        kanjis={kanjisArr.length}
-        arrNumKanjis={arrNumKanjis}
-      />
+      {renderIllu(arrIlluFormatted, kanjisArr.length, arrNumKanjis)}
     </>
   )
 }
