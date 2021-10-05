@@ -17,7 +17,7 @@ export const SSeaweedSmall = styled.div`
   bottom: 0;
 `
 
-const dSeaweedBig = illuDimensions(22, 39)
+const dSeaweedBig = illuDimensions(21, 35)
 
 export const SSeaweedBig = styled.div`
   ${dSeaweedBig}
@@ -36,7 +36,7 @@ export const SSeaTurtleSmall = styled.div`
   position: absolute;
   ${dSeaTurtleSmall}
   ${pSeaTurtleSmall.bottom}
-  right: 0;
+  right: 50vw;
 `
 
 const dSeaTurtleBig = illuDimensions(12, 12)
