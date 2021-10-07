@@ -555,6 +555,87 @@ const turtleSmall = [
 const turtleBig = [
   [
     {
+      s: 1,
+      column: 3,
+      row: 5,
+      c: orangeL2,
+    },
+    {
+      s: 1,
+      column: 4,
+      row: 5,
+      c: orangeL1,
+    },
+    {
+      s: 1,
+      column: 4,
+      row: 4,
+      c: orangeL2,
+    },
+    {
+      s: 3,
+      column: 5,
+      row: 3,
+      c: orange,
+      main: true,
+    },
+    {
+      s: 1,
+      column: 7,
+      row: 2,
+      c: green,
+    },
+    {
+      s: 1,
+      column: 7,
+      row: 1,
+      c: greenL1,
+    },
+    {
+      s: 1,
+      column: 8,
+      row: 2,
+      c: greenD1,
+    },
+    {
+      s: 1,
+      column: 8,
+      row: 3,
+      c: orangeL1,
+    },
+    {
+      s: 2,
+      column: 8,
+      row: 4,
+      c: orangeD1,
+    },
+    {
+      s: 1,
+      column: 9,
+      row: 3,
+      c: greenL2,
+    },
+    {
+      s: 1,
+      column: 10,
+      row: 3,
+      c: greenL1,
+    },
+    {
+      s: 1,
+      column: 10,
+      row: 4,
+      c: greenL2,
+    },
+    {
+      s: 1,
+      column: 10,
+      row: 5,
+      c: orangeL1,
+    },
+  ],
+  [
+    {
       s: 2,
       column: 2,
       row: 10,
@@ -650,6 +731,45 @@ const turtleBig = [
       row: 6,
       c: orangeD1,
       main: true,
+    },
+  ],
+  [
+    {
+      s: 1,
+      column: 11,
+      row: 5,
+      c: greenD1,
+    },
+    {
+      s: 1,
+      column: 11,
+      row: 6,
+      c: green,
+    },
+    {
+      s: 1,
+      column: 12,
+      row: 6,
+      c: greenL1,
+    },
+    {
+      s: 3,
+      column: 8,
+      row: 6,
+      c: orange,
+      main: true,
+    },
+    {
+      s: 1,
+      column: 8,
+      row: 9,
+      c: orangeL1,
+    },
+    {
+      s: 1,
+      column: 9,
+      row: 9,
+      c: orangeL2,
     },
   ],
 ]

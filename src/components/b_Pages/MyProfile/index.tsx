@@ -4,17 +4,16 @@ import {
   kanjisArrFormatter,
   getKanjisNum,
 } from "src/helpers/formatters/kanjisArrFormatter"
-import PageWithText from "src/components/c_Partials/PageWithText"
 import SeaTurtles from "src/components/d_Illustrations/_compIllus/SeaTurtles"
 import {
   arrIllu,
   colorIllu,
 } from "src/components/d_Illustrations/_data/seaTurtles"
-import { useAppSelector } from "src/store"
+import TextWrapper from "src/components/f_Statics/TextWrapper"
+import Illu from "src/components/d_Illustrations/Illu"
+import ButtonInText from "src/components/e_Interactives/ButtonInText"
 
 const MyProfile = () => {
-  const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
-
   const kanjisArr = useMemo(
     () => kanjisArrFormatter(getKanjisNum(arrIllu)),
     [arrIllu]
@@ -22,21 +21,17 @@ const MyProfile = () => {
 
   return (
     <>
-      <PageWithText
-        illu={{
-          kanjisArr,
-          renderIllu: data => <SeaTurtles data={data} />,
-          arrDataIllu: { arrIllu, colorIllu },
-        }}
-        textWithTitle={{
-          title: "My profile",
-          text: [
-            "The informations for the quizzes and their answers was taken from wikipedia and jisho.org.",
-            "The illustrations are self-made.",
-          ],
-        }}
-        buttonBig={{ text: "Quizzes", path: `/quizzes/${quizzesSlug}` }}
+      <Illu
+        kanjisArr={kanjisArr}
+        renderIllu={data => <SeaTurtles data={data} />}
+        arrDataIllu={{ arrIllu, colorIllu }}
       />
+      <TextWrapper>
+        email address: email@address.fr
+        <ButtonInText text="Change my email" buttonType="submit" />
+        <ButtonInText text="Change my password" buttonType="submit" />
+        <ButtonInText text="Delete my account" buttonType="submit" />
+      </TextWrapper>
     </>
   )
 }

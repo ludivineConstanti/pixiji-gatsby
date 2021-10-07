@@ -10,7 +10,7 @@ import {
 
 interface Attrs {
   s: {
-    position: number
+    position: string
     color: string
     columnStart: number
     rowStart: number

@@ -6,6 +6,8 @@ import {
   breakPointT,
   breakPointD,
   buttonWidth,
+  contentLMarginLM,
+  contentLMarginLT,
 } from "src/styles/g"
 
 const dSeaweedSmall = illuDimensions(9, 6)
@@ -13,8 +15,14 @@ const dSeaweedSmall = illuDimensions(9, 6)
 export const SSeaweedSmall = styled.div`
   ${dSeaweedSmall}
   position: absolute;
-  left: 20vh;
   bottom: 0;
+  left: ${contentLMarginLM};
+  ${breakPointT} {
+    left: ${contentLMarginLT};
+  }
+  ${breakPointD} {
+    left: ${buttonWidth};
+  }
 `
 
 const dSeaweedBig = illuDimensions(21, 35)
@@ -41,8 +49,21 @@ export const SSeaTurtleSmall = styled.div`
 
 const dSeaTurtleBig = illuDimensions(12, 12)
 
+const pSeaTurtleBig = illuCustomPos({
+  bottom: { pos: [15, 0] },
+  top: { pos: [30, 0, 3], sC: "buttonWidth" },
+  right: { pos: [40, 5, 30] },
+  left: { pos: [10, 0] },
+})
+
 export const SSeaTurtleBig = styled.div`
   position: absolute;
+  ${pSeaTurtleBig.bottom}
+  ${pSeaTurtleBig.left}
   ${dSeaTurtleBig}
   right: 20vh;
+  ${breakPointD} {
+    ${pSeaTurtleBig.right}
+    ${pSeaTurtleBig.top}
+  }
 `

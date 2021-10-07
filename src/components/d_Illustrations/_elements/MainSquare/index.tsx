@@ -1,8 +1,8 @@
-// == Import npm
-import React, { useState, useEffect, memo } from "react"
+import React, { useState, useEffect, useMemo, memo } from "react"
 import { motion } from "framer-motion"
 
 import { zIMainSquareHover } from "src/styles/g"
+import { KanjiRaw } from "src/models"
 import { tMSIFontSize, tMSIBFontSize } from "src/styles/typo"
 import { aAnimateOn } from "src/components/d_Illustrations/_helpers/animation"
 import SMainSquare, { SKanji, SInfos, SInfosBottom } from "./SMainSquare"
@@ -30,69 +30,64 @@ const MainSquare = ({
   kanjiIndex,
   kanjisArr,
 }: MainSquareProps) => {
-  const [answer, setAnswer] = useState(false)
-  const [infos, setInfos] = useState(false)
-  const [vMainSquare, setVMainSquare] = useState({
-    initial: { scale: 0 },
-    animateOff: { scale: 0.2 },
-    animateOn: aAnimateOn,
-    whileHoverEmpty: { scale: 1.5 },
-  })
-  const [vInfos, setVInfos] = useState({
-    infos: {},
-    infosB: {},
-    kana: {},
-    kanji: {},
-  })
+  const [answer, setAnswer] = useState<KanjiRaw | false>(false)
+  const [infos, setInfos] = useState<{ answeredWrong: number } | false>(false)
 
-  useEffect(() => {
-    const colorRGB =
-      color.slice(0, 1) === "h" ? hslToRgb(color) : hexToRgb(color)
+  const colorRGB = useMemo(
+    () => (color.slice(0, 1) === "h" ? hslToRgb(color) : hexToRgb(color)),
+    [color]
+  )
 
+  const v = useMemo(() => {
     const scaleFactor = 8 / size
 
-    setVMainSquare({
-      ...vMainSquare,
-      initial: {
-        backgroundColor: `rgb(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b})`,
+    return {
+      mainSquare: {
+        initial: {
+          scale: 0,
+          backgroundColor: `rgb(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b})`,
+        },
+        animateOff: { scale: 0.2 },
+        animateOn: aAnimateOn,
+        whileHoverEmpty: { scale: 1.5 },
+        whileHoverOn: {
+          scale: scaleFactor,
+          zIndex: zIMainSquareHover,
+          padding: `${8 / scaleFactor}px`,
+          backgroundColor: `rgb(${darkerColor(colorRGB).r}, ${
+            darkerColor(colorRGB).g
+          }, ${darkerColor(colorRGB).b})`,
+          transition: { type: "spring", damping: 15 },
+        },
       },
-      whileHoverOn: {
-        scale: scaleFactor,
-        zIndex: zIMainSquareHover,
-        padding: `${8 / scaleFactor}px`,
-        backgroundColor: `rgb(${darkerColor(colorRGB).r}, ${
-          darkerColor(colorRGB).g
-        }, ${darkerColor(colorRGB).b})`,
-        transition: { type: "spring", damping: 15 },
-      },
-    })
 
-    setVInfos({
       infos: {
-        initial: { fontSize: 0 },
-        whileHoverOn: {
-          display: "block",
-          opacity: 1,
-          fontSize: `${tMSIFontSize / scaleFactor}px`,
+        infos: {
+          initial: { fontSize: 0 },
+          whileHoverOn: {
+            display: "block",
+            opacity: 1,
+            fontSize: `${+tMSIFontSize / scaleFactor}px`,
+          },
+        },
+        infosB: {
+          initial: { fontSize: 0 },
+          whileHoverOn: {
+            fontSize: `${+tMSIBFontSize / scaleFactor}px`,
+            bottom: `${8 / scaleFactor}px`,
+          },
+        },
+        kana: {
+          whileHoverOn: { marginRight: `${8 / scaleFactor}px` },
+        },
+        kanji: {
+          whileHoverOn: {
+            fontSize: `${28 / scaleFactor}px`,
+            margin: `${8 / scaleFactor}px`,
+          },
         },
       },
-      infosB: {
-        initial: { fontSize: 0 },
-        whileHoverOn: {
-          fontSize: `${tMSIBFontSize / scaleFactor}px`,
-          bottom: `${8 / scaleFactor}px`,
-        },
-      },
-      kana: {
-        whileHoverOn: { marginRight: `${8 / scaleFactor}px` },
-      },
-      kanji: {
-        whileHoverOn: {
-          fontSize: `${28 / scaleFactor}px`,
-          margin: `${8 / scaleFactor}px`,
-        },
-      },
-    })
+    }
   }, [])
 
   useEffect(() => {
@@ -112,38 +107,35 @@ const MainSquare = ({
   return (
     <SMainSquare
       s={{
-        color,
+        color: `rgb(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b})`,
         size,
         columnStart,
         rowStart,
         position,
       }}
-      variants={vMainSquare}
+      variants={v.mainSquare}
       initial="initial"
       animate={kanjisArr.length > kanjiIndex ? "animateOn" : "animateOff"}
       // eslint-disable-next-line no-nested-ternary
       whileHover={
-        !answer.kanji && kanjisArr.length > kanjiIndex
+        answer && !answer.kanji && kanjisArr.length > kanjiIndex
           ? "whileHoverEmpty"
           : kanjisArr.length > kanjiIndex
           ? "whileHoverOn"
           : "whileHoverOff"
       }
-      onMouseEnter={() =>
-        setVMainSquare({ ...vMainSquare, animateOn: aAnimateOn })
-      }
       exit="initial"
     >
       {answer && (
         <>
-          <SInfos variants={vInfos.infos}>
-            <motion.span variants={vInfos.kana}>{answer.kana}</motion.span>
+          <SInfos variants={v.infos.infos}>
+            <motion.span variants={v.infos.kana}>{answer.kana}</motion.span>
             {answer.kanaEn}
           </SInfos>
-          <SKanji variants={vInfos.kanji}>{answer.kanji}</SKanji>
-          <SInfos variants={vInfos.infos}>{answer.en}</SInfos>
-          {infos.answeredWrong > 0 && (
-            <SInfosBottom variants={vInfos.infosB}>
+          <SKanji variants={v.infos.kanji}>{answer.kanji}</SKanji>
+          <SInfos variants={v.infos.infos}>{answer.en}</SInfos>
+          {infos && infos.answeredWrong > 0 && (
+            <SInfosBottom variants={v.infos.infosB}>
               wrong: {infos.answeredWrong} time{infos.answeredWrong > 1 && "s"}
             </SInfosBottom>
           )}
