@@ -115,10 +115,10 @@ const ButtonKanji = ({
       ...vButtonKanji,
       whileHoverOn: {
         ...vButtonKanji.whileHoverOn,
-        backgroundColor: colorMainD1,
+        backgroundColor: colorMain,
       },
     })
-  }, [colorMainD1])
+  }, [colorMain])
 
   return (
     <SButtonKanji
