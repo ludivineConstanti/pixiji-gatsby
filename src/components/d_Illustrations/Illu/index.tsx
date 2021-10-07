@@ -52,7 +52,7 @@ const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
     }
 
     return { illuFormatted: arrIlluFormatted, numKanjis: arrNumKanjis }
-  }, [])
+  }, [kanjisArr])
 
   return (
     <>
