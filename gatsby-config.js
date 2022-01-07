@@ -11,6 +11,13 @@ module.exports = {
     siteUrl: `https://www.linkedin.com/in/ludivine-constanti`,
   },
   plugins: [
+    // styled components
+    {
+      resolve: `gatsby-plugin-styled-components`,
+      options: {
+        // Add any options here
+      },
+    },
     // allow absolute paths
     {
       resolve: "gatsby-plugin-root-import",

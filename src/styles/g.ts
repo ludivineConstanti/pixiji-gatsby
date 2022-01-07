@@ -40,7 +40,7 @@ export const illuMarginL = `calc(${contentLWidth} + ${contentLMarginL} * 2)`
 // z-index
 // parents
 export const zImenu = 5
-const zIMSContainerHover = 4
+export const zIMSContainerHover = 4
 export const zIBigButton = 3
 export const zIquestion = 2
 export const zIContentL = 2

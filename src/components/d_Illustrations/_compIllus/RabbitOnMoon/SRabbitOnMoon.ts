@@ -1,4 +1,6 @@
 import styled from "styled-components"
+
+import SGridWrapper from "src/components/d_Illustrations/_elements/GridWrapper"
 import {
   squareUnitT,
   squareUnitM,
@@ -10,10 +12,7 @@ import {
   illuCustomPos,
 } from "src/styles/g"
 
-const dPlanet = illuDimensions(10, 10)
-
-export const SPlanet = styled.div`
-  ${dPlanet}
+export const SPlanet = styled(SGridWrapper)<{ height: number; width: number }>`
   position: fixed;
   left: calc(${buttonWidth} / 2);
   bottom: calc(${squareUnitM} * 32);

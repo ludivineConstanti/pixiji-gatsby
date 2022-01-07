@@ -10,7 +10,9 @@ interface RabbitOnMoonProps {
 const RabbitOnMoon = ({ data }: RabbitOnMoonProps) => (
   <>
     <Stars color="#FFF8BB" />
-    <SPlanet>{data[0]}</SPlanet>
+    <SPlanet height={10} width={10}>
+      {data[0]}
+    </SPlanet>
     <SRabbit>{data[1]}</SRabbit>
     <SMoon>{data[2]}</SMoon>
   </>
