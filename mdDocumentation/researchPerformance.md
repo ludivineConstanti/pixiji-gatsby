@@ -10,7 +10,9 @@ Which could make sense since I am testing the localhost version for both, which 
 
 After running yarn build and yarn serve, the results are more positive
 
-### Performance gained 30 points ✅
+![performance_screenshot](https://user-images.githubusercontent.com/24965333/148588401-12861a7c-e83e-4c6d-938f-e1a758ff5bcb.jpg)
+
+### Performance gained 45 points ✅
 
 What disappeared / improved from the "Opportunity" and the "Diagnostics" list:
 
@@ -23,7 +25,7 @@ What disappeared / improved from the "Opportunity" and the "Diagnostics" list:
 - Avoid chaining critical requests 6 chains found => down to 3
 - Keep request counts low and transfer sizes small 10 requests • 333 KiB => there's now 8 requests more but their size diminished by 130 KiB
 
-### Accessibility gained 8 points ✅
+### Accessibility gained 13 points ✅
 
 There is 5 more audits that passed
 
@@ -32,7 +34,7 @@ There is 5 more audits that passed
 - Warning for "Browser errors were logged to the console" disappeared
 - Warning for "Missing source maps for large first-party JavaScript" disappeared
 
-### SEO gained 20 points (the maximum it could gain) ✅
+### SEO gained 10 points (the maximum it could gain) ✅
 
 - Warning for "Document does not have a meta description" disappeared
 - Warning for "Page is blocked from indexing" disappeared
