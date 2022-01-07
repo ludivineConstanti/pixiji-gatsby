@@ -4,4 +4,8 @@
 
 When I first made a build with Gatsby, the illustration of the home page, which shows a rabbit on a moon, made in pixel art with divs, was not properly displayed. the divs were taking the full page's width, instead of being displayed as squares and it looked like the styles from the css, with the grid dictating the sizes and positions of the divs, were not getting applied. However after navigating to an other page of the website and coming back, it worked properly. This bug also happened on the other pages and was also disappearing after switching pages once.
 
+![bug_screenshot](https://user-images.githubusercontent.com/24965333/148587249-9716f638-1fa0-4cd1-8e3a-9508be815d7a.png)
+
 I found this [discussion](https://github.com/gatsbyjs/gatsby/issues/9121) on GitHub, with people that have the same issue, and one of the users, who also uses style-components posted the [link to gatsby-plugin-styled-components](https://www.gatsbyjs.org/packages/gatsby-plugin-styled-components/?=styled) as a solution. I tested it and it resolved the issue.
+
+![scrnli_07_01_2022_18-05-46](https://user-images.githubusercontent.com/24965333/148587368-9a08ca7d-e8ab-4591-ac8b-62a2488dae68.png)
