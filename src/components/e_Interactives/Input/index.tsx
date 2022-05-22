@@ -1,6 +1,6 @@
 import React from "react"
 
-import SInput, { SLabel } from "./SInput"
+import SInput, { SLabel } from "./style"
 
 interface InputProps {
   isLast?: boolean

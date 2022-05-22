@@ -3,7 +3,7 @@ import React from "react"
 import ButtonInText from "src/components/e_Interactives/ButtonInText"
 import Title from "src/components/f_Statics/Title"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
-import { SText, SLink } from "./STextWithTitle"
+import { SText, SLink } from "./style"
 
 const vText = {
   initial: { opacity: 0, x: 100 },

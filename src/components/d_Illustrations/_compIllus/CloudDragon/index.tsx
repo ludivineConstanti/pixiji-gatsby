@@ -2,13 +2,7 @@ import React from "react"
 
 import Stars from "src/components/d_Illustrations/_elements/Stars"
 import { orangeL2 } from "src/components/d_Illustrations/_data/cloudDragon"
-import {
-  SCloudTop,
-  SDragon,
-  SCloudDragon,
-  SCloudBL,
-  SCloudBR,
-} from "./SCloudDragon"
+import { SCloudTop, SDragon, SCloudDragon, SCloudBL, SCloudBR } from "./style"
 
 interface CloudDragonProps {
   data: JSX.Element[][]

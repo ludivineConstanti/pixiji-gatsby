@@ -61,8 +61,50 @@ In the network metrics, there doesn't seem to be a big difference in the size of
 
 ## Get every constant value that can be put outside of a React component, outside of it
 
+At the beginning of the project, I forgot that React runs the code that is inside of a component every time it is updated, and I also forgot that it was possible to use informations stored in a variable, in a component, while having this one out of the component. During the project, I sometimes got warning from React, because some of the code that was executed on each update was very expensive, and even made the website crash, at some point. After this, I became more aware of the importance of understanding React lifecycle and to structure my code to update as few things as possible, when the component needs to render again.
+
 ## Don't use Redux to store values that do not need to change
 
 ## Use useMemo for the other ones
 
 ## Use .attrs for styled component (it avoids the warning)
+
+The downside that styled-components can have is that when there is one property that changes between 2 components, it can not mutualize the common style and separate the property that is different or update. So if a component uses 50 lines of css code, and one of those lines changes or updates, styled component will generate the 50 lines of the css class again, instead of isolating the one that should not be updated. This is of course very bad for performance which is why a warning will show up in the console if this case scenario is present in the code. I had this issue for the divs that form the pixel style illustrations through my website, which are all very similar, but need different colors, sizes and positions. There is 2 solutions for this issue, the 1st one is to put this style inline, so that the common style is still inside of styled-components (which still optimizes it, so it is better practice to use it) and the 2nd is to use the [.attr (which is provided by styled-components)](https://styled-components.com/docs/basics#attaching-additional-props) , and put the style that changes often inside of it. I tried to find out which option is better, but was not able to, the only thing that I found, is a discussion on GitHub which explains why animating styles (or using a lot of unique ones) with styled-components is very expensive, but it did not actually explain the difference between using inline style and using .attr. I decided to use .attr instead of inline style, because I thought that if the authors of the library offered this option, they would at least aim for it to have a similar, if not better performance.
+
+Here is the code that I ended up using for the small squares that are part of the illustrations. There is no code between the backquotes at the end, because it turns out that they have no style in commun.
+
+```JavaScript
+export default styled(motion.div).attrs<Attrs>(props => ({
+  style: {
+    backgroundColor: props.s.color,
+    gridColumnStart: props.s.columnStart,
+    gridRowStart: props.s.rowStart,
+    gridColumnEnd: `span ${props.s.size}`,
+    gridRowEnd: `span ${props.s.size}`,
+  },
+}))<Attrs>``
+```
+
+I also used .attr for the stars, which had some similar styles between them.
+
+```JavaScript
+export const SStar = styled(motion.div).attrs<Attrs>(props => ({
+  style: {
+    backgroundColor: props.s.color,
+    height: `calc(${squareUnitM} * ${props.s.size})`,
+    width: `calc(${squareUnitM} * ${props.s.size})`,
+    top: `${props.s.top}vh`,
+    left: `${props.s.left}vw`,
+  },
+}))<Attrs>`
+  position: absolute;
+  ${breakPointT} {
+    height: calc(${squareUnitT} * ${props => props.s.size});
+    width: calc(${squareUnitT} * ${props => props.s.size});
+  }
+  ${breakPointD} {
+    height: calc(${squareUnit} * ${props => props.s.size});
+    width: calc(${squareUnit} * ${props => props.s.size});
+  }
+`
+```

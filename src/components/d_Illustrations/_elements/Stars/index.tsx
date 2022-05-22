@@ -1,7 +1,7 @@
 import React, { useEffect, memo, useMemo } from "react"
 import { useMotionValue } from "framer-motion"
 
-import { SStarContainer } from "./SStars"
+import { SStarContainer } from "./style"
 import { createStar, createVStar, useCreateTranslate } from "./helpers"
 
 // Ref for animation => https://framerbook.com/animation/example-animations/24-cursor/

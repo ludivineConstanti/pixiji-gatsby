@@ -1,6 +1,6 @@
 import React from "react"
 
-import SIlluDecoOnGround from "./SIlluDecoOnGround"
+import SIlluDecoOnGround from "./style"
 
 interface IlluOnGroundProps {
   color: string

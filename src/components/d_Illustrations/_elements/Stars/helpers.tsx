@@ -1,7 +1,7 @@
 import React from "react"
 import { useTransform, MotionValue } from "framer-motion"
 
-import { SStar } from "./SStars"
+import { SStar } from "./style"
 
 export const createStar = (
   array: JSX.Element[],

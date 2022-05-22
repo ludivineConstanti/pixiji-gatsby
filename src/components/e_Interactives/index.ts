@@ -1,0 +1,6 @@
+export { default as Arrow } from "./Arrow"
+export { default as ButtonBig } from "./ButtonBig"
+export { default as ButtonInText } from "./ButtonInText"
+export { default as Input } from "./Input"
+export { default as LinkIcon } from "./LinkIcon"
+export { default as MenuOrCloseIcon } from "./MenuOrCloseIcon"

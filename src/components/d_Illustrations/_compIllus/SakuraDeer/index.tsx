@@ -2,7 +2,7 @@ import React from "react"
 
 import IlluGround from "src/components/d_Illustrations/_elements/IlluGround"
 import IlluDecoOnGround from "src/components/d_Illustrations/_elements/IlluDecoOnGround"
-import { STree0, STree1, STree2P1, STree2P2, SDeer } from "./SSakuraDeer"
+import { STree0, STree1, STree2P1, STree2P2, SDeer } from "./style"
 
 interface SakuraDeerProps {
   data: JSX.Element[][]

@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 import Arrow from "src/components/e_Interactives/Arrow"
 import { buttonArrowHT, buttonArrowHX } from "src/styles/animation"
-import SButtonBig, { SButton, SComment, SText } from "./SButtonBig"
+import SButtonBig, { SButton, SComment, SText } from "./style"
 import { useAppSelector } from "src/store"
 
 const MArrow = motion(Arrow)

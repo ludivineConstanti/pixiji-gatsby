@@ -1,7 +1,7 @@
 import React from "react"
 
 import IlluGround from "src/components/d_Illustrations/_elements/IlluGround"
-import { SMonkeyLeft, SMonkeyRight, SRocks } from "./SSnowMonkey"
+import { SMonkeyLeft, SMonkeyRight, SRocks } from "./style"
 
 interface SnowMonkeysProps {
   data: JSX.Element[][]

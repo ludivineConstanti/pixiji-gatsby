@@ -1,9 +1,10 @@
 import React, { useEffect, useState, memo, useMemo } from "react"
+import { Color } from "framer"
 
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateColor } from "src/reducer/slices/globalSlice"
 import { createIllustration } from "src/components/d_Illustrations/_helpers/createIllustration"
-import { SPColorMain, SColorMain } from "./SIllu"
+import { SPColorMain, SColorMain } from "./style"
 import { IlluProps } from "src/models"
 
 const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
@@ -25,7 +26,7 @@ const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
     dispatch(
       updateColor({
         main: colorIllu,
-        lighter: colorIllu,
+        lighter: Color.toHexString(Color.lighten(Color(colorIllu), 10)),
       })
     )
   }, [colorIllu])

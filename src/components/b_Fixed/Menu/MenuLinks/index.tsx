@@ -4,7 +4,7 @@ import MenuLink from "../MenuLink"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateEmail } from "src/reducer/slices/globalSlice"
 import { resetStateQuiz } from "src/reducer/slices/quizSlice"
-import SMenuLinks, { SContainer } from "./SMenuLinks"
+import SMenuLinks, { SContainer } from "./style"
 
 const MenuLinks = () => {
   const dispatch = useAppDispatch()

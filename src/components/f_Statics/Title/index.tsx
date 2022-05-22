@@ -1,6 +1,6 @@
 import React from "react"
 
-import STitle, { SSquareTitle } from "./STitle"
+import STitle, { SSquareTitle } from "./style"
 
 const vSquareTitle = {
   initial: { width: "1%", left: 0 },

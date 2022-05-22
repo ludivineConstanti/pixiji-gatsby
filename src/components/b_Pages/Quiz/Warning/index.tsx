@@ -1,6 +1,6 @@
 import React from "react"
 
-import SWarning, { SButtonWrapper } from "./SWarning"
+import SWarning, { SButtonWrapper } from "./style"
 import ButtonInText from "src/components/e_Interactives/ButtonInText"
 
 const Warning = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 import { useAppSelector } from "src/store"
-import SMenuSetting, { SText, SOnOff } from "./SMenuSetting"
+import SMenuSetting, { SText, SOnOff } from "./style"
 
 interface MenuSettingProps {
   text: string

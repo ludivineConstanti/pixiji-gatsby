@@ -1,6 +1,6 @@
 import React from "react"
 
-import SIlluGround from "./SIlluGround"
+import SIlluGround from "./style"
 
 interface CraneSunsetProps {
   color: string

@@ -5,7 +5,7 @@ import { zIMainSquareHover } from "src/styles/g"
 import { KanjiRaw } from "src/models"
 import { tMSIFontSize, tMSIBFontSize } from "src/styles/typo"
 import { aAnimateOn } from "src/components/d_Illustrations/_helpers/animation"
-import SMainSquare, { SKanji, SInfos, SInfosBottom } from "./SMainSquare"
+import SMainSquare, { SKanji, SInfos, SInfosBottom } from "./style"
 import { hexToRgb, hslToRgb, darkerColor } from "./utils"
 
 interface MainSquareProps {

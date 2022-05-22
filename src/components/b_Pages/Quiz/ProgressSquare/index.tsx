@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import SProgressSquare from "./SProgressSquare"
+import SProgressSquare from "./style"
 
 interface ProgressSquareProps {
   squareNum: number

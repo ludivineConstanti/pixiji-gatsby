@@ -2,13 +2,13 @@
 
 The folder organisation that I had for my last project [An intro to Blockchain](https://github.com/ludivineConstanti/an-intro-to-Blockchain) was working well, in my opinion. There was some minor issues with some elements that did not have a clear category, but it was mostly fine.
 
-This time. I'll put letters at the beggining of my folder names so that they are ordered automatically how I want them to be.  
+This time. I'll put letters at the beggining of my folder names so that they are ordered automatically how I want them to be.
 
 I've also read on the React documentation that there's an organization system called "collocation" => put the files that are often modified together in the same folder. This time, I'll try putting the container files for redux in the same folder as the components. I can think already of 3 potential advantages of doing this:
 
-* I won't mix up the components and containers folder anymore while looking for files.
-* I will spend less time looking for the right file when I want to modify its container.
-* ✨ I won't have to change the path to import the container, I can just rename my index file to "component" and add another index file that will be the container. ✨
+- I won't mix up the components and containers folder anymore while looking for files.
+- I will spend less time looking for the right file when I want to modify its container.
+- ✨ I won't have to change the path to import the container, I can just rename my index file to "component" and add another index file that will be the container. ✨
 
 I will also try the collocation concept for other files in this project, like those for the reducer and the actions.
 
@@ -43,7 +43,10 @@ I discovered there is a special tool for inline styling in React ("styled compon
 
 I had some errors showing up in the console.log, complaining about the props I give to some components so that styled-components can use them. Therefore, I decided to always give those props in an object prop that I call s. This way, it's also easier for me to differentiate the props that are just used for styling (especially when there's a lot of them).
 
+## Update n°4 on CSS organisation
+
+At the beginning, I used SComponentName as a naming convention, for the files that contained the styling of the component. I decided to change it to "style" as including the name of the component for every file made copy-pasting take more time, and I find that using the same name constantly, instead of one personnalized to every component, simplifies the structure.
+
 ## Typo
 
 I have more font sizes than intended, but I think, for the future, I might continue to use one name per role for the typo, and just extend a class if they are the same size. This way, I won't have to go look for it, in the original css file, if I want to make it different, I'll just remove the extend and write the new settings.
-  

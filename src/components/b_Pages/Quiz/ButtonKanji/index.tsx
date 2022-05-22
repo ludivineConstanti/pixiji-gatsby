@@ -4,7 +4,7 @@ import axios from "axios"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { answeredQuestionQuiz } from "src/reducer/slices/quizSlice"
 import { strokeWidth } from "src/styles/g"
-import SButtonKanji, { SText } from "./SButtonKanji"
+import SButtonKanji, { SText } from "./style"
 
 const sendToAPI = async (
   email: string,

@@ -1,6 +1,6 @@
 import React, { memo } from "react"
 
-import SSquare from "./SSquare"
+import SSquare from "./style"
 import { iVSquare } from "./animation"
 
 interface SquareProps {

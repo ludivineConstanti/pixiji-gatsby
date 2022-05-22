@@ -2,7 +2,7 @@ import React, { memo } from "react"
 
 import { useAppSelector } from "src/store"
 import ButtonKanji from "../ButtonKanji"
-import SQuestion, { SText, SOptions } from "./SQuestion"
+import SQuestion, { SText, SOptions } from "./style"
 
 interface QuestionProps {
   quizId: number

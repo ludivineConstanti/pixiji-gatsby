@@ -1,6 +1,6 @@
 import React from "react"
 
-import STextWrapper, { SBackgroundColor } from "./STextWrapper"
+import STextWrapper, { SBackgroundColor } from "./style"
 import { vBackgroundText } from "src/styles/animation"
 import { useAppSelector } from "src/store"
 

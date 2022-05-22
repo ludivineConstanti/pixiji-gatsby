@@ -1,6 +1,6 @@
 import React, { memo } from "react"
 
-import { SRedPanda } from "./SRedPanda"
+import { SRedPanda } from "./style"
 import Stars from "src/components/d_Illustrations/_elements/Stars"
 
 interface RedPandaProps {

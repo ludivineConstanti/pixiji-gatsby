@@ -2,7 +2,7 @@ import React from "react"
 import { AnimatePresence } from "framer-motion"
 
 import { useAppSelector } from "src/store"
-import SHeader from "./SHeader"
+import SHeader from "./style"
 import ProgressBar from "../ProgressBar"
 
 const Header = () => {

@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, { CSSProp } from "styled-components"
 import { motion } from "framer-motion"
 
 import { zImenu, contentMenuWidth, breakPointD } from "src/styles/g"
@@ -13,7 +13,8 @@ export default styled.div`
   z-index: ${zImenu};
   position: fixed;
 `
-export const SContent = styled(motion.div)`
+export const SContent = styled(motion.div)<{ s: { customStyle: CSSProp } }>`
+  overflow-y: scroll;
   width: 100%;
   height: 100vh;
   position: fixed;
@@ -23,4 +24,6 @@ export const SContent = styled(motion.div)`
   ${breakPointD} {
     width: ${contentMenuWidth};
   }
+
+  ${p => p.s.customStyle}
 `

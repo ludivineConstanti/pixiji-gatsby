@@ -1,6 +1,6 @@
 import React from "react"
 
-import SSQuizzesNav, { SNavSquare } from "./SQuizzesNav"
+import SSQuizzesNav, { SNavSquare } from "./style"
 import { useAppSelector } from "src/store"
 
 const vNavSquare = {

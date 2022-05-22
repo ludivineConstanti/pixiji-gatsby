@@ -1,6 +1,6 @@
 import React from "react"
 
-import { SPlanet, SRabbit, SMoon } from "./SRabbitOnMoon"
+import { SPlanet, SRabbit, SMoon } from "./style"
 import Stars from "src/components/d_Illustrations/_elements/Stars"
 
 interface RabbitOnMoonProps {

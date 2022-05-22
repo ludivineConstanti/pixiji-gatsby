@@ -11,7 +11,7 @@ import {
   SHime,
   bSettings,
   SBackgroundColor,
-} from "./SKaguyaHime"
+} from "./style"
 
 interface KaguyaHimeProps {
   data: JSX.Element[][]

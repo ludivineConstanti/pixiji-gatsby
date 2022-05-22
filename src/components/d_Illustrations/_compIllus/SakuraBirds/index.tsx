@@ -1,6 +1,6 @@
 import React from "react"
 
-import { SFlowers0, SFlowers1, SFlowers2 } from "./SSakuraBirds"
+import { SFlowers0, SFlowers1, SFlowers2 } from "./style"
 
 interface SakuraBirdsProps {
   data: JSX.Element[][]

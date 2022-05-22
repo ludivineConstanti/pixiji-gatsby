@@ -1,6 +1,6 @@
 import React from "react"
 
-import SFeedbackMessage from "./SFeedbackMessage"
+import SFeedbackMessage from "./style"
 
 interface FeedbackMessageProps {
   content: string | JSX.Element | JSX.Element[]

@@ -1,7 +1,7 @@
 // == Import npm
 import React from "react"
 
-import SLinkIcon, { vLinkIcon } from "./SLinkIcon"
+import SLinkIcon, { vLinkIcon } from "./style"
 
 interface LinkIconProps {
   path: string

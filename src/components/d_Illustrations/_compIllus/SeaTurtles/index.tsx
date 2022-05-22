@@ -5,7 +5,7 @@ import {
   SSeaweedBig,
   SSeaTurtleSmall,
   SSeaTurtleBig,
-} from "./SSeaTurtles"
+} from "./style"
 
 interface SSeaTurtlesProps {
   data: JSX.Element[][]

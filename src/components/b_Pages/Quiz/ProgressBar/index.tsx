@@ -1,6 +1,6 @@
 import React, { useMemo } from "react"
 
-import SProgressBar from "./SProgressBar"
+import SProgressBar from "./style"
 import ProgressSquare from "../ProgressSquare"
 import { useAppSelector } from "src/store"
 

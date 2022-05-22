@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { updateMenuIsOpen } from "src/reducer/slices/globalSlice"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { tMLLetterSpacing } from "src/styles/typo"
-import SMenuLink, { SMenuButton } from "./SMenuLink"
+import SMenuLink, { SMenuButton } from "./style"
 
 interface MenuLinkProps {
   text: string

@@ -2,7 +2,7 @@ import React from "react"
 
 import Stars from "src/components/d_Illustrations/_elements/Stars"
 import IlluDecoOnGround from "src/components/d_Illustrations/_elements/IlluDecoOnGround"
-import { SFish0, SFish1, SFish2 } from "./SKodomoNoHi"
+import { SFish0, SFish1, SFish2 } from "./style"
 
 const poleColor = "#120B42"
 

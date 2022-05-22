@@ -8,7 +8,7 @@ import {
   tBInTLetterSpacing,
 } from "src/styles/typo"
 import { buttonArrowHT, buttonArrowHX } from "src/styles/animation"
-import { SText } from "./SButtonInText"
+import { SText } from "./style"
 import ButtonWrapper from "./ButtonWrapper"
 import { buttonTypeProp, sizeProp } from "./_common"
 

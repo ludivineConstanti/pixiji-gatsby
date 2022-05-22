@@ -1,6 +1,6 @@
 import React, { RefObject } from "react"
 
-import { SArrow, SStroke, SEnd } from "./SArrow"
+import { SArrow, SStroke, SEnd } from "./style"
 import { useAppSelector } from "src/store"
 
 interface ArrowProps {

@@ -1,7 +1,7 @@
 import React from "react"
 
 import MenuSetting from "../MenuSetting"
-import { STitle } from "./SMenuSettings"
+import { STitle } from "./style"
 import { updateCheating } from "src/reducer/slices/globalSlice"
 import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
 import { useAppDispatch, useAppSelector } from "src/store"

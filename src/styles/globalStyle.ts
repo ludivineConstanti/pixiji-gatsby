@@ -7,4 +7,15 @@ import { customStyle } from "./customStyle"
 export const GlobalStyle = createGlobalStyle`
 ${resetStyle}
 ${customStyle}
+
+// makes scrollbar invisible
+-ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
+  scrollbar-width: thin;
+  ::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+    width: 0px;
+    height: 0px;
+  }
 `

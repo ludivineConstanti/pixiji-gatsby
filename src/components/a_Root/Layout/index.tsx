@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet"
 
 import { GlobalStyle } from "src/styles/globalStyle"
 import Menu from "src/components/b_Fixed/Menu"
+import KanjiDetails from "src/components/b_Fixed/KanjiDetails"
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[]
@@ -22,6 +23,7 @@ const Layout = ({ children, isPlaying = false }: LayoutProps) => {
       </Helmet>
       <GlobalStyle />
       <Menu isPlaying={isPlaying} />
+      <KanjiDetails />
       {children}
     </>
   )

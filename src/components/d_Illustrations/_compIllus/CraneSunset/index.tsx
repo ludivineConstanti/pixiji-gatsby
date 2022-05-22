@@ -9,7 +9,7 @@ import {
   SBaby,
   SAdult,
   SRockRight,
-} from "./SCraneSunset"
+} from "./style"
 
 interface CraneSunsetProps {
   data: JSX.Element[][]
