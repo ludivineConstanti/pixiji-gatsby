@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import { useAppDispatch, useAppSelector } from "src/store"
 import {
@@ -19,11 +20,22 @@ import {
 } from "src/components/d_Illustrations/_data/sakuraBirds"
 
 const Register = () => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        ...kanjisJsonFragment
+      }
+    }
+  `)
+
   const dispatch = useAppDispatch()
 
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
-  const kanjisArr = useMemo(() => kanjisArrFormatter(getKanjisNum(arrIllu)), [])
+  const kanjisArr = useMemo(
+    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
+    []
+  )
 
   const [feedback, setFeedback] = useState({ success: false, message: "" })
   return (

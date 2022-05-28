@@ -1,11 +1,9 @@
-import { kanjis } from "src/assets/dataQuiz/kanjis"
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
 import { kanjisInitial } from "src/assets/dataQuiz/kanjisInitial"
 import { quizzes } from "src/assets/dataQuiz/quizzes"
 import { RootState } from "src/store"
 
 export const initialStateQuiz = (quizId: number) => {
-  const currentQuiz = kanjis.filter(e => e.quizId === quizId)
   const rightAnswers: [] = []
   const wrongAnswers: [] = []
 
@@ -19,7 +17,6 @@ export const initialStateQuiz = (quizId: number) => {
       arrAnswers: any
     }[]
     totalQuestions: number
-    totalOptions: number
     title: string
     finished: boolean
     answeredQuestion: boolean
@@ -31,7 +28,6 @@ export const initialStateQuiz = (quizId: number) => {
   const returnedState: ReturnedState = {
     dataQuiz: quizFormatter(kanjisInitial),
     totalQuestions: 0,
-    totalOptions: currentQuiz.length,
     title: quizzes[quizId - 1].title,
     finished: false,
     answeredQuestion: false,
@@ -70,8 +66,9 @@ export const initialize = (
   const { quizId } = payload
 
   const cQ = state[`quiz${quizId}`]
-  const currentQuiz = kanjis.filter(e => e.quizId === quizId)
+  const currentQuiz = payload.kanjis.filter(e => e.quizId === quizId)
   const formattedQuiz = quizFormatter(currentQuiz)
+
   cQ.dataQuiz = formattedQuiz
 
   if (cQ.totalQuestions === 0) {

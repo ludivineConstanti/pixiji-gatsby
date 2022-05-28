@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import {
   kanjisArrFormatter,
@@ -14,8 +15,16 @@ import Illu from "src/components/d_Illustrations/Illu"
 import ButtonInText from "src/components/e_Interactives/ButtonInText"
 
 const MyProfile = () => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        ...kanjisJsonFragment
+      }
+    }
+  `)
+
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(getKanjisNum(arrIllu)),
+    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
     [arrIllu]
   )
 

@@ -11,6 +11,7 @@ export const globalSlice = createSlice({
       lighter: "#0A2846",
     },
     menuIsOpen: false,
+    idSelectedKanji: false as boolean | number,
   },
 
   reducers: {
@@ -38,11 +39,22 @@ export const globalSlice = createSlice({
     updateMenuIsOpen: (state, { payload }: { payload: boolean }) => {
       state.menuIsOpen = payload
     },
+    updateIdSelectedKanji: (
+      state,
+      { payload }: { payload: boolean | number }
+    ) => {
+      state.idSelectedKanji = payload
+    },
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { updateEmail, updateCheating, updateColor, updateMenuIsOpen } =
-  globalSlice.actions
+export const {
+  updateEmail,
+  updateCheating,
+  updateColor,
+  updateMenuIsOpen,
+  updateIdSelectedKanji,
+} = globalSlice.actions
 
 export default globalSlice.reducer

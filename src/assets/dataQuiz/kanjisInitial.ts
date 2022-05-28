@@ -1,6 +1,6 @@
 export const kanjisInitial = [
   {
-    id: 1,
+    kanjiId: 1,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -8,7 +8,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 2,
+    kanjiId: 2,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -16,7 +16,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 3,
+    kanjiId: 3,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -24,7 +24,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 4,
+    kanjiId: 4,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -32,7 +32,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 5,
+    kanjiId: 5,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -40,7 +40,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 6,
+    kanjiId: 6,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -48,7 +48,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 7,
+    kanjiId: 7,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -56,7 +56,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 8,
+    kanjiId: 8,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -64,7 +64,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 9,
+    kanjiId: 9,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -72,7 +72,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 10,
+    kanjiId: 10,
     kanji: "?",
     en: "?",
     kana: "?",
@@ -80,7 +80,7 @@ export const kanjisInitial = [
     quizId: 1,
   },
   {
-    id: 11,
+    kanjiId: 11,
     kanji: "?",
     en: "?",
     kana: "?",

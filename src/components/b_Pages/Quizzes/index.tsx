@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateIdQuiz } from "src/reducer/slices/quizSlice"
@@ -17,12 +18,25 @@ interface QuizzesProps {
 }
 
 const Quizzes = ({ currentQuiz }: QuizzesProps) => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        nodes {
+          quizId
+        }
+      }
+    }
+  `)
+
+  const totalOptions = useMemo(
+    () => allKanjisJson.nodes.filter(e => e.quizId === currentQuiz.id).length,
+    [allKanjisJson]
+  )
+
   const dispatch = useAppDispatch()
 
   const dataQuizzes = useAppSelector(state => state.quiz.dataQuizzes)
-  const totalOptions = useAppSelector(
-    state => state.quiz[`quiz${currentQuiz.id}`].totalOptions
-  )
+
   const kanjisArr = useAppSelector(
     state => state.quiz[`quiz${currentQuiz.id}`].wrongAnswers
   )

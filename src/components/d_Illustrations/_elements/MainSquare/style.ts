@@ -33,6 +33,7 @@ export default styled(motion.div).attrs<Attrs>(props => ({
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
 `
 
 const textHidden = `

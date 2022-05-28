@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import {
   kanjisArrFormatter,
@@ -15,10 +16,18 @@ import {
 import SLinkIconContainer from "./SError404"
 
 const Error404 = () => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        ...kanjisJsonFragment
+      }
+    }
+  `)
+
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(getKanjisNum(arrIllu)),
+    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
     [arrIllu]
   )
 

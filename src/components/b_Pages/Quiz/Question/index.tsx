@@ -29,7 +29,7 @@ const Question = ({ quizId }: QuestionProps) => {
           arrAnswers.map(e => (
             <ButtonKanji
               quizId={quizId}
-              key={e.id}
+              key={e.kanjiId}
               possibleAnswer={e}
               disabled={answeredQuestion}
             />

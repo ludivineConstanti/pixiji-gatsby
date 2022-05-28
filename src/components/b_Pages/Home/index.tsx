@@ -1,4 +1,5 @@
 import React, { useMemo, memo } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import {
   kanjisArrFormatter,
@@ -12,7 +13,18 @@ import {
 } from "src/components/d_Illustrations/_data/rabbitOnMoon"
 
 const Home = () => {
-  const kanjisArr = useMemo(() => kanjisArrFormatter(getKanjisNum(arrIllu)), [])
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        ...kanjisJsonFragment
+      }
+    }
+  `)
+
+  const kanjisArr = useMemo(
+    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
+    []
+  )
 
   return (
     <>

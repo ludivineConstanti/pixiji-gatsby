@@ -7,6 +7,8 @@ import { tMSIFontSize, tMSIBFontSize } from "src/styles/typo"
 import { aAnimateOn } from "src/components/d_Illustrations/_helpers/animation"
 import SMainSquare, { SKanji, SInfos, SInfosBottom } from "./style"
 import { hexToRgb, hslToRgb, darkerColor } from "./utils"
+import { useAppDispatch } from "src/store"
+import { updateIdSelectedKanji } from "src/reducer/slices/globalSlice"
 
 interface MainSquareProps {
   size: number
@@ -30,6 +32,8 @@ const MainSquare = ({
   kanjiIndex,
   kanjisArr,
 }: MainSquareProps) => {
+  const dispatch = useAppDispatch()
+
   const [answer, setAnswer] = useState<KanjiRaw | false>(false)
   const [infos, setInfos] = useState<{ answeredWrong: number } | false>(false)
 
@@ -125,6 +129,9 @@ const MainSquare = ({
           : "whileHoverOff"
       }
       exit="initial"
+      onClick={() => {
+        dispatch(updateIdSelectedKanji(kanjisArr[kanjiIndex].kanjiId))
+      }}
     >
       {answer && (
         <>

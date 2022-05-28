@@ -60,7 +60,7 @@ const ButtonKanji = ({
     ]
   })
 
-  const isCorrect = possibleAnswer.id === correctAnswer.id
+  const isCorrect = possibleAnswer.kanjiId === correctAnswer.kanjiId
 
   const [wasClicked, setWasClicked] = useState(false)
 
@@ -127,7 +127,7 @@ const ButtonKanji = ({
         dispatch(answeredQuestionQuiz({ quizId, answer: possibleAnswer }))
         setWasClicked(true)
         if (email) {
-          sendToAPI(email, possibleAnswer.id, isCorrect)
+          sendToAPI(email, possibleAnswer.kanjiId, isCorrect)
         }
       }}
       disabled={disabled}

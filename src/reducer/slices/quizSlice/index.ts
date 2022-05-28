@@ -9,6 +9,8 @@ import {
   emptyAnswer,
 } from "./helpers"
 
+type QuizIdOptions = 1 | 2 | 3
+
 export const quizSlice = createSlice({
   name: "quiz",
   initialState,
@@ -21,13 +23,17 @@ export const quizSlice = createSlice({
         state[key] = initialState[key]
       })
     },
-    updateIdQuiz: (state, { payload }) => {
-      // { quizId, slug}
+    updateIdQuiz: (
+      state,
+      { payload }: { payload: { quizId: QuizIdOptions; slug: string } }
+    ) => {
       state.currentQuizId = payload.quizId
       state.currentSlug = payload.slug
     },
-    initializeQuiz: (state, { payload }) => {
-      // {quizId: number}
+    initializeQuiz: (
+      state,
+      { payload }: { payload: { quizId: QuizIdOptions; title: string; kanjis } }
+    ) => {
       const cQ = state[`quiz${payload.quizId}`]
       if (!cQ.rightAnswers.length) {
         initialize(state, payload)
@@ -39,12 +45,15 @@ export const quizSlice = createSlice({
       const { quizId, answer } = payload
       const cQ = state[`quiz${quizId}`]
 
-      cQ.answeredQuestion = answer.id
+      console.log("answeredQuestionQuiz, answer: ", answer)
+
+      cQ.answeredQuestion = answer.kanjiId
 
       const { infosAnswer } = cQ.dataQuiz[0]
 
       const answeredRight =
-        answer.id === cQ.dataQuiz[0].arrAnswers[infosAnswer.answerIndex].id
+        answer.kanjiId ===
+        cQ.dataQuiz[0].arrAnswers[infosAnswer.answerIndex].kanjiId
 
       if (answeredRight) {
         cQ.answeredCorrectly = true
@@ -60,7 +69,7 @@ export const quizSlice = createSlice({
       }
       if (!answeredRight) {
         const wrongAnswer = cQ.wrongAnswers.filter(
-          e => e.answer.id === answer.id
+          e => e.answer.kanjiId === answer.kanjiId
         )[0]
         if (!wrongAnswer) {
           cQ.dataQuiz[0].infosAnswer.answeredWrong += 1
@@ -76,7 +85,7 @@ export const quizSlice = createSlice({
     },
     nextQuestionQuiz: (
       state,
-      { payload }: { payload: { quizId: 1 | 2 | 3 } }
+      { payload }: { payload: { quizId: QuizIdOptions } }
     ) => {
       // {quizId: num}
       const cQ = state[`quiz${payload.quizId}`]
@@ -95,7 +104,7 @@ export const quizSlice = createSlice({
         payload,
       }: {
         payload: {
-          quizId: 1 | 2 | 3
+          quizId: QuizIdOptions
           dataQuiz: { infosAnswer: { answerIndex: number } }[]
         }
       }
@@ -119,7 +128,7 @@ export const quizSlice = createSlice({
       }
     },
     updateWrongAnswers: (state, { payload }) => {
-      for (let i: 1 | 2 | 3 = 1; i < 4; i++) {
+      for (let i: QuizIdOptions = 1; i < 4; i++) {
         const cQ = state[`quiz${i}`]
         cQ.wrongAnswers = sortWrongAnswers([
           ...payload[`quiz${i}`],

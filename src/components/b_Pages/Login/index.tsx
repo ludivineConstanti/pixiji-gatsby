@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import {
   kanjisArrFormatter,
@@ -19,11 +20,22 @@ import {
 import { onSubmit } from "./utils"
 
 const Login = () => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        ...kanjisJsonFragment
+      }
+    }
+  `)
+
   const dispatch = useAppDispatch()
 
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
-  const kanjisArr = useMemo(() => kanjisArrFormatter(getKanjisNum(arrIllu)), [])
+  const kanjisArr = useMemo(
+    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
+    []
+  )
 
   const [feedback, setFeedback] = useState({ success: false, message: "" })
   return (

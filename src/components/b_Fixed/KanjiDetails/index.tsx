@@ -1,12 +1,13 @@
 import React, { useState } from "react"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
+import { useStaticQuery, graphql } from "gatsby"
 
-import { useAppDispatch, useAppSelector } from "src/store"
+import { useAppSelector, useAppDispatch } from "src/store"
 import { MenuOrCloseIcon, LeftPopUp } from "src/components"
-import { buttonWidth } from "src/styles/g"
-import { tMenuSettingsTitle } from "src/styles/typo"
-
-const sidePadding = 28
+import { tMenuSettingsTitle, tText, tbInTSmallFontSize } from "src/styles/typo"
+import { sidePadding } from "./basics"
+import PopUp from "./PopUp"
+import { updateIdSelectedKanji } from "src/reducer/slices/globalSlice"
 
 const Kanji = styled.div`
   display: flex;
@@ -41,20 +42,21 @@ const Subtitle = styled.h2`
 `
 
 const Text = styled.p`
-  margin-bottom: 8px;
+  ${tText}
+`
+
+const TextInline = styled(Text)`
+  display: inline-block;
 `
 
 const Small = styled.span`
-  font-size: 10px;
+  font-size: ${tbInTSmallFontSize};
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin: 0 16px;
 `
 
-const Medium = styled.span`
-  font-size: 14px;
-  // text-transform: uppercase;
-  // letter-spacing: 3px;
+const SmallWithMargin = styled(Small)`
+  margin: 0 16px;
 `
 
 const Lighter = styled.span<{ color: string }>`
@@ -78,151 +80,162 @@ const Statistics = styled.div<{ backgroundColor: string }>`
 `
 
 const Slash = styled.span`
-  margin: 0 8px;
+  margin: 0 6px;
 `
 
-const PopUpWrapper = styled.div`
-  position: absolute;
-  transform: translate(0, -100%);
-  line-height: 20px;
-  font-size: 15px;
-  margin-right: ${sidePadding}px;
-`
+interface InterrogationMarkProps {
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
+  text: string
+}
 
-const PopUpBackground = styled.div`
-  padding: ${sidePadding}px;
-  background-color: white;
-`
-
-const InterrogationMark = ({ setIsVisible }) => (
-  <InterrogationMarkWrapper
+const InterrogationMark = ({ setIsVisible, text }: InterrogationMarkProps) => (
+  <Subtitle
     onMouseEnter={() => setIsVisible(true)}
     onMouseLeave={() => setIsVisible(false)}
   >
-    ?
-  </InterrogationMarkWrapper>
-)
-
-const PopUp = ({ text, color }) => (
-  <PopUpWrapper>
-    <PopUpBackground style={{ border: `2px solid ${color}` }}>
-      {text}
-    </PopUpBackground>
-  </PopUpWrapper>
+    <InterrogationMarkWrapper>?</InterrogationMarkWrapper>
+    {text}
+  </Subtitle>
 )
 
 const Separator = () => <Slash>-</Slash>
 
 const KanjiDetails = () => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        nodes {
+          kanjiId
+          kana
+          kanaEn
+          kanji
+          en
+        }
+      }
+    }
+  `)
+
+  const dispatch = useAppDispatch()
+
   const [onyomiExplanationIsVisible, setOnyomiExplanationIsVisible] =
     useState(false)
   const [kunyomiExplanationIsVisible, setKunyomiExplanationIsVisible] =
     useState(false)
   const colorMain = useAppSelector(state => state.global.color.main)
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
+  const idSelectedKanji = useAppSelector(state => state.global.idSelectedKanji)
+
+  const selectedKanji = allKanjisJson.nodes.find(kanji => {
+    return +kanji.kanjiId === +idSelectedKanji
+  })
+
   return (
-    <LeftPopUp isShowing={true}>
-      <div style={{ color: colorMain }}>
-        <MenuOrCloseIcon onClick={() => {}} showsCloseButton={true} />
-        <Kanji>
-          <Medium>ichi</Medium>一<Medium>one</Medium>
-        </Kanji>
-        <WrapperSection>
-          <Subtitle>Meanings:</Subtitle>
-          <Medium>
-            One <Separator /> best <Separator /> first <Separator /> foremost{" "}
-            <Separator /> beginning <Separator /> start
-          </Medium>
-        </WrapperSection>
-        <WrapperSection style={{ backgroundColor: "rgba(255, 255, 255)" }}>
-          {onyomiExplanationIsVisible && (
-            <PopUp
-              text={`On'yomi is the Japanese pronounciation that derives from the Chinese
+    <LeftPopUp isShowing={selectedKanji ? true : false}>
+      {selectedKanji && (
+        <div style={{ color: colorMain }}>
+          <MenuOrCloseIcon
+            onClick={() => {
+              dispatch(updateIdSelectedKanji(false))
+            }}
+            showsCloseButton={selectedKanji ? true : false}
+          />
+          <Kanji>
+            <Text>{selectedKanji.kanaEn}</Text>
+            {selectedKanji.kanji}
+            <Text>{selectedKanji.en}</Text>
+          </Kanji>
+          <WrapperSection>
+            <Subtitle>Meanings:</Subtitle>
+            <Text>
+              One <Separator /> best <Separator /> first <Separator /> foremost{" "}
+              <Separator /> beginning <Separator /> start
+            </Text>
+          </WrapperSection>
+          <WrapperSection>
+            {onyomiExplanationIsVisible && (
+              <PopUp
+                text={`On'yomi is the Japanese pronounciation that derives from the Chinese
           way of pronouncing the Kanji ("yomi" means reading in Japanese). It is
           generally used for Japanese words that are made of kanjis combination,
           (look below, or at other kanjis for examples of kanjis combinations).`}
-              color={colorMainL1}
+              />
+            )}
+            <InterrogationMark
+              setIsVisible={setOnyomiExplanationIsVisible}
+              text="On'yomi:"
             />
-          )}
-          <Subtitle>
-            <InterrogationMark setIsVisible={setOnyomiExplanationIsVisible}>
-              ?
-            </InterrogationMark>
-            On'yomi:
-          </Subtitle>
-          <Text>
-            いち <Small>ichi</Small>
-          </Text>
-        </WrapperSection>
-        <WrapperSection>
-          {kunyomiExplanationIsVisible && (
-            <PopUp
-              text={`Kun'yomi is the Kanji's pronounciation based on the Japanese language
+            <Text>
+              いち <SmallWithMargin>ichi</SmallWithMargin>
+            </Text>
+          </WrapperSection>
+          <WrapperSection>
+            {kunyomiExplanationIsVisible && (
+              <PopUp
+                text={`Kun'yomi is the Kanji's pronounciation based on the Japanese language
             ("yomi" means reading in Japanese). It is generally used when a kanji
             is written individually (like above).`}
-              color={colorMainL1}
+              />
+            )}
+            <InterrogationMark
+              setIsVisible={setKunyomiExplanationIsVisible}
+              text="Kun'yomi:"
             />
-          )}
-          <Subtitle>
-            <InterrogationMark setIsVisible={setKunyomiExplanationIsVisible}>
-              ?
-            </InterrogationMark>
-            Kun'yomi:
-          </Subtitle>
-          <Text>
-            イチ <Small>ichi</Small>
-          </Text>
-        </WrapperSection>
-        <WrapperSection style={{ backgroundColor: "rgba(255, 255, 255)" }}>
-          <Subtitle>Use cases:</Subtitle>
-          <ul>
-            <Example>
-              一 位{" "}
-              <Small>
-                イチイ <Lighter color={colorMainL1}>(ichii)</Lighter>
-              </Small>
-              <Medium> first place</Medium>
-            </Example>
-            <Example>
-              均 一 <Small>キンイツ (KIINIITSU)</Small>
-              <Medium>uniformity, equality</Medium>
-            </Example>
-            <Example>
-              １ 対 １ <Small>イチタイイチ (ICHITAIICHI)</Small>
-              <Medium> one-on-one</Medium>
-            </Example>{" "}
-            <Example>
-              一 <Small>イツ</Small>{" "}
-              <Medium>one, same (mind, path, etc.)</Medium>
-            </Example>
-            <Example>
-              一 に <Small>イツニ</Small>{" "}
-              <Medium>solely, entirely, only</Medium>
-            </Example>
-            <Example>
-              均 一 <Small>キンイツ</Small>{" "}
-              <Medium>uniformity, equality</Medium>
-            </Example>
-            <Example>
-              画 一 <Small>カクイツ</Small>{" "}
-              <Medium>uniformity, standardization</Medium>
-            </Example>
-          </ul>
-        </WrapperSection>
-        <Statistics backgroundColor={colorMainL1}>
-          <Subtitle>Statistics:</Subtitle>
-          <Text>This month: </Text>
-          <Text>
-            <Small>Answered correctly:</Small> 2 times
-          </Text>
-          <Text>
-            <Small>Answered wrong:</Small> 2 times
-          </Text>
-          <Text>
-            50% <Small>Success rate</Small>
-          </Text>
-        </Statistics>
-      </div>
+            <Text>
+              イチ <SmallWithMargin>ichi</SmallWithMargin>
+            </Text>
+          </WrapperSection>
+          <WrapperSection>
+            <Subtitle>Use cases:</Subtitle>
+            <ul>
+              <Example>
+                一 位{" "}
+                <SmallWithMargin>
+                  イチイ <Lighter color={colorMainL1}>(ichii)</Lighter>
+                </SmallWithMargin>
+                <TextInline> first place</TextInline>
+              </Example>
+              <Example>
+                均 一 <SmallWithMargin>キンイツ (KIINIITSU)</SmallWithMargin>
+                <TextInline>uniformity, equality</TextInline>
+              </Example>
+              <Example>
+                １ 対 １{" "}
+                <SmallWithMargin>イチタイイチ (ICHITAIICHI)</SmallWithMargin>
+                <TextInline> one-on-one</TextInline>
+              </Example>{" "}
+              <Example>
+                一 <SmallWithMargin>イツ</SmallWithMargin>{" "}
+                <TextInline>one, same (mind, path, etc.)</TextInline>
+              </Example>
+              <Example>
+                一 に <SmallWithMargin>イツニ</SmallWithMargin>{" "}
+                <TextInline>solely, entirely, only</TextInline>
+              </Example>
+              <Example>
+                均 一 <SmallWithMargin>キンイツ</SmallWithMargin>{" "}
+                <TextInline>uniformity, equality</TextInline>
+              </Example>
+              <Example>
+                画 一 <SmallWithMargin>カクイツ</SmallWithMargin>{" "}
+                <TextInline>uniformity, standardization</TextInline>
+              </Example>
+            </ul>
+          </WrapperSection>
+          <Statistics backgroundColor={colorMainL1}>
+            <Subtitle>Statistics:</Subtitle>
+            <Text style={{ display: "block" }}>This month: </Text>
+            <Text>
+              <Small>Answered correctly:</Small> 2 times
+            </Text>
+            <Text>
+              <Small>Answered wrong:</Small> 2 times
+            </Text>
+            <Text>
+              50% <Small>Success rate</Small>
+            </Text>
+          </Statistics>
+        </div>
+      )}
     </LeftPopUp>
   )
 }

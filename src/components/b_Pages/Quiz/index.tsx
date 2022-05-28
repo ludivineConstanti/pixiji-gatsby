@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { AnimatePresence } from "framer-motion"
+import { useStaticQuery, graphql } from "gatsby"
 
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateIdQuiz, initializeQuiz } from "src/reducer/slices/quizSlice"
@@ -19,6 +20,21 @@ interface QuizProps {
 }
 
 const Quiz = ({ currentQuiz }: QuizProps) => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        nodes {
+          quizId
+          kanji
+          kanjiId
+          en
+          kana
+          kanaEn
+        }
+      }
+    }
+  `)
+
   const dispatch = useAppDispatch()
 
   const finishedQuiz = useAppSelector(
@@ -32,7 +48,11 @@ const Quiz = ({ currentQuiz }: QuizProps) => {
   useEffect(() => {
     dispatch(updateIdQuiz({ quizId: currentQuiz.id, slug: currentQuiz.slug }))
     dispatch(
-      initializeQuiz({ quizId: currentQuiz.id, title: currentQuiz.title })
+      initializeQuiz({
+        quizId: currentQuiz.id,
+        title: currentQuiz.title,
+        kanjis: allKanjisJson.nodes,
+      })
     )
   }, [currentQuiz.id, currentQuiz.slug, currentQuiz.title])
 

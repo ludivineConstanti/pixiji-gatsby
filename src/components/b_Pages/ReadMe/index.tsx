@@ -1,4 +1,5 @@
 import React, { useMemo } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import { useAppSelector } from "src/store"
 import {
@@ -13,10 +14,18 @@ import {
 import PageWithText from "src/components/c_Partials/PageWithText"
 
 const About = () => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        ...kanjisJsonFragment
+      }
+    }
+  `)
+
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(getKanjisNum(arrIllu)),
+    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
     [arrIllu]
   )
 

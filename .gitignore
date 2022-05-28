@@ -2,6 +2,8 @@
 .env.development
 .env.production
 
+.npmrc
+
 # Logs
 
 logs
