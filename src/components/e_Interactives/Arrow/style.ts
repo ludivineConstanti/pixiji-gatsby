@@ -1,36 +1,73 @@
 import styled from "styled-components"
 
 import { strokeWidth } from "src/styles/g"
+import { PointsToward, Size } from "./models"
 
-const arrowWidth = (size: "small" | "") => (size === "small" ? "12px" : "24px")
-const arrowEndS = (size: "small" | "") => (size === "small" ? 6 : 12)
+const arrowWidth = (size: Size) => (size === "small" ? "12px" : "24px")
+const arrowEndS = (size: Size) => (size === "small" ? 6 : 12)
+const arrowHeight = (size: Size) => {
+  const sizeValue = arrowEndS(size)
+  return `${Math.hypot(sizeValue, sizeValue)}px`
+}
+
+const alignItems = {
+  top: "flex-start",
+  left: "center",
+  bottom: "flex-end",
+  right: "center",
+}
+
+const justifyContent = {
+  top: "center",
+  left: "flex-start",
+  bottom: "center",
+  right: "flex-end",
+}
 
 // initial css before comes in
+// do not use transform, because the animation uses transform
 export const SArrow = styled.div<{
-  s: { size: "small" | ""; pointsToward: "right" | "left" }
+  s: { size: Size; pointsToward: PointsToward }
 }>`
-  height: ${p => Math.hypot(arrowEndS(p.s.size), arrowEndS(p.s.size))}px;
-  width: ${p => arrowWidth(p.s.size)};
+  height: ${p =>
+    p.s.pointsToward === "right" || p.s.pointsToward === "left"
+      ? arrowHeight(p.s.size)
+      : arrowWidth(p.s.size)};
+  width: ${p =>
+    p.s.pointsToward === "right" || p.s.pointsToward === "left"
+      ? arrowWidth(p.s.size)
+      : arrowHeight(p.s.size)};
   display: flex;
-  align-items: center;
-  justify-content: ${p =>
-    p.s.pointsToward === "right" ? "flex-end" : "flex-start"};
+  align-items: ${p => alignItems[p.s.pointsToward]};
+  justify-content: ${p => justifyContent[p.s.pointsToward]};
   border-style: inherit;
 `
 
-export const SStroke = styled.div<{ s: { colorMain: string } }>`
-  width: 100%;
-  height: ${strokeWidth}px;
+export const SStroke = styled.div<{
+  s: { pointsToward: PointsToward; colorMain: string }
+}>`
+  width: ${p =>
+    p.s.pointsToward === "right" || p.s.pointsToward === "left"
+      ? "100%"
+      : `${strokeWidth}px`};
+  height: ${p =>
+    p.s.pointsToward === "right" || p.s.pointsToward === "left"
+      ? `${strokeWidth}px`
+      : "100%"};
   background-color: ${p => p.s.colorMain};
 `
 
-const borderOnR = `${strokeWidth}px ${strokeWidth}px 0 0`
-const borderOnL = `0 0 ${strokeWidth}px ${strokeWidth}px`
+const borderStyle = {
+  top: `${strokeWidth}px 0 0 ${strokeWidth}px`,
+  left: `0 0 ${strokeWidth}px ${strokeWidth}px`,
+  bottom: `0  ${strokeWidth}px ${strokeWidth}px 0`,
+  right: `${strokeWidth}px ${strokeWidth}px 0 0`,
+}
 
 export const SEnd = styled.div<{
-  s: { pointsToward: "left" | "right"; colorMain: string; size: "small" | "" }
+  s: { pointsToward: PointsToward; colorMain: string; size: Size }
 }>`
-  border-width: ${p => (p.s.pointsToward === "right" ? borderOnR : borderOnL)};
+  border-width: ${p => borderStyle[p.s.pointsToward]};
   border-color: ${p => p.s.colorMain};
   position: absolute;
   height: ${p => arrowEndS(p.s.size)}px;

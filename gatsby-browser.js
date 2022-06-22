@@ -11,6 +11,7 @@ import React from "react"
 import ResizeObserver from "resize-observer-polyfill"
 import { AnimatePresence } from "framer-motion"
 import { Provider } from "react-redux"
+
 import { store } from "src/store"
 
 if (window) {

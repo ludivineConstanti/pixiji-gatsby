@@ -140,7 +140,7 @@ const MainSquare = ({
             {answer.kanaEn}
           </SInfos>
           <SKanji variants={v.infos.kanji}>{answer.kanji}</SKanji>
-          <SInfos variants={v.infos.infos}>{answer.en}</SInfos>
+          <SInfos variants={v.infos.infos}>{answer.en[0]}</SInfos>
           {infos && infos.answeredWrong > 0 && (
             <SInfosBottom variants={v.infos.infosB}>
               wrong: {infos.answeredWrong} time{infos.answeredWrong > 1 && "s"}

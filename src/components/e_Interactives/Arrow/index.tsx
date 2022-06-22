@@ -2,11 +2,12 @@ import React, { RefObject } from "react"
 
 import { SArrow, SStroke, SEnd } from "./style"
 import { useAppSelector } from "src/store"
+import { PointsToward, Size } from "./models"
 
 interface ArrowProps {
-  pointsToward?: "right" | "left"
+  pointsToward?: PointsToward
   isWhite: boolean
-  size: "small" | ""
+  size?: Size
 }
 
 const Arrow = React.forwardRef(
@@ -18,7 +19,9 @@ const Arrow = React.forwardRef(
 
     return (
       <SArrow s={{ pointsToward, size }} ref={ref}>
-        <SStroke s={{ colorMain: isWhite ? "white" : colorMain }} />
+        <SStroke
+          s={{ pointsToward, colorMain: isWhite ? "white" : colorMain }}
+        />
         <SEnd
           s={{ colorMain: isWhite ? "white" : colorMain, pointsToward, size }}
         />

@@ -21,7 +21,7 @@ const Question = ({ quizId }: QuestionProps) => {
   return (
     <SQuestion>
       <SText>
-        Which character means {arrAnswers[infosAnswer.answerIndex].en}?
+        Which character means {arrAnswers[infosAnswer.answerIndex].en[0]}?
       </SText>
       <SOptions>
         {
