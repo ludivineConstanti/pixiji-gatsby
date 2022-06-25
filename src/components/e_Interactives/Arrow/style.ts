@@ -1,11 +1,11 @@
 import styled from "styled-components"
 
 import { strokeWidth } from "src/styles/g"
-import { PointsToward, Size } from "./models"
+import { PointsTowardOptions, SizeOptions } from "./models"
 
-const arrowWidth = (size: Size) => (size === "small" ? "12px" : "24px")
-const arrowEndS = (size: Size) => (size === "small" ? 6 : 12)
-const arrowHeight = (size: Size) => {
+const arrowWidth = (size: SizeOptions) => (size === "small" ? "12px" : "24px")
+const arrowEndS = (size: SizeOptions) => (size === "small" ? 6 : 12)
+const arrowHeight = (size: SizeOptions) => {
   const sizeValue = arrowEndS(size)
   return `${Math.hypot(sizeValue, sizeValue)}px`
 }
@@ -27,7 +27,7 @@ const justifyContent = {
 // initial css before comes in
 // do not use transform, because the animation uses transform
 export const SArrow = styled.div<{
-  s: { size: Size; pointsToward: PointsToward }
+  s: { size: SizeOptions; pointsToward: PointsTowardOptions }
 }>`
   height: ${p =>
     p.s.pointsToward === "right" || p.s.pointsToward === "left"
@@ -44,7 +44,7 @@ export const SArrow = styled.div<{
 `
 
 export const SStroke = styled.div<{
-  s: { pointsToward: PointsToward; colorMain: string }
+  s: { pointsToward: PointsTowardOptions; colorMain: string }
 }>`
   width: ${p =>
     p.s.pointsToward === "right" || p.s.pointsToward === "left"
@@ -65,7 +65,7 @@ const borderStyle = {
 }
 
 export const SEnd = styled.div<{
-  s: { pointsToward: PointsToward; colorMain: string; size: Size }
+  s: { pointsToward: PointsTowardOptions; colorMain: string; size: SizeOptions }
 }>`
   border-width: ${p => borderStyle[p.s.pointsToward]};
   border-color: ${p => p.s.colorMain};

@@ -2,7 +2,7 @@ import React from "react"
 
 import { updateMenuIsOpen } from "src/reducer/slices/globalSlice"
 import { useAppDispatch, useAppSelector } from "src/store"
-import { MenuOrCloseIcon } from "src/components"
+import MenuOrCloseIcon from "src/components/e_Interactives/MenuOrCloseIcon"
 
 const MenuIcon = () => {
   const dispatch = useAppDispatch()

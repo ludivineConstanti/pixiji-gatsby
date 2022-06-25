@@ -10,6 +10,7 @@ interface LeftPopUpProps {
   visibleChild?: JSX.Element
   customStyle?: CSSProp
   onWheel?: () => void
+  setRef?: (e: HTMLElement) => void
 }
 
 const LeftPopUp = ({
@@ -18,6 +19,7 @@ const LeftPopUp = ({
   visibleChild = <></>,
   customStyle = "",
   onWheel = () => {},
+  setRef,
 }: LeftPopUpProps) => {
   return (
     <SWrapper onWheel={onWheel}>
@@ -29,6 +31,11 @@ const LeftPopUp = ({
             animate="animate"
             exit="initial"
             s={{ customStyle }}
+            ref={e => {
+              if (setRef) {
+                setRef(e)
+              }
+            }}
           >
             {children}
           </SContent>

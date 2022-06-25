@@ -3,7 +3,7 @@ import React from "react"
 import MenuIcon from "./MenuIcon"
 import MenuLinks from "./MenuLinks"
 import MenuSettings from "./MenuSettings"
-import { LeftPopUp } from "../.."
+import LeftPopUp from "src/components/c_Partials/LeftPopUp"
 import { useAppSelector } from "src/store"
 
 interface MenuProps {

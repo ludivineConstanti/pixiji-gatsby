@@ -32,3 +32,12 @@ export const SOnOff = styled.div<{ s: { active: boolean; colorMain: string } }>`
     props.s.active ? "white" : "rgba(255, 255, 255, 0.25)"};
   color: ${props => props.s.colorMain};
 `
+
+export const SDropdown = styled.div`
+  border: 2px solid pink;
+  height: 16px;
+  width: 16px;
+  // transform: rotate(45deg);
+  justify-self: flex-end;
+  // align-self: flex-end;
+`

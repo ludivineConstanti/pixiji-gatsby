@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import { useAppSelector, useAppDispatch } from "src/store"
-import { MenuOrCloseIcon, LeftPopUp } from "src/components"
+import MenuOrCloseIcon from "src/components/e_Interactives/MenuOrCloseIcon"
+import LeftPopUp from "src/components/c_Partials/LeftPopUp"
 import PopUp from "./PopUp"
 import { updateIdSelectedKanji } from "src/reducer/slices/globalSlice"
 import InterrogationMark from "./InterrogationMark"
@@ -45,6 +46,7 @@ const KanjiDetails = () => {
   const [kunyomiExplanationIsVisible, setKunyomiExplanationIsVisible] =
     useState(false)
   const [scrollDownIsVisible, setScrollDownIsVisible] = useState(true)
+  const [ref, setRef] = useState(null)
   const colorMain = useAppSelector(state => state.global.color.main)
   const idSelectedKanji = useAppSelector(state => state.global.idSelectedKanji)
 
@@ -54,14 +56,11 @@ const KanjiDetails = () => {
 
   useEffect(() => {
     setScrollDownIsVisible(true)
+    if (ref) {
+      ref.scrollTop = 0
+      console.log(ref)
+    }
   }, [selectedKanji])
-
-  /* if (ref && window) {
-    console.log(ref.scrollTop, ref.scrollHeight)
-    ref.scrollTop = 100
-    // window.scrollTo({ top: ref.scrollHeight })
-    // ref.scrollTop(() => ref.scrollHeight)
-  } */
 
   return (
     <LeftPopUp
@@ -71,6 +70,7 @@ const KanjiDetails = () => {
           setScrollDownIsVisible(false)
         }
       }}
+      setRef={setRef}
     >
       {selectedKanji && (
         <div style={{ color: colorMain }}>
@@ -125,10 +125,7 @@ const KanjiDetails = () => {
           )}
           <UseCases selectedKanji={selectedKanji} />
           <Statistics />
-          <ScrollDownArrow
-            isVisible={scrollDownIsVisible}
-            onClick={() => console.log("clicked")}
-          />
+          <ScrollDownArrow isVisible={scrollDownIsVisible} wrapperRef={ref} />
         </div>
       )}
     </LeftPopUp>

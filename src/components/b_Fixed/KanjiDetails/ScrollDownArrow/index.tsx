@@ -3,30 +3,40 @@ import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
 
 import { useAppSelector } from "src/store"
-import { buttonWidth } from "src/styles/g"
-import { Subtitle } from "../style"
 import { buttonArrowHT, buttonArrowHX } from "src/styles/animation"
 import Arrow from "src/components/e_interactives/arrow"
 
 const MArrow = motion(Arrow)
 
+const offsetHeight = 500
+
 const Wrapper = styled(motion.div)`
-  height: ${buttonWidth};
   width: 100%;
   position: absolute;
-  bottom: 0;
+  bottom: -${offsetHeight}px;
   left: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   &:hover {
     cursor: pointer;
   }
 `
 
-const Text = styled(Subtitle)`
-  color: white;
+const WrapperArrow = styled.div`
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+`
+
+const BackgroundColor = styled.div`
+  width: 100%;
+  height: ${offsetHeight}px;
+  position: relative;
+  top: -5px;
 `
 
 const vArrow = {
@@ -46,26 +56,40 @@ const variants = {
 
 interface ScrollDownArrowProps {
   isVisible: boolean
-  onClick: () => void
+  wrapperRef: HTMLElement
 }
 
-const ScrollDownArrow = ({ isVisible, onClick }: ScrollDownArrowProps) => {
+const ScrollDownArrow = ({ isVisible, wrapperRef }: ScrollDownArrowProps) => {
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
   return (
     <AnimatePresence exitBeforeEnter>
       {isVisible && (
         <Wrapper
-          onClick={onClick}
-          style={{ backgroundColor: colorMainL1 }}
           variants={variants}
           initial="initial"
           animate="animate"
           exit="initial"
           whileHover="whileHover"
+          onClick={() => {
+            if (wrapperRef) {
+              console.log(
+                wrapperRef,
+                wrapperRef.scrollTop,
+                wrapperRef.scrollHeight,
+                wrapperRef.clientHeight,
+                wrapperRef.clientWidth
+              )
+              wrapperRef.scrollTop = 100
+              // window.scrollTo({ top: ref.scrollHeight })
+              // ref.scrollTop(() => ref.scrollHeight)
+            }
+          }}
         >
-          <Text>Scroll down</Text>
-          <MArrow variants={vArrow} isWhite={true} pointsToward="bottom" />
-          <span id="wrapper-bottom" />
+          <WrapperArrow style={{ backgroundColor: colorMainL1 }}>
+            <MArrow variants={vArrow} isWhite={true} pointsToward="bottom" />
+            <span id="wrapper-bottom" />
+          </WrapperArrow>
+          <BackgroundColor style={{ backgroundColor: colorMainL1 }} />
         </Wrapper>
       )}
     </AnimatePresence>

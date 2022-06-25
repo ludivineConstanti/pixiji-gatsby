@@ -2,12 +2,12 @@ import React, { RefObject } from "react"
 
 import { SArrow, SStroke, SEnd } from "./style"
 import { useAppSelector } from "src/store"
-import { PointsToward, Size } from "./models"
+import { PointsTowardOptions, SizeOptions } from "./models"
 
 interface ArrowProps {
-  pointsToward?: PointsToward
-  isWhite: boolean
-  size?: Size
+  pointsToward?: PointsTowardOptions
+  isWhite?: boolean
+  size?: SizeOptions
 }
 
 const Arrow = React.forwardRef(

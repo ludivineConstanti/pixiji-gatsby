@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 import { useAppSelector } from "src/store"
-import SMenuSetting, { SText, SOnOff } from "./style"
+import SMenuSetting, { SText, SOnOff, SDropdown } from "./style"
 
 interface MenuSettingProps {
   text: string
@@ -48,6 +48,7 @@ const MenuSetting = ({
           <SOnOff s={{ active: cheating, colorMain }}>on</SOnOff>
         </>
       )}
+      <SDropdown />
     </SMenuSetting>
   )
 }

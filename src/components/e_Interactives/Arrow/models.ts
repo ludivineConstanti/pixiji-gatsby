@@ -1,3 +1,3 @@
-export type PointsToward = "top" | "left" | "bottom" | "right"
+export type PointsTowardOptions = "top" | "left" | "bottom" | "right"
 
-export type Size = "small" | ""
+export type SizeOptions = "small" | ""

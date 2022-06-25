@@ -8,6 +8,10 @@ export const GlobalStyle = createGlobalStyle`
 ${resetStyle}
 ${customStyle}
 
+html {
+  scroll-behavior: smooth;
+}
+
 // makes scrollbar invisible
 -ms-overflow-style: none;
   scrollbar-width: none;
