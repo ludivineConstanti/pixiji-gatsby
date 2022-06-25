@@ -1,22 +1,8 @@
 import React from "react"
-import styled from "styled-components"
-import { motion, AnimatePresence } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
 
-import { sidePadding } from "../basics"
 import { useAppSelector } from "src/store"
-
-const Wrapper = styled(motion.div)`
-  position: absolute;
-  line-height: 20px;
-  font-size: 15px;
-  margin-right: ${sidePadding}px;
-  transform-origin: top left;
-`
-
-const BackgroundColor = styled.div`
-  padding: ${sidePadding}px;
-  background-color: white;
-`
+import { SWrapper, SBackgroundColor } from "./style"
 
 const variants = {
   initial: { transform: "scale(0) translate(0, -100%)" },
@@ -33,16 +19,16 @@ const PopUp = ({ text, isVisible }: PopUpProps) => {
   return (
     <AnimatePresence exitBeforeEnter>
       {isVisible && (
-        <Wrapper
+        <SWrapper
           variants={variants}
           initial="initial"
           animate="animate"
           exit="initial"
         >
-          <BackgroundColor style={{ border: `2px solid ${colorMainL1}` }}>
+          <SBackgroundColor style={{ border: `2px solid ${colorMainL1}` }}>
             {text}
-          </BackgroundColor>
-        </Wrapper>
+          </SBackgroundColor>
+        </SWrapper>
       )}
     </AnimatePresence>
   )

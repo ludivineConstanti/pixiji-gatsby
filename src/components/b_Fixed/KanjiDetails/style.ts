@@ -3,33 +3,33 @@ import styled from "styled-components"
 import { tMenuSettingsTitle, tText, tbInTSmallFontSize } from "src/styles/typo"
 import { sidePadding } from "./basics"
 
-export const Subtitle = styled.h2`
+export const SSubtitle = styled.h2`
   ${tMenuSettingsTitle}
   margin-bottom: 15px;
   display: flex;
   align-items: center;
 `
 
-export const Text = styled.p`
+export const SText = styled.p`
   ${tText}
 `
 
-export const WrapperSection = styled.div`
+export const SWrapperSection = styled.div`
   padding: ${sidePadding}px;
   position: relative;
 `
 
-export const Small = styled.span`
+export const SSmallText = styled.span`
   font-size: ${tbInTSmallFontSize};
   letter-spacing: 1px;
   text-transform: uppercase;
 `
 
-export const SmallWithMargin = styled(Small)`
+export const SSmallTextWithMargin = styled(SSmallText)`
   margin: 0 16px;
 `
 
-export const Example = styled.li`
+export const SExample = styled.li`
   margin: 16px 0;
 `
 

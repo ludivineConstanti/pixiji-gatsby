@@ -9,7 +9,7 @@ interface LeftPopUpProps {
   isShowing: boolean
   visibleChild?: JSX.Element
   customStyle?: CSSProp
-  onWheel?: () => void
+  onWheel?: (e: React.WheelEvent) => void
   setRef?: (e: HTMLElement) => void
 }
 
@@ -18,11 +18,17 @@ const LeftPopUp = ({
   isShowing,
   visibleChild = <></>,
   customStyle = "",
-  onWheel = () => {},
+  onWheel,
   setRef,
 }: LeftPopUpProps) => {
   return (
-    <SWrapper onWheel={onWheel}>
+    <SWrapper
+      onWheel={e => {
+        if (onWheel) {
+          onWheel(e)
+        }
+      }}
+    >
       <AnimatePresence exitBeforeEnter>
         {isShowing && (
           <SContent

@@ -1,6 +1,6 @@
 import React from "react"
 
-import { Subtitle, Text, WrapperSection } from "../style"
+import { SSubtitle, SText, SWrapperSection } from "../style"
 import Separator from "../Separator"
 import { SelectedKanji } from "../models"
 
@@ -10,9 +10,9 @@ interface MeaningsProps {
 
 const Meanings = ({ selectedKanji }: MeaningsProps) => {
   return (
-    <WrapperSection>
-      <Subtitle>Meaning(s):</Subtitle>
-      <Text>
+    <SWrapperSection>
+      <SSubtitle>Meaning(s):</SSubtitle>
+      <SText>
         {React.Children.toArray(
           selectedKanji.en.map((e: string, i: number) => (
             <>
@@ -21,8 +21,8 @@ const Meanings = ({ selectedKanji }: MeaningsProps) => {
             </>
           ))
         )}
-      </Text>
-    </WrapperSection>
+      </SText>
+    </SWrapperSection>
   )
 }
 

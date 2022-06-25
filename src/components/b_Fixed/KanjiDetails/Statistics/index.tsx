@@ -1,31 +1,10 @@
 import React, { useState } from "react"
-import styled from "styled-components"
 
 import { useAppSelector } from "src/store"
 import { sidePadding } from "../basics"
-import { Subtitle, Text, Small } from "../style"
-import MenuSetting from "src/components/b_Fixed/Menu/MenuSetting"
-
-const Wrapper = styled.div<{ backgroundColor: string }>`
-  background-color: ${p => p.backgroundColor};
-  color: white;
-  width: 100%;
-  position: relative;
-`
-
-const WrapperText = styled.div`
-  padding: ${sidePadding}px;
-`
-
-const OtherOptions = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(0, -100%);
-`
+import { SSubtitle, SText, SSmallText } from "../style"
+import { SWrapper, SWrapperText, SOtherOptions } from "./style"
+import PopUpButton from "src/components/e_Interactives/PopUpButton"
 
 const timeOptions = [
   "today",
@@ -41,17 +20,17 @@ const Statistics = () => {
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
   return (
     <>
-      <Subtitle style={{ paddingLeft: `${sidePadding}px` }}>
+      <SSubtitle style={{ paddingLeft: `${sidePadding}px` }}>
         Statistics:
-      </Subtitle>
-      <Wrapper backgroundColor={colorMainL1}>
+      </SSubtitle>
+      <SWrapper backgroundColor={colorMainL1}>
         {otherOptionsAreVisible && (
-          <OtherOptions>
+          <SOtherOptions>
             {timeOptions
               .filter(e => e !== currentTimeOption)
               .map((e, i) => (
-                <MenuSetting
-                  text={`${e}:`}
+                <PopUpButton
+                  text={e}
                   key={`StatisticTimeOption${e}${i}`}
                   onClick={() => {
                     setCurrentTimeOption(e)
@@ -59,26 +38,27 @@ const Statistics = () => {
                   }}
                 />
               ))}
-          </OtherOptions>
+          </SOtherOptions>
         )}
-        <MenuSetting
-          text={`${currentTimeOption}:`}
+        <PopUpButton
+          text={currentTimeOption}
+          dropdownState={otherOptionsAreVisible ? "up" : "down"}
           onClick={() => {
             setOtherOptionsAreVisible(v => !v)
           }}
         />
-        <WrapperText>
-          <Text>
-            <Small>Answered correctly:</Small> 2 times
-          </Text>
-          <Text>
-            <Small>Answered wrong:</Small> 2 times
-          </Text>
-          <Text style={{ marginTop: "8px" }}>
-            <Small>Success rate</Small>: 50%
-          </Text>
-        </WrapperText>
-      </Wrapper>
+        <SWrapperText>
+          <SText>
+            <SSmallText>Answered correctly:</SSmallText> 2 times
+          </SText>
+          <SText>
+            <SSmallText>Answered wrong:</SSmallText> 2 times
+          </SText>
+          <SText style={{ marginTop: "8px" }}>
+            <SSmallText>Success rate</SSmallText>: 50%
+          </SText>
+        </SWrapperText>
+      </SWrapper>
     </>
   )
 }

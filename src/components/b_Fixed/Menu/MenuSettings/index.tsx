@@ -1,6 +1,6 @@
 import React from "react"
 
-import MenuSetting from "../MenuSetting"
+import PopUpButton from "src/components/e_Interactives/PopUpButton"
 import { STitle } from "./style"
 import { updateCheating } from "src/reducer/slices/globalSlice"
 import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
@@ -23,7 +23,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
   return (
     <div>
       <STitle s={{ colorMainL1 }}>settings</STitle>
-      <MenuSetting
+      <PopUpButton
         text="Cheat mode"
         hasSwitch
         onClick={() => {
@@ -31,7 +31,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
         }}
       />
       {isPlaying && (
-        <MenuSetting
+        <PopUpButton
           text={finishedQuiz ? "Restart quiz" : "Finish quiz"}
           onClick={() => {
             dispatch(cheatingButtonFinishQuiz({ quizId: currentQuizId }))

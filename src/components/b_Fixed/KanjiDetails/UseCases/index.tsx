@@ -1,26 +1,10 @@
 import React from "react"
-import styled from "styled-components"
 
 import { useAppSelector } from "src/store"
 import Separator from "../Separator"
 import { SelectedKanji } from "../models"
-import { Text, Subtitle, WrapperSection, Small, Example } from "../style"
-
-const Kana = styled(Small)`
-  margin: 0 8px;
-`
-
-const KanaEn = styled(Small)`
-  margin-right: 16px;
-`
-
-const TextInline = styled(Text)`
-  display: inline-block;
-`
-
-const Lighter = styled.span<{ color: string }>`
-  color: ${p => p.color};
-`
+import { SSubtitle, SWrapperSection, SSmallText, SExample } from "../style"
+import { SKana, SKanaEn, STextInline, SLighter } from "./style"
 
 interface UseCasesProps {
   selectedKanji: SelectedKanji
@@ -30,33 +14,33 @@ const UseCases = ({ selectedKanji }: UseCasesProps) => {
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
 
   return (
-    <WrapperSection>
-      <Subtitle>Use cases:</Subtitle>
+    <SWrapperSection>
+      <SSubtitle>Use cases:</SSubtitle>
       <ul>
         {React.Children.toArray(
           selectedKanji.onyomiCompounds.map(e => (
-            <Example>
+            <SExample>
               {e.kanji}
-              <Kana>{e.kana}</Kana>
-              <KanaEn>
-                <Lighter color={colorMainL1}>{e.kanaEn}</Lighter>
-              </KanaEn>
-              <TextInline>
+              <SKana>{e.kana}</SKana>
+              <SKanaEn>
+                <SLighter color={colorMainL1}>{e.kanaEn}</SLighter>
+              </SKanaEn>
+              <STextInline>
                 {" "}
                 {React.Children.toArray(
                   e.en.map((text: string, i: number) => (
                     <>
-                      <Small>{text}</Small>
+                      <SSmallText>{text}</SSmallText>
                       {i !== e.en.length - 1 ? <Separator /> : ""}
                     </>
                   ))
                 )}
-              </TextInline>
-            </Example>
+              </STextInline>
+            </SExample>
           ))
         )}
       </ul>
-    </WrapperSection>
+    </SWrapperSection>
   )
 }
 

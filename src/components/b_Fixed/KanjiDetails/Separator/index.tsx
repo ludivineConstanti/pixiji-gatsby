@@ -1,10 +1,7 @@
 import React from "react"
-import styled from "styled-components"
 
-const Slash = styled.span`
-  margin: 0 8px;
-`
+import { SSlash } from "./style"
 
-const Separator = () => <Slash>-</Slash>
+const Separator = () => <SSlash>-</SSlash>
 
 export default Separator

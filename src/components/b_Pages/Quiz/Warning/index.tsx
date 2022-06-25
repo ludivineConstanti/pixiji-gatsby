@@ -7,7 +7,7 @@ const Warning = () => {
   return (
     <SWarning>
       <p>
-        &#9888; Your score won't be saved since you're not logged in. &#9888;
+        &#9888; Your score won't be saved since you're not logged in &#9888;
       </p>
       <SButtonWrapper>
         <ButtonInText text="Login" path="/login" size="small" />

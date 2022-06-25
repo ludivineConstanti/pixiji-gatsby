@@ -11,7 +11,7 @@ import Statistics from "./Statistics"
 import Meanings from "./Meanings"
 import UseCases from "./UseCases"
 import ScrollDownArrow from "./ScrollDownArrow"
-import { Text, WrapperSection, SmallWithMargin, Kanji } from "./style"
+import { SText, SWrapperSection, SSmallTextWithMargin, Kanji } from "./style"
 import { SelectedKanji } from "./models"
 
 const KanjiDetails = () => {
@@ -58,16 +58,20 @@ const KanjiDetails = () => {
     setScrollDownIsVisible(true)
     if (ref) {
       ref.scrollTop = 0
-      console.log(ref)
+      if (ref.scrollHeight <= ref.offsetHeight) {
+        setScrollDownIsVisible(false)
+      }
     }
-  }, [selectedKanji])
+  }, [selectedKanji, ref])
 
   return (
     <LeftPopUp
       isShowing={selectedKanji ? true : false}
-      onWheel={() => {
+      onWheel={e => {
         if (scrollDownIsVisible) {
-          setScrollDownIsVisible(false)
+          if (e.deltaY > 0 && scrollDownIsVisible) {
+            setScrollDownIsVisible(false)
+          }
         }
       }}
       setRef={setRef}
@@ -81,13 +85,15 @@ const KanjiDetails = () => {
             showsCloseButton={selectedKanji ? true : false}
           />
           <Kanji>
-            <Text style={{ marginBottom: "6px" }}>{selectedKanji.kanaEn}</Text>
+            <SText style={{ marginBottom: "6px" }}>
+              {selectedKanji.kanaEn}
+            </SText>
             {selectedKanji.kanji}
-            <Text style={{ marginTop: "6px" }}>{selectedKanji.en[0]}</Text>
+            <SText style={{ marginTop: "6px" }}>{selectedKanji.en[0]}</SText>
           </Kanji>
           <Meanings selectedKanji={selectedKanji} />
           {selectedKanji.onyomi && (
-            <WrapperSection>
+            <SWrapperSection>
               <PopUp
                 text={`On'yomi is the Japanese pronounciation that derives from the Chinese
           way of pronouncing the Kanji ("yomi" means reading in Japanese). It is
@@ -99,14 +105,16 @@ const KanjiDetails = () => {
                 setIsVisible={setOnyomiExplanationIsVisible}
                 text="On'yomi:"
               />
-              <Text>
+              <SText>
                 {selectedKanji.onyomi}
-                <SmallWithMargin>{selectedKanji.onyomiEn}</SmallWithMargin>
-              </Text>
-            </WrapperSection>
+                <SSmallTextWithMargin>
+                  {selectedKanji.onyomiEn}
+                </SSmallTextWithMargin>
+              </SText>
+            </SWrapperSection>
           )}
           {selectedKanji.kunyomi && (
-            <WrapperSection>
+            <SWrapperSection>
               <PopUp
                 text={`Kun'yomi is the Kanji's pronounciation based on the Japanese language
             ("yomi" means reading in Japanese). It is generally used when a kanji
@@ -117,15 +125,21 @@ const KanjiDetails = () => {
                 setIsVisible={setKunyomiExplanationIsVisible}
                 text="Kun'yomi:"
               />
-              <Text>
+              <SText>
                 {selectedKanji.kunyomi}
-                <SmallWithMargin>{selectedKanji.kunyomiEn}</SmallWithMargin>
-              </Text>
-            </WrapperSection>
+                <SSmallTextWithMargin>
+                  {selectedKanji.kunyomiEn}
+                </SSmallTextWithMargin>
+              </SText>
+            </SWrapperSection>
           )}
           <UseCases selectedKanji={selectedKanji} />
           <Statistics />
-          <ScrollDownArrow isVisible={scrollDownIsVisible} wrapperRef={ref} />
+          <ScrollDownArrow
+            isVisible={scrollDownIsVisible}
+            setIsVisible={setScrollDownIsVisible}
+            wrapperRef={ref}
+          />
         </div>
       )}
     </LeftPopUp>

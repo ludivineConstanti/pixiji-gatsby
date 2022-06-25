@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
 ${resetStyle}
 ${customStyle}
 
-html {
+div {
   scroll-behavior: smooth;
 }
 
