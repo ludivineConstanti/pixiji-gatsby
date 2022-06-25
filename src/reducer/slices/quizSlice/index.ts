@@ -87,7 +87,6 @@ export const quizSlice = createSlice({
       state,
       { payload }: { payload: { quizId: QuizIdOptions } }
     ) => {
-      // {quizId: num}
       const cQ = state[`quiz${payload.quizId}`]
 
       const currentQuestion = cQ.dataQuiz[0]

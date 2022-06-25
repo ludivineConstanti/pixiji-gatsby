@@ -3,19 +3,14 @@ import React from "react"
 import ButtonInText from "src/components/e_Interactives/ButtonInText"
 import Title from "src/components/f_Statics/Title"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
-import { SText, SLink } from "./style"
-
-const vText = {
-  initial: { opacity: 0, x: 100 },
-  animate: { opacity: 1, x: 0, transition: { delay: 0.25 } },
-  exit: { opacity: 0, x: -250, transition: { duration: 0.25 } },
-}
+import { SLink } from "./style"
+import Text from "src/components/f_Statics/Text"
 
 interface TextWithTitleProps {
   title: string
   text: (string | { text: string; link: string; path: string })[]
-  button?: boolean | { text: string; path: string }
-  children?: JSX.Element | JSX.Element[]
+  button?: false | { text: string; path: string }
+  children?: JSX.Element
 }
 
 const TextWithTitle = ({
@@ -28,7 +23,7 @@ const TextWithTitle = ({
     <TextWrapper>
       <Title text={title} />
       {text.map((e, i) => (
-        <SText variants={vText} key={`textWithTitlePElement${i}`}>
+        <Text key={`textWithTitlePElement${i}`}>
           {e.text ? (
             <>
               {e.text}{" "}
@@ -39,7 +34,7 @@ const TextWithTitle = ({
           ) : (
             e
           )}
-        </SText>
+        </Text>
       ))}
       {button && <ButtonInText text={button.text} path={button.path} />}
       {children}

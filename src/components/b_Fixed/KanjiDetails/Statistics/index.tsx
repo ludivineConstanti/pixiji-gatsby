@@ -15,6 +15,7 @@ const timeOptions = [
 ]
 
 const Statistics = () => {
+  const isLoggedIn = useAppSelector(state => !!state.global.email)
   const [otherOptionsAreVisible, setOtherOptionsAreVisible] = useState(false)
   const [currentTimeOption, setCurrentTimeOption] = useState(timeOptions[0])
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
@@ -24,40 +25,48 @@ const Statistics = () => {
         Statistics:
       </SSubtitle>
       <SWrapper backgroundColor={colorMainL1}>
-        {otherOptionsAreVisible && (
-          <SOtherOptions>
-            {timeOptions
-              .filter(e => e !== currentTimeOption)
-              .map((e, i) => (
-                <PopUpButton
-                  text={e}
-                  key={`StatisticTimeOption${e}${i}`}
-                  onClick={() => {
-                    setCurrentTimeOption(e)
-                    setOtherOptionsAreVisible(false)
-                  }}
-                />
-              ))}
-          </SOtherOptions>
+        {isLoggedIn ? (
+          <>
+            {otherOptionsAreVisible && (
+              <SOtherOptions>
+                {timeOptions
+                  .filter(e => e !== currentTimeOption)
+                  .map((e, i) => (
+                    <PopUpButton
+                      text={e}
+                      key={`StatisticTimeOption${e}${i}`}
+                      onClick={() => {
+                        setCurrentTimeOption(e)
+                        setOtherOptionsAreVisible(false)
+                      }}
+                    />
+                  ))}
+              </SOtherOptions>
+            )}
+            <PopUpButton
+              text={currentTimeOption}
+              dropdownState={otherOptionsAreVisible ? "up" : "down"}
+              onClick={() => {
+                setOtherOptionsAreVisible(v => !v)
+              }}
+            />
+            <SWrapperText>
+              <SText>
+                <SSmallText>Answered correctly:</SSmallText> 2 times
+              </SText>
+              <SText>
+                <SSmallText>Answered wrong:</SSmallText> 2 times
+              </SText>
+              <SText style={{ marginTop: "8px" }}>
+                <SSmallText>Success rate</SSmallText>: 50%
+              </SText>
+            </SWrapperText>
+          </>
+        ) : (
+          <SWrapperText>
+            <SText>You need to be logged in to see your statistics.</SText>
+          </SWrapperText>
         )}
-        <PopUpButton
-          text={currentTimeOption}
-          dropdownState={otherOptionsAreVisible ? "up" : "down"}
-          onClick={() => {
-            setOtherOptionsAreVisible(v => !v)
-          }}
-        />
-        <SWrapperText>
-          <SText>
-            <SSmallText>Answered correctly:</SSmallText> 2 times
-          </SText>
-          <SText>
-            <SSmallText>Answered wrong:</SSmallText> 2 times
-          </SText>
-          <SText style={{ marginTop: "8px" }}>
-            <SSmallText>Success rate</SSmallText>: 50%
-          </SText>
-        </SWrapperText>
       </SWrapper>
     </>
   )

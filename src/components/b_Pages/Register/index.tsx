@@ -18,6 +18,7 @@ import {
   arrIllu,
   colorIllu,
 } from "src/components/d_Illustrations/_data/sakuraBirds"
+import Text from "src/components/f_Statics/Text"
 
 const Register = () => {
   const { allKanjisJson } = useStaticQuery(graphql`
@@ -46,28 +47,45 @@ const Register = () => {
         renderIllu={data => <SakuraBirds data={data} />}
         arrDataIllu={{ arrIllu, colorIllu }}
       />
-      <TextWrapper>
-        <form
-          onSubmit={e => {
-            onSubmit(e, feedback, setFeedback, dispatch)
-          }}
-        >
-          <Input type="email" placeholder="Your email address" label="Email" />
-          <Input type="password" placeholder="Your password" label="Password" />
-          <Input
-            type="password"
-            placeholder="Confirm your password"
-            label="Password confirmation"
-            isLast={true}
-          />
-          <ButtonInText text="Register" buttonType="submit" />
-        </form>
-        {feedback.message && <FeedbackMessage content={feedback.message} />}
-      </TextWrapper>
-      <ButtonBig
-        text={feedback.success ? "Quizzes" : "Login"}
-        path={feedback.success ? `/quizzes/${quizzesSlug}` : "/login"}
-      />
+
+      {feedback.success ? (
+        <TextWrapper>
+          <>
+            <Text>{feedback.message}</Text>
+            <ButtonInText text="Quizzes" path={`/quizzes/${quizzesSlug}`} />
+          </>
+        </TextWrapper>
+      ) : (
+        <>
+          <TextWrapper>
+            <form
+              onSubmit={e => {
+                onSubmit(e, feedback, setFeedback, dispatch)
+              }}
+            >
+              <Input
+                type="email"
+                placeholder="Your email address"
+                label="Email"
+              />
+              <Input
+                type="password"
+                placeholder="Your password"
+                label="Password"
+              />
+              <Input
+                type="password"
+                placeholder="Confirm your password"
+                label="Password confirmation"
+                isLast={true}
+              />
+              <ButtonInText text="Register" buttonType="submit" />
+            </form>
+            {feedback.message && <FeedbackMessage content={feedback.message} />}
+          </TextWrapper>
+          <ButtonBig text="Login" path="/login" />
+        </>
+      )}
     </>
   )
 }

@@ -18,13 +18,17 @@ a_Root => App (the root of the document at the top)
 b_Fixed => Everything that is used on a lot of pages, not as an individual custom element, but as is (menu...)  
 b_Pages => Everything that has its own url path (home...)  
 c_Illustrations => Illustrations and the function that process them  
-dPartials => Things that takes a lot of space and are reused in the pages  
+d_Partials => Things that takes a lot of space and are reused in the pages  
 e_Interactives => Small interactive elements (buttons...)  
 e_Statics => Small elements that are not interactive
 
 ## Naming
 
 I first thought about removing the "Reducer" or "Actions" at the end of the file name, to make it shorter, since they were in the reducers and actions folder anyways, but I changed my mind after clicking a few times on the files in the reducer folder, thinking I was going to find the component.
+
+### Update
+
+This stopped being relevant after I started using redux-toolkit
 
 ## CSS
 
