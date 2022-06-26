@@ -16,11 +16,11 @@ import {
   colorSakuraDeer,
 } from "src/components/d_Illustrations/_data/sakuraDeer"
 import SakuraDeer from "src/components/d_Illustrations/_compIllus/SakuraDeer"
-import { KanjiRaw } from "src/models"
+import { QuizIdOptions } from "src/models"
 
 interface IlluQuizProps {
-  currentQuizId: 1 | 2 | 3
-  kanjisArr: KanjiRaw[]
+  currentQuizId: QuizIdOptions
+  kanjisArr: number[]
 }
 
 const IlluQuiz = ({ currentQuizId, kanjisArr }: IlluQuizProps) => {

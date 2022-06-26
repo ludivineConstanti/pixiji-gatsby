@@ -7,10 +7,11 @@ import ButtonBig from "src/components/e_Interactives/ButtonBig"
 import TextWithTitle from "src/components/c_Partials/TextWithTitle"
 import IlluQuiz from "src/components/d_Illustrations/IlluQuiz"
 import QuizzesNav from "./QuizzesNav"
+import { QuizIdOptions } from "src/models"
 
 interface QuizzesProps {
   currentQuiz: {
-    id: 1 | 2 | 3
+    id: QuizIdOptions
     title: string
     slug: string
   }

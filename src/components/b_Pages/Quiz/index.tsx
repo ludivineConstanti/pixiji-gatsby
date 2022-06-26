@@ -10,10 +10,11 @@ import Header from "./Header"
 import StatePlaying from "./StatePlaying"
 import StateFinished from "./StateFinished"
 import Warning from "./Warning"
+import { QuizIdOptions } from "src/models"
 
 interface QuizProps {
   currentQuiz: {
-    id: 1 | 2 | 3
+    id: QuizIdOptions
     title: string
     slug: string
   }

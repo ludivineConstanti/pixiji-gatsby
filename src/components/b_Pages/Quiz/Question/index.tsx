@@ -32,17 +32,11 @@ const Question = ({ quizId }: QuestionProps) => {
 
   const { infosAnswer, arrAnswers } = dataObj
 
-  // console.log(infosAnswer.answerIndex, arrAnswers[infosAnswer.answerIndex])
-
   const currentEnglishWord = allKanjisJson.nodes.filter(
     (e: { kanjiId: number }) => {
-      // console.log(e, e.kanjiId, arrAnswers[infosAnswer.answerIndex])
-      // console.log(e.kanjiId === arrAnswers[infosAnswer.answerIndex])
       return e.kanjiId === arrAnswers[infosAnswer.answerIndex]
     }
   )[0].en[0]
-
-  // console.log("currentEnglishWord", currentEnglishWord)
 
   return (
     <SQuestion>
@@ -50,12 +44,11 @@ const Question = ({ quizId }: QuestionProps) => {
       <SOptions>
         {
           // eslint-disable-next-line max-len
-          arrAnswers.map(e => (
+          arrAnswers.map((e: number) => (
             <ButtonKanji
               quizId={quizId}
-              key={e}
+              key={`button-kanji-${e}`}
               kanjiId={e}
-              possibleAnswer={e}
               disabled={answeredQuestion}
             />
           ))

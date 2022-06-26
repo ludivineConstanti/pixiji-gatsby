@@ -1,6 +1,7 @@
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
 import { quizzes } from "src/assets/dataQuiz/quizzes"
 import { RootState } from "src/store"
+import { QuizIdOptions } from "src/models"
 
 export const kanjisInitial = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
@@ -50,7 +51,7 @@ export const initialState = {
 }
 
 export const emptyAnswer = {
-  answer: 0,
+  answer: 1,
   infosAnswer: { answeredRight: 1, answeredWrong: 0 },
 }
 
@@ -58,7 +59,7 @@ export const emptyAnswer = {
 export const initialize = (
   state: RootState,
   payload: {
-    quizId: 1 | 2 | 3
+    quizId: QuizIdOptions
     kanjis: number[]
   }
 ) => {

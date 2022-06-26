@@ -8,8 +8,7 @@ import {
   emptyAnswer,
   kanjisInitial,
 } from "./helpers"
-
-type QuizIdOptions = 1 | 2 | 3
+import { QuizIdOptions } from "src/models"
 
 export const quizSlice = createSlice({
   name: "quiz",

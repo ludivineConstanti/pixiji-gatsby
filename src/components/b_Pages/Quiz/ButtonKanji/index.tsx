@@ -36,18 +36,9 @@ interface ButtonKanjiProps {
   quizId: number
   disabled: boolean | number
   kanjiId: number
-  possibleAnswer: {
-    id: number
-    kanji: string
-  }
 }
 
-const ButtonKanji = ({
-  quizId,
-  possibleAnswer,
-  kanjiId,
-  disabled,
-}: ButtonKanjiProps) => {
+const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
   const { allKanjisJson } = useStaticQuery(graphql`
     query {
       allKanjisJson {
@@ -140,13 +131,13 @@ const ButtonKanji = ({
     <SButtonKanji
       type="button"
       onClick={() => {
-        dispatch(answeredQuestionQuiz({ quizId, answer: possibleAnswer }))
+        dispatch(answeredQuestionQuiz({ quizId, answer: kanjiId }))
         setWasClicked(true)
         if (email) {
           sendToAPI(email, kanjiId, isCorrect)
         }
       }}
-      disabled={disabled}
+      disabled={!!disabled}
       s={{
         colorMain,
         isWrong: !isCorrect && cheating,
