@@ -84,7 +84,14 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
 
   return (
     <>
-      <IlluQuiz currentQuizId={currentQuiz.id} kanjisArr={kanjisArr} />
+      <IlluQuiz
+        currentQuizId={currentQuiz.id}
+        kanjisArr={kanjisArr.map(e => {
+          if (e.answer) {
+            return e.answer
+          }
+        })}
+      />
       <div>
         <TextWithTitle
           title={`Quiz ${currentQuiz.id}`}

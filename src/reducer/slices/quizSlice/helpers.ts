@@ -1,7 +1,8 @@
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
-import { kanjisInitial } from "src/assets/dataQuiz/kanjisInitial"
 import { quizzes } from "src/assets/dataQuiz/quizzes"
 import { RootState } from "src/store"
+
+export const kanjisInitial = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 export const initialStateQuiz = (quizId: number) => {
   const rightAnswers: [] = []
@@ -49,25 +50,23 @@ export const initialState = {
 }
 
 export const emptyAnswer = {
-  answer: {
-    kanji: "",
-    en: "",
-    kana: "",
-    kanaEn: "",
-  },
+  answer: 0,
   infosAnswer: { answeredRight: 1, answeredWrong: 0 },
 }
 
 // put it there since I need it in 2 different actions
 export const initialize = (
   state: RootState,
-  payload: { quizId: 1 | 2 | 3 }
+  payload: {
+    quizId: 1 | 2 | 3
+    kanjis: number[]
+  }
 ) => {
-  const { quizId } = payload
+  const { quizId, kanjis } = payload
 
   const cQ = state[`quiz${quizId}`]
-  const currentQuiz = payload.kanjis.filter(e => e.quizId === quizId)
-  const formattedQuiz = quizFormatter(currentQuiz)
+
+  const formattedQuiz = quizFormatter(kanjis)
 
   cQ.dataQuiz = formattedQuiz
 
