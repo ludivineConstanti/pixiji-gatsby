@@ -5,13 +5,14 @@ import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
 import ButtonBig from "src/components/e_Interactives/ButtonBig"
 import TextWithTitle from "src/components/c_Partials/TextWithTitle"
 
-const Quiz = () => {
+interface QuizProps {
+  kanjis: number[]
+}
+
+const Quiz = ({ kanjis }: QuizProps) => {
   const dispatch = useAppDispatch()
 
   const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
-  const currentQuizTitle = useAppSelector(
-    state => state.quiz[`quiz${state.quiz.currentQuizId}`].title
-  )
   const dataQuizzes = useAppSelector(state => state.quiz.dataQuizzes)
 
   const nextQuiz = useMemo(
@@ -32,8 +33,7 @@ const Quiz = () => {
         onClick={() => {
           dispatch(
             cheatingButtonFinishQuiz({
-              quizId: currentQuizId,
-              title: currentQuizTitle,
+              kanjis,
             })
           )
         }}

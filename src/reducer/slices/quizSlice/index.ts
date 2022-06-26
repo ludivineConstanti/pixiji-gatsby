@@ -1,15 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-import { kanjisInitial } from "src/assets/dataQuiz/kanjisInitial"
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
 import {
   initialState,
   sortWrongAnswers,
   initialize,
   emptyAnswer,
+  kanjisInitial,
 } from "./helpers"
-
-type QuizIdOptions = 1 | 2 | 3
+import { QuizIdOptions } from "src/models"
 
 export const quizSlice = createSlice({
   name: "quiz",
@@ -32,7 +31,14 @@ export const quizSlice = createSlice({
     },
     initializeQuiz: (
       state,
-      { payload }: { payload: { quizId: QuizIdOptions; title: string; kanjis } }
+      {
+        payload,
+      }: {
+        payload: {
+          quizId: QuizIdOptions
+          kanjis: number[]
+        }
+      }
     ) => {
       const cQ = state[`quiz${payload.quizId}`]
       if (!cQ.rightAnswers.length) {
@@ -45,15 +51,12 @@ export const quizSlice = createSlice({
       const { quizId, answer } = payload
       const cQ = state[`quiz${quizId}`]
 
-      console.log("answeredQuestionQuiz, answer: ", answer)
-
-      cQ.answeredQuestion = answer.kanjiId
+      cQ.answeredQuestion = answer
 
       const { infosAnswer } = cQ.dataQuiz[0]
 
       const answeredRight =
-        answer.kanjiId ===
-        cQ.dataQuiz[0].arrAnswers[infosAnswer.answerIndex].kanjiId
+        answer === cQ.dataQuiz[0].arrAnswers[infosAnswer.answerIndex]
 
       if (answeredRight) {
         cQ.answeredCorrectly = true
@@ -68,9 +71,7 @@ export const quizSlice = createSlice({
         }
       }
       if (!answeredRight) {
-        const wrongAnswer = cQ.wrongAnswers.filter(
-          e => e.answer.kanjiId === answer.kanjiId
-        )[0]
+        const wrongAnswer = cQ.wrongAnswers.filter(e => e.answer === answer)[0]
         if (!wrongAnswer) {
           cQ.dataQuiz[0].infosAnswer.answeredWrong += 1
           infosAnswer.answeredWrong += 1
@@ -103,12 +104,13 @@ export const quizSlice = createSlice({
         payload,
       }: {
         payload: {
-          quizId: QuizIdOptions
-          dataQuiz: { infosAnswer: { answerIndex: number } }[]
+          quizId?: QuizIdOptions
+          kanjis: number[]
         }
       }
     ) => {
-      const cQ = state[`quiz${payload.quizId}`]
+      const quizId = payload.quizId || state.currentQuizId
+      const cQ = state[`quiz${quizId}`]
 
       if (!cQ.finished) {
         cQ.dataQuiz.forEach(e => {
@@ -123,7 +125,10 @@ export const quizSlice = createSlice({
         cQ.dataQuiz = quizFormatter(kanjisInitial)
         cQ.finished = true
       } else {
-        initialize(state, { quizId: payload.quizId })
+        initialize(state, {
+          quizId,
+          ...payload,
+        })
       }
     },
     updateWrongAnswers: (state, { payload }) => {

@@ -1,12 +1,3 @@
-export interface KanjiRaw {
-  id: number
-  kanji: string
-  en: string
-  kana: string
-  kanaEn: string
-  quizId: number
-}
-
 export interface DataIllu {
   s: number
   column: number
@@ -18,7 +9,7 @@ export interface DataIllu {
 }
 
 export interface IlluProps {
-  kanjisArr?: KanjiRaw[]
+  kanjisArr?: number[]
   renderIllu: (
     data: JSX.Element[][],
     kanjis: number,
@@ -29,3 +20,5 @@ export interface IlluProps {
     colorIllu: string
   }
 }
+
+export type QuizIdOptions = 1 | 2 | 3

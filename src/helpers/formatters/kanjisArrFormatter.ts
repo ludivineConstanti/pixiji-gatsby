@@ -7,7 +7,7 @@ export const kanjisArrFormatter = (kanjis, kanjisNum: number) => {
   // but the one for deco removes elements from the array so that it doesn't use the
   // same characters on multiple pages, so if we use the same array for this and the quizzes,
   // there will be missing characters for the quiz).
-  const kanjisCopy = [...kanjis]
+  const kanjisCopy = kanjis.map(e => e.kanjiId)
 
   shuffle(kanjisCopy)
   const kanjisArr = []

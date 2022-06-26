@@ -24,7 +24,7 @@ const PopUp = ({
 
   const [vMenuSetting, setVMenuSetting] = useState({
     initial: { height: "0px" },
-    animate: { height: "64px" },
+    animate: { height: "64px", backgroundColor: colorMain },
     whileHover: { backgroundColor: colorMain },
   })
 

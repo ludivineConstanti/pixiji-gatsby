@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useMemo, memo } from "react"
+import React, { useMemo, memo } from "react"
 import { motion } from "framer-motion"
 
 import { zIMainSquareHover } from "src/styles/g"
-import { KanjiRaw } from "src/models"
 import { tMSIFontSize, tMSIBFontSize } from "src/styles/typo"
 import { aAnimateOn } from "src/components/d_Illustrations/_helpers/animation"
-import SMainSquare, { SKanji, SInfos, SInfosBottom } from "./style"
+import SMainSquare, { SKanji, SInfos } from "./style"
 import { hexToRgb, hslToRgb, darkerColor } from "./utils"
 import { useAppDispatch } from "src/store"
 import { updateIdSelectedKanji } from "src/reducer/slices/globalSlice"
+import { useStaticQuery, graphql } from "gatsby"
 
 interface MainSquareProps {
   size: number
@@ -17,10 +17,7 @@ interface MainSquareProps {
   color: string
   position: string
   kanjiIndex: number
-  kanjisArr: {
-    answer: string
-    infosAnswer: { answeredRight: number; answeredWrong: number }
-  }[]
+  kanjisArr: { kanjiId: number }[]
 }
 
 const MainSquare = ({
@@ -32,10 +29,25 @@ const MainSquare = ({
   kanjiIndex,
   kanjisArr,
 }: MainSquareProps) => {
-  const dispatch = useAppDispatch()
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        nodes {
+          kanjiId
+          kana
+          kanaEn
+          kanji
+          en
+        }
+      }
+    }
+  `)
 
-  const [answer, setAnswer] = useState<KanjiRaw | false>(false)
-  const [infos, setInfos] = useState<{ answeredWrong: number } | false>(false)
+  const answer = allKanjisJson.nodes.filter(
+    e => e.kanjiId === kanjisArr[kanjiIndex]
+  )[0]
+
+  const dispatch = useAppDispatch()
 
   const colorRGB = useMemo(
     () => (color.slice(0, 1) === "h" ? hslToRgb(color) : hexToRgb(color)),
@@ -94,20 +106,6 @@ const MainSquare = ({
     }
   }, [])
 
-  useEffect(() => {
-    if (!answer && kanjisArr[kanjiIndex]) {
-      if (kanjisArr[kanjiIndex].answer) {
-        setAnswer(kanjisArr[kanjiIndex].answer)
-        setInfos(kanjisArr[kanjiIndex].infosAnswer)
-      } else {
-        setAnswer(kanjisArr[kanjiIndex])
-      }
-    } else if (!kanjisArr.length) {
-      setAnswer(false)
-      setInfos(false)
-    }
-  }, [kanjisArr])
-
   return (
     <SMainSquare
       s={{
@@ -130,7 +128,7 @@ const MainSquare = ({
       }
       exit="initial"
       onClick={() => {
-        dispatch(updateIdSelectedKanji(kanjisArr[kanjiIndex].kanjiId))
+        dispatch(updateIdSelectedKanji(answer.kanjiId))
       }}
     >
       {answer && (
@@ -141,11 +139,6 @@ const MainSquare = ({
           </SInfos>
           <SKanji variants={v.infos.kanji}>{answer.kanji}</SKanji>
           <SInfos variants={v.infos.infos}>{answer.en[0]}</SInfos>
-          {infos && infos.answeredWrong > 0 && (
-            <SInfosBottom variants={v.infos.infosB}>
-              wrong: {infos.answeredWrong} time{infos.answeredWrong > 1 && "s"}
-            </SInfosBottom>
-          )}
         </>
       )}
     </SMainSquare>

@@ -1,6 +1,5 @@
 import React from "react"
 
-import { KanjiRaw } from "src/models"
 import MainSquare from "src/components/d_Illustrations/_elements/MainSquare"
 import Square from "src/components/d_Illustrations/_elements/Square"
 import { DataIllu } from "src/models"
@@ -9,7 +8,7 @@ export const createIllustration = (
   data: DataIllu[][],
   groupIndex: number,
   numPreviousGroups = 0,
-  kanjisArr: KanjiRaw[]
+  kanjisArr: number[]
 ) => {
   const formattedData: JSX.Element[] = []
   let counter = 0

@@ -10,10 +10,6 @@ export const kanjisJsonFragment = graphql`
   fragment kanjisJsonFragment on KanjisJsonConnection {
     nodes {
       kanjiId
-      kana
-      kanaEn
-      kanji
-      en
     }
   }
 `

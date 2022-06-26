@@ -1,4 +1,5 @@
-import React from "react"
+import React, { useMemo } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import PopUpButton from "src/components/e_Interactives/PopUpButton"
 import { STitle } from "./style"
@@ -11,6 +12,17 @@ interface MenuSettingsProps {
 }
 
 const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        nodes {
+          quizId
+          kanjiId
+        }
+      }
+    }
+  `)
+
   const dispatch = useAppDispatch()
 
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
@@ -19,6 +31,16 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
   const finishedQuiz = useAppSelector(
     state => state.quiz[`quiz${state.quiz.currentQuizId}`].finished
   )
+
+  const kanjis = useMemo(() => {
+    if (allKanjisJson.nodes.length) {
+      return allKanjisJson.nodes
+        .filter(e => e.quizId === currentQuizId)
+        .map(e => {
+          return e.kanjiId
+        })
+    }
+  }, [allKanjisJson])
 
   return (
     <div>
@@ -34,7 +56,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
         <PopUpButton
           text={finishedQuiz ? "Restart quiz" : "Finish quiz"}
           onClick={() => {
-            dispatch(cheatingButtonFinishQuiz({ quizId: currentQuizId }))
+            dispatch(cheatingButtonFinishQuiz({ kanjis }))
           }}
         />
       )}

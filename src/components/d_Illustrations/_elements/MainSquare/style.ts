@@ -50,11 +50,3 @@ export const SInfos = styled(motion.span)`
 export const SKanji = styled(motion.span)`
   ${tMSquareKanji}
 `
-
-export const SInfosBottom = styled(motion.span)`
-  ${tMSquareInfosBottom}
-  ${textHidden}
-  text-align: center;
-  position: absolute;
-  width: 100%;
-`

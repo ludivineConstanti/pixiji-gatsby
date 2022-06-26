@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo } from "react"
 import axios from "axios"
+import { useStaticQuery, graphql } from "gatsby"
 
 import { useAppDispatch, useAppSelector } from "src/store"
 import { answeredQuestionQuiz } from "src/reducer/slices/quizSlice"
@@ -34,18 +35,24 @@ const sendToAPI = async (
 interface ButtonKanjiProps {
   quizId: number
   disabled: boolean | number
-  possibleAnswer: {
-    id: number
-    kanji: string
-  }
+  kanjiId: number
 }
 
-const ButtonKanji = ({
-  quizId,
-  possibleAnswer,
-  disabled,
-}: ButtonKanjiProps) => {
+const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
+  const { allKanjisJson } = useStaticQuery(graphql`
+    query {
+      allKanjisJson {
+        nodes {
+          kanjiId
+          kanji
+        }
+      }
+    }
+  `)
+
   const dispatch = useAppDispatch()
+
+  const kanji = allKanjisJson.nodes.filter(e => e.kanjiId === kanjiId)[0].kanji
 
   const colorMain = useAppSelector(state => state.global.color.main)
   const email = useAppSelector(state => state.global.email)
@@ -60,7 +67,7 @@ const ButtonKanji = ({
     ]
   })
 
-  const isCorrect = possibleAnswer.kanjiId === correctAnswer.kanjiId
+  const isCorrect = kanjiId === correctAnswer
 
   const [wasClicked, setWasClicked] = useState(false)
 
@@ -124,13 +131,13 @@ const ButtonKanji = ({
     <SButtonKanji
       type="button"
       onClick={() => {
-        dispatch(answeredQuestionQuiz({ quizId, answer: possibleAnswer }))
+        dispatch(answeredQuestionQuiz({ quizId, answer: kanjiId }))
         setWasClicked(true)
         if (email) {
-          sendToAPI(email, possibleAnswer.kanjiId, isCorrect)
+          sendToAPI(email, kanjiId, isCorrect)
         }
       }}
-      disabled={disabled}
+      disabled={!!disabled}
       s={{
         colorMain,
         isWrong: !isCorrect && cheating,
@@ -142,7 +149,7 @@ const ButtonKanji = ({
       exit="exit"
       whileHover={disabled ? "whileHoverOff" : "whileHoverOn"}
     >
-      <SText>{possibleAnswer.kanji}</SText>
+      <SText>{kanji}</SText>
     </SButtonKanji>
   )
 }

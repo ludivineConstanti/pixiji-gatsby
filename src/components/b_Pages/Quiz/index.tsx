@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useMemo } from "react"
 import { AnimatePresence } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -10,10 +10,11 @@ import Header from "./Header"
 import StatePlaying from "./StatePlaying"
 import StateFinished from "./StateFinished"
 import Warning from "./Warning"
+import { QuizIdOptions } from "src/models"
 
 interface QuizProps {
   currentQuiz: {
-    id: 1 | 2 | 3
+    id: QuizIdOptions
     title: string
     slug: string
   }
@@ -25,11 +26,7 @@ const Quiz = ({ currentQuiz }: QuizProps) => {
       allKanjisJson {
         nodes {
           quizId
-          kanji
           kanjiId
-          en
-          kana
-          kanaEn
         }
       }
     }
@@ -45,25 +42,43 @@ const Quiz = ({ currentQuiz }: QuizProps) => {
   )
   const isLoggedIn = useAppSelector(state => !!state.global.email)
 
+  const kanjis = useMemo(() => {
+    if (allKanjisJson.nodes.length) {
+      return allKanjisJson.nodes
+        .filter(e => e.quizId === currentQuiz.id)
+        .map(e => {
+          return e.kanjiId
+        })
+    }
+  }, [allKanjisJson])
+
   useEffect(() => {
-    dispatch(updateIdQuiz({ quizId: currentQuiz.id, slug: currentQuiz.slug }))
-    dispatch(
-      initializeQuiz({
-        quizId: currentQuiz.id,
-        title: currentQuiz.title,
-        kanjis: allKanjisJson.nodes,
-      })
-    )
-  }, [currentQuiz.id, currentQuiz.slug, currentQuiz.title])
+    if (kanjis.length) {
+      dispatch(updateIdQuiz({ quizId: currentQuiz.id, slug: currentQuiz.slug }))
+      dispatch(
+        initializeQuiz({
+          quizId: currentQuiz.id,
+          kanjis,
+        })
+      )
+    }
+  }, [kanjis, currentQuiz.id, currentQuiz.slug, currentQuiz.title])
 
   return (
     <>
-      <IlluQuiz currentQuizId={currentQuiz.id} kanjisArr={kanjisArr} />
+      <IlluQuiz
+        currentQuizId={currentQuiz.id}
+        kanjisArr={kanjisArr.map(e => {
+          if (e.answer) {
+            return e.answer
+          }
+        })}
+      />
       <SQuiz>
         <Header />
         {!isLoggedIn && <Warning />}
         <AnimatePresence exitBeforeEnter>
-          {finishedQuiz ? <StateFinished /> : <StatePlaying />}
+          {finishedQuiz ? <StateFinished kanjis={kanjis} /> : <StatePlaying />}
         </AnimatePresence>
       </SQuiz>
     </>
