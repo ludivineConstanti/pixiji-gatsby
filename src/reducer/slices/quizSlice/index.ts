@@ -58,10 +58,12 @@ export const quizSlice = createSlice({
       const answeredRight =
         answer === cQ.dataQuiz[0].arrAnswers[infosAnswer.answerIndex]
 
+      const date = new Date().toString()
+
       if (answeredRight) {
         cQ.answeredCorrectly = true
-        cQ.dataQuiz[0].infosAnswer.answeredRight += 1
-        infosAnswer.answeredRight += 1
+        cQ.dataQuiz[0].infosAnswer.answeredRight.push(date)
+        infosAnswer.answeredRight.push(date)
         cQ.rightAnswers = [...cQ.rightAnswers, { answer, infosAnswer }]
         if (cQ.totalQuestions === cQ.rightAnswers.length) {
           cQ.finished = true
@@ -73,12 +75,12 @@ export const quizSlice = createSlice({
       if (!answeredRight) {
         const wrongAnswer = cQ.wrongAnswers.filter(e => e.answer === answer)[0]
         if (!wrongAnswer) {
-          cQ.dataQuiz[0].infosAnswer.answeredWrong += 1
-          infosAnswer.answeredWrong += 1
+          cQ.dataQuiz[0].infosAnswer.answeredWrong.push(date)
+          infosAnswer.answeredWrong.push(date)
           cQ.wrongAnswers = [...cQ.wrongAnswers, { answer, infosAnswer }]
         }
         if (wrongAnswer) {
-          wrongAnswer.infosAnswer.answeredWrong += 1
+          wrongAnswer.infosAnswer.answeredWrong.push(date)
         }
       }
 

@@ -9,14 +9,14 @@ interface PopUpButtonProps {
   text?: false | string
   hasSwitch?: boolean
   dropdownState?: DropdownStateOptions
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent) => void
 }
 
 const PopUp = ({
   text = false,
   hasSwitch = false,
   dropdownState = false,
-  onClick = () => {},
+  onClick,
 }: PopUpButtonProps) => {
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
   const colorMain = useAppSelector(state => state.global.color.main)
@@ -40,7 +40,11 @@ const PopUp = ({
     <AnimatePresence exitBeforeEnter>
       <SPopUpButton
         type="button"
-        onClick={onClick}
+        onClick={e => {
+          if (onClick) {
+            onClick(e)
+          }
+        }}
         variants={vMenuSetting}
         initial="initial"
         animate="animate"

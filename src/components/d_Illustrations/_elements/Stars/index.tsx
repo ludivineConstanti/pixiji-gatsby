@@ -6,16 +6,17 @@ import { createStar, createVStar, useCreateTranslate } from "./helpers"
 
 // Ref for animation => https://framerbook.com/animation/example-animations/24-cursor/
 
+interface ArrStars {
+  s: JSX.Element[]
+  m: JSX.Element[]
+  l: JSX.Element[]
+}
+
 interface StarsProps {
   color: string
 }
 
 const Stars = ({ color }: StarsProps) => {
-  /* useResizeObserver(ref, target => {
-    setWidth(target.clientWidth)
-    setHeight(target.clientHeight)
-  }) */
-
   // choose 95 instead of 100 so that it doesn't go off screen
   // (have to take into account the width of height of the stars themselves)
   // x and y that the event listener will update
@@ -36,19 +37,12 @@ const Stars = ({ color }: StarsProps) => {
   }, [])
 
   const starsObj = useMemo(() => {
-    // const colorL1 = Color.toHexString(Color.lighten(Color(color), 15));
     const colorL1 = color
 
     const vStar = {
       s: createVStar([1, 0.5], [color, colorL1], 250),
       m: createVStar([0.75, 1], [colorL1, color], 500),
       l: createVStar([1, 0.9], [color, colorL1], 7500),
-    }
-
-    interface ArrStars {
-      s: JSX.Element[]
-      m: JSX.Element[]
-      l: JSX.Element[]
     }
 
     const arrStars: ArrStars = { s: [], m: [], l: [] }
@@ -66,21 +60,17 @@ const Stars = ({ color }: StarsProps) => {
     return { s: arrStars.s, m: arrStars.m, l: arrStars.l }
   }, [])
 
-  const translateX = useMemo(() => {
-    return {
-      s: useCreateTranslate(x, 1920, 50),
-      m: useCreateTranslate(x, 1920, 22.5),
-      l: useCreateTranslate(x, 1920, 10),
-    }
-  }, [])
+  const translateX = {
+    s: useCreateTranslate(x, 1920, 50),
+    m: useCreateTranslate(x, 1920, 22.5),
+    l: useCreateTranslate(x, 1920, 10),
+  }
 
-  const translateY = useMemo(() => {
-    return {
-      s: useCreateTranslate(y, 1080, 50),
-      m: useCreateTranslate(y, 1080, 22.5),
-      l: useCreateTranslate(y, 1080, 10),
-    }
-  }, [])
+  const translateY = {
+    s: useCreateTranslate(y, 1080, 50),
+    m: useCreateTranslate(y, 1080, 22.5),
+    l: useCreateTranslate(y, 1080, 10),
+  }
 
   return (
     <>

@@ -6,6 +6,7 @@ import { STitle } from "./style"
 import { updateCheating } from "src/reducer/slices/globalSlice"
 import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
 import { useAppDispatch, useAppSelector } from "src/store"
+import { getUser, createUser } from "src/helpers/backEnd/users"
 
 interface MenuSettingsProps {
   isPlaying: boolean
@@ -45,6 +46,24 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
   return (
     <div>
       <STitle s={{ colorMainL1 }}>settings</STitle>
+      <PopUpButton
+        text="Use dummy email"
+        onClick={async e => {
+          e.preventDefault()
+
+          const email = "l@c.fr"
+          const password = "PASSWORD!1"
+
+          const responseLogIn = await getUser({ email, password })
+
+          const { success } = responseLogIn.data.data.getUser
+
+          if (success === false) {
+            const responseCreateUser = await createUser({ email, password })
+            console.log("responseCreateUser", responseCreateUser)
+          }
+        }}
+      />
       <PopUpButton
         text="Cheat mode"
         hasSwitch

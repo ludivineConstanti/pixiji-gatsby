@@ -1,3 +1,4 @@
+import { DataIllu } from "src/models"
 import { mapIllu } from "src/components/d_Illustrations/_helpers/mapIllu"
 
 export const colorMoon = "#EFC491"
@@ -226,5 +227,5 @@ const hime = [
   ],
 ]
 
-export const arrIllu = [moon, hime]
+export const arrIllu: DataIllu[][][] = [moon, hime]
 export const colorIllu = "#02312E"

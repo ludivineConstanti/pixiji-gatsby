@@ -1,4 +1,6 @@
-const planet = [
+import { DataIllu } from "src/models"
+
+const planet: DataIllu[][] = [
   [
     {
       s: 1,
@@ -789,5 +791,5 @@ const moon = [
   ],
 ]
 
-export const arrIllu = [planet, rabbit, moon]
+export const arrIllu: DataIllu[][][] = [planet, rabbit, moon]
 export const colorIllu = "#0A2846"

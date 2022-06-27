@@ -49,7 +49,7 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
 
   const text = useMemo(() => {
     const numFirstTry = kanjisArr.filter(
-      answer => answer.infosAnswer.answeredWrong === 0
+      answer => answer.infosAnswer.answeredWrong.length === 0
     )
 
     const textFirstTry =
@@ -59,7 +59,7 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
           } correctly on your first try!`
         : ""
     const numWrongAnswers = kanjisArr.filter(
-      answer => answer.infosAnswer.answeredWrong > 0
+      answer => answer.infosAnswer.answeredWrong.length > 0
     )
     const textWrongAnswers =
       numWrongAnswers.length > 0

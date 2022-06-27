@@ -1,3 +1,5 @@
+import { DataIllu } from "src/models"
+
 // pink light
 const pinkL1 = "#F2BEDD"
 // pink
@@ -680,5 +682,11 @@ const deer = [
   ],
 ]
 
-export const arrSakuraDeer = [tree0, tree1, tree2P1, tree2P2, deer]
+export const arrSakuraDeer: DataIllu[][][] = [
+  tree0,
+  tree1,
+  tree2P1,
+  tree2P2,
+  deer,
+]
 export const colorSakuraDeer = "#260101"

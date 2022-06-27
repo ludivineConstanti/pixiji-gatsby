@@ -1,3 +1,5 @@
+import { DataIllu } from "src/models"
+
 const redL1 = "#DF6C6A"
 const red = "#C5403E"
 const redD1 = "#963836"
@@ -14,7 +16,7 @@ const orangeD2 = "#9D2000"
 const brownL1 = "#621300"
 const brown = "#420D00"
 
-const panda = [
+const panda: DataIllu[][] = [
   [
     {
       s: 1,
@@ -634,5 +636,5 @@ const panda = [
   ],
 ]
 
-export const arrIllu = [panda]
+export const arrIllu: DataIllu[][][] = [panda]
 export const colorIllu = "#004459"

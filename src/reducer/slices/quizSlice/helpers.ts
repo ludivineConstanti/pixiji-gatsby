@@ -5,29 +5,36 @@ import { QuizIdOptions } from "src/models"
 
 export const kanjisInitial = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
+interface InfosAnswerProps {
+  answerIndex: number
+  answeredRight: string[]
+  answeredWrong: string[]
+}
+
+interface RightOrWrongAnswerProps {
+  answer: number
+  infosAnswer: InfosAnswerProps
+}
+
+interface ReturnedStateProps {
+  dataQuiz: {
+    infosAnswer: InfosAnswerProps
+    arrAnswers: number[]
+  }[]
+  totalQuestions: number
+  title: string
+  finished: boolean
+  answeredQuestion: boolean
+  answeredCorrectly: boolean
+  rightAnswers: RightOrWrongAnswerProps[]
+  wrongAnswers: RightOrWrongAnswerProps[]
+}
+
 export const initialStateQuiz = (quizId: number) => {
   const rightAnswers: [] = []
   const wrongAnswers: [] = []
 
-  interface ReturnedState {
-    dataQuiz: {
-      infosAnswer: {
-        answerIndex: number
-        answeredRight: number
-        answeredWrong: number
-      }
-      arrAnswers: any
-    }[]
-    totalQuestions: number
-    title: string
-    finished: boolean
-    answeredQuestion: boolean
-    answeredCorrectly: boolean
-    rightAnswers: any
-    wrongAnswers: any
-  }
-
-  const returnedState: ReturnedState = {
+  const returnedState: ReturnedStateProps = {
     dataQuiz: quizFormatter(kanjisInitial),
     totalQuestions: 0,
     title: quizzes[quizId - 1].title,
@@ -50,9 +57,14 @@ export const initialState = {
   quiz3: initialStateQuiz(3),
 }
 
+const emptyAnswerAnsweredWrong: string[] = []
+
 export const emptyAnswer = {
   answer: 1,
-  infosAnswer: { answeredRight: 1, answeredWrong: 0 },
+  infosAnswer: {
+    answeredRight: [new Date().toString()],
+    answeredWrong: emptyAnswerAnsweredWrong,
+  },
 }
 
 // put it there since I need it in 2 different actions
@@ -81,15 +93,11 @@ export const initialize = (
   cQ.rightAnswers = []
 }
 
-export const sortWrongAnswers = (
-  wrongAnswers: {
-    infosAnswer: { answeredWrong: number; answeredRight: number }
-  }[]
-) => {
+export const sortWrongAnswers = (wrongAnswers: RightOrWrongAnswerProps[]) => {
   return wrongAnswers.sort(
     (a, b) =>
-      b.infosAnswer.answeredWrong -
-      b.infosAnswer.answeredRight -
-      (a.infosAnswer.answeredWrong - a.infosAnswer.answeredRight)
+      b.infosAnswer.answeredWrong.length -
+      b.infosAnswer.answeredRight.length -
+      (a.infosAnswer.answeredWrong.length - a.infosAnswer.answeredRight.length)
   )
 }
