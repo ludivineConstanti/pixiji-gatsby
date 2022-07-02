@@ -55,11 +55,12 @@ const KanjiDetails = () => {
   })
 
   useEffect(() => {
-    setScrollDownIsVisible(true)
     if (ref) {
       ref.scrollTop = 0
       if (ref.scrollHeight <= ref.offsetHeight) {
         setScrollDownIsVisible(false)
+      } else {
+        setScrollDownIsVisible(true)
       }
     }
   }, [selectedKanji, ref])
