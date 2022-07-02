@@ -5,7 +5,7 @@ import { getUser } from "src/helpers/backEnd/users"
 import { getWorstScores } from "src/helpers/backEnd/scores"
 
 export const onSubmit = async (
-  e: React.FormEvent<HTMLFormElement>,
+  event: React.FormEvent<HTMLFormElement>,
   feedback: {
     success: boolean
     message: string
@@ -18,11 +18,11 @@ export const onSubmit = async (
   >,
   dispatch: AppDispatch
 ) => {
-  e.preventDefault()
+  event.preventDefault()
   setFeedback({ ...feedback, message: "Loading..." })
 
-  const email = e.target[0].value
-  const password = e.target[1].value
+  const email = event.target[0].value
+  const password = event.target[1].value
 
   const responseLogIn = await getUser({ email, password })
 

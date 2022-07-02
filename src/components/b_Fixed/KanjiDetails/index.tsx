@@ -133,7 +133,9 @@ const KanjiDetails = () => {
               </SText>
             </SWrapperSection>
           )}
-          <UseCases selectedKanji={selectedKanji} />
+          {selectedKanji.onyomiCompounds.length ? (
+            <UseCases onyomiCompounds={selectedKanji.onyomiCompounds} />
+          ) : null}
           <Statistics />
           <ScrollDownArrow
             isVisible={scrollDownIsVisible}

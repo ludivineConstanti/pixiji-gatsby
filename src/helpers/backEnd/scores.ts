@@ -9,12 +9,15 @@ export const getWorstScores = ({ email }: GetWorstScoresProps) =>
     url: process.env.GATSBY_API,
     method: "post",
     data: {
-      query: `query getWorstScores($email: String) {
-        scores {
-          answer
-          infosAnswer {
-            answeredRight
-            answeredWrong
+      query: `
+      query getWorstScores($email: String) {
+        getWorstScores(input: {email: $email}) {
+          scores {
+           answer
+            infosAnswer {
+              answeredRight
+              answeredWrong
+            }
           }
         }
       }
@@ -36,12 +39,13 @@ export const setScore = ({ email, kanjiId, isCorrect }: SetScoresProps) =>
     url: process.env.GATSBY_API,
     method: "post",
     data: {
-      query: `mutation setScore($email: String!, $kanjiId: String!, $isCorrect: Boolean!) {
-            setScore(input: {email: $email, kanjiId: $kanjiId, isCorrect: $isCorrect}, ){
-            success
-            message
-          }
+      query: `
+      mutation setScore($email: String!, $kanjiId: String!, $isCorrect: Boolean!) {
+        setScore(input: {email: $email, kanjiId: $kanjiId, isCorrect: $isCorrect}) {
+          success
+          message
         }
+      }
           `,
       variables: {
         email,

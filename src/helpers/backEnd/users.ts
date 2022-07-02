@@ -10,12 +10,13 @@ export const createUser = ({ email, password }: CreateUserProps) =>
     url: process.env.GATSBY_API,
     method: "post",
     data: {
-      query: `mutation createUser($email: String!, $password: String!) {
-      createUser(input: {email: $email, password: $password}) {
-        success
-        message
+      query: `
+      mutation createUser($email: String!, $password: String!) {
+        createUser(input: {email: $email, password: $password}) {
+          success
+          message
+        }
       }
-    }
       `,
       variables: {
         email,
@@ -34,12 +35,14 @@ export const getUser = ({ email, password }: GetUserProps) =>
     url: process.env.GATSBY_API,
     method: "post",
     data: {
-      query: `query getUser($email: String!, $password: String!) {
-                  getUser(input: {email: $email, password: $password}) {
-                  success
-                  message
-                }
-              }`,
+      query: `
+      query getUser($email: String!, $password: String!) {
+        getUser(input: {email: $email, password: $password}) {
+          success
+          message
+        }
+      }
+      `,
       variables: {
         email,
         password,

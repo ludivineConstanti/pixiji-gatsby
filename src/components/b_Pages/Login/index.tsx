@@ -19,6 +19,7 @@ import {
 } from "src/components/d_Illustrations/_data/redPanda"
 import { onSubmit } from "./utils"
 import { getWorstScores } from "src/helpers/backEnd/scores"
+import { dummyEmail } from "src/constants"
 
 const Login = () => {
   const { allKanjisJson } = useStaticQuery(graphql`
@@ -63,24 +64,6 @@ const Login = () => {
       <ButtonBig
         text={feedback.success ? "Quizzes" : "Register"}
         path={feedback.success ? `/quizzes/${quizzesSlug}` : "/register"}
-      />
-      <div
-        style={{
-          backgroundColor: "pink",
-          height: "500px",
-          width: "500px",
-          zIndex: 1000,
-          position: "fixed",
-          top: 0,
-          left: 0,
-        }}
-        onClick={async () => {
-          console.log("clicked")
-          const responseWorstScores = await getWorstScores({
-            email: "l@c.fr",
-          })
-          console.log(responseWorstScores)
-        }}
       />
     </>
   )

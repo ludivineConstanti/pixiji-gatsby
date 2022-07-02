@@ -7,6 +7,7 @@ export const SWrapper = styled.div<{ backgroundColor: string }>`
   color: white;
   width: 100%;
   position: relative;
+  flex-grow: 1;
 `
 
 export const SWrapperText = styled.div`

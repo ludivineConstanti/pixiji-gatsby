@@ -7,6 +7,15 @@ import { strokeWidth } from "src/styles/g"
 import SButtonKanji, { SText } from "./style"
 import { setScore } from "src/helpers/backEnd/scores"
 
+interface AllKanjisJsonProps {
+  allKanjisJson: {
+    nodes: {
+      kanjiId: number
+      kanji: string
+    }[]
+  }
+}
+
 interface ButtonKanjiProps {
   quizId: number
   disabled: boolean | number
@@ -14,7 +23,7 @@ interface ButtonKanjiProps {
 }
 
 const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
-  const { allKanjisJson } = useStaticQuery(graphql`
+  const { allKanjisJson } = useStaticQuery<AllKanjisJsonProps>(graphql`
     query {
       allKanjisJson {
         nodes {

@@ -42,7 +42,6 @@ const Register = () => {
   return (
     <>
       <Illu
-        useCase="register"
         kanjisArr={kanjisArr}
         renderIllu={data => <SakuraBirds data={data} />}
         arrDataIllu={{ arrIllu, colorIllu }}

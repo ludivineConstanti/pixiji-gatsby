@@ -3,17 +3,28 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import PopUpButton from "src/components/e_Interactives/PopUpButton"
 import { STitle } from "./style"
-import { updateCheating } from "src/reducer/slices/globalSlice"
+import { updateCheating, updateEmail } from "src/reducer/slices/globalSlice"
 import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { getUser, createUser } from "src/helpers/backEnd/users"
+import { dummyEmail, dummyPassword } from "src/constants"
+import { QuizIdOptions } from "src/models"
+
+interface KanjisJsonProps {
+  allKanjisJson: {
+    nodes: {
+      quizId: QuizIdOptions
+      kanjiId: number
+    }[]
+  }
+}
 
 interface MenuSettingsProps {
   isPlaying: boolean
 }
 
 const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
-  const { allKanjisJson } = useStaticQuery(graphql`
+  const { allKanjisJson } = useStaticQuery<KanjisJsonProps>(graphql`
     query {
       allKanjisJson {
         nodes {
@@ -32,6 +43,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
   const finishedQuiz = useAppSelector(
     state => state.quiz[`quiz${state.quiz.currentQuizId}`].finished
   )
+  const isLoggedIn = useAppSelector(state => state.global.email)
 
   const kanjis = useMemo(() => {
     if (allKanjisJson.nodes.length) {
@@ -46,24 +58,47 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
   return (
     <div>
       <STitle s={{ colorMainL1 }}>settings</STitle>
-      <PopUpButton
-        text="Use dummy email"
-        onClick={async e => {
-          e.preventDefault()
+      {!isLoggedIn && (
+        <PopUpButton
+          text="Use dummy email"
+          onClick={async e => {
+            e.preventDefault()
 
-          const email = "l@c.fr"
-          const password = "PASSWORD!1"
+            let responseLogIn
+            try {
+              responseLogIn = await getUser({
+                email: dummyEmail,
+                password: dummyPassword,
+              })
+            } catch (error) {
+              console.log(error)
+            }
 
-          const responseLogIn = await getUser({ email, password })
+            const successLogIn = responseLogIn.data.data.getUser.success
 
-          const { success } = responseLogIn.data.data.getUser
+            if (successLogIn) {
+              dispatch(updateEmail(dummyEmail))
+            } else {
+              let responseCreateUser
+              try {
+                responseCreateUser = await createUser({
+                  email: dummyEmail,
+                  password: dummyPassword,
+                })
+              } catch (error) {
+                console.log(error)
+              }
 
-          if (success === false) {
-            const responseCreateUser = await createUser({ email, password })
-            console.log("responseCreateUser", responseCreateUser)
-          }
-        }}
-      />
+              const successCreateUser =
+                responseCreateUser.data.data.getUser.success
+
+              if (successCreateUser) {
+                dispatch(updateEmail(dummyEmail))
+              }
+            }
+          }}
+        />
+      )}
       <PopUpButton
         text="Cheat mode"
         hasSwitch
