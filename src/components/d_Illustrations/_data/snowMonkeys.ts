@@ -1,3 +1,5 @@
+import { DataIllu } from "src/models"
+
 const monkeyLeft = [
   [
     // head
@@ -664,5 +666,5 @@ const rocks = [
   ],
 ]
 
-export const arrSnowMonkeys = [monkeyLeft, monkeyRight, rocks]
+export const arrSnowMonkeys: DataIllu[][][] = [monkeyLeft, monkeyRight, rocks]
 export const colorSnowMonkeys = "#004646"

@@ -1,3 +1,10 @@
+export interface OnyomiCompoundsProps {
+  en: string[]
+  kana: string
+  kanaEn: string
+  kanji: string
+}
+
 export interface SelectedKanji {
   kanjiId: number
   kana: string
@@ -8,10 +15,5 @@ export interface SelectedKanji {
   onyomiEn: string
   kunyomi: string
   kunyomiEn: string
-  onyomiCompounds: {
-    en: string[]
-    kana: string
-    kanaEn: string
-    kanji: string
-  }[]
+  onyomiCompounds: OnyomiCompoundsProps[]
 }

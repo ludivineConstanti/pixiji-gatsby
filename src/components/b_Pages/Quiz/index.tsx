@@ -12,6 +12,15 @@ import StateFinished from "./StateFinished"
 import Warning from "./Warning"
 import { QuizIdOptions } from "src/models"
 
+interface AllKanjisJsonProps {
+  allKanjisJson: {
+    nodes: {
+      kanjiId: number
+      quizId: number
+    }[]
+  }
+}
+
 interface QuizProps {
   currentQuiz: {
     id: QuizIdOptions
@@ -21,7 +30,7 @@ interface QuizProps {
 }
 
 const Quiz = ({ currentQuiz }: QuizProps) => {
-  const { allKanjisJson } = useStaticQuery(graphql`
+  const { allKanjisJson } = useStaticQuery<AllKanjisJsonProps>(graphql`
     query {
       allKanjisJson {
         nodes {

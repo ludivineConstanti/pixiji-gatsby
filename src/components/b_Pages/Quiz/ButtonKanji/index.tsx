@@ -1,35 +1,19 @@
 import React, { useState, useEffect, memo } from "react"
-import axios from "axios"
 import { useStaticQuery, graphql } from "gatsby"
 
 import { useAppDispatch, useAppSelector } from "src/store"
 import { answeredQuestionQuiz } from "src/reducer/slices/quizSlice"
 import { strokeWidth } from "src/styles/g"
 import SButtonKanji, { SText } from "./style"
+import { setScore } from "src/helpers/backEnd/scores"
 
-const sendToAPI = async (
-  email: string,
-  kanjiId: number,
-  isCorrect: boolean
-) => {
-  await axios({
-    url: process.env.GATSBY_API,
-    method: "post",
-    data: {
-      query: `mutation setScore($email: String!, $kanjiId: String!, $isCorrect: Boolean!) {
-        setScore(input: {email: $email, kanjiId: $kanjiId, isCorrect: $isCorrect}, ){
-        success
-        message
-      }
-    }
-      `,
-      variables: {
-        email,
-        kanjiId: `${kanjiId}`,
-        isCorrect,
-      },
-    },
-  })
+interface AllKanjisJsonProps {
+  allKanjisJson: {
+    nodes: {
+      kanjiId: number
+      kanji: string
+    }[]
+  }
 }
 
 interface ButtonKanjiProps {
@@ -39,7 +23,7 @@ interface ButtonKanjiProps {
 }
 
 const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
-  const { allKanjisJson } = useStaticQuery(graphql`
+  const { allKanjisJson } = useStaticQuery<AllKanjisJsonProps>(graphql`
     query {
       allKanjisJson {
         nodes {
@@ -134,7 +118,7 @@ const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
         dispatch(answeredQuestionQuiz({ quizId, answer: kanjiId }))
         setWasClicked(true)
         if (email) {
-          sendToAPI(email, kanjiId, isCorrect)
+          setScore({ email, kanjiId: `${kanjiId}`, isCorrect })
         }
       }}
       disabled={!!disabled}

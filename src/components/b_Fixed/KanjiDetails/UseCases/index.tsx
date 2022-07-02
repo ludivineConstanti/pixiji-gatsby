@@ -2,15 +2,15 @@ import React from "react"
 
 import { useAppSelector } from "src/store"
 import Separator from "../Separator"
-import { SelectedKanji } from "../models"
+import { OnyomiCompoundsProps } from "../models"
 import { SSubtitle, SWrapperSection, SSmallText, SExample } from "../style"
 import { SKana, SKanaEn, STextInline, SLighter } from "./style"
 
 interface UseCasesProps {
-  selectedKanji: SelectedKanji
+  onyomiCompounds: OnyomiCompoundsProps[]
 }
 
-const UseCases = ({ selectedKanji }: UseCasesProps) => {
+const UseCases = ({ onyomiCompounds }: UseCasesProps) => {
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
 
   return (
@@ -18,7 +18,7 @@ const UseCases = ({ selectedKanji }: UseCasesProps) => {
       <SSubtitle>Use cases:</SSubtitle>
       <ul>
         {React.Children.toArray(
-          selectedKanji.onyomiCompounds.map(e => (
+          onyomiCompounds.map(e => (
             <SExample>
               {e.kanji}
               <SKana>{e.kana}</SKana>

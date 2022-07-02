@@ -14,47 +14,37 @@ export const createIllustration = (
   let counter = 0
   for (let i = 0; i < data.length; i += 1) {
     // eslint-disable-next-line no-loop-func
-    data[i].forEach(
-      (square: {
-        s: number
-        column: number
-        row: number
-        c: string
-        main?: boolean
-        position?: "top" | "bottom" | "right" | "left"
-        animationCase?: string
-      }) => {
-        counter += 1
-        if (square.main) {
-          formattedData.push(
-            <MainSquare
-              key={`mainSquare${counter}__${groupIndex}`}
-              size={square.s}
-              columnStart={square.column}
-              rowStart={square.row}
-              color={square.c}
-              kanjiIndex={numPreviousGroups + i}
-              position={square.position || ""}
-              kanjisArr={kanjisArr}
-              animationCase={square.animationCase || ""}
-            />
-          )
-        } else {
-          formattedData.push(
-            <Square
-              key={`square${counter}__${groupIndex}`}
-              size={square.s}
-              columnStart={square.column}
-              rowStart={square.row}
-              color={square.c}
-              kanjiIndex={numPreviousGroups + i}
-              kanjisArrLength={kanjisArr.length}
-              animationCase={square.animationCase || ""}
-            />
-          )
-        }
+    data[i].forEach((square: DataIllu) => {
+      counter += 1
+      if (square.main) {
+        formattedData.push(
+          <MainSquare
+            key={`mainSquare${counter}__${groupIndex}`}
+            size={square.s}
+            columnStart={square.column}
+            rowStart={square.row}
+            color={square.c}
+            kanjiIndex={numPreviousGroups + i}
+            position={square.position || ""}
+            kanjisArr={kanjisArr}
+            animationCase={square.animationCase || ""}
+          />
+        )
+      } else {
+        formattedData.push(
+          <Square
+            key={`square${counter}__${groupIndex}`}
+            size={square.s}
+            columnStart={square.column}
+            rowStart={square.row}
+            color={square.c}
+            kanjiIndex={numPreviousGroups + i}
+            kanjisArrLength={kanjisArr.length}
+            animationCase={square.animationCase || ""}
+          />
+        )
       }
-    )
+    })
   }
   return formattedData
 }

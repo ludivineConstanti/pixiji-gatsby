@@ -13,4 +13,4 @@ So here is a list of rules that I am not applying and will transition into:
   ✔️ Makes it easier to have an overview of the code.
   ✔️ Avoid useless renders (every time a prop is updated, everything is re-rendered)
   ✔️ Encourage restructuring a component in more small cmponents is part of React's philosophy.  
-  ✔️ Not use and index file to reexport the components (it makes it more practical to export them, since you only need to reference the folder that contains the index file, instead of the entire folder, but it also makes it more difficult for Gatsby to bundle the code on a page by page basis, since it imports everything that are in those index files).
+  ✔️ Do not store data that can be stored in a json file (or other format) as javascript

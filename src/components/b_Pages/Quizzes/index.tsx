@@ -9,6 +9,14 @@ import IlluQuiz from "src/components/d_Illustrations/IlluQuiz"
 import QuizzesNav from "./QuizzesNav"
 import { QuizIdOptions } from "src/models"
 
+interface AllKanjisJsonProps {
+  allKanjisJson: {
+    nodes: {
+      quizId: number
+    }[]
+  }
+}
+
 interface QuizzesProps {
   currentQuiz: {
     id: QuizIdOptions
@@ -19,7 +27,7 @@ interface QuizzesProps {
 }
 
 const Quizzes = ({ currentQuiz }: QuizzesProps) => {
-  const { allKanjisJson } = useStaticQuery(graphql`
+  const { allKanjisJson } = useStaticQuery<AllKanjisJsonProps>(graphql`
     query {
       allKanjisJson {
         nodes {
@@ -49,7 +57,7 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
 
   const text = useMemo(() => {
     const numFirstTry = kanjisArr.filter(
-      answer => answer.infosAnswer.answeredWrong === 0
+      answer => answer.infosAnswer.answeredWrong.length === 0
     )
 
     const textFirstTry =
@@ -59,7 +67,7 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
           } correctly on your first try!`
         : ""
     const numWrongAnswers = kanjisArr.filter(
-      answer => answer.infosAnswer.answeredWrong > 0
+      answer => answer.infosAnswer.answeredWrong.length > 0
     )
     const textWrongAnswers =
       numWrongAnswers.length > 0

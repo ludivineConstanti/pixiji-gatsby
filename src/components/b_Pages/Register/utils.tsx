@@ -1,7 +1,8 @@
 import React from "react"
-import axios from "axios"
+
 import { updateEmail } from "src/reducer/slices/globalSlice"
 import { AppDispatch } from "src/store"
+import { createUser } from "src/helpers/backEnd/users"
 
 export const onSubmit = async (
   e: React.FormEvent<HTMLFormElement>,
@@ -54,28 +55,15 @@ export const onSubmit = async (
     })
     return
   }
-  const response = await axios({
-    url: process.env.GATSBY_API,
-    method: "post",
-    data: {
-      query: `mutation createUser($email: String!, $password: String!) {
-      createUser(input: {email: $email, password: $password}) {
-        success
-        message
-      }
-    }
-      `,
-      variables: {
-        email,
-        password: password1,
-      },
-    },
-  })
+  const response = await createUser({ email, password: password1 })
+
   if (response.status !== 200) {
     setFeedback({ success: false, message: response.statusText })
     return
   }
+
   const result = response.data.data.createUser
+
   setFeedback(result)
   dispatch(updateEmail(email))
 }

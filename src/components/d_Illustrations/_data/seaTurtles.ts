@@ -1,3 +1,5 @@
+import { DataIllu } from "src/models"
+
 const greyL1 = "#708377"
 const grey = "#627067"
 const greyD1 = "#56655C"
@@ -12,7 +14,7 @@ const greenL1 = "#BADDC6"
 const green = "#8CC6A0"
 const greenD1 = "#63B07E"
 
-const seaweedSmall = [
+const seaweedSmall: DataIllu[][] = [
   [
     {
       s: 3,
@@ -90,7 +92,7 @@ const seaweedSmall = [
     },
   ],
 ]
-const seaweedBig = [
+const seaweedBig: DataIllu[][] = [
   [
     {
       s: 1,
@@ -774,5 +776,10 @@ const turtleBig = [
   ],
 ]
 
-export const arrIllu = [seaweedSmall, seaweedBig, turtleSmall, turtleBig]
+export const arrIllu: DataIllu[][][] = [
+  seaweedSmall,
+  seaweedBig,
+  turtleSmall,
+  turtleBig,
+]
 export const colorIllu = "#1C416B"

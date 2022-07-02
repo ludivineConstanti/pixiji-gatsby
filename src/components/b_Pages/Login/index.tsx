@@ -18,6 +18,8 @@ import {
   colorIllu,
 } from "src/components/d_Illustrations/_data/redPanda"
 import { onSubmit } from "./utils"
+import { getWorstScores } from "src/helpers/backEnd/scores"
+import { dummyEmail } from "src/constants"
 
 const Login = () => {
   const { allKanjisJson } = useStaticQuery(graphql`
@@ -32,20 +34,20 @@ const Login = () => {
 
   const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
 
-  const kanjisArr = useMemo(
-    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
-    []
-  )
+  const kanjisArr = useMemo(() => {
+    const kanjisNum = getKanjisNum(arrIllu)
+    return kanjisArrFormatter(allKanjisJson.nodes, kanjisNum)
+  }, [])
 
   const [feedback, setFeedback] = useState({ success: false, message: "" })
   return (
     <>
       <Illu
-        useCase="login"
         kanjisArr={kanjisArr}
         renderIllu={data => <RedPanda data={data} />}
         arrDataIllu={{ arrIllu, colorIllu }}
       />
+
       <TextWrapper>
         <form onSubmit={e => onSubmit(e, feedback, setFeedback, dispatch)}>
           <Input type="email" placeholder="Your email address" label="Email" />

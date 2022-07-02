@@ -55,11 +55,12 @@ const KanjiDetails = () => {
   })
 
   useEffect(() => {
-    setScrollDownIsVisible(true)
     if (ref) {
       ref.scrollTop = 0
       if (ref.scrollHeight <= ref.offsetHeight) {
         setScrollDownIsVisible(false)
+      } else {
+        setScrollDownIsVisible(true)
       }
     }
   }, [selectedKanji, ref])
@@ -133,7 +134,9 @@ const KanjiDetails = () => {
               </SText>
             </SWrapperSection>
           )}
-          <UseCases selectedKanji={selectedKanji} />
+          {selectedKanji.onyomiCompounds.length ? (
+            <UseCases onyomiCompounds={selectedKanji.onyomiCompounds} />
+          ) : null}
           <Statistics />
           <ScrollDownArrow
             isVisible={scrollDownIsVisible}

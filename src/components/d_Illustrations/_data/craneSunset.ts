@@ -1,3 +1,5 @@
+import { DataIllu } from "src/models"
+
 const black = "#000000"
 const white = "#FFFFFF"
 
@@ -949,7 +951,7 @@ const rockRight = [
   ],
 ]
 
-export const arrCraneSunset = [
+export const arrCraneSunset: DataIllu[][][] = [
   sun,
   cloudLeft,
   cloudRight,

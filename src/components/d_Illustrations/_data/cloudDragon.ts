@@ -1,3 +1,5 @@
+import { DataIllu } from "src/models"
+
 const orangeL4 = "#FFDFD9"
 const orangeL3 = "#FFBFB3"
 export const orangeL2 = "#FFA897"
@@ -850,5 +852,11 @@ const cloudBR = [
   ],
 ]
 
-export const arrIllu = [cloudTop, dragon, cloudDragon, cloudBL, cloudBR]
+export const arrIllu: DataIllu[][][] = [
+  cloudTop,
+  dragon,
+  cloudDragon,
+  cloudBL,
+  cloudBR,
+]
 export const colorIllu = "#002A51"

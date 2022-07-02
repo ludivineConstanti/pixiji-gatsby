@@ -3,8 +3,8 @@ export interface DataIllu {
   column: number
   row: number
   c: string
-  main?: boolean | undefined
-  position?: "right" | "left" | "top" | "bottom" | undefined
+  main?: "bottom" | boolean
+  position?: "right" | "left" | "top" | "bottom"
   animationCase?: string
 }
 

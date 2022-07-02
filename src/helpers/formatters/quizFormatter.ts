@@ -10,10 +10,11 @@ export const quizFormatter = dataQuiz => {
   }
   const answers12 = Math.ceil(dataQuiz.length / 12) - answers11
   const quizFormatted = []
+  const answeredDefault: Date[] = []
   const infosAnswer = (num: number) => ({
     answerIndex: Math.floor(Math.random() * num),
-    answeredRight: 0,
-    answeredWrong: 0,
+    answeredRight: answeredDefault,
+    answeredWrong: answeredDefault,
   })
   for (let i = 0; i < answers12; i += 1) {
     quizFormatted.push({

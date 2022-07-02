@@ -5,10 +5,23 @@ import { zIMainSquareHover } from "src/styles/g"
 import { tMSIFontSize, tMSIBFontSize } from "src/styles/typo"
 import { aAnimateOn } from "src/components/d_Illustrations/_helpers/animation"
 import SMainSquare, { SKanji, SInfos } from "./style"
-import { hexToRgb, hslToRgb, darkerColor } from "./utils"
+import { darkerColor } from "./utils"
+import { colorToRgb } from "src/helpers/colors"
 import { useAppDispatch } from "src/store"
 import { updateIdSelectedKanji } from "src/reducer/slices/globalSlice"
 import { useStaticQuery, graphql } from "gatsby"
+
+interface AllKanjisJsonProps {
+  allKanjisJson: {
+    nodes: {
+      kanjiId: number
+      kana: string
+      kanaEn: string
+      kanji: string
+      en: string[]
+    }[]
+  }
+}
 
 interface MainSquareProps {
   size: number
@@ -17,7 +30,7 @@ interface MainSquareProps {
   color: string
   position: string
   kanjiIndex: number
-  kanjisArr: { kanjiId: number }[]
+  kanjisArr: number[]
 }
 
 const MainSquare = ({
@@ -29,7 +42,7 @@ const MainSquare = ({
   kanjiIndex,
   kanjisArr,
 }: MainSquareProps) => {
-  const { allKanjisJson } = useStaticQuery(graphql`
+  const { allKanjisJson } = useStaticQuery<AllKanjisJsonProps>(graphql`
     query {
       allKanjisJson {
         nodes {
@@ -49,10 +62,7 @@ const MainSquare = ({
 
   const dispatch = useAppDispatch()
 
-  const colorRGB = useMemo(
-    () => (color.slice(0, 1) === "h" ? hslToRgb(color) : hexToRgb(color)),
-    [color]
-  )
+  const colorRGB = useMemo(() => colorToRgb(color), [color])
 
   const v = useMemo(() => {
     const scaleFactor = 8 / size

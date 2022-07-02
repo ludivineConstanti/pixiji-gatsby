@@ -57,7 +57,7 @@ const MenuLink = ({ path = "", text, onClick = () => {} }: MenuLinkProps) => {
       animate="animate"
       whileHover="whileHover"
     >
-      <motion.div variants={vSquare} className="menuLink__square" />
+      <motion.div variants={vSquare} />
       {text}
     </SMenuLink>
   ) : (
@@ -72,7 +72,7 @@ const MenuLink = ({ path = "", text, onClick = () => {} }: MenuLinkProps) => {
       animate="animate"
       whileHover="whileHover"
     >
-      <motion.div variants={vSquare} className="menuLink__square" />
+      <motion.div variants={vSquare} />
       {text}
     </SMenuButton>
   )

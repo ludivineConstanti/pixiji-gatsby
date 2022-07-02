@@ -1,6 +1,6 @@
 import React, { useEffect, useState, memo, useMemo } from "react"
-import { Color } from "framer"
 
+import { colorToRgb } from "src/helpers/colors"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateColor } from "src/reducer/slices/globalSlice"
 import { createIllustration } from "src/components/d_Illustrations/_helpers/createIllustration"
@@ -23,10 +23,15 @@ const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
       animate: { width: "100%", transition: { mass: 5 } },
     })
 
+    const colorRGB = colorToRgb(colorIllu)
+    const lighter = `rgb(${colorRGB.r + 25}, ${colorRGB.g + 25}, ${
+      colorRGB.b + 25
+    })`
+
     dispatch(
       updateColor({
         main: colorIllu,
-        lighter: Color.toHexString(Color.lighten(Color(colorIllu), 10)),
+        lighter,
       })
     )
   }, [colorIllu])

@@ -1,6 +1,10 @@
 import { shuffle } from "../shuffle"
+import { DataIllu } from "src/models"
 
-export const kanjisArrFormatter = (kanjis, kanjisNum: number) => {
+export const kanjisArrFormatter = (
+  kanjis: { kanjiId: number }[],
+  kanjisNum: number
+) => {
   // need to make a copy of the array by spreading it (otherwise it's a dynamic copy and it's useless)
   // this way it doesn't mess up the data for the quizzes
   // (both the illustrations used for deco and the quizzes use the same kanjis data
@@ -17,7 +21,7 @@ export const kanjisArrFormatter = (kanjis, kanjisNum: number) => {
   return kanjisArr
 }
 
-export const getKanjisNum = (arrOfArrs: any[][]) => {
+export const getKanjisNum = (arrOfArrs: DataIllu[][][]) => {
   let length = 0
   arrOfArrs.forEach(arr => {
     length += arr.length

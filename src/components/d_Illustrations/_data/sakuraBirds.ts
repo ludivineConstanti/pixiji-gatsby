@@ -1,3 +1,5 @@
+import { DataIllu } from "src/models"
+
 const pinkL2 = "#EFD7E5"
 const pinkL1 = "#F2BEDD"
 const pink = "#EB8DC5"
@@ -9,7 +11,7 @@ const brown = "#C97C53"
 const brownD1 = "#B66133"
 const brownD2 = "#A54E20"
 
-const flowers0 = [
+const flowers0: DataIllu[][] = [
   [
     {
       s: 6,
@@ -32,7 +34,7 @@ const flowers0 = [
   ],
 ]
 
-const flowers1 = [
+const flowers1: DataIllu[][] = [
   [
     {
       s: 3,
@@ -200,7 +202,7 @@ const flowers1 = [
   ],
 ]
 
-const flowers2 = [
+const flowers2: DataIllu[][] = [
   [
     {
       s: 1,
@@ -420,5 +422,5 @@ const flowers2 = [
   ],
 ]
 
-export const arrIllu = [flowers0, flowers1, flowers2]
+export const arrIllu: DataIllu[][][] = [flowers0, flowers1, flowers2]
 export const colorIllu = "#008181"
