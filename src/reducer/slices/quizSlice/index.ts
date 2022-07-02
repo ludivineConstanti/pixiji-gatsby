@@ -8,13 +8,16 @@ import {
   kanjisInitial,
 } from "./helpers"
 import { QuizIdOptions } from "src/models/models"
+import { InitialStateProps } from "./models"
+
+const initialState: InitialStateProps = {
+  data: [],
+  currentQuizId: 1,
+}
 
 export const quizSlice = createSlice({
   name: "quiz",
-  initialState: {
-    data: [],
-    currentQuizId: 1,
-  },
+  initialState,
 
   reducers: {
     resetStateQuiz: state => {
@@ -37,7 +40,9 @@ export const quizSlice = createSlice({
         }
       }
     ) => {
-      const currentQuiz = state.data.filter(data => data.id === payload.quizId)
+      const currentQuiz = state.data.filter(
+        data => data.quizId === payload.quizId
+      )
       if (!currentQuiz.length || currentQuiz[0].finished) {
         const quizInitialData = initialize(payload)
 
@@ -134,9 +139,12 @@ export const quizSlice = createSlice({
       }
     ) => {
       const quizId = payload.quizId || state.currentQuizId
-      const currentQuiz = state.data.filter(
-        data => data.quizId === payload.quizId
-      )[0]
+      console.log("quizId", quizId)
+      const currentQuiz = state.data.filter(data => data.quizId === quizId)[0]
+
+      console.log("state", state)
+      console.log("state.data", state.data)
+      console.log("currentQuiz", currentQuiz)
 
       if (!currentQuiz) {
         return

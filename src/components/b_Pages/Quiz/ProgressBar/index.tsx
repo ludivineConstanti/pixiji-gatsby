@@ -37,7 +37,7 @@ const ProgressBar = () => {
     }
 
     return arrTemp
-  }, [])
+  }, [quizzesData])
 
   return (
     <SProgressBar

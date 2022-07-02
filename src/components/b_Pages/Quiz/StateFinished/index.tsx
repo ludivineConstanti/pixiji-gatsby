@@ -52,6 +52,7 @@ const StateFinished = ({ kanjis }: StateFinishedProps) => {
       <ButtonBig
         text="Replay"
         onClick={() => {
+          console.log("clicked replay")
           dispatch(
             cheatingButtonFinishQuiz({
               kanjis,
