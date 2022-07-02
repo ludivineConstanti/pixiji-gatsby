@@ -1,4 +1,4 @@
-import { DataIllu } from "src/models"
+import { DataIllu } from "src/models/models"
 
 const redL1 = "#DF6C6A"
 const red = "#C5403E"

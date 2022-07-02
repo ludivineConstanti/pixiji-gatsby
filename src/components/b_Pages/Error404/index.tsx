@@ -14,17 +14,32 @@ import {
   colorIllu,
 } from "src/components/d_Illustrations/_data/cloudDragon"
 import SLinkIconContainer from "./SError404"
+import {
+  KanjisJsonFragmentProps,
+  AllQuizFragmentProps,
+} from "src/models/models"
+
+interface QueryProps {
+  allKanjisJson: KanjisJsonFragmentProps
+  allQuiz: AllQuizFragmentProps
+}
 
 const Error404 = () => {
-  const { allKanjisJson } = useStaticQuery(graphql`
+  const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
         ...kanjisJsonFragment
       }
+      allQuiz {
+        ...quizFragment
+      }
     }
   `)
 
-  const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
+  const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
+  const quizzesSlug = allQuiz.nodes.filter(
+    data => data.quizId === currentQuizId
+  )[0].slug
 
   const kanjisArr = useMemo(
     () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),

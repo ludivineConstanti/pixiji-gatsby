@@ -7,12 +7,18 @@ import ButtonBig from "src/components/e_Interactives/ButtonBig"
 import TextWithTitle from "src/components/c_Partials/TextWithTitle"
 import IlluQuiz from "src/components/d_Illustrations/IlluQuiz"
 import QuizzesNav from "./QuizzesNav"
-import { QuizIdOptions } from "src/models"
+import { QuizIdOptions } from "src/models/models"
 
-interface AllKanjisJsonProps {
+interface QueryProps {
   allKanjisJson: {
     nodes: {
       quizId: number
+    }[]
+  }
+  allQuiz: {
+    nodes: {
+      quizId: QuizIdOptions
+      slug: string
     }[]
   }
 }
@@ -23,15 +29,20 @@ interface QuizzesProps {
     title: string
     slug: string
   }
-  dataQuizzes: []
 }
 
 const Quizzes = ({ currentQuiz }: QuizzesProps) => {
-  const { allKanjisJson } = useStaticQuery<AllKanjisJsonProps>(graphql`
+  const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
         nodes {
           quizId
+        }
+      }
+      allQuiz {
+        nodes {
+          quizId
+          slug
         }
       }
     }
@@ -44,16 +55,22 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
 
   const dispatch = useAppDispatch()
 
-  const dataQuizzes = useAppSelector(state => state.quiz.dataQuizzes)
-
-  const kanjisArr = useAppSelector(
-    state => state.quiz[`quiz${currentQuiz.id}`].wrongAnswers
+  const dataQuizzes = useAppSelector(state => state.quiz.data)
+  const currentQuizData = dataQuizzes.filter(
+    data => data.quizId === currentQuiz.id
   )
 
-  const previousQuiz = dataQuizzes.filter(
-    quiz => quiz.id === currentQuiz.id - 1
+  const kanjisArr = currentQuizData.length
+    ? currentQuizData[0].wrongAnswers
+    : []
+
+  const previousQuiz = allQuiz.nodes.filter(
+    data => data.quizId === currentQuiz.id - 1
   )
-  const nextQuiz = dataQuizzes.filter(quiz => quiz.id === currentQuiz.id + 1)
+
+  const nextQuiz = allQuiz.nodes.filter(
+    data => data.quizId === currentQuiz.id + 1
+  )
 
   const text = useMemo(() => {
     const numFirstTry = kanjisArr.filter(
@@ -88,7 +105,7 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
   }, [kanjisArr])
 
   useEffect(() => {
-    dispatch(updateIdQuiz({ quizId: currentQuiz.id, slug: currentQuiz.slug }))
+    dispatch(updateIdQuiz({ quizId: currentQuiz.id }))
   }, [currentQuiz.id, currentQuiz.slug])
 
   return (
@@ -117,7 +134,7 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
         />
         {previousQuiz.length ? (
           <ButtonBig
-            text={`Quiz ${previousQuiz[0].id}`}
+            text={`Quiz ${previousQuiz[0].quizId}`}
             arrowDirection="left"
             path={`/quizzes/${previousQuiz[0].slug}`}
           />
@@ -126,7 +143,7 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
         )}
         {nextQuiz.length ? (
           <ButtonBig
-            text={`Quiz ${nextQuiz[0].id}`}
+            text={`Quiz ${nextQuiz[0].quizId}`}
             side="right"
             path={`/quizzes/${nextQuiz[0].slug}`}
           />

@@ -8,11 +8,14 @@ import {
   emptyAnswer,
   kanjisInitial,
 } from "./helpers"
-import { QuizIdOptions } from "src/models"
+import { QuizIdOptions } from "src/models/models"
 
 export const quizSlice = createSlice({
   name: "quiz",
-  initialState,
+  initialState: {
+    data: [],
+    currentQuizId: 1,
+  },
 
   reducers: {
     resetStateQuiz: state => {
@@ -24,10 +27,9 @@ export const quizSlice = createSlice({
     },
     updateIdQuiz: (
       state,
-      { payload }: { payload: { quizId: QuizIdOptions; slug: string } }
+      { payload }: { payload: { quizId: QuizIdOptions } }
     ) => {
       state.currentQuizId = payload.quizId
-      state.currentSlug = payload.slug
     },
     initializeQuiz: (
       state,
@@ -40,65 +42,76 @@ export const quizSlice = createSlice({
         }
       }
     ) => {
-      const cQ = state[`quiz${payload.quizId}`]
-      if (!cQ.rightAnswers.length) {
-        initialize(state, payload)
+      const currentQuiz = state.data.filter(data => data.id === payload.quizId)
+      if (!currentQuiz.length || currentQuiz[0].finished) {
+        const quizInitialData = initialize(payload)
+
+        state.data = state.data.filter(e => e.quizId !== payload.quizId)
+        state.data.push(quizInitialData)
       }
       state.currentQuizId = payload.quizId
     },
     answeredQuestionQuiz: (state, { payload }) => {
       // {quizId: num, answer: answerObj}
       const { quizId, answer } = payload
-      const cQ = state[`quiz${quizId}`]
+      const currentQuiz = state[`quiz${quizId}`]
 
-      cQ.answeredQuestion = answer
+      currentQuiz.answeredQuestion = answer
 
-      const { infosAnswer } = cQ.dataQuiz[0]
+      const { infosAnswer } = currentQuiz.dataQuiz[0]
 
       const answeredRight =
-        answer === cQ.dataQuiz[0].arrAnswers[infosAnswer.answerIndex]
+        answer === currentQuiz.dataQuiz[0].arrAnswers[infosAnswer.answerIndex]
 
       const date = new Date().toString()
 
       if (answeredRight) {
-        cQ.answeredCorrectly = true
-        cQ.dataQuiz[0].infosAnswer.answeredRight.push(date)
+        currentQuiz.answeredCorrectly = true
+        currentQuiz.dataQuiz[0].infosAnswer.answeredRight.push(date)
         infosAnswer.answeredRight.push(date)
-        cQ.rightAnswers = [...cQ.rightAnswers, { answer, infosAnswer }]
-        if (cQ.totalQuestions === cQ.rightAnswers.length) {
-          cQ.finished = true
+        currentQuiz.rightAnswers = [
+          ...currentQuiz.rightAnswers,
+          { answer, infosAnswer },
+        ]
+        if (currentQuiz.totalQuestions === currentQuiz.rightAnswers.length) {
+          currentQuiz.finished = true
         }
-        if (cQ.wrongAnswers.length < cQ.rightAnswers.length) {
-          cQ.wrongAnswers = [...cQ.wrongAnswers, emptyAnswer]
+        if (currentQuiz.wrongAnswers.length < currentQuiz.rightAnswers.length) {
+          currentQuiz.wrongAnswers = [...currentQuiz.wrongAnswers, emptyAnswer]
         }
       }
       if (!answeredRight) {
-        const wrongAnswer = cQ.wrongAnswers.filter(e => e.answer === answer)[0]
+        const wrongAnswer = currentQuiz.wrongAnswers.filter(
+          e => e.answer === answer
+        )[0]
         if (!wrongAnswer) {
-          cQ.dataQuiz[0].infosAnswer.answeredWrong.push(date)
+          currentQuiz.dataQuiz[0].infosAnswer.answeredWrong.push(date)
           infosAnswer.answeredWrong.push(date)
-          cQ.wrongAnswers = [...cQ.wrongAnswers, { answer, infosAnswer }]
+          currentQuiz.wrongAnswers = [
+            ...currentQuiz.wrongAnswers,
+            { answer, infosAnswer },
+          ]
         }
         if (wrongAnswer) {
           wrongAnswer.infosAnswer.answeredWrong.push(date)
         }
       }
 
-      cQ.wrongAnswers = sortWrongAnswers(cQ.wrongAnswers)
+      currentQuiz.wrongAnswers = sortWrongAnswers(currentQuiz.wrongAnswers)
     },
     nextQuestionQuiz: (
       state,
       { payload }: { payload: { quizId: QuizIdOptions } }
     ) => {
-      const cQ = state[`quiz${payload.quizId}`]
+      const currentQuiz = state[`quiz${payload.quizId}`]
 
-      const currentQuestion = cQ.dataQuiz[0]
-      cQ.dataQuiz.shift()
-      if (!cQ.answeredCorrectly) {
-        cQ.dataQuiz = [...cQ.dataQuiz, currentQuestion]
+      const currentQuestion = currentQuiz.dataQuiz[0]
+      currentQuiz.dataQuiz.shift()
+      if (!currentQuiz.answeredCorrectly) {
+        currentQuiz.dataQuiz = [...currentQuiz.dataQuiz, currentQuestion]
       }
-      cQ.answeredQuestion = false
-      cQ.answeredCorrectly = false
+      currentQuiz.answeredQuestion = false
+      currentQuiz.answeredCorrectly = false
     },
     cheatingButtonFinishQuiz: (
       state,
@@ -112,22 +125,22 @@ export const quizSlice = createSlice({
       }
     ) => {
       const quizId = payload.quizId || state.currentQuizId
-      const cQ = state[`quiz${quizId}`]
+      const currentQuiz = state[`quiz${quizId}`]
 
-      if (!cQ.finished) {
-        cQ.dataQuiz.forEach(e => {
+      if (!currentQuiz.finished) {
+        currentQuiz.dataQuiz.forEach(e => {
           const { answerIndex } = e.infosAnswer
-          cQ.rightAnswers.push({
+          currentQuiz.rightAnswers.push({
             answer: e.arrAnswers[answerIndex],
             infosAnswer: { ...e.infosAnswer, answerIndex },
           })
         })
-        cQ.wrongAnswers = sortWrongAnswers(cQ.wrongAnswers)
+        currentQuiz.wrongAnswers = sortWrongAnswers(currentQuiz.wrongAnswers)
 
-        cQ.dataQuiz = quizFormatter(kanjisInitial)
-        cQ.finished = true
+        currentQuiz.dataQuiz = quizFormatter(kanjisInitial)
+        currentQuiz.finished = true
       } else {
-        initialize(state, {
+        initialize({
           quizId,
           ...payload,
         })
@@ -135,10 +148,10 @@ export const quizSlice = createSlice({
     },
     updateWrongAnswers: (state, { payload }) => {
       for (let i: QuizIdOptions = 1; i < 4; i++) {
-        const cQ = state[`quiz${i}`]
-        cQ.wrongAnswers = sortWrongAnswers([
+        const currentQuiz = state[`quiz${i}`]
+        currentQuiz.wrongAnswers = sortWrongAnswers([
           ...payload[`quiz${i}`],
-          ...cQ.wrongAnswers,
+          ...currentQuiz.wrongAnswers,
         ])
       }
     },

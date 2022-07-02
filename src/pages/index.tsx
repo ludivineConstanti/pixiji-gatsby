@@ -4,9 +4,9 @@ import Layout from "src/components/a_Root/Layout"
 import Home from "src/components/b_Pages/Home"
 import Seo from "src/components/seo"
 
-const IndexPage = props => {
+const IndexPage = ({ location }) => {
   return (
-    <Layout location={props.location}>
+    <Layout location={location}>
       <Seo title="Home" />
       <Home />
     </Layout>

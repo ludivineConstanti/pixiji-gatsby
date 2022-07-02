@@ -1,16 +1,35 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import MenuLink from "../MenuLink"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateEmail } from "src/reducer/slices/globalSlice"
 import { resetStateQuiz } from "src/reducer/slices/quizSlice"
 import SMenuLinks, { SContainer } from "./style"
+import { AllQuizFragmentProps } from "src/models/models"
+
+interface QueryProps {
+  allQuiz: AllQuizFragmentProps
+}
 
 const MenuLinks = () => {
+  const { allQuiz } = useStaticQuery<QueryProps>(graphql`
+    query {
+      allQuiz {
+        nodes {
+          quizId
+          slug
+        }
+      }
+    }
+  `)
   const dispatch = useAppDispatch()
 
   const isLoggedIn = useAppSelector(state => !!state.global.email)
-  const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
+  const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
+  const quizzesSlug = allQuiz.nodes.filter(
+    data => data.quizId === currentQuizId
+  )[0].slug
 
   return (
     <SMenuLinks>

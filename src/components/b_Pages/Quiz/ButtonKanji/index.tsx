@@ -7,7 +7,7 @@ import { strokeWidth } from "src/styles/g"
 import SButtonKanji, { SText } from "./style"
 import { setScore } from "src/helpers/backEnd/scores"
 
-interface AllKanjisJsonProps {
+interface QueryProps {
   allKanjisJson: {
     nodes: {
       kanjiId: number
@@ -23,7 +23,7 @@ interface ButtonKanjiProps {
 }
 
 const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
-  const { allKanjisJson } = useStaticQuery<AllKanjisJsonProps>(graphql`
+  const { allKanjisJson } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
         nodes {
@@ -41,15 +41,14 @@ const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
   const colorMain = useAppSelector(state => state.global.color.main)
   const email = useAppSelector(state => state.global.email)
   const cheating = useAppSelector(state => state.global.cheating)
-  const answeredQuestion = useAppSelector(
-    state => !!state.quiz[`quiz${state.quiz.currentQuizId}`].answeredQuestion
-  )
-  const correctAnswer = useAppSelector(state => {
-    const current = `quiz${state.quiz.currentQuizId}`
-    return state.quiz[current].dataQuiz[0].arrAnswers[
-      state.quiz[current].dataQuiz[0].infosAnswer.answerIndex
+
+  const quizzesData = useAppSelector(state => state.quiz.data)
+  const currentQuizData = quizzesData.filter(data => data.quizId === quizId)
+  const answeredQuestion = currentQuizData[0].answeredQuestion
+  const correctAnswer =
+    currentQuizData[0].formattedQuiz[0].arrAnswers[
+      currentQuizData[0].formattedQuiz[0].infosAnswer.answerIndex
     ]
-  })
 
   const isCorrect = kanjiId === correctAnswer
 

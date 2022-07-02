@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "src/store"
 import { updateColor } from "src/reducer/slices/globalSlice"
 import { createIllustration } from "src/components/d_Illustrations/_helpers/createIllustration"
 import { SPColorMain, SColorMain } from "./style"
-import { IlluProps } from "src/models"
+import { IlluProps } from "src/models/models"
 
 const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
   const dispatch = useAppDispatch()

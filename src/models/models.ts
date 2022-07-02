@@ -8,6 +8,19 @@ export interface DataIllu {
   animationCase?: string
 }
 
+export interface KanjisJsonFragmentProps {
+  nodes: {
+    kanjiId: number
+  }[]
+}
+
+export interface AllQuizFragmentProps {
+  nodes: {
+    quizId: QuizIdOptions
+    slug: string
+  }[]
+}
+
 export interface IlluProps {
   kanjisArr?: number[]
   renderIllu: (

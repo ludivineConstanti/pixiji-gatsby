@@ -2,7 +2,7 @@ import React from "react"
 
 import MainSquare from "src/components/d_Illustrations/_elements/MainSquare"
 import Square from "src/components/d_Illustrations/_elements/Square"
-import { DataIllu } from "src/models"
+import { DataIllu } from "src/models/models"
 
 export const createIllustration = (
   data: DataIllu[][],

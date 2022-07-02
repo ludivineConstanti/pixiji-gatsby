@@ -11,7 +11,7 @@ import { useAppDispatch } from "src/store"
 import { updateIdSelectedKanji } from "src/reducer/slices/globalSlice"
 import { useStaticQuery, graphql } from "gatsby"
 
-interface AllKanjisJsonProps {
+interface QueryProps {
   allKanjisJson: {
     nodes: {
       kanjiId: number
@@ -42,7 +42,7 @@ const MainSquare = ({
   kanjiIndex,
   kanjisArr,
 }: MainSquareProps) => {
-  const { allKanjisJson } = useStaticQuery<AllKanjisJsonProps>(graphql`
+  const { allKanjisJson } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
         nodes {

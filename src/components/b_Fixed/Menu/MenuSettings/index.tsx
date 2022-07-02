@@ -8,7 +8,7 @@ import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { getUser, createUser } from "src/helpers/backEnd/users"
 import { dummyEmail, dummyPassword } from "src/constants"
-import { QuizIdOptions } from "src/models"
+import { QuizIdOptions } from "src/models/models"
 
 interface KanjisJsonProps {
   allKanjisJson: {

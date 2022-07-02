@@ -8,20 +8,18 @@ import Question from "../Question"
 const StatePlaying = () => {
   const dispatch = useAppDispatch()
 
-  const answeredQuestion = useAppSelector(
-    state => !!state.quiz[`quiz${state.quiz.currentQuizId}`].answeredQuestion
-  )
-  const answeredCorrectly = useAppSelector(
-    state => state.quiz[`quiz${state.quiz.currentQuizId}`].answeredCorrectly
-  )
   const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
+  const quizzesData = useAppSelector(state => state.quiz.data)
+  const currentQuizData = quizzesData.filter(
+    data => data.quizId === currentQuizId
+  )
 
   return (
     <>
       <Question quizId={currentQuizId} />
-      {answeredQuestion && (
+      {currentQuizData.length && currentQuizData[0].answeredQuestion && (
         <ButtonBig
-          comment={answeredCorrectly ? "correct!" : "wrong!"}
+          comment={currentQuizData[0].answeredCorrectly ? "correct!" : "wrong!"}
           text="next"
           onClick={() => {
             dispatch(nextQuestionQuiz({ quizId: currentQuizId }))

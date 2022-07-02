@@ -13,3 +13,12 @@ export const kanjisJsonFragment = graphql`
     }
   }
 `
+
+export const quizFragment = graphql`
+  fragment quizFragment on QuizConnection {
+    nodes {
+      quizId
+      slug
+    }
+  }
+`

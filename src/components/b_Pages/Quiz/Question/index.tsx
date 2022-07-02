@@ -21,16 +21,12 @@ const Question = ({ quizId }: QuestionProps) => {
     }
   `)
 
-  const dataObj = useAppSelector(
-    state => state.quiz[`quiz${state.quiz.currentQuizId}`].dataQuiz[0]
-  )
-  const answeredQuestion = useAppSelector(
-    state => state.quiz[`quiz${state.quiz.currentQuizId}`].answeredQuestion
-  )
+  const quizzesData = useAppSelector(state => state.quiz.data)
+  const currentQuizData = quizzesData.filter(data => data.quizId === quizId)
 
-  if (!dataObj) return null
+  if (!currentQuizData.length) return null
 
-  const { infosAnswer, arrAnswers } = dataObj
+  const { infosAnswer, arrAnswers } = currentQuizData[0].formattedQuiz[0]
 
   const currentEnglishWord = allKanjisJson.nodes.filter(
     (e: { kanjiId: number }) => {
@@ -49,7 +45,7 @@ const Question = ({ quizId }: QuestionProps) => {
               quizId={quizId}
               key={`button-kanji-${e}`}
               kanjiId={e}
-              disabled={answeredQuestion}
+              disabled={currentQuizData[0].answeredQuestion}
             />
           ))
         }
