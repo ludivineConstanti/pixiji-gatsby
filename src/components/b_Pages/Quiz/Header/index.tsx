@@ -31,7 +31,6 @@ const Header = () => {
   `)
   const quizId = useAppSelector(state => state.quiz.currentQuizId)
   const quizzesData = useAppSelector(state => state.quiz.data)
-
   const currentQuizData = quizzesData.filter(data => data.quizId === quizId)
   const currentQuizFromQuery = allQuiz.nodes.filter(
     data => data.quizId === quizId

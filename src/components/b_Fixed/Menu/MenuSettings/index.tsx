@@ -40,9 +40,13 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
   const cheating = useAppSelector(state => state.global.cheating)
   const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
-  const finishedQuiz = useAppSelector(
-    state => state.quiz[`quiz${state.quiz.currentQuizId}`].finished
+  const quizzesData = useAppSelector(state => state.quiz.data)
+  const currentQuizData = quizzesData.filter(
+    data => data.quizId === currentQuizId
   )
+  const finishedQuiz = currentQuizData.length
+    ? currentQuizData[0].finishedQuiz
+    : false
   const isLoggedIn = useAppSelector(state => state.global.email)
 
   const kanjis = useMemo(() => {

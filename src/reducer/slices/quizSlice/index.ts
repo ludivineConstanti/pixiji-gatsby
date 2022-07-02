@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit"
 
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
 import {
-  initialState,
   sortWrongAnswers,
   initialize,
   emptyAnswer,
@@ -19,11 +18,7 @@ export const quizSlice = createSlice({
 
   reducers: {
     resetStateQuiz: state => {
-      // putting state = initialState directly doesn't work
-      const stateKeys = Object.keys(state) as Array<keyof typeof state>
-      stateKeys.forEach(key => {
-        state[key] = initialState[key]
-      })
+      state.data = []
     },
     updateIdQuiz: (
       state,
@@ -54,20 +49,25 @@ export const quizSlice = createSlice({
     answeredQuestionQuiz: (state, { payload }) => {
       // {quizId: num, answer: answerObj}
       const { quizId, answer } = payload
-      const currentQuiz = state[`quiz${quizId}`]
+      const currentQuiz = state.data.filter(data => data.quizId === quizId)[0]
+
+      if (!currentQuiz) {
+        return
+      }
 
       currentQuiz.answeredQuestion = answer
 
-      const { infosAnswer } = currentQuiz.dataQuiz[0]
+      const { infosAnswer } = currentQuiz.formattedQuiz[0]
 
       const answeredRight =
-        answer === currentQuiz.dataQuiz[0].arrAnswers[infosAnswer.answerIndex]
+        answer ===
+        currentQuiz.formattedQuiz[0].arrAnswers[infosAnswer.answerIndex]
 
       const date = new Date().toString()
 
       if (answeredRight) {
         currentQuiz.answeredCorrectly = true
-        currentQuiz.dataQuiz[0].infosAnswer.answeredRight.push(date)
+        currentQuiz.formattedQuiz[0].infosAnswer.answeredRight.push(date)
         infosAnswer.answeredRight.push(date)
         currentQuiz.rightAnswers = [
           ...currentQuiz.rightAnswers,
@@ -85,7 +85,7 @@ export const quizSlice = createSlice({
           e => e.answer === answer
         )[0]
         if (!wrongAnswer) {
-          currentQuiz.dataQuiz[0].infosAnswer.answeredWrong.push(date)
+          currentQuiz.formattedQuiz[0].infosAnswer.answeredWrong.push(date)
           infosAnswer.answeredWrong.push(date)
           currentQuiz.wrongAnswers = [
             ...currentQuiz.wrongAnswers,
@@ -103,12 +103,21 @@ export const quizSlice = createSlice({
       state,
       { payload }: { payload: { quizId: QuizIdOptions } }
     ) => {
-      const currentQuiz = state[`quiz${payload.quizId}`]
+      const currentQuiz = state.data.filter(
+        data => data.quizId === payload.quizId
+      )[0]
 
-      const currentQuestion = currentQuiz.dataQuiz[0]
-      currentQuiz.dataQuiz.shift()
+      if (!currentQuiz) {
+        return
+      }
+
+      const currentQuestion = currentQuiz.formattedQuiz[0]
+      currentQuiz.formattedQuiz.shift()
       if (!currentQuiz.answeredCorrectly) {
-        currentQuiz.dataQuiz = [...currentQuiz.dataQuiz, currentQuestion]
+        currentQuiz.formattedQuiz = [
+          ...currentQuiz.formattedQuiz,
+          currentQuestion,
+        ]
       }
       currentQuiz.answeredQuestion = false
       currentQuiz.answeredCorrectly = false
@@ -125,10 +134,16 @@ export const quizSlice = createSlice({
       }
     ) => {
       const quizId = payload.quizId || state.currentQuizId
-      const currentQuiz = state[`quiz${quizId}`]
+      const currentQuiz = state.data.filter(
+        data => data.quizId === payload.quizId
+      )[0]
+
+      if (!currentQuiz) {
+        return
+      }
 
       if (!currentQuiz.finished) {
-        currentQuiz.dataQuiz.forEach(e => {
+        currentQuiz.formattedQuiz.forEach(e => {
           const { answerIndex } = e.infosAnswer
           currentQuiz.rightAnswers.push({
             answer: e.arrAnswers[answerIndex],
@@ -137,7 +152,7 @@ export const quizSlice = createSlice({
         })
         currentQuiz.wrongAnswers = sortWrongAnswers(currentQuiz.wrongAnswers)
 
-        currentQuiz.dataQuiz = quizFormatter(kanjisInitial)
+        currentQuiz.formattedQuiz = quizFormatter(kanjisInitial)
         currentQuiz.finished = true
       } else {
         initialize({
@@ -147,13 +162,10 @@ export const quizSlice = createSlice({
       }
     },
     updateWrongAnswers: (state, { payload }) => {
-      for (let i: QuizIdOptions = 1; i < 4; i++) {
-        const currentQuiz = state[`quiz${i}`]
-        currentQuiz.wrongAnswers = sortWrongAnswers([
-          ...payload[`quiz${i}`],
-          ...currentQuiz.wrongAnswers,
-        ])
-      }
+      // TO DO! (for when the responseWorstScore request is executed)
+      state.data.forEach(quiz => {
+        quiz.wrongAnswers = sortWrongAnswers([...quiz.wrongAnswers])
+      })
     },
   },
 })
