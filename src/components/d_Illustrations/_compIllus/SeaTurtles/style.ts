@@ -2,7 +2,6 @@ import styled from "styled-components"
 import {
   illuDimensions,
   illuCustomPos,
-  contentMenuWidth,
   breakPointT,
   breakPointD,
   buttonWidth,
@@ -61,8 +60,8 @@ export const SSeaTurtleBig = styled.div`
   ${pSeaTurtleBig.bottom}
   ${pSeaTurtleBig.left}
   ${dSeaTurtleBig}
-  right: 20vh;
   ${breakPointD} {
+    left: auto;
     ${pSeaTurtleBig.right}
     ${pSeaTurtleBig.top}
   }

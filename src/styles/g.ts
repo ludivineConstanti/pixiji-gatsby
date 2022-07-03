@@ -117,7 +117,7 @@ export const illuCustomPos = (objProp: ObjProps) => {
     top?: string
     bottom?: string
   } = {}
-  const arrPos = Object.keys(objProp) as Array<keyof typeof objProp>
+  const arrPos = Object.keys(objProp) as (keyof typeof objProp)[]
   for (const key of arrPos) {
     // eslint-disable-next-line no-nested-ternary
     const marginButton =

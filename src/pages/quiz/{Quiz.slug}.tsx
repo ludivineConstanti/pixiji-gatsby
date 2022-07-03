@@ -4,15 +4,25 @@ import { graphql } from "gatsby"
 import Layout from "src/components/a_Root/Layout"
 import Quiz from "src/components/b_Pages/Quiz"
 import Seo from "src/components/seo"
+import { QuizIdOptions } from "src/models/models"
 
-// <Quizzes currentQuiz={params.slug} />
-const IndexPage = ({ data }) => {
+interface QuizPageProps {
+  data: {
+    quiz: {
+      slug: string
+      title: string
+      quizId: QuizIdOptions
+    }
+  }
+}
+
+const QuizPage = ({ data }: QuizPageProps) => {
   return (
     <Layout isPlaying={true}>
       <Seo title={data.quiz.slug} />
       <Quiz
         currentQuiz={{
-          id: data.quiz.meta.id,
+          id: data.quiz.quizId,
           title: data.quiz.title,
           slug: data.quiz.slug,
         }}
@@ -21,16 +31,14 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export default IndexPage
+export default QuizPage
 
 export const query = graphql`
   query ($id: String!) {
     quiz(id: { eq: $id }) {
       slug
       title
-      meta {
-        id
-      }
+      quizId
     }
   }
 `

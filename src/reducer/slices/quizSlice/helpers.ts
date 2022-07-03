@@ -1,96 +1,42 @@
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
-import { quizzes } from "src/assets/dataQuiz/quizzes"
-import { RootState } from "src/store"
-import { QuizIdOptions } from "src/models"
+import { QuizIdOptions } from "src/models/models"
+import { RightOrWrongAnswerProps } from "./models"
 
 export const kanjisInitial = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
-interface InfosAnswerProps {
-  answerIndex: number
-  answeredRight: string[]
-  answeredWrong: string[]
+const emptyAnswerAnsweredWrong: string[] = []
+const dateInStringFormat = new Date().toString()
+
+export const emptyAnswer = {
+  answer: 0,
+  infosAnswer: {
+    answerIndex: 1,
+    answeredRight: [dateInStringFormat],
+    answeredWrong: emptyAnswerAnsweredWrong,
+  },
 }
 
-interface RightOrWrongAnswerProps {
-  answer: number
-  infosAnswer: InfosAnswerProps
-}
+// put it there since I need it in 2 different actions
+export const initialize = (payload: {
+  quizId: QuizIdOptions
+  kanjis: number[]
+}) => {
+  const { quizId, kanjis } = payload
 
-interface ReturnedStateProps {
-  dataQuiz: {
-    infosAnswer: InfosAnswerProps
-    arrAnswers: number[]
-  }[]
-  totalQuestions: number
-  title: string
-  finished: boolean
-  answeredQuestion: boolean
-  answeredCorrectly: boolean
-  rightAnswers: RightOrWrongAnswerProps[]
-  wrongAnswers: RightOrWrongAnswerProps[]
-}
+  const formattedQuiz = quizFormatter(kanjis)
+  const rightAnswers: RightOrWrongAnswerProps[] = []
+  const wrongAnswers: RightOrWrongAnswerProps[] = []
 
-export const initialStateQuiz = (quizId: number) => {
-  const rightAnswers: [] = []
-  const wrongAnswers: [] = []
-
-  const returnedState: ReturnedStateProps = {
-    dataQuiz: quizFormatter(kanjisInitial),
-    totalQuestions: 0,
-    title: quizzes[quizId - 1].title,
+  return {
+    formattedQuiz,
+    totalQuestions: formattedQuiz.length,
+    quizId,
     finished: false,
     answeredQuestion: false,
     answeredCorrectly: false,
     rightAnswers,
     wrongAnswers,
   }
-
-  return returnedState
-}
-
-export const initialState = {
-  dataQuizzes: quizzes,
-  currentQuizId: 1,
-  currentSlug: quizzes[0].slug,
-  quiz1: initialStateQuiz(1),
-  quiz2: initialStateQuiz(2),
-  quiz3: initialStateQuiz(3),
-}
-
-const emptyAnswerAnsweredWrong: string[] = []
-
-export const emptyAnswer = {
-  answer: 1,
-  infosAnswer: {
-    answeredRight: [new Date().toString()],
-    answeredWrong: emptyAnswerAnsweredWrong,
-  },
-}
-
-// put it there since I need it in 2 different actions
-export const initialize = (
-  state: RootState,
-  payload: {
-    quizId: QuizIdOptions
-    kanjis: number[]
-  }
-) => {
-  const { quizId, kanjis } = payload
-
-  const cQ = state[`quiz${quizId}`]
-
-  const formattedQuiz = quizFormatter(kanjis)
-
-  cQ.dataQuiz = formattedQuiz
-
-  if (cQ.totalQuestions === 0) {
-    cQ.totalQuestions = formattedQuiz.length
-  }
-
-  cQ.finished = false
-  cQ.answeredQuestion = false
-  cQ.answeredCorrectly = false
-  cQ.rightAnswers = []
 }
 
 export const sortWrongAnswers = (wrongAnswers: RightOrWrongAnswerProps[]) => {

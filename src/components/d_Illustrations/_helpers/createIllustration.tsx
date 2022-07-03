@@ -2,12 +2,12 @@ import React from "react"
 
 import MainSquare from "src/components/d_Illustrations/_elements/MainSquare"
 import Square from "src/components/d_Illustrations/_elements/Square"
-import { DataIllu } from "src/models"
+import { DataIllu } from "src/models/models"
 
 export const createIllustration = (
   data: DataIllu[][],
   groupIndex: number,
-  numPreviousGroups = 0,
+  numPreviousGroups: number,
   kanjisArr: number[]
 ) => {
   const formattedData: JSX.Element[] = []
@@ -27,7 +27,6 @@ export const createIllustration = (
             kanjiIndex={numPreviousGroups + i}
             position={square.position || ""}
             kanjisArr={kanjisArr}
-            animationCase={square.animationCase || ""}
           />
         )
       } else {
@@ -40,7 +39,6 @@ export const createIllustration = (
             color={square.c}
             kanjiIndex={numPreviousGroups + i}
             kanjisArrLength={kanjisArr.length}
-            animationCase={square.animationCase || ""}
           />
         )
       }

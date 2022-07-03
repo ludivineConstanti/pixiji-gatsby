@@ -1,6 +1,13 @@
 // Hover
 export const buttonArrowHX = 8
-export const buttonArrowHT = {
+
+interface ButtonArrowHTProps {
+  repeat: number
+  repeatType: "mirror" | "reverse" | "loop"
+  mass: number
+}
+
+export const buttonArrowHT: ButtonArrowHTProps = {
   repeat: Infinity,
   repeatType: "mirror",
   mass: 2,

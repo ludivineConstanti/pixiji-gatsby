@@ -17,7 +17,7 @@ export default styled(motion.div)<{
     touchGround: boolean
     width: number
     height: number
-    margin: number[]
+    margin: (string | number)[]
   }
 }>`
   position: fixed;

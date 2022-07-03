@@ -1,12 +1,9 @@
-- meta:
-    id: 1
+- quizId: 1
   slug: first-grade
   title: 1st grade
-- meta:
-    id: 2
+- quizId: 2
   slug: second-grade
   title: 2nd grade
-- meta:
-    id: 3
+- quizId: 3
   slug: third-grade
   title: 3rd grade

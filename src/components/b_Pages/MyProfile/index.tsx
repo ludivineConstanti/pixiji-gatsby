@@ -13,6 +13,8 @@ import {
 import TextWrapper from "src/components/f_Statics/TextWrapper"
 import Illu from "src/components/d_Illustrations/Illu"
 import ButtonInText from "src/components/e_Interactives/ButtonInText"
+import { useAppSelector } from "src/store"
+import Text from "src/components/f_Statics/Text"
 
 const MyProfile = () => {
   const { allKanjisJson } = useStaticQuery(graphql`
@@ -22,6 +24,8 @@ const MyProfile = () => {
       }
     }
   `)
+
+  const email = useAppSelector(state => state.global.email)
 
   const kanjisArr = useMemo(
     () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
@@ -36,9 +40,9 @@ const MyProfile = () => {
         arrDataIllu={{ arrIllu, colorIllu }}
       />
       <TextWrapper>
-        email address: email@address.fr
-        <ButtonInText text="Change my email" buttonType="submit" />
-        <ButtonInText text="Change my password" buttonType="submit" />
+        <Text>{`Current email: ${email}`}</Text>
+        <ButtonInText text="Update my email" buttonType="submit" />
+        <ButtonInText text="Update my password" buttonType="submit" />
         <ButtonInText text="Delete my account" buttonType="submit" />
       </TextWrapper>
     </>

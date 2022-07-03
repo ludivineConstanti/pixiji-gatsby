@@ -11,7 +11,7 @@ export const iVIconT = {
 }
 
 export const iVIconM = {
-  initial: { width: 0 },
+  initial: { width: "0%" },
   animate: { width: "75%" },
 }
 

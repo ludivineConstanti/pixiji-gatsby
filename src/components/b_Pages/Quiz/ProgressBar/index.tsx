@@ -10,18 +10,21 @@ const vProgressBar = {
 }
 
 const ProgressBar = () => {
-  const questionNumber = useAppSelector(
-    state => state.quiz[`quiz${state.quiz.currentQuizId}`].totalQuestions
+  const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
+  const quizzesData = useAppSelector(state => state.quiz.data)
+  const currentQuizData = quizzesData.filter(
+    data => data.quizId === currentQuizId
   )
-  const currentNumber = useAppSelector(state => {
-    const current = `quiz${state.quiz.currentQuizId}`
-    return (
-      state.quiz[current].totalQuestions - state.quiz[current].dataQuiz.length
-    )
-  })
 
   const squaresArr = useMemo(() => {
     const arrTemp = []
+
+    const questionNumber = currentQuizData.length
+      ? currentQuizData[0].totalQuestions
+      : 0
+    const currentNumber = quizzesData.length
+      ? quizzesData[0].totalQuestions - quizzesData[0].formattedQuiz.length
+      : 0
 
     for (let i = 0; i < questionNumber; i += 1) {
       arrTemp.push(
@@ -34,7 +37,7 @@ const ProgressBar = () => {
     }
 
     return arrTemp
-  }, [questionNumber, currentNumber])
+  }, [quizzesData])
 
   return (
     <SProgressBar

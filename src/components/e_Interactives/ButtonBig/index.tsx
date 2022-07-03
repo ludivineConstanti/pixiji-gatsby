@@ -22,7 +22,7 @@ interface ButtonBigProps {
 const ButtonBig = ({
   comment = "",
   text,
-  onClick = () => {},
+  onClick,
   colorButton = "white",
   side = "left",
   path = "",
@@ -71,7 +71,16 @@ const ButtonBig = ({
           {content}
         </Link>
       ) : (
-        <SButton onClick={onClick} type="button" s={{ side }} aria-label={text}>
+        <SButton
+          onClick={() => {
+            if (onClick) {
+              onClick()
+            }
+          }}
+          type="button"
+          s={{ side }}
+          aria-label={text}
+        >
           {content}
         </SButton>
       )}

@@ -1,4 +1,4 @@
-import { DataIllu } from "src/models"
+import { DataIllu } from "src/models/models"
 
 // pink light
 const pinkL1 = "#F2BEDD"
