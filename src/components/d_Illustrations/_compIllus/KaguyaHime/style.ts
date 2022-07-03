@@ -46,7 +46,13 @@ export const SHime = styled.div`
   ${pHime.bottom}
 `
 
-export const bSettings = [
+interface BSettingsProps {
+  side: "left" | "right"
+  margin: number | string
+  color: string
+}
+
+export const bSettings: BSettingsProps[] = [
   { side: "left", margin: 0, color: bambooColors[2] },
   { side: "left", margin: buttonWidth, color: bambooColors[2] },
   { side: "right", margin: 60, color: bambooColors[2] },

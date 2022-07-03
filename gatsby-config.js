@@ -48,6 +48,15 @@ module.exports = {
         name: `quizzes`,
       },
     },
+    // tslint
+    `gatsby-plugin-typescript`,
+    {
+      resolve: "gatsby-plugin-tslint",
+      options: {
+        test: /\.ts$|\.tsx$/,
+        exclude: /(node_modules|cache|public)/,
+      },
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-image`,
     {

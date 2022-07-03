@@ -15,16 +15,26 @@ interface QueryProps {
       slug: string
     }[]
   }
+  allKanjisJson: {
+    nodes: {
+      quizId: QuizIdOptions
+    }[]
+  }
 }
 
 const Header = () => {
-  const { allQuiz } = useStaticQuery<QueryProps>(graphql`
+  const { allQuiz, allKanjisJson } = useStaticQuery<QueryProps>(graphql`
     query {
       allQuiz {
         nodes {
           title
           quizId
           slug
+        }
+      }
+      allKanjisJson {
+        nodes {
+          quizId
         }
       }
     }
@@ -35,17 +45,20 @@ const Header = () => {
   const currentQuizFromQuery = allQuiz.nodes.filter(
     data => data.quizId === quizId
   )[0]
+  const totalNumberOfKanjis = allKanjisJson.nodes.filter(
+    data => data.quizId === quizId
+  ).length
 
   return (
     <SHeader>
       {currentQuizData.length && (
         <>
           <h2>
-            Quiz {quizId} - {currentQuizFromQuery.title} (
-            {currentQuizData[0].totalOptions} kanjis)
+            Quiz {quizId} - {currentQuizFromQuery.title} ({totalNumberOfKanjis}{" "}
+            kanjis)
           </h2>
-          <AnimatePresence exitBeforeEnter>
-            {!currentQuizData[0].finishedQuiz && <ProgressBar />}
+          <AnimatePresence exitBeforeEnter={true}>
+            {!currentQuizData[0].finished && <ProgressBar />}
           </AnimatePresence>
         </>
       )}

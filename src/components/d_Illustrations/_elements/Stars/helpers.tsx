@@ -3,6 +3,23 @@ import { useTransform, MotionValue } from "framer-motion"
 
 import { SStar } from "./style"
 
+export const createVStar = (
+  scaleArr: [number, number],
+  colorArr: [string, string],
+  mass: number
+) => ({
+  init: { scale: 0 },
+  animate: {
+    scale: scaleArr,
+    backgroundColor: colorArr,
+    transition: {
+      repeat: Infinity,
+      repeatType: "reverse",
+      mass,
+    },
+  },
+})
+
 export const createStar = (
   array: JSX.Element[],
   size: number,
@@ -25,23 +42,6 @@ export const createStar = (
     />
   )
 }
-
-export const createVStar = (
-  scaleArr: [number, number],
-  colorArr: [string, string],
-  mass: number
-) => ({
-  init: { scale: 0 },
-  animate: {
-    scale: scaleArr,
-    backgroundColor: colorArr,
-    transition: {
-      repeat: Infinity,
-      repeatType: "reverse",
-      mass,
-    },
-  },
-})
 
 export const useCreateTranslate = (
   xOrY: MotionValue<number>,

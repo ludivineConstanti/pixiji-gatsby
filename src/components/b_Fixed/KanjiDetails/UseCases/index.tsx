@@ -19,7 +19,7 @@ const UseCases = ({ onyomiCompounds }: UseCasesProps) => {
       <ul>
         {React.Children.toArray(
           onyomiCompounds.map(e => (
-            <SExample>
+            <SExample key={`onyomiCompound${e.kanji}${e.kana}`}>
               {e.kanji}
               <SKana>{e.kana}</SKana>
               <SKanaEn>

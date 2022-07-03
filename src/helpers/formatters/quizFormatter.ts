@@ -4,6 +4,7 @@ export const quizFormatter = (dataQuiz: number[]) => {
   shuffle(dataQuiz)
   const answers11 = 11 - (dataQuiz.length % 12) + 1
   if (answers11 - 1 > dataQuiz.length / 12) {
+    // tslint:disable-next-line:no-console
     console.error(
       "the current quizFormatter does not work for this data length"
     )

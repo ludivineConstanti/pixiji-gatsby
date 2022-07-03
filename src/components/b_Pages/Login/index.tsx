@@ -62,7 +62,9 @@ const Login = () => {
       />
 
       <TextWrapper>
-        <form onSubmit={e => onSubmit(e, feedback, setFeedback, dispatch)}>
+        <form
+          onSubmit={event => onSubmit(event, feedback, setFeedback, dispatch)}
+        >
           <Input type="email" placeholder="Your email address" label="Email" />
           <Input
             type="password"

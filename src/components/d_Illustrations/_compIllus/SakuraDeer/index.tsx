@@ -21,7 +21,7 @@ const SakuraDeer = ({ data, kanjis, numKanjis }: SakuraDeerProps) => {
         margin={[46]}
         width={2}
         height={10}
-        touchGround
+        touchGround={true}
         kanjis={kanjis}
         isOnNum={numKanjis[0]}
       />
@@ -32,7 +32,7 @@ const SakuraDeer = ({ data, kanjis, numKanjis }: SakuraDeerProps) => {
         margin={[38]}
         width={2}
         height={20}
-        touchGround
+        touchGround={true}
         kanjis={kanjis}
         isOnNum={numKanjis[1]}
       />
@@ -43,7 +43,7 @@ const SakuraDeer = ({ data, kanjis, numKanjis }: SakuraDeerProps) => {
         margin={[8]}
         width={2}
         height={25}
-        touchGround
+        touchGround={true}
         kanjis={kanjis}
         isOnNum={numKanjis[3]}
       />

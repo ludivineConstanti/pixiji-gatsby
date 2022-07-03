@@ -30,7 +30,7 @@ const KaguyaHime = ({ data, kanjis, totalKanjis }: KaguyaHimeProps) => (
         side={bamboo.side}
         margin={[bamboo.margin]}
         width={2}
-        touchGround
+        touchGround={true}
         height={100}
         kanjis={kanjis}
         isOnNum={totalKanjis}

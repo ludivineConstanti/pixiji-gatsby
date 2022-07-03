@@ -52,8 +52,8 @@ const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
 
     const arrNumKanjis = []
     let numKanjisCounter = 0
-    for (let i = 0; i < arrIllu.length; i += 1) {
-      numKanjisCounter += arrIllu[i].length
+    for (const illu of arrIllu) {
+      numKanjisCounter += illu.length
       arrNumKanjis.push(numKanjisCounter)
     }
 

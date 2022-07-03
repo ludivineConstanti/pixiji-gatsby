@@ -87,7 +87,7 @@ const Quiz = ({ currentQuiz }: QuizProps) => {
       <SQuiz>
         <Header />
         {!isLoggedIn && <Warning />}
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence exitBeforeEnter={true}>
           {currentQuizData.length && currentQuizData[0].finished ? (
             <StateFinished kanjis={kanjis} />
           ) : (

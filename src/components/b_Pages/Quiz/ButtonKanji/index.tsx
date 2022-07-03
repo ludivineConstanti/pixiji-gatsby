@@ -1,5 +1,6 @@
 import React, { useState, useEffect, memo } from "react"
 import { useStaticQuery, graphql } from "gatsby"
+import { Variants } from "framer-motion"
 
 import { useAppDispatch, useAppSelector } from "src/store"
 import { answeredQuestionQuiz } from "src/reducer/slices/quizSlice"
@@ -54,7 +55,7 @@ const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
 
   const [wasClicked, setWasClicked] = useState(false)
 
-  const [vButtonKanji, setVButtonKanji] = useState({
+  const [vButtonKanji, setVButtonKanji] = useState<Variants>({
     initial: { scaleX: 0, x: 150 },
     animate: { scaleX: 1, x: 0 },
     exit: { scaleX: 0, x: -150 },
@@ -62,39 +63,43 @@ const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
   })
 
   useEffect(() => {
+    let newVariantAnimate
+
+    if (!answeredQuestion) {
+      newVariantAnimate = {
+        ...vButtonKanji.animate,
+        scale: 1,
+      }
+    } else if (!wasClicked && isCorrect && cheating) {
+      newVariantAnimate = {
+        ...vButtonKanji.animate,
+        scale: 0.6,
+        border: `${strokeWidth} solid rgba(255, 255, 255, 1)`,
+      }
+    } else if (wasClicked && isCorrect) {
+      newVariantAnimate = {
+        ...vButtonKanji.animate,
+        scale: 1,
+        border: `${strokeWidth * 2} solid rgba(255, 255, 255, 1)`,
+      }
+    } else if (wasClicked) {
+      newVariantAnimate = {
+        ...vButtonKanji.animate,
+        scale: 1,
+        border: `${strokeWidth} solid rgba(255, 255, 255, 0.25)`,
+      }
+    } else {
+      newVariantAnimate = {
+        ...vButtonKanji.animate,
+        scale: 0.6,
+        border: `${strokeWidth} solid rgba(255, 255, 255, 0.25)`,
+      }
+    }
     setVButtonKanji({
       ...vButtonKanji,
-      // eslint-disable-next-line no-nested-ternary
-      animate: !answeredQuestion
-        ? {
-            ...vButtonKanji.animate,
-            scale: 1,
-          }
-        : !wasClicked && isCorrect && cheating
-        ? {
-            ...vButtonKanji.animate,
-            scale: 0.6,
-            border: `${strokeWidth} solid rgba(255, 255, 255, 1)`,
-          }
-        : // eslint-disable-next-line no-nested-ternary
-        wasClicked && isCorrect
-        ? {
-            ...vButtonKanji.animate,
-            scale: 1,
-            border: `${strokeWidth * 2} solid rgba(255, 255, 255, 1)`,
-          }
-        : wasClicked
-        ? {
-            ...vButtonKanji.animate,
-            scale: 1,
-            border: `${strokeWidth} solid rgba(255, 255, 255, 0.25)`,
-          }
-        : {
-            ...vButtonKanji.animate,
-            scale: 0.6,
-            border: `${strokeWidth} solid rgba(255, 255, 255, 0.25)`,
-          },
+      animate: newVariantAnimate,
     })
+
     if (!disabled) {
       setWasClicked(false)
     }

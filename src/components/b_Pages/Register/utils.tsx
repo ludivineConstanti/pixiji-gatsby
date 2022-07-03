@@ -46,8 +46,8 @@ export const onSubmit = async (
         <>
           <p>Sorry, the passwords need to:</p>
           <ul>
-            {arrPasswordProblems.map(problem => (
-              <li>{problem}</li>
+            {arrPasswordProblems.map((problem, i) => (
+              <li key={`passwordProblemLi${problem}${i}`}>{problem}</li>
             ))}
           </ul>
         </>

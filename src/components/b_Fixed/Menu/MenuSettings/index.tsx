@@ -45,7 +45,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
     data => data.quizId === currentQuizId
   )
   const finishedQuiz = currentQuizData.length
-    ? currentQuizData[0].finishedQuiz
+    ? currentQuizData[0].finished
     : false
   const isLoggedIn = useAppSelector(state => state.global.email)
 
@@ -75,6 +75,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
                 password: dummyPassword,
               })
             } catch (error) {
+              // tslint:disable-next-line:no-console
               console.log(error)
             }
 
@@ -90,6 +91,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
                   password: dummyPassword,
                 })
               } catch (error) {
+                // tslint:disable-next-line:no-console
                 console.log(error)
               }
 
@@ -105,7 +107,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
       )}
       <PopUpButton
         text="Cheat mode"
-        hasSwitch
+        hasSwitch={true}
         onClick={() => {
           dispatch(updateCheating(!cheating))
         }}

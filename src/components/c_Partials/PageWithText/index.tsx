@@ -28,7 +28,7 @@ const PageWithText = ({
       arrDataIllu={illu.arrDataIllu}
     />
     <TextWithTitle title={textWithTitle.title} text={textWithTitle.text}>
-      {children}
+      <>{children}</>
     </TextWithTitle>
     <ButtonBig text={buttonBig.text} path={buttonBig.path || ""} />
   </>

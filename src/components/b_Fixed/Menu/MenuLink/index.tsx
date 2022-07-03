@@ -12,7 +12,7 @@ interface MenuLinkProps {
   onClick?: () => void
 }
 
-const MenuLink = ({ path = "", text, onClick = () => {} }: MenuLinkProps) => {
+const MenuLink = ({ path = "", text, onClick }: MenuLinkProps) => {
   const dispatch = useAppDispatch()
 
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
@@ -20,7 +20,7 @@ const MenuLink = ({ path = "", text, onClick = () => {} }: MenuLinkProps) => {
 
   const [vMenuLink, setVMenuLink] = useState({
     initial: { letterSpacing: "0px" },
-    animate: { letterSpacing: `${tMLLetterSpacing}px` },
+    animate: { letterSpacing: `${tMLLetterSpacing}px`, color: colorMainL1 },
     whileHover: {
       color: colorMain,
       letterSpacing: `${tMLLetterSpacing * 2}px`,
@@ -29,6 +29,7 @@ const MenuLink = ({ path = "", text, onClick = () => {} }: MenuLinkProps) => {
 
   const [vSquare, setVSquare] = useState({
     initial: { backgroundColor: colorMainL1 },
+    animate: {},
     whileHover: { backgroundColor: colorMain },
   })
 
@@ -63,7 +64,9 @@ const MenuLink = ({ path = "", text, onClick = () => {} }: MenuLinkProps) => {
   ) : (
     <SMenuButton
       onClick={() => {
-        onClick()
+        if (onClick) {
+          onClick()
+        }
         updateMenuIsOpen(false)
       }}
       s={{ colorMainL1 }}

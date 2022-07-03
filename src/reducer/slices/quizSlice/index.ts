@@ -139,12 +139,7 @@ export const quizSlice = createSlice({
       }
     ) => {
       const quizId = payload.quizId || state.currentQuizId
-      console.log("quizId", quizId)
       const currentQuiz = state.data.filter(data => data.quizId === quizId)[0]
-
-      console.log("state", state)
-      console.log("state.data", state.data)
-      console.log("currentQuiz", currentQuiz)
 
       if (!currentQuiz) {
         return
