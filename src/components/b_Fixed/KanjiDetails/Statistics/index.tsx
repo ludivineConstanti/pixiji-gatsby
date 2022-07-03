@@ -31,10 +31,10 @@ const Statistics = () => {
               <SOtherOptions>
                 {timeOptions
                   .filter(e => e !== currentTimeOption)
-                  .map((e, i) => (
+                  .map(e => (
                     <PopUpButton
                       text={e}
-                      key={`StatisticTimeOption${e}${i}`}
+                      key={`StatisticTimeOption${e}`}
                       onClick={() => {
                         setCurrentTimeOption(e)
                         setOtherOptionsAreVisible(false)

@@ -2,10 +2,10 @@ import React from "react"
 
 import SIlluDecoOnGround from "./style"
 
-interface IlluOnGroundProps {
+interface IlluDecoOnGroundProps {
   color: string
   side: "right" | "left"
-  margin: number[]
+  margin: (number | string)[]
   width: number
   height: number
   touchGround?: boolean
@@ -13,7 +13,7 @@ interface IlluOnGroundProps {
   kanjis: number
 }
 
-const IlluOnGround = ({
+const IlluDecoOnGround = ({
   color,
   side,
   margin,
@@ -22,7 +22,7 @@ const IlluOnGround = ({
   touchGround = false,
   isOnNum,
   kanjis,
-}: IlluOnGroundProps) => {
+}: IlluDecoOnGroundProps) => {
   const vIlluDecoOnGround = {
     initial: { scaleX: 0 },
     animateOn: { scaleX: 1 },
@@ -46,4 +46,4 @@ const IlluOnGround = ({
   )
 }
 
-export default IlluOnGround
+export default IlluDecoOnGround

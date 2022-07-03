@@ -8,7 +8,7 @@ import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { getUser, createUser } from "src/helpers/backEnd/users"
 import { dummyEmail, dummyPassword } from "src/constants"
-import { QuizIdOptions } from "src/models"
+import { QuizIdOptions } from "src/models/models"
 
 interface KanjisJsonProps {
   allKanjisJson: {
@@ -40,9 +40,13 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
   const cheating = useAppSelector(state => state.global.cheating)
   const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
-  const finishedQuiz = useAppSelector(
-    state => state.quiz[`quiz${state.quiz.currentQuizId}`].finished
+  const quizzesData = useAppSelector(state => state.quiz.data)
+  const currentQuizData = quizzesData.filter(
+    data => data.quizId === currentQuizId
   )
+  const finishedQuiz = currentQuizData.length
+    ? currentQuizData[0].finished
+    : false
   const isLoggedIn = useAppSelector(state => state.global.email)
 
   const kanjis = useMemo(() => {
@@ -71,6 +75,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
                 password: dummyPassword,
               })
             } catch (error) {
+              // tslint:disable-next-line:no-console
               console.log(error)
             }
 
@@ -86,6 +91,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
                   password: dummyPassword,
                 })
               } catch (error) {
+                // tslint:disable-next-line:no-console
                 console.log(error)
               }
 
@@ -101,7 +107,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
       )}
       <PopUpButton
         text="Cheat mode"
-        hasSwitch
+        hasSwitch={true}
         onClick={() => {
           dispatch(updateCheating(!cheating))
         }}
@@ -110,7 +116,9 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
         <PopUpButton
           text={finishedQuiz ? "Restart quiz" : "Finish quiz"}
           onClick={() => {
-            dispatch(cheatingButtonFinishQuiz({ kanjis }))
+            dispatch(
+              cheatingButtonFinishQuiz({ quizId: currentQuizId, kanjis })
+            )
           }}
         />
       )}

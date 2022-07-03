@@ -18,21 +18,34 @@ import {
   colorIllu,
 } from "src/components/d_Illustrations/_data/redPanda"
 import { onSubmit } from "./utils"
-import { getWorstScores } from "src/helpers/backEnd/scores"
-import { dummyEmail } from "src/constants"
+import {
+  KanjisJsonFragmentProps,
+  AllQuizFragmentProps,
+} from "src/models/models"
+
+interface QueryProps {
+  allKanjisJson: KanjisJsonFragmentProps
+  allQuiz: AllQuizFragmentProps
+}
 
 const Login = () => {
-  const { allKanjisJson } = useStaticQuery(graphql`
+  const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
         ...kanjisJsonFragment
+      }
+      allQuiz {
+        ...quizFragment
       }
     }
   `)
 
   const dispatch = useAppDispatch()
 
-  const quizzesSlug = useAppSelector(state => state.quiz.currentSlug)
+  const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
+  const quizzesSlug = allQuiz.nodes.filter(
+    data => data.quizId === currentQuizId
+  )[0].slug
 
   const kanjisArr = useMemo(() => {
     const kanjisNum = getKanjisNum(arrIllu)
@@ -49,7 +62,9 @@ const Login = () => {
       />
 
       <TextWrapper>
-        <form onSubmit={e => onSubmit(e, feedback, setFeedback, dispatch)}>
+        <form
+          onSubmit={event => onSubmit(event, feedback, setFeedback, dispatch)}
+        >
           <Input type="email" placeholder="Your email address" label="Email" />
           <Input
             type="password"

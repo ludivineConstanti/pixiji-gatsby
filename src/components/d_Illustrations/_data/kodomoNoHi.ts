@@ -1,4 +1,4 @@
-import { DataIllu } from "src/models"
+import { DataIllu } from "src/models/models"
 
 const fishMaker = (hue: number) => {
   const lightL1 = `hsl(${hue}, 4%, 95%)`

@@ -1,5 +1,5 @@
 import { shuffle } from "../shuffle"
-import { DataIllu } from "src/models"
+import { DataIllu } from "src/models/models"
 
 export const kanjisArrFormatter = (
   kanjis: { kanjiId: number }[],

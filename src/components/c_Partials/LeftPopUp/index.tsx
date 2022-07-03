@@ -16,7 +16,7 @@ interface LeftPopUpProps {
 const LeftPopUp = ({
   children,
   isShowing,
-  visibleChild = <></>,
+  visibleChild = null,
   customStyle = "",
   onWheel,
   setRef,
@@ -29,7 +29,7 @@ const LeftPopUp = ({
         }
       }}
     >
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence exitBeforeEnter={true}>
         {isShowing && (
           <SContent
             variants={variants}

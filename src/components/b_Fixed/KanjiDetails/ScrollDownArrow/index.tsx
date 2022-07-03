@@ -36,7 +36,7 @@ const ScrollDownArrow = ({
 }: ScrollDownArrowProps) => {
   const colorMainL1 = useAppSelector(state => state.global.color.lighter)
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence exitBeforeEnter={true}>
       {isVisible && (
         <SWrapper
           variants={variants}

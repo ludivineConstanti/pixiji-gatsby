@@ -21,7 +21,7 @@ if (window) {
 }
 
 export const wrapPageElement = ({ element }) => (
-  <AnimatePresence exitBeforeEnter>{element}</AnimatePresence>
+  <AnimatePresence exitBeforeEnter={true}>{element}</AnimatePresence>
 )
 
 export const wrapRootElement = ({ element }) => {

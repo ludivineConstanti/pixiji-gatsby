@@ -4,7 +4,7 @@ import Layout from "src/components/a_Root/Layout"
 import MyProfile from "src/components/b_Pages/MyProfile"
 import Seo from "src/components/seo"
 
-const MyProfilePage = props => {
+const MyProfilePage = () => {
   return (
     <Layout>
       <Seo title="My account" />

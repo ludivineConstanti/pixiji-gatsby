@@ -2,13 +2,18 @@ import { createSlice } from "@reduxjs/toolkit"
 
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
 import {
-  initialState,
   sortWrongAnswers,
   initialize,
   emptyAnswer,
   kanjisInitial,
 } from "./helpers"
-import { QuizIdOptions } from "src/models"
+import { QuizIdOptions } from "src/models/models"
+import { InitialStateProps } from "./models"
+
+const initialState: InitialStateProps = {
+  data: [],
+  currentQuizId: 1,
+}
 
 export const quizSlice = createSlice({
   name: "quiz",
@@ -16,18 +21,13 @@ export const quizSlice = createSlice({
 
   reducers: {
     resetStateQuiz: state => {
-      // putting state = initialState directly doesn't work
-      const stateKeys = Object.keys(state) as Array<keyof typeof state>
-      stateKeys.forEach(key => {
-        state[key] = initialState[key]
-      })
+      state.data = []
     },
     updateIdQuiz: (
       state,
-      { payload }: { payload: { quizId: QuizIdOptions; slug: string } }
+      { payload }: { payload: { quizId: QuizIdOptions } }
     ) => {
       state.currentQuizId = payload.quizId
-      state.currentSlug = payload.slug
     },
     initializeQuiz: (
       state,
@@ -40,65 +40,92 @@ export const quizSlice = createSlice({
         }
       }
     ) => {
-      const cQ = state[`quiz${payload.quizId}`]
-      if (!cQ.rightAnswers.length) {
-        initialize(state, payload)
+      const currentQuiz = state.data.filter(
+        data => data.quizId === payload.quizId
+      )
+      if (!currentQuiz.length || currentQuiz[0].finished) {
+        const quizInitialData = initialize(payload)
+
+        state.data = state.data.filter(e => e.quizId !== payload.quizId)
+        state.data.push(quizInitialData)
       }
       state.currentQuizId = payload.quizId
     },
     answeredQuestionQuiz: (state, { payload }) => {
       // {quizId: num, answer: answerObj}
       const { quizId, answer } = payload
-      const cQ = state[`quiz${quizId}`]
+      const currentQuiz = state.data.filter(data => data.quizId === quizId)[0]
 
-      cQ.answeredQuestion = answer
+      if (!currentQuiz) {
+        return
+      }
 
-      const { infosAnswer } = cQ.dataQuiz[0]
+      currentQuiz.answeredQuestion = answer
+
+      const { infosAnswer } = currentQuiz.formattedQuiz[0]
 
       const answeredRight =
-        answer === cQ.dataQuiz[0].arrAnswers[infosAnswer.answerIndex]
+        answer ===
+        currentQuiz.formattedQuiz[0].arrAnswers[infosAnswer.answerIndex]
 
       const date = new Date().toString()
 
       if (answeredRight) {
-        cQ.answeredCorrectly = true
-        cQ.dataQuiz[0].infosAnswer.answeredRight.push(date)
+        currentQuiz.answeredCorrectly = true
+        currentQuiz.formattedQuiz[0].infosAnswer.answeredRight.push(date)
         infosAnswer.answeredRight.push(date)
-        cQ.rightAnswers = [...cQ.rightAnswers, { answer, infosAnswer }]
-        if (cQ.totalQuestions === cQ.rightAnswers.length) {
-          cQ.finished = true
+        currentQuiz.rightAnswers = [
+          ...currentQuiz.rightAnswers,
+          { answer, infosAnswer },
+        ]
+        if (currentQuiz.totalQuestions === currentQuiz.rightAnswers.length) {
+          currentQuiz.finished = true
         }
-        if (cQ.wrongAnswers.length < cQ.rightAnswers.length) {
-          cQ.wrongAnswers = [...cQ.wrongAnswers, emptyAnswer]
+        if (currentQuiz.wrongAnswers.length < currentQuiz.rightAnswers.length) {
+          currentQuiz.wrongAnswers = [...currentQuiz.wrongAnswers, emptyAnswer]
         }
       }
       if (!answeredRight) {
-        const wrongAnswer = cQ.wrongAnswers.filter(e => e.answer === answer)[0]
+        const wrongAnswer = currentQuiz.wrongAnswers.filter(
+          e => e.answer === answer
+        )[0]
         if (!wrongAnswer) {
-          cQ.dataQuiz[0].infosAnswer.answeredWrong.push(date)
+          currentQuiz.formattedQuiz[0].infosAnswer.answeredWrong.push(date)
           infosAnswer.answeredWrong.push(date)
-          cQ.wrongAnswers = [...cQ.wrongAnswers, { answer, infosAnswer }]
+          currentQuiz.wrongAnswers = [
+            ...currentQuiz.wrongAnswers,
+            { answer, infosAnswer },
+          ]
         }
         if (wrongAnswer) {
           wrongAnswer.infosAnswer.answeredWrong.push(date)
         }
       }
 
-      cQ.wrongAnswers = sortWrongAnswers(cQ.wrongAnswers)
+      currentQuiz.wrongAnswers = sortWrongAnswers(currentQuiz.wrongAnswers)
     },
     nextQuestionQuiz: (
       state,
       { payload }: { payload: { quizId: QuizIdOptions } }
     ) => {
-      const cQ = state[`quiz${payload.quizId}`]
+      const currentQuiz = state.data.filter(
+        data => data.quizId === payload.quizId
+      )[0]
 
-      const currentQuestion = cQ.dataQuiz[0]
-      cQ.dataQuiz.shift()
-      if (!cQ.answeredCorrectly) {
-        cQ.dataQuiz = [...cQ.dataQuiz, currentQuestion]
+      if (!currentQuiz) {
+        return
       }
-      cQ.answeredQuestion = false
-      cQ.answeredCorrectly = false
+
+      const currentQuestion = currentQuiz.formattedQuiz[0]
+      currentQuiz.formattedQuiz.shift()
+      if (!currentQuiz.answeredCorrectly) {
+        currentQuiz.formattedQuiz = [
+          ...currentQuiz.formattedQuiz,
+          currentQuestion,
+        ]
+      }
+      currentQuiz.answeredQuestion = false
+      currentQuiz.answeredCorrectly = false
     },
     cheatingButtonFinishQuiz: (
       state,
@@ -106,41 +133,51 @@ export const quizSlice = createSlice({
         payload,
       }: {
         payload: {
-          quizId?: QuizIdOptions
+          quizId: QuizIdOptions
           kanjis: number[]
         }
       }
     ) => {
-      const quizId = payload.quizId || state.currentQuizId
-      const cQ = state[`quiz${quizId}`]
+      const currentQuiz = state.data.filter(
+        data => data.quizId === payload.quizId
+      )[0]
 
-      if (!cQ.finished) {
-        cQ.dataQuiz.forEach(e => {
+      if (currentQuiz === undefined) {
+        return
+      }
+
+      console.log("passed if currentQuiz === undefined")
+
+      if (currentQuiz.finished === false) {
+        console.log("passed if currentQuiz.finished === false")
+        currentQuiz.formattedQuiz.forEach(e => {
           const { answerIndex } = e.infosAnswer
-          cQ.rightAnswers.push({
+          currentQuiz.rightAnswers.push({
             answer: e.arrAnswers[answerIndex],
             infosAnswer: { ...e.infosAnswer, answerIndex },
           })
         })
-        cQ.wrongAnswers = sortWrongAnswers(cQ.wrongAnswers)
 
-        cQ.dataQuiz = quizFormatter(kanjisInitial)
-        cQ.finished = true
+        while (
+          currentQuiz.wrongAnswers.length < currentQuiz.rightAnswers.length
+        ) {
+          currentQuiz.wrongAnswers.push(emptyAnswer)
+        }
+
+        currentQuiz.wrongAnswers = sortWrongAnswers(currentQuiz.wrongAnswers)
+        currentQuiz.formattedQuiz = quizFormatter(kanjisInitial)
+        currentQuiz.finished = true
       } else {
-        initialize(state, {
-          quizId,
-          ...payload,
-        })
+        const quizInitialData = initialize(payload)
+        state.data = state.data.filter(e => e.quizId !== payload.quizId)
+        state.data.push(quizInitialData)
       }
     },
     updateWrongAnswers: (state, { payload }) => {
-      for (let i: QuizIdOptions = 1; i < 4; i++) {
-        const cQ = state[`quiz${i}`]
-        cQ.wrongAnswers = sortWrongAnswers([
-          ...payload[`quiz${i}`],
-          ...cQ.wrongAnswers,
-        ])
-      }
+      // TO DO! (for when the responseWorstScore request is executed)
+      state.data.forEach(quiz => {
+        quiz.wrongAnswers = sortWrongAnswers([...quiz.wrongAnswers])
+      })
     },
   },
 })

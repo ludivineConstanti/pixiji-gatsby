@@ -22,20 +22,22 @@ const TextWithTitle = ({
   return (
     <TextWrapper>
       <Title text={title} />
-      {text.map((e, i) => (
-        <Text key={`textWithTitlePElement${i}`}>
-          {e.text ? (
-            <>
-              {e.text}{" "}
-              <SLink href={e.path} target="_blank" rel="noreferrer">
-                {e.link}
-              </SLink>
-            </>
-          ) : (
-            e
-          )}
-        </Text>
-      ))}
+      <>
+        {text.map((element, i) => (
+          <Text key={`textWithTitlePElement${i}`}>
+            {typeof element === "object" ? (
+              <>
+                {element.text}{" "}
+                <SLink href={element.path} target="_blank" rel="noreferrer">
+                  {element.link}
+                </SLink>
+              </>
+            ) : (
+              element
+            )}
+          </Text>
+        ))}
+      </>
       {button && <ButtonInText text={button.text} path={button.path} />}
       {children}
     </TextWrapper>

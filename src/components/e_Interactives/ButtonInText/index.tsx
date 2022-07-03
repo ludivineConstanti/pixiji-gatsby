@@ -57,7 +57,7 @@ const ButtonInText = ({
       <SText variants={vText} s={{ size }}>
         {text}
       </SText>
-      <MArrow variants={vArrow} isWhite size={size} />
+      <MArrow variants={vArrow} isWhite={true} size={size} />
     </ButtonWrapper>
   )
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { AnimatePresence } from "framer-motion"
 
 import { useAppSelector } from "src/store"
 import SPopUpButton, { SText, SOnOff, SDropdown } from "./style"
@@ -12,7 +11,7 @@ interface PopUpButtonProps {
   onClick?: (e: React.MouseEvent) => void
 }
 
-const PopUp = ({
+const PopUpButton = ({
   text = false,
   hasSwitch = false,
   dropdownState = false,
@@ -37,32 +36,30 @@ const PopUp = ({
   }, [colorMain])
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      <SPopUpButton
-        type="button"
-        onClick={e => {
-          if (onClick) {
-            onClick(e)
-          }
-        }}
-        variants={vMenuSetting}
-        initial="initial"
-        animate="animate"
-        exit="initial"
-        whileHover="whileHover"
-        s={{ dropdownState }}
-      >
-        {text && <SText>{text}</SText>}
-        {hasSwitch && (
-          <>
-            <SOnOff s={{ active: !cheating, colorMain }}>off</SOnOff>
-            <SOnOff s={{ active: cheating, colorMain }}>on</SOnOff>
-          </>
-        )}
-        {dropdownState && <SDropdown s={{ dropdownState }} />}
-      </SPopUpButton>
-    </AnimatePresence>
+    <SPopUpButton
+      type="button"
+      onClick={e => {
+        if (onClick) {
+          onClick(e)
+        }
+      }}
+      variants={vMenuSetting}
+      initial="initial"
+      animate="animate"
+      exit="initial"
+      whileHover="whileHover"
+      s={{ dropdownState }}
+    >
+      {text && <SText>{text}</SText>}
+      {hasSwitch && (
+        <>
+          <SOnOff s={{ active: !cheating, colorMain }}>off</SOnOff>
+          <SOnOff s={{ active: cheating, colorMain }}>on</SOnOff>
+        </>
+      )}
+      {dropdownState && <SDropdown s={{ dropdownState }} />}
+    </SPopUpButton>
   )
 }
 
-export default PopUp
+export default PopUpButton

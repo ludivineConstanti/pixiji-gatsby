@@ -2,11 +2,7 @@ import styled from "styled-components"
 import { motion } from "framer-motion"
 
 import { zIMainSquare } from "src/styles/g"
-import {
-  tMSquareInfos,
-  tMSquareKanji,
-  tMSquareInfosBottom,
-} from "src/styles/typo"
+import { tMSquareInfos, tMSquareKanji } from "src/styles/typo"
 
 interface Attrs {
   s: {

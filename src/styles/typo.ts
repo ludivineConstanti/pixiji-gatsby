@@ -84,10 +84,6 @@ export const tMSquareInfos = `
 `
 
 export const tMSIBFontSize = "9"
-export const tMSquareInfosBottom = `
-  ${boldUppercase}
-  letter-spacing: 4px;
-`
 
 // BUTTON BIG
 export const tButtonBigComment = `
