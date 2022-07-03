@@ -81,13 +81,15 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
     )
 
     let textAnsweredCorrectly = ""
-    if (numFirstTry.length === currentQuizData[0].totalQuestions) {
-      textAnsweredCorrectly =
-        "Amazing! You answered all the questions, on your first try, correctly!"
-    } else if (numFirstTry.length === 0) {
-      textAnsweredCorrectly = `You answered ${numFirstTry.length} question${
-        numFirstTry.length > 1 ? "s" : ""
-      } correctly on your first try!`
+    if (currentQuizData.length > 0) {
+      if (numFirstTry.length === currentQuizData[0].totalQuestions) {
+        textAnsweredCorrectly =
+          "Amazing! You answered all the questions, on your first try, correctly!"
+      } else if (numFirstTry.length === 0) {
+        textAnsweredCorrectly = `You answered ${numFirstTry.length} question${
+          numFirstTry.length > 1 ? "s" : ""
+        } correctly on your first try!`
+      }
     }
 
     const textWrongAnswers =

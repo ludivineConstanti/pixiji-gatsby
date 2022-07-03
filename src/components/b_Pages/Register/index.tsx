@@ -35,6 +35,9 @@ const Register = () => {
       allKanjisJson {
         ...kanjisJsonFragment
       }
+      allQuiz {
+        ...quizFragment
+      }
     }
   `)
 
