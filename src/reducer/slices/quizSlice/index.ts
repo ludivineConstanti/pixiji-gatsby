@@ -133,19 +133,23 @@ export const quizSlice = createSlice({
         payload,
       }: {
         payload: {
-          quizId?: QuizIdOptions
+          quizId: QuizIdOptions
           kanjis: number[]
         }
       }
     ) => {
-      const quizId = payload.quizId || state.currentQuizId
-      const currentQuiz = state.data.filter(data => data.quizId === quizId)[0]
+      const currentQuiz = state.data.filter(
+        data => data.quizId === payload.quizId
+      )[0]
 
-      if (!currentQuiz) {
+      if (currentQuiz === undefined) {
         return
       }
 
-      if (!currentQuiz.finished) {
+      console.log("passed if currentQuiz === undefined")
+
+      if (currentQuiz.finished === false) {
+        console.log("passed if currentQuiz.finished === false")
         currentQuiz.formattedQuiz.forEach(e => {
           const { answerIndex } = e.infosAnswer
           currentQuiz.rightAnswers.push({
@@ -153,15 +157,20 @@ export const quizSlice = createSlice({
             infosAnswer: { ...e.infosAnswer, answerIndex },
           })
         })
-        currentQuiz.wrongAnswers = sortWrongAnswers(currentQuiz.wrongAnswers)
 
+        while (
+          currentQuiz.wrongAnswers.length < currentQuiz.rightAnswers.length
+        ) {
+          currentQuiz.wrongAnswers.push(emptyAnswer)
+        }
+
+        currentQuiz.wrongAnswers = sortWrongAnswers(currentQuiz.wrongAnswers)
         currentQuiz.formattedQuiz = quizFormatter(kanjisInitial)
         currentQuiz.finished = true
       } else {
-        initialize({
-          quizId,
-          ...payload,
-        })
+        const quizInitialData = initialize(payload)
+        state.data = state.data.filter(e => e.quizId !== payload.quizId)
+        state.data.push(quizInitialData)
       }
     },
     updateWrongAnswers: (state, { payload }) => {

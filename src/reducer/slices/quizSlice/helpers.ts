@@ -8,7 +8,7 @@ const emptyAnswerAnsweredWrong: string[] = []
 const dateInStringFormat = new Date().toString()
 
 export const emptyAnswer = {
-  answer: 1,
+  answer: 0,
   infosAnswer: {
     answerIndex: 1,
     answeredRight: [dateInStringFormat],

@@ -61,7 +61,10 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
   )
 
   const kanjisArr = currentQuizData.length
-    ? currentQuizData[0].wrongAnswers
+    ? currentQuizData[0].wrongAnswers.slice(
+        0,
+        currentQuizData[0].rightAnswers.length
+      )
     : []
 
   const previousQuiz = allQuiz.nodes.filter(
@@ -77,28 +80,29 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
       answer => answer.infosAnswer.answeredWrong.length === 0
     )
 
-    const textFirstTry =
-      numFirstTry.length > 0
-        ? `You answered ${numFirstTry.length} question${
-            numFirstTry.length > 1 ? "s" : ""
-          } correctly on your first try!`
-        : ""
-    const numWrongAnswers = kanjisArr.filter(
-      answer => answer.infosAnswer.answeredWrong.length > 0
-    )
+    let textAnsweredCorrectly = ""
+    if (numFirstTry.length === currentQuizData[0].totalQuestions) {
+      textAnsweredCorrectly =
+        "Amazing! You answered all the questions, on your first try, correctly!"
+    } else if (numFirstTry.length === 0) {
+      textAnsweredCorrectly = `You answered ${numFirstTry.length} question${
+        numFirstTry.length > 1 ? "s" : ""
+      } correctly on your first try!`
+    }
+
     const textWrongAnswers =
-      numWrongAnswers.length > 0
-        ? `Hover the squares on the right to look at the ${
-            numWrongAnswers.length
-          } answer${numWrongAnswers.length > 1 ? "s" : ""} you got wrong.`
+      kanjisArr.length > 0
+        ? `Hover the squares on the right to look at the answer${
+            kanjisArr.length > 1 ? "s" : ""
+          } you got wrong.`
         : ""
     const textIntro =
-      numFirstTry.length > 0 || numWrongAnswers.length > 0
+      numFirstTry.length > 0 || kanjisArr.length > 0
         ? ""
         : `This quiz contains the ${totalOptions} kanjis that are taught in the ${currentQuiz.title}, in Japan.`
 
     return {
-      firstTry: textFirstTry,
+      firstTry: textAnsweredCorrectly,
       wrongAnswers: textWrongAnswers,
       intro: textIntro,
     }

@@ -51,7 +51,7 @@ const Header = () => {
 
   return (
     <SHeader>
-      {currentQuizData.length && (
+      {currentQuizData.length > 0 && (
         <>
           <h2>
             Quiz {quizId} - {currentQuizFromQuery.title} ({totalNumberOfKanjis}{" "}

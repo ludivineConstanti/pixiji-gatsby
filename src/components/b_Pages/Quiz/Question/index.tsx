@@ -24,7 +24,7 @@ const Question = ({ quizId }: QuestionProps) => {
   const quizzesData = useAppSelector(state => state.quiz.data)
   const currentQuizData = quizzesData.filter(data => data.quizId === quizId)
 
-  if (!currentQuizData.length) return null
+  if (currentQuizData.length === 0) return null
 
   const { infosAnswer, arrAnswers } = currentQuizData[0].formattedQuiz[0]
 

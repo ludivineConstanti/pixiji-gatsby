@@ -116,7 +116,9 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
         <PopUpButton
           text={finishedQuiz ? "Restart quiz" : "Finish quiz"}
           onClick={() => {
-            dispatch(cheatingButtonFinishQuiz({ kanjis }))
+            dispatch(
+              cheatingButtonFinishQuiz({ quizId: currentQuizId, kanjis })
+            )
           }}
         />
       )}

@@ -46,7 +46,7 @@ const StateFinished = ({ kanjis }: StateFinishedProps) => {
         title="Well done!"
         text={[
           "You answed all the questions!",
-          "Try putting your mouse over the squares, on the right, to look at the answers again.",
+          "You can click the squares, on the right, to look at the answers again.",
         ]}
       />
       <ButtonBig
@@ -54,12 +54,13 @@ const StateFinished = ({ kanjis }: StateFinishedProps) => {
         onClick={() => {
           dispatch(
             cheatingButtonFinishQuiz({
+              quizId: currentQuizId,
               kanjis,
             })
           )
         }}
       />
-      {nextQuiz.length ? (
+      {nextQuiz.length > 0 ? (
         <ButtonBig
           text={`Quiz ${nextQuiz[0].quizId}`}
           side="right"

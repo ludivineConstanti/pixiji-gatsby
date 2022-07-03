@@ -59,7 +59,7 @@ const Quiz = ({ currentQuiz }: QuizProps) => {
   }, [allKanjisJson, currentQuiz.id])
 
   useEffect(() => {
-    if (kanjis.length) {
+    if (kanjis.length && currentQuizData.length === 0) {
       dispatch(updateIdQuiz({ quizId: currentQuiz.id }))
       dispatch(
         initializeQuiz({
@@ -88,7 +88,7 @@ const Quiz = ({ currentQuiz }: QuizProps) => {
         <Header />
         {!isLoggedIn && <Warning />}
         <AnimatePresence exitBeforeEnter={true}>
-          {currentQuizData.length && currentQuizData[0].finished ? (
+          {currentQuizData.length > 0 && currentQuizData[0].finished ? (
             <StateFinished kanjis={kanjis} />
           ) : (
             <StatePlaying />

@@ -17,7 +17,7 @@ const StatePlaying = () => {
   return (
     <>
       <Question quizId={currentQuizId} />
-      {currentQuizData.length && currentQuizData[0].answeredQuestion && (
+      {currentQuizData.length > 0 && currentQuizData[0].answeredQuestion && (
         <ButtonBig
           comment={currentQuizData[0].answeredCorrectly ? "correct!" : "wrong!"}
           text="next"
