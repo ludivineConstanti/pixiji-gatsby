@@ -27,22 +27,20 @@ const Statistics = () => {
       <SWrapper backgroundColor={colorMainL1}>
         {isLoggedIn ? (
           <>
-            {otherOptionsAreVisible && (
-              <SOtherOptions>
-                {timeOptions
-                  .filter(e => e !== currentTimeOption)
-                  .map((e, i) => (
-                    <PopUpButton
-                      text={e}
-                      key={`StatisticTimeOption${e}${i}`}
-                      onClick={() => {
-                        setCurrentTimeOption(e)
-                        setOtherOptionsAreVisible(false)
-                      }}
-                    />
-                  ))}
-              </SOtherOptions>
-            )}
+            <SOtherOptions>
+              {timeOptions
+                .filter(e => e !== currentTimeOption)
+                .map(e => (
+                  <PopUpButton
+                    text={e}
+                    key={`StatisticTimeOption${e}`}
+                    onClick={() => {
+                      setCurrentTimeOption(e)
+                      setOtherOptionsAreVisible(false)
+                    }}
+                  />
+                ))}
+            </SOtherOptions>
             <PopUpButton
               text={currentTimeOption}
               dropdownState={otherOptionsAreVisible ? "up" : "down"}

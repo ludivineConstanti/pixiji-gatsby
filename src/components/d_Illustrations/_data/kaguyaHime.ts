@@ -1,9 +1,8 @@
 import { DataIllu } from "src/models/models"
-import { mapIllu } from "src/components/d_Illustrations/_helpers/mapIllu"
 
 export const colorMoon = "#EFC491"
 
-let moon = [
+const moon = [
   [
     {
       s: 4,
@@ -14,8 +13,6 @@ let moon = [
     },
   ],
 ]
-
-moon = mapIllu(moon, { name: "shine", values: [4, 10] })
 
 const brown = "#3E322E"
 const brownD1 = "#2D2826"

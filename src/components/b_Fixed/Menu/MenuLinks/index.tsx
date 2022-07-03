@@ -39,13 +39,16 @@ const MenuLinks = () => {
         <MenuLink text="Quizzes" path={`/quizzes/${quizzesSlug}`} />
         <MenuLink text="About" path="/about" />
         {isLoggedIn ? (
-          <MenuLink
-            text="Logout"
-            onClick={() => {
-              dispatch(updateEmail(""))
-              dispatch(resetStateQuiz())
-            }}
-          />
+          <>
+            <MenuLink text="My profile" path="/my-profile" />
+            <MenuLink
+              text="Logout"
+              onClick={() => {
+                dispatch(updateEmail(""))
+                dispatch(resetStateQuiz())
+              }}
+            />
+          </>
         ) : (
           <>
             <MenuLink text="Register" path="/register" />

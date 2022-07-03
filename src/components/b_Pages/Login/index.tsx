@@ -22,8 +22,6 @@ import {
   KanjisJsonFragmentProps,
   AllQuizFragmentProps,
 } from "src/models/models"
-import { getWorstScores } from "src/helpers/backEnd/scores"
-import { dummyEmail } from "src/constants"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentProps
