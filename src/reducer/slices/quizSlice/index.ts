@@ -9,6 +9,7 @@ import {
 } from "./helpers"
 import { QuizIdOptions } from "src/models/models"
 import { InitialStateProps } from "./models"
+import { returnformattedDate } from "src/helpers/index"
 
 const initialState: InitialStateProps = {
   data: [],
@@ -68,7 +69,7 @@ export const quizSlice = createSlice({
         answer ===
         currentQuiz.formattedQuiz[0].arrAnswers[infosAnswer.answerIndex]
 
-      const date = new Date().toString()
+      const date = returnformattedDate()
 
       if (answeredRight) {
         currentQuiz.answeredCorrectly = true

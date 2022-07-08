@@ -23,7 +23,7 @@ const Arrow = React.forwardRef(
           s={{ pointsToward, colorMain: isWhite ? "white" : colorMain }}
         />
         <SEnd
-          s={{ colorMain: isWhite ? "white" : colorMain, pointsToward, size }}
+          s={{ pointsToward, size, colorMain: isWhite ? "white" : colorMain }}
         />
       </SArrow>
     )

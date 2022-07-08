@@ -44,6 +44,7 @@ export const globalSlice = createSlice({
       { payload }: { payload: boolean | number }
     ) => {
       state.idSelectedKanji = payload
+      state.menuIsOpen = false
     },
   },
 })

@@ -79,7 +79,14 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
               console.log(error)
             }
 
-            const successLogIn = responseLogIn.data.data.getUser.success
+            let successLogIn
+
+            if (typeof responseLogIn === "object") {
+              successLogIn = responseLogIn.data.data.getUser.success
+            } else {
+              // tslint:disable-next-line:no-console
+              console.log("No answer came from the server")
+            }
 
             if (successLogIn) {
               dispatch(updateEmail(dummyEmail))

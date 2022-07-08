@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Helmet } from "react-helmet"
 
 import { GlobalStyle } from "src/styles/globalStyle"
 import Menu from "src/components/b_Fixed/Menu"
 import KanjiDetails from "src/components/b_Fixed/KanjiDetails"
+import { useAppDispatch } from "src/store"
+import { updateIdSelectedKanji } from "src/reducer/slices/globalSlice"
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[]
@@ -11,6 +13,14 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, isPlaying = false }: LayoutProps) => {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    return () => {
+      dispatch(updateIdSelectedKanji(false))
+    }
+  }, [])
+
   return (
     <>
       <Helmet>

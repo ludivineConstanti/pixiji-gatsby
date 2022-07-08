@@ -9,10 +9,6 @@ export const SWrapper = styled.div<{ backgroundColor: string }>`
   position: relative;
 `
 
-export const SWrapperText = styled.div`
-  padding: ${sidePadding}px;
-`
-
 export const SOtherOptions = styled.div`
   display: flex;
   width: 100%;
@@ -21,4 +17,8 @@ export const SOtherOptions = styled.div`
   top: 0;
   left: 0;
   transform: translate(0, -100%);
+`
+
+export const SWrapperText = styled.div`
+  padding: ${sidePadding}px;
 `

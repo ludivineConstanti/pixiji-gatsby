@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 
 import { useAppSelector } from "src/store"
 import { buttonArrowHT, buttonArrowHX } from "src/styles/animation"
-import Arrow from "src/components/e_interactives/arrow"
+import Arrow from "src/components/e_interactives/Arrow"
 import { SWrapper, SWrapperArrow } from "./style"
 
 const MArrow = motion(Arrow)

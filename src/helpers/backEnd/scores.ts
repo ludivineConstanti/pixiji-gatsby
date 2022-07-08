@@ -28,6 +28,34 @@ export const getWorstScores = ({ email }: GetWorstScoresProps) =>
     },
   })
 
+interface GetScoreProps {
+  email: string
+  kanjiId: string
+}
+
+export const getScore = ({ email, kanjiId }: GetScoreProps) =>
+  axios({
+    url: process.env.GATSBY_API,
+    method: "post",
+    data: {
+      query: `
+      query getScore($email: String, $kanjiId: String!) {
+        getScore(input: {email: $email, kanjiId: $kanjiId}) {
+          answer
+          infosAnswer {
+            answeredRight
+            answeredWrong
+          }
+        }
+      }
+        `,
+      variables: {
+        email,
+        kanjiId,
+      },
+    },
+  })
+
 interface SetScoresProps {
   email: string
   kanjiId: string

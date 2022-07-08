@@ -10,14 +10,14 @@ const arrowHeight = (size: SizeOptions) => {
   return `${Math.hypot(sizeValue, sizeValue)}px`
 }
 
-const alignItems = {
+const howToAlignItems = {
   top: "flex-start",
   left: "center",
   bottom: "flex-end",
   right: "center",
 }
 
-const justifyContent = {
+const howToJustifyContent = {
   top: "center",
   left: "flex-start",
   bottom: "center",
@@ -38,8 +38,8 @@ export const SArrow = styled.div<{
       ? arrowWidth(p.s.size)
       : arrowHeight(p.s.size)};
   display: flex;
-  align-items: ${p => alignItems[p.s.pointsToward]};
-  justify-content: ${p => justifyContent[p.s.pointsToward]};
+  align-items: ${p => howToAlignItems[p.s.pointsToward]};
+  justify-content: ${p => howToJustifyContent[p.s.pointsToward]};
   border-style: inherit;
 `
 

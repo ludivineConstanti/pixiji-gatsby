@@ -1,17 +1,17 @@
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
 import { QuizIdOptions } from "src/models/models"
 import { RightOrWrongAnswerProps } from "./models"
+import { returnformattedDate } from "src/helpers/index"
 
 export const kanjisInitial = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 const emptyAnswerAnsweredWrong: string[] = []
-const dateInStringFormat = new Date().toString()
 
 export const emptyAnswer = {
   answer: 0,
   infosAnswer: {
     answerIndex: 1,
-    answeredRight: [dateInStringFormat],
+    answeredRight: [returnformattedDate()],
     answeredWrong: emptyAnswerAnsweredWrong,
   },
 }
