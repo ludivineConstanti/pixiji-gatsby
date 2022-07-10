@@ -5,12 +5,11 @@ import { useAppDispatch, useAppSelector } from "src/store"
 import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
 import ButtonBig from "src/components/e_Interactives/ButtonBig"
 import TextWithTitle from "src/components/c_Partials/TextWithTitle"
-import { QuizIdOptions } from "src/models/models"
 
 interface QueryProps {
   allQuiz: {
     nodes: {
-      quizId: QuizIdOptions
+      quizId: number
       slug: string
     }[]
   }

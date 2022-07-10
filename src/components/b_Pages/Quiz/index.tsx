@@ -10,20 +10,15 @@ import Header from "./Header"
 import StatePlaying from "./StatePlaying"
 import StateFinished from "./StateFinished"
 import Warning from "./Warning"
-import { QuizIdOptions } from "src/models/models"
+import { KanjisJsonFragmentToInitializeQuiz } from "src/models/models"
 
 interface QueryProps {
-  allKanjisJson: {
-    nodes: {
-      kanjiId: number
-      quizId: number
-    }[]
-  }
+  allKanjisJson: KanjisJsonFragmentToInitializeQuiz
 }
 
 interface QuizProps {
   currentQuiz: {
-    id: QuizIdOptions
+    id: number
     title: string
     slug: string
   }
@@ -33,10 +28,7 @@ const Quiz = ({ currentQuiz }: QuizProps) => {
   const { allKanjisJson } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
-        nodes {
-          quizId
-          kanjiId
-        }
+        ...kanjisJsonFragmentToInitializeQuiz
       }
     }
   `)

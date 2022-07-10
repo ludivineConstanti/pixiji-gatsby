@@ -8,12 +8,11 @@ import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { getUser, createUser } from "src/helpers/backEnd/users"
 import { dummyEmail, dummyPassword } from "src/constants"
-import { QuizIdOptions } from "src/models/models"
 
 interface KanjisJsonProps {
   allKanjisJson: {
     nodes: {
-      quizId: QuizIdOptions
+      quizId: number
       kanjiId: number
     }[]
   }
@@ -81,11 +80,13 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
 
             let successLogIn
 
-            if (typeof responseLogIn === "object") {
+            if (
+              typeof responseLogIn === "object" &&
+              responseLogIn.data &&
+              responseLogIn.data.data &&
+              responseLogIn.data.data.getUser
+            ) {
               successLogIn = responseLogIn.data.data.getUser.success
-            } else {
-              // tslint:disable-next-line:no-console
-              console.log("No answer came from the server")
             }
 
             if (successLogIn) {
@@ -102,8 +103,16 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
                 console.log(error)
               }
 
-              const successCreateUser =
-                responseCreateUser.data.data.getUser.success
+              let successCreateUser
+
+              if (
+                typeof responseCreateUser === "object" &&
+                responseCreateUser.data &&
+                responseCreateUser.data.data &&
+                responseCreateUser.data.data.getUser
+              ) {
+                successCreateUser = responseCreateUser.data.data.getUser.success
+              }
 
               if (successCreateUser) {
                 dispatch(updateEmail(dummyEmail))

@@ -20,7 +20,7 @@ const MyProfile = () => {
   const { allKanjisJson } = useStaticQuery(graphql`
     query {
       allKanjisJson {
-        ...kanjisJsonFragment
+        ...kanjisJsonFragmentForIllustrations
       }
     }
   `)

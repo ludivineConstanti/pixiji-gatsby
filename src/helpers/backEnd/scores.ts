@@ -13,7 +13,8 @@ export const getWorstScores = ({ email }: GetWorstScoresProps) =>
       query getWorstScores($email: String) {
         getWorstScores(input: {email: $email}) {
           scores {
-           answer
+            answer
+            quizId
             infosAnswer {
               answeredRight
               answeredWrong
@@ -59,17 +60,23 @@ export const getScore = ({ email, kanjiId }: GetScoreProps) =>
 interface SetScoresProps {
   email: string
   kanjiId: string
+  quizId: string
   isCorrect: boolean
 }
 
-export const setScore = ({ email, kanjiId, isCorrect }: SetScoresProps) =>
+export const setScore = ({
+  email,
+  kanjiId,
+  quizId,
+  isCorrect,
+}: SetScoresProps) =>
   axios({
     url: process.env.GATSBY_API,
     method: "post",
     data: {
       query: `
-      mutation setScore($email: String!, $kanjiId: String!, $isCorrect: Boolean!) {
-        setScore(input: {email: $email, kanjiId: $kanjiId, isCorrect: $isCorrect}) {
+      mutation setScore($email: String!, $kanjiId: String!, $quizId: String!, $isCorrect: Boolean!) {
+        setScore(input: {email: $email, kanjiId: $kanjiId, quizId: $quizId, isCorrect: $isCorrect}) {
           success
           message
         }
@@ -79,6 +86,7 @@ export const setScore = ({ email, kanjiId, isCorrect }: SetScoresProps) =>
         email,
         kanjiId,
         isCorrect,
+        quizId,
       },
     },
   })

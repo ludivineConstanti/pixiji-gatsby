@@ -7,7 +7,6 @@ import ButtonBig from "src/components/e_Interactives/ButtonBig"
 import TextWithTitle from "src/components/c_Partials/TextWithTitle"
 import IlluQuiz from "src/components/d_Illustrations/IlluQuiz"
 import QuizzesNav from "./QuizzesNav"
-import { QuizIdOptions } from "src/models/models"
 
 interface QueryProps {
   allKanjisJson: {
@@ -17,7 +16,7 @@ interface QueryProps {
   }
   allQuiz: {
     nodes: {
-      quizId: QuizIdOptions
+      quizId: number
       slug: string
     }[]
   }
@@ -25,7 +24,7 @@ interface QueryProps {
 
 interface QuizzesProps {
   currentQuiz: {
-    id: QuizIdOptions
+    id: number
     title: string
     slug: string
   }

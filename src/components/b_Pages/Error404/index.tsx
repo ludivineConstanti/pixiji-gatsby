@@ -15,23 +15,23 @@ import {
 } from "src/components/d_Illustrations/_data/cloudDragon"
 import SLinkIconContainer from "./SError404"
 import {
-  KanjisJsonFragmentProps,
-  AllQuizFragmentProps,
+  KanjisJsonFragmentForIllustrationsProps,
+  AllQuizFragmentForQuizLinkProps,
 } from "src/models/models"
 
 interface QueryProps {
-  allKanjisJson: KanjisJsonFragmentProps
-  allQuiz: AllQuizFragmentProps
+  allKanjisJson: KanjisJsonFragmentForIllustrationsProps
+  allQuiz: AllQuizFragmentForQuizLinkProps
 }
 
 const Error404 = () => {
   const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
-        ...kanjisJsonFragment
+        ...kanjisJsonFragmentForIllustrations
       }
       allQuiz {
-        ...quizFragment
+        ...quizFragmentForQuizLink
       }
     }
   `)

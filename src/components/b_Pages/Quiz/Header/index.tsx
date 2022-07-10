@@ -5,19 +5,18 @@ import { useStaticQuery, graphql } from "gatsby"
 import { useAppSelector } from "src/store"
 import SHeader from "./style"
 import ProgressBar from "../ProgressBar"
-import { QuizIdOptions } from "src/models/models"
 
 interface QueryProps {
   allQuiz: {
     nodes: {
       title: string
-      quizId: QuizIdOptions
+      quizId: number
       slug: string
     }[]
   }
   allKanjisJson: {
     nodes: {
-      quizId: QuizIdOptions
+      quizId: number
     }[]
   }
 }

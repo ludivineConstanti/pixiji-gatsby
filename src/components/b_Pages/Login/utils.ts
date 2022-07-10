@@ -1,8 +1,6 @@
 import { updateEmail } from "src/reducer/slices/globalSlice"
-import { updateWrongAnswers } from "src/reducer/slices/quizSlice"
 import { AppDispatch } from "src/store"
 import { getUser } from "src/helpers/backEnd/users"
-import { getWorstScores } from "src/helpers/backEnd/scores"
 
 export const onSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
@@ -38,14 +36,4 @@ export const onSubmit = async (
   }
 
   setFeedback(result)
-
-  if (!result.success) {
-    return
-  }
-  const responseWorstScores = await getWorstScores({ email })
-
-  console.log(responseWorstScores)
-  console.log(responseWorstScores.data.data)
-  console.log(responseWorstScores.data.data.getWorstScores)
-  dispatch(updateWrongAnswers(responseWorstScores.data.data.getWorstScores))
 }

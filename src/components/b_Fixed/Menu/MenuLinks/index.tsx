@@ -6,10 +6,10 @@ import { useAppDispatch, useAppSelector } from "src/store"
 import { updateEmail } from "src/reducer/slices/globalSlice"
 import { resetStateQuiz } from "src/reducer/slices/quizSlice"
 import SMenuLinks, { SContainer } from "./style"
-import { AllQuizFragmentProps } from "src/models/models"
+import { AllQuizFragmentForQuizLinkProps } from "src/models/models"
 
 interface QueryProps {
-  allQuiz: AllQuizFragmentProps
+  allQuiz: AllQuizFragmentForQuizLinkProps
 }
 
 const MenuLinks = () => {

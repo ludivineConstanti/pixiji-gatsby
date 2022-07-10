@@ -122,7 +122,12 @@ const ButtonKanji = ({ quizId, kanjiId, disabled }: ButtonKanjiProps) => {
         dispatch(answeredQuestionQuiz({ quizId, answer: kanjiId }))
         setWasClicked(true)
         if (email) {
-          setScore({ email, kanjiId: `${kanjiId}`, isCorrect })
+          setScore({
+            email,
+            kanjiId: `${kanjiId}`,
+            quizId: `${quizId}`,
+            isCorrect,
+          })
         }
       }}
       disabled={!!disabled}

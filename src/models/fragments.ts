@@ -6,16 +6,25 @@
 
 import { graphql } from "gatsby"
 
-export const kanjisJsonFragment = graphql`
-  fragment kanjisJsonFragment on KanjisJsonConnection {
+export const kanjisJsonFragmentForIllustrations = graphql`
+  fragment kanjisJsonFragmentForIllustrations on KanjisJsonConnection {
     nodes {
       kanjiId
     }
   }
 `
 
-export const quizFragment = graphql`
-  fragment quizFragment on QuizConnection {
+export const kanjisJsonFragmentToInitializeQuiz = graphql`
+  fragment kanjisJsonFragmentToInitializeQuiz on KanjisJsonConnection {
+    nodes {
+      quizId
+      kanjiId
+    }
+  }
+`
+
+export const quizFragmentForQuizLink = graphql`
+  fragment quizFragmentForQuizLink on QuizConnection {
     nodes {
       quizId
       slug

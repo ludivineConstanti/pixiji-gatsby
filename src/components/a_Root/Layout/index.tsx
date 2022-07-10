@@ -1,11 +1,19 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { Helmet } from "react-helmet"
+import { useStaticQuery, graphql } from "gatsby"
 
 import { GlobalStyle } from "src/styles/globalStyle"
 import Menu from "src/components/b_Fixed/Menu"
 import KanjiDetails from "src/components/b_Fixed/KanjiDetails"
-import { useAppDispatch } from "src/store"
+import { useAppDispatch, useAppSelector } from "src/store"
 import { updateIdSelectedKanji } from "src/reducer/slices/globalSlice"
+import { updateWrongAnswers } from "src/reducer/slices/quizSlice"
+import { getWorstScores } from "src/helpers/backEnd/scores"
+import { KanjisJsonFragmentToInitializeQuiz } from "src/models/models"
+
+interface QueryProps {
+  allKanjisJson: KanjisJsonFragmentToInitializeQuiz
+}
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[]
@@ -13,13 +21,45 @@ interface LayoutProps {
 }
 
 const Layout = ({ children, isPlaying = false }: LayoutProps) => {
+  const { allKanjisJson } = useStaticQuery<QueryProps>(graphql`
+    query {
+      allKanjisJson {
+        ...kanjisJsonFragmentToInitializeQuiz
+      }
+    }
+  `)
+
+  const [hasMounted, setHasMounted] = useState(false)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    setHasMounted(true)
     return () => {
       dispatch(updateIdSelectedKanji(false))
     }
   }, [])
+
+  const email = useAppSelector(state => state.global.email)
+
+  useEffect(() => {
+    if (hasMounted && email) {
+      getWorstScores({ email }).then(response => {
+        if (
+          typeof response === "object" &&
+          response.data &&
+          response.data.data &&
+          response.data.data.getWorstScores
+        ) {
+          dispatch(
+            updateWrongAnswers({
+              answers: response.data.data.getWorstScores.scores,
+              kanjis: allKanjisJson.nodes,
+            })
+          )
+        }
+      })
+    }
+  }, [email])
 
   return (
     <>

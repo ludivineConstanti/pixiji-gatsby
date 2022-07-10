@@ -2,7 +2,6 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import SSQuizzesNav, { SNavSquare } from "./style"
-import { QuizIdOptions } from "src/models/models"
 
 const vNavSquare = {
   initial: { scale: 0 },
@@ -13,7 +12,7 @@ const vNavSquare = {
 interface QueryProps {
   allQuiz: {
     nodes: {
-      quizId: QuizIdOptions
+      quizId: number
       slug: string
     }[]
   }

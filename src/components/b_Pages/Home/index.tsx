@@ -16,7 +16,7 @@ const Home = () => {
   const { allKanjisJson } = useStaticQuery(graphql`
     query {
       allKanjisJson {
-        ...kanjisJsonFragment
+        ...kanjisJsonFragmentForIllustrations
       }
     }
   `)
