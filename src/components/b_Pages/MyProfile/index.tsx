@@ -15,6 +15,7 @@ import Illu from "src/components/d_Illustrations/Illu"
 import ButtonInText from "src/components/e_Interactives/ButtonInText"
 import { useAppSelector } from "src/store"
 import Text from "src/components/f_Statics/Text"
+import { paths } from "src/models/constants"
 
 const MyProfile = () => {
   const { allKanjisJson } = useStaticQuery(graphql`
@@ -40,10 +41,20 @@ const MyProfile = () => {
         arrDataIllu={{ arrIllu, colorIllu }}
       />
       <TextWrapper>
-        <Text>{`Current email: ${email}`}</Text>
-        <ButtonInText text="Update my email" buttonType="submit" />
-        <ButtonInText text="Update my password" buttonType="submit" />
-        <ButtonInText text="Delete my account" buttonType="submit" />
+        {email ? (
+          <>
+            <Text>{`Current email: ${email}`}</Text>
+            <ButtonInText text="Update my email" />
+            <ButtonInText text="Update my password" />
+            <ButtonInText text="Delete my account" />
+          </>
+        ) : (
+          <>
+            <Text>You need to be logged in to access this page.</Text>
+            <ButtonInText text="Log in" path={paths.login} />
+            <ButtonInText text="Register" path={paths.register} />
+          </>
+        )}
       </TextWrapper>
     </>
   )

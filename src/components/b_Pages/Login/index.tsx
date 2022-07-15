@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react"
+import React, { useMemo } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import {
@@ -6,53 +6,41 @@ import {
   getKanjisNum,
 } from "src/helpers/formatters/kanjisArrFormatter"
 import { useAppDispatch, useAppSelector } from "src/store"
-import ButtonBig from "src/components/e_Interactives/ButtonBig"
 import ButtonInText from "src/components/e_Interactives/ButtonInText"
 import Illu from "src/components/d_Illustrations/Illu"
+import Text from "src/components/f_Statics/Text"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
-import Input from "src/components/e_Interactives/Input"
-import FeedbackMessage from "src/components/f_Statics/FeedbackMessage"
 import RedPanda from "src/components/d_Illustrations/_compIllus/RedPanda"
 import {
   arrIllu,
   colorIllu,
 } from "src/components/d_Illustrations/_data/redPanda"
-import { onSubmit } from "./utils"
-import {
-  KanjisJsonFragmentForIllustrationsProps,
-  AllQuizFragmentForQuizLinkProps,
-} from "src/models/models"
+import { KanjisJsonFragmentForIllustrationsProps } from "src/models/models"
+import { updateEmail } from "src/reducer/slices/globalSlice"
+import DefaultState from "./DefaultState"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentForIllustrationsProps
-  allQuiz: AllQuizFragmentForQuizLinkProps
 }
 
 const Login = () => {
-  const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
+  const { allKanjisJson } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
         ...kanjisJsonFragmentForIllustrations
-      }
-      allQuiz {
-        ...quizFragmentForQuizLink
       }
     }
   `)
 
   const dispatch = useAppDispatch()
 
-  const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
-  const quizzesSlug = allQuiz.nodes.filter(
-    data => data.quizId === currentQuizId
-  )[0].slug
+  const email = useAppSelector(state => state.global.email)
 
   const kanjisArr = useMemo(() => {
     const kanjisNum = getKanjisNum(arrIllu)
     return kanjisArrFormatter(allKanjisJson.nodes, kanjisNum)
   }, [])
 
-  const [feedback, setFeedback] = useState({ success: false, message: "" })
   return (
     <>
       <Illu
@@ -60,26 +48,19 @@ const Login = () => {
         renderIllu={data => <RedPanda data={data} />}
         arrDataIllu={{ arrIllu, colorIllu }}
       />
-
-      <TextWrapper>
-        <form
-          onSubmit={event => onSubmit(event, feedback, setFeedback, dispatch)}
-        >
-          <Input type="email" placeholder="Your email address" label="Email" />
-          <Input
-            type="password"
-            placeholder="Your password"
-            label="Password"
-            isLast={true}
+      {email ? (
+        <TextWrapper>
+          <Text>You're already logged in!</Text>
+          <ButtonInText
+            text="Logout"
+            onClick={() => {
+              dispatch(updateEmail(""))
+            }}
           />
-          <ButtonInText text="Login" buttonType="submit" />
-        </form>
-        {feedback.message && <FeedbackMessage content={feedback.message} />}
-      </TextWrapper>
-      <ButtonBig
-        text={feedback.success ? "Quizzes" : "Register"}
-        path={feedback.success ? `/quizzes/${quizzesSlug}` : "/register"}
-      />
+        </TextWrapper>
+      ) : (
+        <DefaultState />
+      )}
     </>
   )
 }

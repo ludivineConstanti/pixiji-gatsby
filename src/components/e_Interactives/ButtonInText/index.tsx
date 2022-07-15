@@ -10,7 +10,7 @@ import {
 import { buttonArrowHT, buttonArrowHX } from "src/styles/animation"
 import { SText } from "./style"
 import ButtonWrapper from "./ButtonWrapper"
-import { buttonTypeProp, sizeProp } from "./_common"
+import { sizeProp } from "./_common"
 
 const MArrow = motion(Arrow)
 
@@ -24,15 +24,15 @@ const vArrow = {
 interface ButtonInTextProps {
   text: string
   path?: string
-  buttonType?: buttonTypeProp
   size?: sizeProp
+  onClick?: () => void
 }
 
 const ButtonInText = ({
   text,
   path = "",
-  buttonType = "",
   size = "",
+  onClick,
 }: ButtonInTextProps) => {
   const vText = {
     initial: { fontSize: 0, letterSpacing: 0 },
@@ -53,7 +53,7 @@ const ButtonInText = ({
     },
   }
   return (
-    <ButtonWrapper buttonType={buttonType} path={path} size={size}>
+    <ButtonWrapper path={path} size={size} onClick={onClick}>
       <SText variants={vText} s={{ size }}>
         {text}
       </SText>

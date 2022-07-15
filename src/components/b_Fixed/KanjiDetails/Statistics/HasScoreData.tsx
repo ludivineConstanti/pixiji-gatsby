@@ -45,7 +45,8 @@ const HasScoreData = ({ answeredRight, answeredWrong }: HasScoreDataProps) => {
         <SText>
           You do not have any score for this kanji yet.
           <br />
-          {`You can find it in the Quiz ${currentKanji.quizId}.`}
+          {typeof currentKanji === "object" &&
+            `You can find it in the Quiz ${currentKanji.quizId}.`}
         </SText>
       ) : (
         <>

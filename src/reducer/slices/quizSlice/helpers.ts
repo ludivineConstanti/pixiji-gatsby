@@ -42,7 +42,7 @@ export const initializeQuizState = ({
     answeredQuestion,
     answeredCorrectly: false,
     rightAnswers,
-    wrongAnswers: wrongAnswers ? wrongAnswers : [],
+    wrongAnswers: wrongAnswers ? sortWrongAnswers(wrongAnswers) : [],
   }
 
   // uf wrongAnswers are defined, it means we got it from the backend
@@ -52,7 +52,10 @@ export const initializeQuizState = ({
   } else if (currentQuiz.finished) {
     state.data = state.data.map(e => {
       if (e.quizId === quizId) {
-        return { ...quizInitialData, ...e.wrongAnswers }
+        return {
+          ...quizInitialData,
+          wrongAnswers: sortWrongAnswers(e.wrongAnswers),
+        }
       }
       return e
     })
