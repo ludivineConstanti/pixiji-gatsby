@@ -50,7 +50,7 @@ export const deleteUser = ({ email, password }: DeleteUserProps) =>
     },
   })
 
-interface setUserEmailProps {
+interface SetUserEmailProps {
   email: string
   newEmail: string
   password: string
@@ -60,7 +60,7 @@ export const setUserEmail = ({
   email,
   newEmail,
   password,
-}: setUserEmailProps) =>
+}: SetUserEmailProps) =>
   axios({
     url: process.env.GATSBY_API,
     method: "post",

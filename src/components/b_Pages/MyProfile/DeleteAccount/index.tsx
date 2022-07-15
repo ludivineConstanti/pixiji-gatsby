@@ -38,7 +38,7 @@ const DeleteAccount = ({ setUiState }: DeleteAccountProps) => {
         }}
       >
         <Input type="password" label="Password" placeholder="Your password" />
-        <ButtonInText text="Delete my account" onClick={() => {}} />
+        <ButtonInText text="Delete my account" />
       </SForm>
       {feedback.message && <Text>{feedback.message}</Text>}
     </TemplateUpdateInfos>

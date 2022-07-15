@@ -1,6 +1,7 @@
 # Bug List GSAP 😵
 
 ## The animation on hover, made with GSAP, blocked when the mouse entered the div slightly (when the enter and exit event of the mouse were not clear)
+
 => Fixed by using a timeline for the animation
 
 ## Passing a ref to a component not working
@@ -10,7 +11,8 @@
 ## Using redux with "React.forwardRef" not working
 
 => Using redux modified the react component and converted it back to a function, which made using "React.forwardRef" pointless,it now works by adding extra arguments
-``` Javascript
+
+```Javascript
 export default connect(mapStateToProps, {}, null, { forwardRef: true })(Component);
 ```
 
@@ -35,14 +37,14 @@ export default connect(mapStateToProps, {}, null, { forwardRef: true })(Componen
 ## Quiz Illustration not behaving properly
 
 => The quiz Illustration was not shrinking at the beggining of a quiz
-=> turns out I forgot the if statement that blocks the animation from starting if the array of quiz answers is not empty (and at the moment, I do not suppress the answers, even if you leave the quiz) 
+=> turns out I forgot the if statement that blocks the animation from starting if the array of quiz answers is not empty (and at the moment, I do not suppress the answers, even if you leave the quiz)
 => I put an other condition to see if you're just starting the quiz or not (might have to change it later depending on what I decide UX wise)
 
 ## Menu icon not updating to the proper color
 
 => I had a lot of problems with the color of the icon animation, first with GSAP, where it worked fine on the first page, but the colors value didn't update for the others, and then it kept a history of the colors, so it cycled through all of them...
 => Most of the problems were solved when I started to use framer-motion, which is better integrated (to my knowledge) with react's lifecycle, but it still didn't want to update the colors properly.
-=> I still don't know why it didn't work, but I found an alternative way of toggling the color when it changes from the menu icon state, to the cross state, just by giving it as color prop to styled component (white if the menu is open and the current color if it's closed), and this one updates the colors correctly. Otherwise  just update the animate animation with a hook.
+=> I still don't know why it didn't work, but I found an alternative way of toggling the color when it changes from the menu icon state, to the cross state, just by giving it as color prop to styled component (white if the menu is open and the current color if it's closed), and this one updates the colors correctly. Otherwise just update the animate animation with a hook.
 
 ## GSAP reverse animation not working
 
@@ -52,7 +54,7 @@ The GSAP animations were working fine while using .to, but nothing happened whil
 
 => modifying the height and width property scales from the top right, to scale from the center, I can either use x any to put it back in place or use scale.
 
-``` JavaScript
+```JavaScript
 // converts the size of the div we get in pixels to vw
 const componentWidth = componentRef.current.clientWidth / document.documentElement.clientWidth * 100;
 // 8.8 => scale we want in vw
@@ -63,7 +65,7 @@ ease: 'power1.inOut', zIndex: 10, scale: componentScale, fontSize: `${2 / compon
 }).play();
 ```
 
-``` JavaScript
+```JavaScript
 // converts the size of the div we get in pixels to vw
 const componentWidth = componentRef.current.clientWidth / document.documentElement.clientWidth * 100;
 // 8.8 => scale we want in vw
@@ -121,3 +123,22 @@ To my knowledge, there's no solution to this, so I just stopped using as (I didn
 I have one mainColor that I stock in my state, which worked fine when the site is loaded but didn't always update afterward. This problem was fixed when I started using animate presence in the app component, which also fixes the problem I had with intro animations not always triggering when (except when you reloaded the page).
 
 I had a lot of similar problems with animating the colors, but I either removed the animation (and then it gets the color automatically updated from styled-component) or I update the animate animation (from framer-motion) when the color changes, and then it fixes it.
+
+## The background color does not properly update
+
+The background color is getting animated every time the page changes. The background color of the previous illustration is displayed as a new one comes from the right. The problem is that the state took a few milliseconds to update, and the user could see a color flash.
+
+I added an `hasMounted` check, which decides wether the component should use the color of the current illustration, or the previous one.
+
+```JavaScript
+const [hasMounted, setHasMounted] = useState(false)
+
+useEffect(() => {
+    setHasMounted(true)
+}, [])
+
+return (
+<SPColorMain
+    style={{ backgroundColor: hasMounted ? previousMainColor : colorMain }}
+/>)
+```
