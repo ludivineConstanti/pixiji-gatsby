@@ -29,7 +29,7 @@ const ButtonWrapper = ({
       width: size === "small" ? "160px" : "100%",
       padding: size === "small" ? "8px" : "24px",
       border: `${strokeWidth}px solid rgba(255, 255, 255, 1)`,
-      transition: { delay: 0.3 },
+      transition: { delay: 0.15 },
     },
     exit: {
       x: -250,

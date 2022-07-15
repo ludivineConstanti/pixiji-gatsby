@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useState, useMemo } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import {
@@ -16,6 +16,11 @@ import ButtonInText from "src/components/e_Interactives/ButtonInText"
 import { useAppSelector } from "src/store"
 import Text from "src/components/f_Statics/Text"
 import { paths } from "src/models/constants"
+import DefaultState from "./DefaultState"
+import DeleteAccount from "./DeleteAccount"
+import UpdateEmail from "./UpdateEmail"
+import UpdatePassword from "./UpdatePassword"
+import { uiStateOptions } from "./basics"
 
 const MyProfile = () => {
   const { allKanjisJson } = useStaticQuery(graphql`
@@ -27,6 +32,8 @@ const MyProfile = () => {
   `)
 
   const email = useAppSelector(state => state.global.email)
+
+  const [uiState, setUiState] = useState(uiStateOptions.default)
 
   const kanjisArr = useMemo(
     () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
@@ -40,22 +47,28 @@ const MyProfile = () => {
         renderIllu={data => <SeaTurtles data={data} />}
         arrDataIllu={{ arrIllu, colorIllu }}
       />
-      <TextWrapper>
-        {email ? (
-          <>
-            <Text>{`Current email: ${email}`}</Text>
-            <ButtonInText text="Update my email" />
-            <ButtonInText text="Update my password" />
-            <ButtonInText text="Delete my account" />
-          </>
-        ) : (
-          <>
-            <Text>You need to be logged in to access this page.</Text>
-            <ButtonInText text="Log in" path={paths.login} />
-            <ButtonInText text="Register" path={paths.register} />
-          </>
-        )}
-      </TextWrapper>
+      {email ? (
+        <>
+          {uiState === uiStateOptions.default && (
+            <DefaultState setUiState={setUiState} />
+          )}
+          {uiState === uiStateOptions.updateEmail && (
+            <UpdateEmail setUiState={setUiState} />
+          )}
+          {uiState === uiStateOptions.updatePassword && (
+            <UpdatePassword setUiState={setUiState} />
+          )}
+          {uiState === uiStateOptions.deleteAccount && (
+            <DeleteAccount setUiState={setUiState} />
+          )}
+        </>
+      ) : (
+        <TextWrapper>
+          <Text>You need to be logged in to access this page.</Text>
+          <ButtonInText text="Login" path={paths.login} />
+          <ButtonInText text="Register" path={paths.register} />
+        </TextWrapper>
+      )}
     </>
   )
 }

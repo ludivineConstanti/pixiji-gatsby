@@ -7,7 +7,10 @@ import Menu from "src/components/b_Fixed/Menu"
 import KanjiDetails from "src/components/b_Fixed/KanjiDetails"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateIdSelectedKanji } from "src/reducer/slices/globalSlice"
-import { updateWrongAnswers } from "src/reducer/slices/quizSlice"
+import {
+  updateWrongAnswers,
+  resetStateQuiz,
+} from "src/reducer/slices/quizSlice"
 import { getWorstScores } from "src/helpers/backEnd/scores"
 import { KanjisJsonFragmentToInitializeQuiz } from "src/models/models"
 
@@ -42,22 +45,27 @@ const Layout = ({ children, isPlaying = false }: LayoutProps) => {
   const email = useAppSelector(state => state.global.email)
 
   useEffect(() => {
-    if (hasMounted && email) {
-      getWorstScores({ email }).then(response => {
-        if (
-          typeof response === "object" &&
-          response.data &&
-          response.data.data &&
-          response.data.data.getWorstScores
-        ) {
-          dispatch(
-            updateWrongAnswers({
-              answers: response.data.data.getWorstScores.scores,
-              kanjis: allKanjisJson.nodes,
-            })
-          )
-        }
-      })
+    if (hasMounted) {
+      if (email) {
+        getWorstScores({ email }).then(response => {
+          if (
+            typeof response === "object" &&
+            response.data &&
+            response.data.data &&
+            response.data.data.getWorstScores
+          ) {
+            dispatch(
+              updateWrongAnswers({
+                answers: response.data.data.getWorstScores.scores,
+                kanjis: allKanjisJson.nodes,
+              })
+            )
+          }
+        })
+      } else {
+        console.log("reset state quiz")
+        dispatch(resetStateQuiz())
+      }
     }
   }, [email])
 
