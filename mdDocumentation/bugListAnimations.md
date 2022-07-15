@@ -128,6 +128,16 @@ I had a lot of similar problems with animating the colors, but I either removed 
 
 The background color is getting animated every time the page changes. The background color of the previous illustration is displayed as a new one comes from the right. The problem is that the state took a few milliseconds to update, and the user could see a color flash.
 
+## Before
+### 1 The outro animation started, components disappeared from the screen
+![animation0](https://user-images.githubusercontent.com/24965333/179274715-41f1c8f3-1380-4d8f-bd41-be1e9ef43367.png)
+### 2 The div in the background is visible, its color has not been properly updated, yet
+![animation1](https://user-images.githubusercontent.com/24965333/179274721-7b7c82fc-2101-4365-b453-eb983aec654c.png)
+### 3 The div in the background is visible, its color is now correct
+![animation3](https://user-images.githubusercontent.com/24965333/179274727-a23ebda7-93a4-4c55-81b1-6e4cf2c87764.png)
+### 4 The new div with the new background finished its animation, coming in from the right
+![animation2](https://user-images.githubusercontent.com/24965333/179274722-9caf1faf-0cb2-4955-9eba-9c2b67cfd23c.png)
+
 I added an `hasMounted` check, which decides wether the component should use the color of the current illustration, or the previous one.
 
 ```JavaScript
@@ -142,3 +152,15 @@ return (
     style={{ backgroundColor: hasMounted ? previousMainColor : colorMain }}
 />)
 ```
+
+## After
+### 1 The outro animation started, components disappeared from the screen
+![animation0](https://user-images.githubusercontent.com/24965333/179274715-41f1c8f3-1380-4d8f-bd41-be1e9ef43367.png)
+### 2 The div in the background is visible, its color has not been properly updated, yet, but it's fine because it's using the color of the "current" illustration (which has not been updated, so it's actually the previous one)
+![animation0](https://user-images.githubusercontent.com/24965333/179274715-41f1c8f3-1380-4d8f-bd41-be1e9ef43367.png)
+### 3 The div in the background is visible, its color is now using the one from the previous illustration (which has now been correctly updated)
+![animation3](https://user-images.githubusercontent.com/24965333/179274727-a23ebda7-93a4-4c55-81b1-6e4cf2c87764.png)
+### 4 The new div with the new background finished its animation, coming in from the right
+![animation2](https://user-images.githubusercontent.com/24965333/179274722-9caf1faf-0cb2-4955-9eba-9c2b67cfd23c.png)
+
+
