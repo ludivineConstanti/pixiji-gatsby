@@ -15,23 +15,23 @@ import {
 } from "src/components/d_Illustrations/_data/cloudDragon"
 import SLinkIconContainer from "./SError404"
 import {
-  KanjisJsonFragmentProps,
-  AllQuizFragmentProps,
+  KanjisJsonFragmentForIllustrationsProps,
+  AllQuizFragmentForQuizLinkProps,
 } from "src/models/models"
 
 interface QueryProps {
-  allKanjisJson: KanjisJsonFragmentProps
-  allQuiz: AllQuizFragmentProps
+  allKanjisJson: KanjisJsonFragmentForIllustrationsProps
+  allQuiz: AllQuizFragmentForQuizLinkProps
 }
 
 const Error404 = () => {
   const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
-        ...kanjisJsonFragment
+        ...kanjisJsonFragmentForIllustrations
       }
       allQuiz {
-        ...quizFragment
+        ...quizFragmentForQuizLink
       }
     }
   `)
@@ -64,21 +64,7 @@ const Error404 = () => {
         buttonBig={{ text: "Quizzes", path: `/quizzes/${quizzesSlug}` }}
       >
         <SLinkIconContainer>
-          <LinkIcon path="https://www.behance.net/Lu-di" columnStart={1}>
-            <svg
-              viewBox="0 0 80 80"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M59.6355 41.5614H50.0157C50.9369 35.2598 59.2658 36.0949 59.6355 41.5614ZM62.8135 27.75H46.876V24.5625H62.8135V27.75ZM29.775 24.6071C41.4094 24.7793 41.6325 36.1778 35.554 39.2824C42.9107 41.9599 43.1562 56.412 28.7423 56.412H15.001V24.6071H29.775ZM54.373 31.7981C60.9201 31.7981 64.9204 35.5817 65.7938 41.2013C65.9564 42.2786 66.0233 43.7289 65.9914 45.7498H49.8659C49.4642 51.7232 56.3365 52.7878 58.6857 50.0625H65.4177C64.4805 52.8197 61.1082 56.4375 54.5802 56.4375C48.049 56.4375 43.6885 52.7655 43.6885 44.3792C43.6885 36.0694 47.6952 31.7981 54.373 31.7981ZM21.3759 43.6783H28.5829C34.569 43.6783 34.9674 50.0852 28.4777 50.0852H21.3759V43.6783ZM21.3759 30.9283H28.3279C35.1682 30.9283 34.3235 37.3033 28.9909 37.3033H21.3759V30.9283Z"
-                fill="white"
-              />
-            </svg>
-          </LinkIcon>
-          <LinkIcon path="https://github.com/ludivineConstanti" columnStart={3}>
+          <LinkIcon path="https://github.com/ludivineConstanti" columnStart={1}>
             <svg
               viewBox="0 0 80 80"
               fill="none"
@@ -92,7 +78,7 @@ const Error404 = () => {
           </LinkIcon>
           <LinkIcon
             path="https://www.linkedin.com/in/ludivine-constanti/"
-            columnStart={5}
+            columnStart={3}
           >
             <svg
               viewBox="0 0 80 80"
@@ -101,6 +87,20 @@ const Error404 = () => {
             >
               <path
                 d="M29.4383 58.4375H21.8533V30.6259H29.4383V58.4375ZM25.6458 27.4199C23.2034 27.4199 21.2212 25.4226 21.2212 22.96C21.2212 20.4974 23.2034 18.5 25.6458 18.5C28.0881 18.5 30.0703 20.4974 30.0703 22.96C30.0703 25.4226 28.0907 27.4199 25.6458 27.4199ZM59.7782 58.4375H52.1932V44.2687C52.1932 35.7533 42.0799 36.398 42.0799 44.2687V58.4375H34.4949V30.6259H42.0799V35.0884C45.612 28.5501 59.7782 28.0672 59.7782 41.3485V58.4375Z"
+                fill="white"
+              />
+            </svg>
+          </LinkIcon>
+          <LinkIcon path="https://www.behance.net/Lu-di" columnStart={5}>
+            <svg
+              viewBox="0 0 80 80"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M59.6355 41.5614H50.0157C50.9369 35.2598 59.2658 36.0949 59.6355 41.5614ZM62.8135 27.75H46.876V24.5625H62.8135V27.75ZM29.775 24.6071C41.4094 24.7793 41.6325 36.1778 35.554 39.2824C42.9107 41.9599 43.1562 56.412 28.7423 56.412H15.001V24.6071H29.775ZM54.373 31.7981C60.9201 31.7981 64.9204 35.5817 65.7938 41.2013C65.9564 42.2786 66.0233 43.7289 65.9914 45.7498H49.8659C49.4642 51.7232 56.3365 52.7878 58.6857 50.0625H65.4177C64.4805 52.8197 61.1082 56.4375 54.5802 56.4375C48.049 56.4375 43.6885 52.7655 43.6885 44.3792C43.6885 36.0694 47.6952 31.7981 54.373 31.7981ZM21.3759 43.6783H28.5829C34.569 43.6783 34.9674 50.0852 28.4777 50.0852H21.3759V43.6783ZM21.3759 30.9283H28.3279C35.1682 30.9283 34.3235 37.3033 28.9909 37.3033H21.3759V30.9283Z"
                 fill="white"
               />
             </svg>

@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react"
-import { AnimatePresence } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
 
+import { AnimatePresence } from "src/models/basics"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateIdQuiz, initializeQuiz } from "src/reducer/slices/quizSlice"
 import IlluQuiz from "src/components/d_Illustrations/IlluQuiz"
@@ -10,20 +10,15 @@ import Header from "./Header"
 import StatePlaying from "./StatePlaying"
 import StateFinished from "./StateFinished"
 import Warning from "./Warning"
-import { QuizIdOptions } from "src/models/models"
+import { KanjisJsonFragmentToInitializeQuiz } from "src/models/models"
 
 interface QueryProps {
-  allKanjisJson: {
-    nodes: {
-      kanjiId: number
-      quizId: number
-    }[]
-  }
+  allKanjisJson: KanjisJsonFragmentToInitializeQuiz
 }
 
 interface QuizProps {
   currentQuiz: {
-    id: QuizIdOptions
+    id: number
     title: string
     slug: string
   }
@@ -33,10 +28,7 @@ const Quiz = ({ currentQuiz }: QuizProps) => {
   const { allKanjisJson } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
-        nodes {
-          quizId
-          kanjiId
-        }
+        ...kanjisJsonFragmentToInitializeQuiz
       }
     }
   `)

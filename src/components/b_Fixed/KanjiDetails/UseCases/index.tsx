@@ -18,20 +18,26 @@ const UseCases = ({ onyomiCompounds }: UseCasesProps) => {
       <SSubtitle>Use cases:</SSubtitle>
       <ul>
         {React.Children.toArray(
-          onyomiCompounds.map(e => (
-            <SExample key={`onyomiCompound${e.kanji}${e.kana}`}>
-              {e.kanji}
-              <SKana>{e.kana}</SKana>
+          onyomiCompounds.map((compound, compoundIndex) => (
+            <SExample
+              key={`onyomiCompound${compound.kanji}${compound.kana}${compoundIndex}`}
+            >
+              {compound.kanji}
+              <SKana>{compound.kana}</SKana>
               <SKanaEn>
-                <SLighter color={colorMainL1}>{e.kanaEn}</SLighter>
+                <SLighter color={colorMainL1}>{compound.kanaEn}</SLighter>
               </SKanaEn>
               <STextInline>
                 {" "}
                 {React.Children.toArray(
-                  e.en.map((text: string, i: number) => (
+                  compound.en.map((text: string, textIndex: number) => (
                     <>
                       <SSmallText>{text}</SSmallText>
-                      {i !== e.en.length - 1 ? <Separator /> : ""}
+                      {textIndex !== compound.en.length - 1 ? (
+                        <Separator />
+                      ) : (
+                        ""
+                      )}
                     </>
                   ))
                 )}

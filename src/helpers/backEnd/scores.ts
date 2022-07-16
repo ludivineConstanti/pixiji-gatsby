@@ -13,7 +13,8 @@ export const getWorstScores = ({ email }: GetWorstScoresProps) =>
       query getWorstScores($email: String) {
         getWorstScores(input: {email: $email}) {
           scores {
-           answer
+            answer
+            quizId
             infosAnswer {
               answeredRight
               answeredWrong
@@ -28,20 +29,54 @@ export const getWorstScores = ({ email }: GetWorstScoresProps) =>
     },
   })
 
-interface SetScoresProps {
+interface GetScoreProps {
   email: string
   kanjiId: string
-  isCorrect: boolean
 }
 
-export const setScore = ({ email, kanjiId, isCorrect }: SetScoresProps) =>
+export const getScore = ({ email, kanjiId }: GetScoreProps) =>
   axios({
     url: process.env.GATSBY_API,
     method: "post",
     data: {
       query: `
-      mutation setScore($email: String!, $kanjiId: String!, $isCorrect: Boolean!) {
-        setScore(input: {email: $email, kanjiId: $kanjiId, isCorrect: $isCorrect}) {
+      query getScore($email: String, $kanjiId: String!) {
+        getScore(input: {email: $email, kanjiId: $kanjiId}) {
+          answer
+          infosAnswer {
+            answeredRight
+            answeredWrong
+          }
+        }
+      }
+        `,
+      variables: {
+        email,
+        kanjiId,
+      },
+    },
+  })
+
+interface SetScoresProps {
+  email: string
+  kanjiId: string
+  quizId: string
+  isCorrect: boolean
+}
+
+export const setScore = ({
+  email,
+  kanjiId,
+  quizId,
+  isCorrect,
+}: SetScoresProps) =>
+  axios({
+    url: process.env.GATSBY_API,
+    method: "post",
+    data: {
+      query: `
+      mutation setScore($email: String!, $kanjiId: String!, $quizId: String!, $isCorrect: Boolean!) {
+        setScore(input: {email: $email, kanjiId: $kanjiId, quizId: $quizId, isCorrect: $isCorrect}) {
           success
           message
         }
@@ -51,6 +86,7 @@ export const setScore = ({ email, kanjiId, isCorrect }: SetScoresProps) =>
         email,
         kanjiId,
         isCorrect,
+        quizId,
       },
     },
   })

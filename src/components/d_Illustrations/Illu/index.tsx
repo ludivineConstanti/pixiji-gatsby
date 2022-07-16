@@ -10,12 +10,17 @@ import { IlluProps } from "src/models/models"
 const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
   const dispatch = useAppDispatch()
 
-  const pColorMain = useAppSelector(state => state.global.color.previous)
+  const previousMainColor = useAppSelector(state => state.global.color.previous)
   const colorMain = useAppSelector(state => state.global.color.main)
 
   const { colorIllu } = arrDataIllu
 
+  const [hasMounted, setHasMounted] = useState(false)
   const [vSColorMain, setVsColorMain] = useState({})
+
+  useEffect(() => {
+    setHasMounted(true)
+  }, [])
 
   useEffect(() => {
     setVsColorMain({
@@ -62,7 +67,9 @@ const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
 
   return (
     <>
-      <SPColorMain s={{ color: pColorMain }} />
+      <SPColorMain
+        style={{ backgroundColor: hasMounted ? previousMainColor : colorMain }}
+      />
       <SColorMain
         s={{ color: colorMain }}
         variants={vSColorMain}

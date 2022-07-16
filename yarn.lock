@@ -1734,9 +1734,9 @@
     "@jridgewell/trace-mapping" "^0.3.9"
 
 "@jridgewell/resolve-uri@^3.0.3":
-  version "3.0.8"
-  resolved "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.0.8.tgz#687cc2bbf243f4e9a868ecf2262318e2658873a1"
-  integrity sha512-YK5G9LaddzGbcucK4c8h5tWFmMPBvRZ/uyWmN1/SbBdIvqGUdWGkJ5BAaccgs6XbzVLsqbPJrBSFwKv3kT9i7w==
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.1.0.tgz#2203b118c157721addfe69d47b70465463066d78"
+  integrity sha512-F2msla3tad+Mfht5cJq7LSXcdudKTWCVYUgw6pLFOOHSTtZlj6SWNYAp+AhuqLmWdBO2X5hPrLcu8cVP8fy28w==
 
 "@jridgewell/set-array@^1.0.0", "@jridgewell/set-array@^1.0.1":
   version "1.1.2"
@@ -2184,9 +2184,9 @@
     form-data "^3.0.0"
 
 "@types/node@*":
-  version "18.0.0"
-  resolved "https://registry.npmjs.org/@types/node/-/node-18.0.0.tgz#67c7b724e1bcdd7a8821ce0d5ee184d3b4dd525a"
-  integrity sha512-cHlGmko4gWLVI27cGJntjs/Sj8th9aYwplmZFwmmgYQQvL5NUsgVJG7OddLvNfLqYS31KFN0s3qlaD9qCaxACA==
+  version "18.0.3"
+  resolved "https://registry.npmjs.org/@types/node/-/node-18.0.3.tgz#463fc47f13ec0688a33aec75d078a0541a447199"
+  integrity sha512-HzNRZtp4eepNitP+BD6k2L6DROIDG4Q0fm4x+dwfsr6LGmROENnok75VGw40628xf+iR24WeMFcHuuBDUAzzsQ==
 
 "@types/node@16.9.1":
   version "16.9.1"
@@ -2248,9 +2248,9 @@
     redux "^4.0.0"
 
 "@types/react@*":
-  version "18.0.14"
-  resolved "https://registry.npmjs.org/@types/react/-/react-18.0.14.tgz#e016616ffff51dba01b04945610fe3671fdbe06d"
-  integrity sha512-x4gGuASSiWmo0xjDLpm5mPb52syZHJx02VKbqUKdLmKtAwIh63XClGsiTI1K6DO5q7ox4xAsQrU+Gl3+gGXF9Q==
+  version "18.0.15"
+  resolved "https://registry.npmjs.org/@types/react/-/react-18.0.15.tgz#d355644c26832dc27f3e6cbf0c4f4603fc4ab7fe"
+  integrity sha512-iz3BtLuIYH1uWdsv6wXYdhozhqj20oD4/Hk2DNXIn1kFsmp9x8d9QB6FnPhfkbhd2PgEONt9Q1x/ebkwjfFLow==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2963,13 +2963,13 @@ babel-plugin-remove-graphql-queries@^3.14.0:
     "@babel/runtime" "^7.15.4"
     gatsby-core-utils "^2.14.0"
 
-babel-plugin-remove-graphql-queries@^4.17.0:
-  version "4.17.0"
-  resolved "https://registry.npmjs.org/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-4.17.0.tgz#debb5b83b069ccd4f10e33536aad3602157900f0"
-  integrity sha512-UovjamHhy5y46WyBO/hfqxrLbMq04o+hlTeqCRzeLol4eWtH+8CufdLAZWYtM1l1BIChwvXCxDY2ugeXlbj7+w==
+babel-plugin-remove-graphql-queries@^4.18.0:
+  version "4.18.0"
+  resolved "https://registry.npmjs.org/babel-plugin-remove-graphql-queries/-/babel-plugin-remove-graphql-queries-4.18.0.tgz#796558bb8e2463a45e1a11b649ae96a2d627d3dc"
+  integrity sha512-6oOm/cTZdk+7yPh4R4ISLKNur3rK5w2zAUCXTOGKYcRYbvKCS22ODafQBrNcu/UdfpXwSz3XZOG5ru72Z5usUw==
   dependencies:
     "@babel/runtime" "^7.15.4"
-    gatsby-core-utils "^3.17.0"
+    gatsby-core-utils "^3.18.0"
 
 "babel-plugin-styled-components@>= 1.12.0", babel-plugin-styled-components@^2.0.2:
   version "2.0.7"
@@ -3377,9 +3377,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001125, caniuse-lite@^1.0.30001335, caniuse-lite@^1.0.30001359:
-  version "1.0.30001361"
-  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001361.tgz#ba2adb2527566fb96f3ac7c67698ae7fc495a28d"
-  integrity sha512-ybhCrjNtkFji1/Wto6SSJKkWk6kZgVQsDq5QI83SafsF6FXv2JB4df9eEdH6g8sdGgqTXrFLjAxqBGgYoU3azQ==
+  version "1.0.30001363"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001363.tgz#26bec2d606924ba318235944e1193304ea7c4f15"
+  integrity sha512-HpQhpzTGGPVMnCjIomjt+jvyUu8vNFo3TaDiZ/RcoTrlOq/5+tC8zHdsbgFB6MxmaY+jCpsH09aD80Bb4Ow3Sg==
 
 ccount@^1.0.0:
   version "1.1.0"
@@ -4532,9 +4532,9 @@ dotenv@^8.2.0:
   integrity sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==
 
 duplexer3@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.npmjs.org/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
-  integrity sha512-CEj8FwwNA4cVH2uFCoHUrmojhYh1vmCdOaneKJXwkeY1i9jnlslVo9dx+hQ5Hl9GnH/Bwy/IjxAyOePyPKYnzA==
+  version "0.1.5"
+  resolved "https://registry.npmjs.org/duplexer3/-/duplexer3-0.1.5.tgz#0b5e4d7bad5de8901ea4440624c8e1d20099217e"
+  integrity sha512-1A8za6ws41LQgv9HrE/66jyC5yuSjQ3L/KOpFtoBilsAK2iA2wuS5rTt1OCzIvtS2V7nVmedsUU+DGRcjBmOYA==
 
 duplexer@^0.1.1:
   version "0.1.2"
@@ -4547,9 +4547,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.3.564, electron-to-chromium@^1.4.172:
-  version "1.4.177"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.177.tgz#b6a4436eb788ca732556cd69f384b8a3c82118c5"
-  integrity sha512-FYPir3NSBEGexSZUEeht81oVhHfLFl6mhUKSkjHN/iB/TwEIt/WHQrqVGfTLN5gQxwJCQkIJBe05eOXjI7omgg==
+  version "1.4.184"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.184.tgz#381d4d111fc82d3376ed690dfb621e675f9078a9"
+  integrity sha512-IADi390FRdvxWfVX3hjzfTDNVHiTqVo9ar53/7em/SfhUG9YcjVhyQecY/XwmBHRKden/wFud7RWOUH7+7LFng==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -5671,10 +5671,10 @@ gatsby-core-utils@^2.14.0:
     tmp "^0.2.1"
     xdg-basedir "^4.0.0"
 
-gatsby-core-utils@^3.17.0:
-  version "3.17.0"
-  resolved "https://registry.npmjs.org/gatsby-core-utils/-/gatsby-core-utils-3.17.0.tgz#5fe33c4267a3d0a7439b8065ee9c16f5cc2aead1"
-  integrity sha512-1e0YaqTAEpSSBkpWkY703lu+Bl76ASXUvUcpnNO3CavCYZsRQxAXtMXIKIEvhm1z6zWJmY9HILo6/DjP+PHeyw==
+gatsby-core-utils@^3.18.0:
+  version "3.18.0"
+  resolved "https://registry.npmjs.org/gatsby-core-utils/-/gatsby-core-utils-3.18.0.tgz#4b03ee01822d399eec06ba83c867967d14669a42"
+  integrity sha512-mCoNgH4MilosLhEroklgVffwie9lyxgmvNwe/oIyzXr6NcZ2uxSp8G1KrgxdG2srt2hCNlZLlzS25ltLTeHTjA==
   dependencies:
     "@babel/runtime" "^7.15.4"
     ci-info "2.0.0"
@@ -5682,7 +5682,7 @@ gatsby-core-utils@^3.17.0:
     fastq "^1.13.0"
     file-type "^16.5.3"
     fs-extra "^10.1.0"
-    got "^11.8.3"
+    got "^11.8.5"
     import-from "^4.0.0"
     lmdb "2.5.2"
     lock "^1.1.0"
@@ -5840,9 +5840,9 @@ gatsby-plugin-sharp@^3.11.0:
     uuid "3.4.0"
 
 gatsby-plugin-styled-components@^5.4.0:
-  version "5.17.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-5.17.0.tgz#bf3130860f087a49b23fc82496844a34b9a4ff87"
-  integrity sha512-VhDXtHuBcgiD/7DYWuzo3lgNRIyM1fk3h0Zl4S8d0PBkTSKbU67atesAqMOOeaX6kGt6qzy4UU30w2ztvrVZXg==
+  version "5.18.0"
+  resolved "https://registry.npmjs.org/gatsby-plugin-styled-components/-/gatsby-plugin-styled-components-5.18.0.tgz#16251c205e1d2ef8b521b76246e2bc75e7679424"
+  integrity sha512-jg5QuglHEZ6wn/6MdsktEQZh5NRfozCqed0DBxkU1Pk47YGRGduizoHo8ADsP/X8GSBmNbELXM7KLen9hZXT2Q==
   dependencies:
     "@babel/runtime" "^7.15.4"
 
@@ -5893,9 +5893,9 @@ gatsby-plugin-typescript@^3.14.0:
     babel-plugin-remove-graphql-queries "^3.14.0"
 
 gatsby-plugin-typescript@^4.17.0:
-  version "4.17.0"
-  resolved "https://registry.npmjs.org/gatsby-plugin-typescript/-/gatsby-plugin-typescript-4.17.0.tgz#95da5c9c4dbdd029eb702e465ccc4b10a12a8993"
-  integrity sha512-aSO/h4z+jdWBZtEnH17NoZaFchO8LkEcIdNX2saYIjJfa2tMbOR+wnOuQJVAdj61n8ntc1pQkNJxiEK31IaZjw==
+  version "4.18.0"
+  resolved "https://registry.npmjs.org/gatsby-plugin-typescript/-/gatsby-plugin-typescript-4.18.0.tgz#2d2c7f27082542c147901df93d3981ab85dcdb39"
+  integrity sha512-SuNBrp57SnovOyhCz0zPkz7begV4UR2XdXUrFsh4N0jWOI5yFNVgENpKlbI/O7JnvgyV5KC/pkobNh3we+0mcQ==
   dependencies:
     "@babel/core" "^7.15.5"
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.14.5"
@@ -5903,7 +5903,7 @@ gatsby-plugin-typescript@^4.17.0:
     "@babel/plugin-proposal-optional-chaining" "^7.14.5"
     "@babel/preset-typescript" "^7.15.0"
     "@babel/runtime" "^7.15.4"
-    babel-plugin-remove-graphql-queries "^4.17.0"
+    babel-plugin-remove-graphql-queries "^4.18.0"
 
 gatsby-plugin-utils@^1.14.0:
   version "1.14.0"
@@ -6053,9 +6053,9 @@ gatsby-telemetry@^2.11.0, gatsby-telemetry@^2.14.0:
     uuid "3.4.0"
 
 gatsby-transformer-json@^4.15.0:
-  version "4.17.0"
-  resolved "https://registry.npmjs.org/gatsby-transformer-json/-/gatsby-transformer-json-4.17.0.tgz#2bdaaf01e9daa3c430d923f23f42cfbe3de9419f"
-  integrity sha512-PQ7wSDN2KgQkV3RkkNjqBYnsWKqhU5iiqQEPV28WFS3HRgmq8RWuONc3dBlvBztNSDGtKrwFngbRlEsze7PbOw==
+  version "4.18.0"
+  resolved "https://registry.npmjs.org/gatsby-transformer-json/-/gatsby-transformer-json-4.18.0.tgz#b125ff6b5b07a97019c584d8c0bd3e76b3ca45c7"
+  integrity sha512-WnEgg3Yq/aOvAyjJGJdmQuPzVT1nbnFph3cVuZ1DyCBrOsl18dNs0eHdL/sQ96e2EvBjDuy1dT+ULB3KCQzf7g==
   dependencies:
     "@babel/runtime" "^7.15.4"
     bluebird "^3.7.2"
@@ -6426,9 +6426,9 @@ globals@^11.1.0:
   integrity sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==
 
 globals@^13.6.0, globals@^13.9.0:
-  version "13.15.0"
-  resolved "https://registry.npmjs.org/globals/-/globals-13.15.0.tgz#38113218c907d2f7e98658af246cef8b77e90bac"
-  integrity sha512-bpzcOlgDhMG070Av0Vy5Owklpv1I6+j96GhUI7Rh7IzDCKLzboflLrrfqMu8NquDbiR4EOQk7XzJwqVJxicxog==
+  version "13.16.0"
+  resolved "https://registry.npmjs.org/globals/-/globals-13.16.0.tgz#9be4aca28f311aaeb974ea54978ebbb5e35ce46a"
+  integrity sha512-A1lrQfpNF+McdPOnnFqY3kSN0AFTy485bTi1bkLk4mVPODIUEcSfhHgRqA+QdXPksrSTTztYXx37NFV+GpGk3Q==
   dependencies:
     type-fest "^0.20.2"
 
@@ -6482,7 +6482,7 @@ globby@^11.0.3, globby@^11.0.4:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-got@^11.8.2, got@^11.8.3:
+got@^11.8.2, got@^11.8.5:
   version "11.8.5"
   resolved "https://registry.npmjs.org/got/-/got-11.8.5.tgz#ce77d045136de56e8f024bebb82ea349bc730046"
   integrity sha512-o0Je4NvQObAuZPHLFoRSkdG2lTgtcynqymzg2Vupdx6PorhaT5MCbIyXG6d4D94kk8ZG57QeosgdiqfJWhEhlQ==
@@ -7701,9 +7701,9 @@ jsonfile@^6.0.1:
     graceful-fs "^4.1.6"
 
 "jsx-ast-utils@^2.4.1 || ^3.0.0", jsx-ast-utils@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.npmjs.org/jsx-ast-utils/-/jsx-ast-utils-3.3.1.tgz#a3e0f1cb7e230954eab4dcbce9f6288a78f8ba44"
-  integrity sha512-pxrjmNpeRw5wwVeWyEAk7QJu2GnBO3uzPFmHCKJJFPKK2Cy0cWL23krGtLdnMmbIi6/FjlrQpPyfQI19ByPOhQ==
+  version "3.3.2"
+  resolved "https://registry.npmjs.org/jsx-ast-utils/-/jsx-ast-utils-3.3.2.tgz#afe5efe4332cd3515c065072bd4d6b0aa22152bd"
+  integrity sha512-4ZCADZHRkno244xlNnn4AOG6sRQ7iBZ5BbgZ4vW4y5IZw7cVUD1PPeblm1xx/nfmMxPdt/LHsXZW8z/j58+l9Q==
   dependencies:
     array-includes "^3.1.5"
     object.assign "^4.1.2"
@@ -7770,9 +7770,9 @@ klona@^2.0.4:
   integrity sha512-pJiBpiXMbt7dkzXe8Ghj/u4FfXOOa98fPW+bihOJ4SjnoijweJrNThJfd3ifXpXhREjpoF2mZVH1GfS9LV3kHQ==
 
 language-subtag-registry@~0.3.2:
-  version "0.3.21"
-  resolved "https://registry.npmjs.org/language-subtag-registry/-/language-subtag-registry-0.3.21.tgz#04ac218bea46f04cb039084602c6da9e788dd45a"
-  integrity sha512-L0IqwlIXjilBVVYKFT37X9Ih11Um5NEl9cbJIuU/SwP/zEEAbBPOnEeeuxVMf45ydWQRDQN3Nqc96OgbH1K+Pg==
+  version "0.3.22"
+  resolved "https://registry.npmjs.org/language-subtag-registry/-/language-subtag-registry-0.3.22.tgz#2e1500861b2e457eba7e7ae86877cbd08fa1fd1d"
+  integrity sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==
 
 language-tags@^1.0.5:
   version "1.0.5"
@@ -8937,9 +8937,9 @@ mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@^0.5.4, mkdirp@~0.5.1:
     minimist "^1.2.6"
 
 moment@^2.27.0:
-  version "2.29.3"
-  resolved "https://registry.npmjs.org/moment/-/moment-2.29.3.tgz#edd47411c322413999f7a5940d526de183c031f3"
-  integrity sha512-c6YRvhEo//6T2Jz/vVtYzqBzwvPT95JBQ+smCytzf7c50oMZRsR/a4w88aD34I+/QVSfnoAnSBFPJHItlOMJVw==
+  version "2.29.4"
+  resolved "https://registry.npmjs.org/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
 mri@^1.1.0:
   version "1.2.0"
@@ -12081,9 +12081,9 @@ type-fest@^0.8.0, type-fest@^0.8.1:
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
 type-fest@^2.5.3:
-  version "2.15.1"
-  resolved "https://registry.npmjs.org/type-fest/-/type-fest-2.15.1.tgz#ad596982d50c157f7e981307c21c3983970e4e77"
-  integrity sha512-LYSjcIz3NmoQksXq/3/B7Nfad+T8mkaI628agAAnHCpXPTBRMK2ygt3eABpzII8CbZZM8dLdVQ4Gr8ousjFjMw==
+  version "2.16.0"
+  resolved "https://registry.npmjs.org/type-fest/-/type-fest-2.16.0.tgz#1250fbd64dafaf4c8e405e393ef3fb16d9651db2"
+  integrity sha512-qpaThT2HQkFb83gMOrdKVsfCN7LKxP26Yq+smPzY1FqoHRjqmjqHXA7n5Gkxi8efirtbeEUxzfEdePthQWCuHw==
 
 type-is@^1.6.4, type-is@~1.6.18:
   version "1.6.18"
@@ -12513,9 +12513,9 @@ uuid@3.4.0, uuid@^3.0.0, uuid@^3.3.2:
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
 uvu@^0.5.0:
-  version "0.5.4"
-  resolved "https://registry.npmjs.org/uvu/-/uvu-0.5.4.tgz#5a37482ade580b7d817569e0b2c013712857293c"
-  integrity sha512-x1CyUjcP9VKaNPhjeB3FIc/jqgLsz2Q9LFhRzUTu/jnaaHILEGNuE0XckQonl8ISLcwyk9I2EZvWlYsQnwxqvQ==
+  version "0.5.6"
+  resolved "https://registry.npmjs.org/uvu/-/uvu-0.5.6.tgz#2754ca20bcb0bb59b64e9985e84d2e81058502df"
+  integrity sha512-+g8ENReyr8YsOc6fv/NVJs2vFdHBnBNdfE49rshrTzDWOlUx4Gq7KOS2GD8eqhy2j+Ejq29+SbKH8yjkAqXqoA==
   dependencies:
     dequal "^2.0.0"
     diff "^5.0.0"

@@ -1,6 +1,6 @@
 import React from "react"
 
-import SInput, { SLabel } from "./style"
+import SInput, { SLabel, vInput, vLabel } from "./style"
 
 interface InputProps {
   isLast?: boolean
@@ -16,8 +16,25 @@ const Input = ({
   label,
 }: InputProps) => (
   <>
-    <SLabel htmlFor={label}>{label}:</SLabel>
-    <SInput type={type} placeholder={placeholder} s={{ isLast }} id={label} />
+    <SLabel
+      variants={vLabel}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      htmlFor={label}
+    >
+      {label}:
+    </SLabel>
+    <SInput
+      variants={vInput}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      type={type}
+      placeholder={placeholder}
+      s={{ isLast }}
+      id={label}
+    />
   </>
 )
 

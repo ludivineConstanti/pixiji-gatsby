@@ -8,15 +8,22 @@ export interface DataIllu {
   animationCase?: string
 }
 
-export interface KanjisJsonFragmentProps {
+export interface KanjisJsonFragmentForIllustrationsProps {
   nodes: {
     kanjiId: number
   }[]
 }
 
-export interface AllQuizFragmentProps {
+export interface KanjisJsonFragmentToInitializeQuiz {
   nodes: {
-    quizId: QuizIdOptions
+    kanjiId: number
+    quizId: number
+  }[]
+}
+
+export interface AllQuizFragmentForQuizLinkProps {
+  nodes: {
+    quizId: number
     slug: string
   }[]
 }
@@ -33,5 +40,3 @@ export interface IlluProps {
     colorIllu: string
   }
 }
-
-export type QuizIdOptions = 1 | 2 | 3

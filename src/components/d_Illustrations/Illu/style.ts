@@ -11,10 +11,9 @@ const background = `
   z-index: ${zIAppBackground};
 `
 
-export const SPColorMain = styled.div<{ s: { color: string } }>`
+export const SPColorMain = styled.div`
   width: 100%;
   ${background}
-  background-color: ${props => props.s.color};
 `
 
 export const SColorMain = styled(motion.div)<{ s: { color: string } }>`

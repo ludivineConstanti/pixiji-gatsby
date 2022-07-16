@@ -2,20 +2,20 @@ import React from "react"
 
 import { SButton, SLink } from "./SButton"
 import { strokeWidth } from "src/styles/g"
-import { buttonTypeProp, sizeProp } from "../_common"
+import { sizeProp } from "../_common"
 
 interface ButtonWrapperProps {
   children: JSX.Element | JSX.Element[]
   path?: string
-  buttonType?: buttonTypeProp
   size?: sizeProp
+  onClick?: () => void
 }
 
 const ButtonWrapper = ({
-  buttonType,
   path,
   size,
   children,
+  onClick,
 }: ButtonWrapperProps) => {
   const vLink = {
     initial: {
@@ -29,7 +29,7 @@ const ButtonWrapper = ({
       width: size === "small" ? "160px" : "100%",
       padding: size === "small" ? "8px" : "24px",
       border: `${strokeWidth}px solid rgba(255, 255, 255, 1)`,
-      transition: { delay: 0.3 },
+      transition: { delay: 0.15 },
     },
     exit: {
       x: -250,
@@ -40,19 +40,7 @@ const ButtonWrapper = ({
   }
   return (
     <>
-      {buttonType ? (
-        <SButton
-          type={buttonType}
-          variants={vLink}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          whileHover="whileHover"
-          s={{ size }}
-        >
-          {children}
-        </SButton>
-      ) : (
+      {path ? (
         <SLink
           to={path}
           variants={vLink}
@@ -61,9 +49,23 @@ const ButtonWrapper = ({
           exit="exit"
           whileHover="whileHover"
           s={{ size }}
+          onClick={onClick}
         >
           {children}
         </SLink>
+      ) : (
+        <SButton
+          type="submit"
+          variants={vLink}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          whileHover="whileHover"
+          s={{ size }}
+          onClick={onClick}
+        >
+          {children}
+        </SButton>
       )}
     </>
   )

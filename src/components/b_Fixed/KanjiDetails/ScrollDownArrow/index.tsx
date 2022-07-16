@@ -1,9 +1,10 @@
 import React from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion } from "framer-motion"
 
+import { AnimatePresence } from "src/models/basics"
 import { useAppSelector } from "src/store"
 import { buttonArrowHT, buttonArrowHX } from "src/styles/animation"
-import Arrow from "src/components/e_interactives/arrow"
+import Arrow from "src/components/e_Interactives/Arrow"
 import { SWrapper, SWrapperArrow } from "./style"
 
 const MArrow = motion(Arrow)

@@ -1,7 +1,7 @@
 import React from "react"
 import { CSSProp } from "styled-components"
-import { AnimatePresence } from "framer-motion"
 
+import { AnimatePresence } from "src/models/basics"
 import SWrapper, { SContent, variants } from "./style"
 
 interface LeftPopUpProps {

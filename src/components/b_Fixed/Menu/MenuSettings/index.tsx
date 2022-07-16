@@ -7,13 +7,12 @@ import { updateCheating, updateEmail } from "src/reducer/slices/globalSlice"
 import { cheatingButtonFinishQuiz } from "src/reducer/slices/quizSlice"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { getUser, createUser } from "src/helpers/backEnd/users"
-import { dummyEmail, dummyPassword } from "src/constants"
-import { QuizIdOptions } from "src/models/models"
+import { dummyEmail, dummyPassword } from "src/models/constants"
 
 interface KanjisJsonProps {
   allKanjisJson: {
     nodes: {
-      quizId: QuizIdOptions
+      quizId: number
       kanjiId: number
     }[]
   }
@@ -79,12 +78,22 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
               console.log(error)
             }
 
-            const successLogIn = responseLogIn.data.data.getUser.success
+            let successLogIn = false
+
+            if (
+              typeof responseLogIn === "object" &&
+              responseLogIn.data &&
+              responseLogIn.data.data &&
+              responseLogIn.data.data.getUser
+            ) {
+              successLogIn = responseLogIn.data.data.getUser.success
+            }
 
             if (successLogIn) {
               dispatch(updateEmail(dummyEmail))
             } else {
               let responseCreateUser
+
               try {
                 responseCreateUser = await createUser({
                   email: dummyEmail,
@@ -95,8 +104,17 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
                 console.log(error)
               }
 
-              const successCreateUser =
-                responseCreateUser.data.data.getUser.success
+              let successCreateUser = false
+
+              if (
+                typeof responseCreateUser === "object" &&
+                responseCreateUser.data &&
+                responseCreateUser.data.data &&
+                responseCreateUser.data.data.createUser
+              ) {
+                successCreateUser =
+                  responseCreateUser.data.data.createUser.success
+              }
 
               if (successCreateUser) {
                 dispatch(updateEmail(dummyEmail))

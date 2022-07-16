@@ -27,14 +27,16 @@ export const globalSlice = createSlice({
         payload,
       }: {
         payload: {
-          previous?: string
-          darker?: string
-          main?: string
-          lighter?: string
+          main: string
+          lighter: string
         }
       }
     ) => {
-      state.color = { ...state.color, previous: state.color.main, ...payload }
+      state.color = {
+        previous: state.color.main,
+        main: payload.main,
+        lighter: payload.lighter,
+      }
     },
     updateMenuIsOpen: (state, { payload }: { payload: boolean }) => {
       state.menuIsOpen = payload
@@ -44,6 +46,7 @@ export const globalSlice = createSlice({
       { payload }: { payload: boolean | number }
     ) => {
       state.idSelectedKanji = payload
+      state.menuIsOpen = false
     },
   },
 })

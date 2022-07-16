@@ -11,12 +11,13 @@ import {
   arrIllu,
   colorIllu,
 } from "src/components/d_Illustrations/_data/rabbitOnMoon"
+import { paths } from "src/models/constants"
 
 const Home = () => {
   const { allKanjisJson } = useStaticQuery(graphql`
     query {
       allKanjisJson {
-        ...kanjisJsonFragment
+        ...kanjisJsonFragmentForIllustrations
       }
     }
   `)
@@ -43,7 +44,7 @@ const Home = () => {
             "This website is born from the thought that kanjis (Chinese characters that are used in the Japanese writing system) would work well with pixel art.",
           ],
         }}
-        buttonBig={{ text: "next", path: "/read-me" }}
+        buttonBig={{ text: "next", path: paths.readMe }}
       />
     </>
   )

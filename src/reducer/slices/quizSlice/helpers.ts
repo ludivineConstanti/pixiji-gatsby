@@ -1,41 +1,64 @@
 import { quizFormatter } from "src/helpers/formatters/quizFormatter"
-import { QuizIdOptions } from "src/models/models"
-import { RightOrWrongAnswerProps } from "./models"
+import { RightOrWrongAnswerProps, InitialStateProps } from "./models"
+import { returnformattedDate } from "src/helpers/index"
 
 export const kanjisInitial = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 const emptyAnswerAnsweredWrong: string[] = []
-const dateInStringFormat = new Date().toString()
 
 export const emptyAnswer = {
   answer: 0,
   infosAnswer: {
     answerIndex: 1,
-    answeredRight: [dateInStringFormat],
+    answeredRight: [returnformattedDate()],
     answeredWrong: emptyAnswerAnsweredWrong,
   },
 }
 
-// put it there since I need it in 2 different actions
-export const initialize = (payload: {
-  quizId: QuizIdOptions
+interface InitializeQuizStateProps {
+  state: InitialStateProps
+  quizId: number
   kanjis: number[]
-}) => {
-  const { quizId, kanjis } = payload
+  wrongAnswers?: RightOrWrongAnswerProps[]
+}
+
+export const initializeQuizState = ({
+  state,
+  quizId,
+  kanjis,
+  wrongAnswers,
+}: InitializeQuizStateProps) => {
+  const currentQuiz = state.data.find(data => data.quizId === quizId)
 
   const formattedQuiz = quizFormatter(kanjis)
   const rightAnswers: RightOrWrongAnswerProps[] = []
-  const wrongAnswers: RightOrWrongAnswerProps[] = []
+  const answeredQuestion: false | number = false
 
-  return {
+  const quizInitialData = {
     formattedQuiz,
     totalQuestions: formattedQuiz.length,
     quizId,
     finished: false,
-    answeredQuestion: false,
+    answeredQuestion,
     answeredCorrectly: false,
     rightAnswers,
-    wrongAnswers,
+    wrongAnswers: wrongAnswers ? sortWrongAnswers(wrongAnswers) : [],
+  }
+
+  // uf wrongAnswers are defined, it means we got it from the backend
+  // and state.data has been resetted
+  if (!currentQuiz || wrongAnswers) {
+    state.data = [...state.data, quizInitialData]
+  } else if (currentQuiz.finished) {
+    state.data = state.data.map(e => {
+      if (e.quizId === quizId) {
+        return {
+          ...quizInitialData,
+          wrongAnswers: sortWrongAnswers(e.wrongAnswers),
+        }
+      }
+      return e
+    })
   }
 }
 

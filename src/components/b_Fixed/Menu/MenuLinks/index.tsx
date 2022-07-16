@@ -4,12 +4,12 @@ import { useStaticQuery, graphql } from "gatsby"
 import MenuLink from "../MenuLink"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateEmail } from "src/reducer/slices/globalSlice"
-import { resetStateQuiz } from "src/reducer/slices/quizSlice"
 import SMenuLinks, { SContainer } from "./style"
-import { AllQuizFragmentProps } from "src/models/models"
+import { AllQuizFragmentForQuizLinkProps } from "src/models/models"
+import { paths } from "src/models/constants"
 
 interface QueryProps {
-  allQuiz: AllQuizFragmentProps
+  allQuiz: AllQuizFragmentForQuizLinkProps
 }
 
 const MenuLinks = () => {
@@ -34,25 +34,24 @@ const MenuLinks = () => {
   return (
     <SMenuLinks>
       <SContainer>
-        <MenuLink text="Home" path="/" />
-        <MenuLink text="Read me" path="/read-me" />
-        <MenuLink text="Quizzes" path={`/quizzes/${quizzesSlug}`} />
-        <MenuLink text="About" path="/about" />
+        <MenuLink text="Home" path={paths.home} />
+        <MenuLink text="Read me" path={paths.readMe} />
+        <MenuLink text="Quizzes" path={`${paths.quizzes}/${quizzesSlug}`} />
+        <MenuLink text="About" path={paths.about} />
         {isLoggedIn ? (
           <>
-            <MenuLink text="My profile" path="/my-profile" />
+            <MenuLink text="My profile" path={paths.myProfile} />
             <MenuLink
               text="Logout"
               onClick={() => {
                 dispatch(updateEmail(""))
-                dispatch(resetStateQuiz())
               }}
             />
           </>
         ) : (
           <>
-            <MenuLink text="Register" path="/register" />
-            <MenuLink text="Login" path="/login" />
+            <MenuLink text="Register" path={paths.register} />
+            <MenuLink text="Login" path={paths.login} />
           </>
         )}
       </SContainer>

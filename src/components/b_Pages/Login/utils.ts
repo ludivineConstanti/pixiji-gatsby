@@ -1,8 +1,6 @@
 import { updateEmail } from "src/reducer/slices/globalSlice"
-import { updateWrongAnswers } from "src/reducer/slices/quizSlice"
 import { AppDispatch } from "src/store"
 import { getUser } from "src/helpers/backEnd/users"
-import { getWorstScores } from "src/helpers/backEnd/scores"
 
 export const onSubmit = async (
   event: React.FormEvent<HTMLFormElement>,
@@ -21,8 +19,14 @@ export const onSubmit = async (
   event.preventDefault()
   setFeedback({ ...feedback, message: "Loading..." })
 
-  const email = event.target[0].value
-  const password = event.target[1].value
+  // need to do it in various step so that typescripts types it correctly
+  const target = event.target as HTMLFormElement
+
+  const emailElement = target[0] as HTMLInputElement
+  const email = emailElement.value
+
+  const passwordElement = target[1] as HTMLInputElement
+  const password = passwordElement.value
 
   const responseLogIn = await getUser({ email, password })
 
@@ -38,14 +42,4 @@ export const onSubmit = async (
   }
 
   setFeedback(result)
-
-  if (!result.success) {
-    return
-  }
-  const responseWorstScores = await getWorstScores({ email })
-
-  console.log(responseWorstScores)
-  console.log(responseWorstScores.data.data)
-  console.log(responseWorstScores.data.data.getWorstScores)
-  dispatch(updateWrongAnswers(responseWorstScores.data.data.getWorstScores))
 }

@@ -7,7 +7,9 @@
     "no-console": [true, "log", "error"],
     "ordered-imports": false,
     "object-literal-sort-keys": false,
-    "object-literal-shorthand": true
+    "object-literal-shorthand": true,
+    "no-submodule-imports": [true, "src"],
+    "no-implicit-dependencies": [true, ["src"]]
   },
   "linterOptions": {
     "exclude": ["config/**/*.js", "node_modules/**/*.ts"]

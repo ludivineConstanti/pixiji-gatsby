@@ -1,5 +1,5 @@
 import React from "react"
-import { useTransform, MotionValue } from "framer-motion"
+import { useTransform, MotionValue, Variants } from "framer-motion"
 
 import { SStar } from "./style"
 
@@ -23,7 +23,7 @@ export const createVStar = (
 export const createStar = (
   array: JSX.Element[],
   size: number,
-  variants,
+  variants: Variants,
   key: string,
   color: string
 ) => {

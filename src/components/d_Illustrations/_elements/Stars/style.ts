@@ -38,7 +38,7 @@ export const SStar = styled(motion.div).attrs<Attrs>(props => ({
   }
 `
 
-export const SStarContainer = styled(motion.div)`
+export const SStarContainer = styled(motion.div)<{ init: "init" }>`
   width: 100%;
   height: 100vh;
   position: fixed;

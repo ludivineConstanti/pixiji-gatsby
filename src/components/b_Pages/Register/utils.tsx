@@ -5,7 +5,7 @@ import { AppDispatch } from "src/store"
 import { createUser } from "src/helpers/backEnd/users"
 
 export const onSubmit = async (
-  e: React.FormEvent<HTMLFormElement>,
+  event: React.FormEvent<HTMLFormElement>,
   feedback: {
     success: boolean
     message: string
@@ -18,12 +18,20 @@ export const onSubmit = async (
   >,
   dispatch: AppDispatch
 ) => {
-  e.preventDefault()
+  event.preventDefault()
   setFeedback({ ...feedback, message: "Loading..." })
 
-  const email: string = e.target[0].value
-  const password1: string = e.target[1].value
-  const password2: string = e.target[2].value
+  // need to do it in various step so that typescripts types it correctly
+  const target = event.target as HTMLFormElement
+
+  const emailElement = target[0] as HTMLInputElement
+  const email = emailElement.value
+
+  const password1Element = target[1] as HTMLInputElement
+  const password1 = password1Element.value
+
+  const password2Element = target[2] as HTMLInputElement
+  const password2 = password2Element.value
 
   const arrPasswordProblems = []
 
