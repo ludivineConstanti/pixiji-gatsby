@@ -19,7 +19,7 @@ export interface InitialStateProps {
     totalQuestions: number
     quizId: number
     finished: boolean
-    answeredQuestion: boolean
+    answeredQuestion: boolean | number
     answeredCorrectly: boolean
     rightAnswers: RightOrWrongAnswerProps[]
     wrongAnswers: RightOrWrongAnswerProps[]

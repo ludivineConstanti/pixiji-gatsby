@@ -1,5 +1,5 @@
 import React, { useEffect, memo, useMemo } from "react"
-import { useMotionValue } from "framer-motion"
+import { useMotionValue, Variants } from "framer-motion"
 
 import { SStarContainer } from "./style"
 import { createStar, createVStar, useCreateTranslate } from "./helpers"
@@ -40,9 +40,9 @@ const Stars = ({ color }: StarsProps) => {
     const colorL1 = color
 
     const vStar = {
-      s: createVStar([1, 0.5], [color, colorL1], 250),
-      m: createVStar([0.75, 1], [colorL1, color], 500),
-      l: createVStar([1, 0.9], [color, colorL1], 7500),
+      s: createVStar([1, 0.5], [color, colorL1], 250) as Variants,
+      m: createVStar([0.75, 1], [colorL1, color], 500) as Variants,
+      l: createVStar([1, 0.9], [color, colorL1], 7500) as Variants,
     }
 
     const arrStars: ArrStars = { s: [], m: [], l: [] }
