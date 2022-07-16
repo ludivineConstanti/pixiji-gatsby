@@ -6,27 +6,24 @@ This website helps you to train your kanjis (characters from the Japanese writin
 
 The ⚡⚡⚡ mdDocumentation folder ⚡⚡⚡ contains some observations made during the project (bugs, research...). Other observations are made in the code itself as comment.
 
-I used the code of an other repository to make that one (I started "from scratch" again when I started using gatsby) you can see the previous git history on [this repository](https://github.com/ludivineConstanti/Pixiji).
+You can see the previous git history of this project on [this repository](https://github.com/ludivineConstanti/Pixiji), which contains the 1st version of this website.
 
-This is a portfolio project, so some feature were created, just to make the website easier to go through:
+### This is a portfolio project, so some feature were created, just to make the website easier to go through:
 
-- A cheating mode, that you can change in the menu, is on by default and change the answer's colors to show the right one.
-- You can finish or restart the quiz just by clicking on one button (also in the menu, but only visible when you are playing the quiz).
-- You have access to all the quizzes (no content is locked).
+- A "Use Dummy email" button (in the menu) allows you to log in a pre-existing account (which already has some scores, from the quizzes).
+- A "Cheat mode" button (in the menu) is on by default and change the answer's colors to show the right one.
+- It is possible to finish or restart the quiz just by clicking on one button (also in the menu, but only visible when you are playing the quiz).
+- No content is locked (all quizzes are available, there is no need to attain a certain level at the 1st one to unlock the 2nd and so on...).
+- The 404 page has links to my linkedin account and github repositories.
 
-And some others are following the original concept of being a learning experience:
+### And some others are following the original concept of being a learning experience:
 
 - The quiz is randomized, so each time you reload, you get different questions.
 - It keeps track of the wrong answers, so it will keep asking the same question over and over until you answer correctly.
 - The pixel art on the right (when you play the quiz) show you the answers again (and their translation), if you want to spend more time looking at them.
-- You can see japanese characters (and their prononciation + translation) on every page of the website (it reacts on hover).
+- You can see japanese characters (and their pronunciation + translation) on every page of the website (it reacts on hover).
+- If you click on the japanese characters that are displayed in the illustrations, more details will be shown (translation and use cases, and your scores, for this character, if you are logged in).
 
-## 🤓 Things I learned:
+## ✏️ Related projects
 
-- Redux toolkit makes it easier to write code and in a more succinct way.
-- Styled-Components can help you style your React components in JavaScript (I didn't know it existed).
-- Animation libraries are great (I mainly used CSS animations before, which are much more limited, and started trying to do things on my own, with JavaScript before reading that GSAP could make that so much easier).
-- It's better to use transform properties for animation (causes less bugs and is more performant).
-- It's better to use a toolset that works well together: I used GSAP at the beginning of the project, because that was the main library that I heard of. Afterward, I learned about framer-motion and it made a lot of things less complicated and shorter to write (I needed to use hooks to keep the animation state in memory. ref to know which element to animate, and then my animation didn't properly update when a prop updated... framer motion made a lot of that easier).
-- Using more libraries simplifies the code, but make it harder to find what you want (small documentation, small community, limited options...)
-- Too much organisation is not necessarily good (I tried to organise my state in advance, without having any real reason to, and same thing for writing code again afterward, I was ready to rechange a lot of the structure, when it wasn't necessary).
+You can find the [back-end of this project](https://github.com/ludivineConstanti/pixiji-data) on my github account, as well as a small [web scraper](https://github.com/ludivineConstanti/pixiji-web-scraper) that was created to gather the data used for the kanjis.

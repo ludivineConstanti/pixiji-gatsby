@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react"
+import React, { useState, useEffect, useMemo } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import {
@@ -33,12 +33,19 @@ const MyProfile = () => {
 
   const email = useAppSelector(state => state.global.email)
 
+  const [isLoggedOutOnFirstVisit, setIsLoggedOutOnFirstVisit] = useState(false)
   const [uiState, setUiState] = useState(uiStateOptions.default)
 
   const kanjisArr = useMemo(
     () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
     [arrIllu]
   )
+
+  useEffect(() => {
+    if (!email) {
+      setIsLoggedOutOnFirstVisit(true)
+    }
+  }, [])
 
   return (
     <>
@@ -47,7 +54,13 @@ const MyProfile = () => {
         renderIllu={data => <SeaTurtles data={data} />}
         arrDataIllu={{ arrIllu, colorIllu }}
       />
-      {email ? (
+      {!email && isLoggedOutOnFirstVisit ? (
+        <TextWrapper>
+          <Text>You need to be logged in to access this page.</Text>
+          <ButtonInText text="Login" path={paths.login} />
+          <ButtonInText text="Register" path={paths.register} />
+        </TextWrapper>
+      ) : (
         <>
           {uiState === uiStateOptions.default && (
             <DefaultState setUiState={setUiState} />
@@ -62,12 +75,6 @@ const MyProfile = () => {
             <DeleteAccount setUiState={setUiState} />
           )}
         </>
-      ) : (
-        <TextWrapper>
-          <Text>You need to be logged in to access this page.</Text>
-          <ButtonInText text="Login" path={paths.login} />
-          <ButtonInText text="Register" path={paths.register} />
-        </TextWrapper>
       )}
     </>
   )
