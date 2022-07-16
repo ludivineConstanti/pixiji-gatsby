@@ -83,7 +83,7 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
     if (currentQuizData.length > 0) {
       if (numFirstTry.length === currentQuizData[0].totalQuestions) {
         textAnsweredCorrectly =
-          "Amazing! You answered all the questions, on your first try, correctly!"
+          "Amazing! You answered all the questions correctly on your first try!"
       } else if (numFirstTry.length === 0) {
         textAnsweredCorrectly = `You answered ${numFirstTry.length} question${
           numFirstTry.length > 1 ? "s" : ""
@@ -92,7 +92,7 @@ const Quizzes = ({ currentQuiz }: QuizzesProps) => {
     }
 
     const textWrongAnswers =
-      kanjisArr.length > 0
+      kanjisArr.filter(e => e.answer !== 0).length > 0
         ? `Hover the squares on the right to look at the answer${
             kanjisArr.length > 1 ? "s" : ""
           } you got wrong.`
