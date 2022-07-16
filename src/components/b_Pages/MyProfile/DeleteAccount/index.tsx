@@ -22,7 +22,12 @@ const DeleteAccount = ({ setUiState }: DeleteAccountProps) => {
       <SForm
         onSubmit={async event => {
           event.preventDefault()
-          const password = event.target[0].value
+
+          // need to do it in various step so that typescripts types it correctly
+          const target = event.target as HTMLFormElement
+
+          const passwordElement = target[0] as HTMLInputElement
+          const password = passwordElement.value
           if (!password) {
             setFeedback({
               success: false,

@@ -25,7 +25,11 @@ const UpdateEmail = ({ setUiState }: UpdateEmailProps) => {
         onSubmit={async event => {
           event.preventDefault()
 
-          const newEmail = event.target[0].value
+          // need to do it in various step so that typescripts types it correctly
+          const target = event.target as HTMLFormElement
+
+          const newEmailElement = target[0] as HTMLInputElement
+          const newEmail = newEmailElement.value
 
           if (!newEmail) {
             setFeedback({
@@ -35,7 +39,8 @@ const UpdateEmail = ({ setUiState }: UpdateEmailProps) => {
             return
           }
 
-          const newEmailConfirmation = event.target[1].value
+          const newEmailConfirmationElement = target[1] as HTMLInputElement
+          const newEmailConfirmation = newEmailConfirmationElement.value
 
           if (newEmail !== newEmailConfirmation) {
             setFeedback({ success: false, message: "The emails do not match." })
@@ -51,7 +56,8 @@ const UpdateEmail = ({ setUiState }: UpdateEmailProps) => {
             return
           }
 
-          const password = event.target[2].value
+          const passwordElement = target[2] as HTMLInputElement
+          const password = passwordElement.value
 
           if (!password) {
             setFeedback({

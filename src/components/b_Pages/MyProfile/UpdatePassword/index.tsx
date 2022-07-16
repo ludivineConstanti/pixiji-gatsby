@@ -22,9 +22,17 @@ const UpdatePassword = ({ setUiState }: UpdatePasswordProps) => {
         onSubmit={async event => {
           event.preventDefault()
 
-          const password = event.target[0].value
-          const newPassword = event.target[1].value
-          const newPasswordConfirmation = event.target[2].value
+          // need to do it in various step so that typescripts types it correctly
+          const target = event.target as HTMLFormElement
+
+          const passwordElement = target[0] as HTMLInputElement
+          const password = passwordElement.value
+
+          const newPasswordElement = target[1] as HTMLInputElement
+          const newPassword = newPasswordElement.value
+
+          const newPasswordConfirmationElement = target[2] as HTMLInputElement
+          const newPasswordConfirmation = newPasswordConfirmationElement.value
 
           if (!password) {
             setFeedback({

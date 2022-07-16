@@ -19,8 +19,14 @@ export const onSubmit = async (
   event.preventDefault()
   setFeedback({ ...feedback, message: "Loading..." })
 
-  const email = event.target[0].value
-  const password = event.target[1].value
+  // need to do it in various step so that typescripts types it correctly
+  const target = event.target as HTMLFormElement
+
+  const emailElement = target[0] as HTMLInputElement
+  const email = emailElement.value
+
+  const passwordElement = target[1] as HTMLInputElement
+  const password = passwordElement.value
 
   const responseLogIn = await getUser({ email, password })
 
