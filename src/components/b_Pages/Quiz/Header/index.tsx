@@ -1,7 +1,7 @@
 import React from "react"
-import { AnimatePresence } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
 
+import { AnimatePresence } from "src/models/basics"
 import { useAppSelector } from "src/store"
 import SHeader from "./style"
 import ProgressBar from "../ProgressBar"

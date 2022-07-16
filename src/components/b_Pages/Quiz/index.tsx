@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react"
-import { AnimatePresence } from "framer-motion"
 import { useStaticQuery, graphql } from "gatsby"
 
+import { AnimatePresence } from "src/models/basics"
 import { useAppDispatch, useAppSelector } from "src/store"
 import { updateIdQuiz, initializeQuiz } from "src/reducer/slices/quizSlice"
 import IlluQuiz from "src/components/d_Illustrations/IlluQuiz"

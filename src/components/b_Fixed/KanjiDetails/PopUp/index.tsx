@@ -1,8 +1,8 @@
 import React from "react"
-import { AnimatePresence } from "framer-motion"
 
 import { useAppSelector } from "src/store"
 import { SWrapper, SBackgroundColor } from "./style"
+import { AnimatePresence } from "src/models/basics"
 
 const variants = {
   initial: { transform: "scale(0) translate(0, -100%)" },
