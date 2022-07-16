@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useEffect, useState } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import { useAppDispatch, useAppSelector } from "src/store"
@@ -34,12 +34,19 @@ const Register = () => {
 
   const dispatch = useAppDispatch()
 
+  const [isLoggedInOnFirstVisit, setIsLoggedInOnFirstVisit] = useState(false)
   const email = useAppSelector(state => state.global.email)
 
   const kanjisArr = useMemo(
     () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
     []
   )
+
+  useEffect(() => {
+    if (email) {
+      setIsLoggedInOnFirstVisit(true)
+    }
+  }, [])
 
   return (
     <>
@@ -48,7 +55,7 @@ const Register = () => {
         renderIllu={data => <SakuraBirds data={data} />}
         arrDataIllu={{ arrIllu, colorIllu }}
       />
-      {email ? (
+      {email && isLoggedInOnFirstVisit ? (
         <TextWrapper>
           <Text>You can not register a new account while being logged in.</Text>
           <ButtonInText

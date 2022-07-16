@@ -5,7 +5,7 @@ import { AppDispatch } from "src/store"
 import { createUser } from "src/helpers/backEnd/users"
 
 export const onSubmit = async (
-  e: React.FormEvent<HTMLFormElement>,
+  event: React.FormEvent<HTMLFormElement>,
   feedback: {
     success: boolean
     message: string
@@ -18,7 +18,7 @@ export const onSubmit = async (
   >,
   dispatch: AppDispatch
 ) => {
-  e.preventDefault()
+  event.preventDefault()
   setFeedback({ ...feedback, message: "Loading..." })
 
   // need to do it in various step so that typescripts types it correctly

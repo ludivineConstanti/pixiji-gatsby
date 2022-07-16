@@ -78,7 +78,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
               console.log(error)
             }
 
-            let successLogIn
+            let successLogIn = false
 
             if (
               typeof responseLogIn === "object" &&
@@ -93,6 +93,7 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
               dispatch(updateEmail(dummyEmail))
             } else {
               let responseCreateUser
+
               try {
                 responseCreateUser = await createUser({
                   email: dummyEmail,
@@ -103,15 +104,16 @@ const MenuSettings = ({ isPlaying }: MenuSettingsProps) => {
                 console.log(error)
               }
 
-              let successCreateUser
+              let successCreateUser = false
 
               if (
                 typeof responseCreateUser === "object" &&
                 responseCreateUser.data &&
                 responseCreateUser.data.data &&
-                responseCreateUser.data.data.getUser
+                responseCreateUser.data.data.createUser
               ) {
-                successCreateUser = responseCreateUser.data.data.getUser.success
+                successCreateUser =
+                  responseCreateUser.data.data.createUser.success
               }
 
               if (successCreateUser) {

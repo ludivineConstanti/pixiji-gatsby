@@ -1,4 +1,4 @@
-import React, { useMemo } from "react"
+import React, { useMemo, useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 import {
@@ -34,11 +34,18 @@ const Login = () => {
 
   const dispatch = useAppDispatch()
 
+  const [isLoggedInOnFirstVisit, setIsLoggedInOnFirstVisit] = useState(false)
   const email = useAppSelector(state => state.global.email)
 
   const kanjisArr = useMemo(() => {
     const kanjisNum = getKanjisNum(arrIllu)
     return kanjisArrFormatter(allKanjisJson.nodes, kanjisNum)
+  }, [])
+
+  useEffect(() => {
+    if (email) {
+      setIsLoggedInOnFirstVisit(true)
+    }
   }, [])
 
   return (
@@ -48,7 +55,7 @@ const Login = () => {
         renderIllu={data => <RedPanda data={data} />}
         arrDataIllu={{ arrIllu, colorIllu }}
       />
-      {email ? (
+      {email && isLoggedInOnFirstVisit ? (
         <TextWrapper>
           <Text>You're already logged in!</Text>
           <ButtonInText
