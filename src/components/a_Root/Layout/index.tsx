@@ -63,7 +63,6 @@ const Layout = ({ children, isPlaying = false }: LayoutProps) => {
           }
         })
       } else {
-        console.log("reset state quiz")
         dispatch(resetStateQuiz())
       }
     }

@@ -5,8 +5,8 @@ import { SText } from "../style"
 import { SWrapperText, SOtherOptions } from "./style"
 import PopUpButton from "src/components/e_Interactives/PopUpButton"
 import { getScore } from "src/helpers/backEnd/scores"
-import { returnformattedDate } from "src/helpers/index"
 import HasScoreData from "./HasScoreData"
+import { dateToNumberArray } from "./util"
 
 const timeOptions = [
   {
@@ -35,8 +35,6 @@ const timeOptions = [
   },
 ]
 
-const dateToNumberArray = (date: string) => date.split("-").map(e => +e)
-
 interface CurrentScoreDataDefaultProps {
   state: "loading"
 }
@@ -52,12 +50,12 @@ const IsLoggedIn = () => {
   const kanjiId = useAppSelector(state => state.global.idSelectedKanji)
 
   const [otherOptionsAreVisible, setOtherOptionsAreVisible] = useState(false)
-  const [currentTimeOption, setCurrentTimeOption] = useState(timeOptions[0])
+  const [currentTimeOption, setCurrentTimeOption] = useState(
+    timeOptions[timeOptions.length - 1]
+  )
   const [currentScoreData, setCurrentScoreData] = useState<
     CurrentScoreDataDefaultProps | CurrentScoreDataProps
   >({ state: "loading" })
-
-  const currentDate = dateToNumberArray(returnformattedDate())
 
   getScore({ email, kanjiId: `${kanjiId}` }).then(response => {
     if (response.data && response.data.data && response.data.data.getScore) {
@@ -84,7 +82,7 @@ const IsLoggedIn = () => {
                   .map(e => (
                     <PopUpButton
                       text={e.text}
-                      key={`StatisticTimeOption${e}`}
+                      key={`StatisticTimeOption${e.text}`}
                       onClick={() => {
                         setCurrentTimeOption(e)
                         setOtherOptionsAreVisible(false)
@@ -107,14 +105,10 @@ const IsLoggedIn = () => {
           <SText>Loading...</SText>
         ) : (
           <HasScoreData
-            answeredRight={currentTimeOption.filteringFunction(
-              currentScoreData.answeredRight,
-              currentDate
-            )}
-            answeredWrong={currentTimeOption.filteringFunction(
-              currentScoreData.answeredWrong,
-              currentDate
-            )}
+            answeredRight={currentScoreData.answeredRight}
+            answeredWrong={currentScoreData.answeredWrong}
+            filteringFunction={currentTimeOption.filteringFunction}
+            selectedTime={currentTimeOption.text}
           />
         )}
       </SWrapperText>
@@ -123,3 +117,7 @@ const IsLoggedIn = () => {
 }
 
 export default IsLoggedIn
+
+{
+  /*  */
+}
