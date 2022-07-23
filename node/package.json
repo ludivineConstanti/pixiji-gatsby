@@ -1,0 +1,13 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node --loader @k-foss/ts-esnode --experimental-specifier-resolution=node ./index.ts"
+  },
+  "dependencies": {
+    "@k-foss/ts-esnode": "^2.0.2",
+    "fs": "^0.0.1-security"
+  }
+}

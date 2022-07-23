@@ -9,32 +9,44 @@ import { useAppSelector } from "src/store"
 import PageWithText from "src/components/c_Partials/PageWithText"
 import LinkIcon from "src/components/e_Interactives/LinkIcon/index"
 import CloudDragon from "src/components/d_Illustrations/_compIllus/CloudDragon"
-import {
-  arrIllu,
-  colorIllu,
-} from "src/components/d_Illustrations/_data/cloudDragon"
 import SLinkIconContainer from "./SError404"
 import {
   KanjisJsonFragmentForIllustrationsProps,
   AllQuizFragmentForQuizLinkProps,
+  IlluQueryProps,
 } from "src/models/models"
+import { colors } from "src/models/constants"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentForIllustrationsProps
   allQuiz: AllQuizFragmentForQuizLinkProps
+  allCloudDragonJson: IlluQueryProps
 }
 
 const Error404 = () => {
-  const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
-    query {
-      allKanjisJson {
-        ...kanjisJsonFragmentForIllustrations
+  const { allKanjisJson, allQuiz, allCloudDragonJson } =
+    useStaticQuery<QueryProps>(graphql`
+      query {
+        allKanjisJson {
+          ...kanjisJsonFragmentForIllustrations
+        }
+        allQuiz {
+          ...quizFragmentForQuizLink
+        }
+        allCloudDragonJson {
+          nodes {
+            main
+            color
+            column
+            indexIllu
+            indexKanjiGroup
+            row
+            size
+            position
+          }
+        }
       }
-      allQuiz {
-        ...quizFragmentForQuizLink
-      }
-    }
-  `)
+    `)
 
   const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
   const quizzesSlug = allQuiz.nodes.filter(
@@ -42,8 +54,12 @@ const Error404 = () => {
   )[0].slug
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
-    [arrIllu]
+    () =>
+      kanjisArrFormatter(
+        allKanjisJson.nodes,
+        getKanjisNum(allCloudDragonJson.nodes)
+      ),
+    [allCloudDragonJson, allKanjisJson]
   )
 
   return (
@@ -52,7 +68,10 @@ const Error404 = () => {
         illu={{
           kanjisArr,
           renderIllu: data => <CloudDragon data={data} />,
-          arrDataIllu: { arrIllu, colorIllu },
+          arrDataIllu: {
+            arrIllu: allCloudDragonJson.nodes,
+            colorIllu: colors.cloudDragon.background,
+          },
         }}
         textWithTitle={{
           title: "404",

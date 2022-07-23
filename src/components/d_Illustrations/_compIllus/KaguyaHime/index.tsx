@@ -4,7 +4,7 @@ import Stars from "src/components/d_Illustrations/_elements/Stars"
 import IlluGround from "src/components/d_Illustrations/_elements/IlluGround"
 import IlluDecoOnGround from "src/components/d_Illustrations/_elements/IlluDecoOnGround"
 import { vBackgroundText } from "src/styles/animation"
-import { colorMoon } from "src/components/d_Illustrations/_data/kaguyaHime"
+import { colors } from "src/models/constants"
 import {
   bambooColors,
   SMoon,
@@ -21,7 +21,7 @@ interface KaguyaHimeProps {
 
 const KaguyaHime = ({ data, kanjis, totalKanjis }: KaguyaHimeProps) => (
   <>
-    <Stars color={colorMoon} />
+    <Stars color={colors.kaguyaHime.colorMoon} />
     <IlluGround color={bambooColors[2]} />
     {bSettings.map((bamboo, i) => (
       <IlluDecoOnGround

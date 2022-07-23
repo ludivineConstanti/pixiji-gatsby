@@ -7,23 +7,45 @@ import {
 } from "src/helpers/formatters/kanjisArrFormatter"
 import PageWithText from "src/components/c_Partials/PageWithText"
 import RabbitOnMoon from "src/components/d_Illustrations/_compIllus/RabbitOnMoon"
+import { paths, colors } from "src/models/constants"
 import {
-  arrIllu,
-  colorIllu,
-} from "src/components/d_Illustrations/_data/rabbitOnMoon"
-import { paths } from "src/models/constants"
+  KanjisJsonFragmentForIllustrationsProps,
+  IlluQueryProps,
+} from "src/models/models"
+
+interface QueryProps {
+  allKanjisJson: KanjisJsonFragmentForIllustrationsProps
+  allRabbitOnMoonJson: IlluQueryProps
+}
 
 const Home = () => {
-  const { allKanjisJson } = useStaticQuery(graphql`
-    query {
-      allKanjisJson {
-        ...kanjisJsonFragmentForIllustrations
+  const { allKanjisJson, allRabbitOnMoonJson } =
+    useStaticQuery<QueryProps>(graphql`
+      query {
+        allKanjisJson {
+          ...kanjisJsonFragmentForIllustrations
+        }
+        allRabbitOnMoonJson {
+          nodes {
+            main
+            color
+            column
+            indexIllu
+            indexKanjiGroup
+            row
+            size
+            position
+          }
+        }
       }
-    }
-  `)
+    `)
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
+    () =>
+      kanjisArrFormatter(
+        allKanjisJson.nodes,
+        getKanjisNum(allRabbitOnMoonJson.nodes)
+      ),
     []
   )
 
@@ -34,8 +56,8 @@ const Home = () => {
           kanjisArr,
           renderIllu: data => <RabbitOnMoon data={data} />,
           arrDataIllu: {
-            arrIllu,
-            colorIllu,
+            arrIllu: allRabbitOnMoonJson.nodes,
+            colorIllu: colors.rabbitOnMoon.background,
           },
         }}
         textWithTitle={{

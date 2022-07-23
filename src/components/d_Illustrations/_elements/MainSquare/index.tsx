@@ -67,6 +67,9 @@ const MainSquare = ({
   const v = useMemo(() => {
     const scaleFactor = 8 / size
 
+    const darkerColor1 = darkerColor(colorRGB)
+    const darkerColor2 = darkerColor(darkerColor1)
+
     return {
       mainSquare: {
         initial: {
@@ -80,10 +83,11 @@ const MainSquare = ({
           scale: scaleFactor,
           zIndex: zIMainSquareHover,
           padding: `${8 / scaleFactor}px`,
-          backgroundColor: `rgb(${darkerColor(colorRGB).r}, ${
-            darkerColor(colorRGB).g
-          }, ${darkerColor(colorRGB).b})`,
+          backgroundColor: `rgb(${darkerColor1.r}, ${darkerColor1.g}, ${darkerColor1.b})`,
           transition: { type: "spring", damping: 15 },
+        },
+        whileTap: {
+          backgroundColor: `rgb(${darkerColor2.r}, ${darkerColor2.g}, ${darkerColor2.b})`,
         },
       },
 
@@ -136,6 +140,7 @@ const MainSquare = ({
           ? "whileHoverOn"
           : "whileHoverOff"
       }
+      whileTap="whileTap"
       exit="initial"
       onClick={() => {
         dispatch(updateIdSelectedKanji(answer.kanjiId))

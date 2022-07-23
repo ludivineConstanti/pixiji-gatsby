@@ -14,7 +14,7 @@ import {
   contentLMarginLT,
   contentLWidthR,
 } from "src/styles/g"
-import { colorIllu } from "src/components/d_Illustrations/_data/kaguyaHime"
+import { colors } from "src/models/constants"
 
 export const bambooColors = ["#057B73", "#04625C", "#034A45"]
 
@@ -69,7 +69,7 @@ export const bSettings: BSettingsProps[] = [
 export const SBackgroundColor = styled(motion.div)`
   ${contentLWidthR}
   top: 0;
-  background-color: ${colorIllu};
+  background-color: ${colors.kaguyaHime.background};
   left: ${contentLMarginLM};
   position: fixed;
   height: calc(${contentLMarginLM} * 1.5);

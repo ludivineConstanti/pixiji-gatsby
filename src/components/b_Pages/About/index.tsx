@@ -7,32 +7,43 @@ import {
 } from "src/helpers/formatters/kanjisArrFormatter"
 import PageWithText from "src/components/c_Partials/PageWithText"
 import KaguyaHime from "src/components/d_Illustrations/_compIllus/KaguyaHime"
-import {
-  arrIllu,
-  colorIllu,
-} from "src/components/d_Illustrations/_data/kaguyaHime"
 import { useAppSelector } from "src/store"
 import {
   KanjisJsonFragmentForIllustrationsProps,
   AllQuizFragmentForQuizLinkProps,
+  IlluQueryProps,
 } from "src/models/models"
+import { colors } from "src/models/constants"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentForIllustrationsProps
   allQuiz: AllQuizFragmentForQuizLinkProps
+  allKaguyaHimeJson: IlluQueryProps
 }
 
 const About = () => {
-  const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
-    query {
-      allKanjisJson {
-        ...kanjisJsonFragmentForIllustrations
+  const { allKanjisJson, allQuiz, allKaguyaHimeJson } =
+    useStaticQuery<QueryProps>(graphql`
+      query {
+        allKanjisJson {
+          ...kanjisJsonFragmentForIllustrations
+        }
+        allQuiz {
+          ...quizFragmentForQuizLink
+        }
+        allKaguyaHimeJson {
+          nodes {
+            main
+            color
+            column
+            indexIllu
+            indexKanjiGroup
+            row
+            size
+          }
+        }
       }
-      allQuiz {
-        ...quizFragmentForQuizLink
-      }
-    }
-  `)
+    `)
 
   const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
   const quizzesSlug = allQuiz.nodes.filter(
@@ -40,8 +51,12 @@ const About = () => {
   )[0].slug
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
-    [arrIllu]
+    () =>
+      kanjisArrFormatter(
+        allKanjisJson.nodes,
+        getKanjisNum(allKaguyaHimeJson.nodes)
+      ),
+    [allKanjisJson, allKaguyaHimeJson]
   )
 
   return (
@@ -52,7 +67,10 @@ const About = () => {
           renderIllu: (data, kanjis) => (
             <KaguyaHime data={data} kanjis={kanjis} totalKanjis={kanjis} />
           ),
-          arrDataIllu: { arrIllu, colorIllu },
+          arrDataIllu: {
+            arrIllu: allKaguyaHimeJson.nodes,
+            colorIllu: colors.kaguyaHime.background,
+          },
         }}
         textWithTitle={{
           title: "About",
