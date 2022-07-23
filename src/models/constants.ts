@@ -12,7 +12,7 @@ export enum paths {
   login = "/login",
 }
 
-export const colors = {
+export const illuColors = {
   cloudDragon: {
     orangeL2: "#FFA897",
     background: "#002A51",

@@ -57,13 +57,13 @@ const fishMaker = (hue: number) => {
         size: 1,
         column: 4,
         row: 5,
-        color: color,
+        color,
       },
       {
         size: 1,
         column: 4,
         row: 6,
-        color: color,
+        color,
       },
       {
         size: 1,
@@ -159,19 +159,19 @@ const fishMaker = (hue: number) => {
         size: 1,
         column: 8,
         row: 4,
-        color: color,
+        color,
       },
       {
         size: 1,
         column: 8,
         row: 5,
-        color: color,
+        color,
       },
       {
         size: 1,
         column: 9,
         row: 3,
-        color: color,
+        color,
       },
       {
         size: 1,
@@ -201,7 +201,7 @@ const fishMaker = (hue: number) => {
         size: 2,
         column: 10,
         row: 3,
-        color: color,
+        color,
       },
       {
         size: 3,
@@ -266,7 +266,7 @@ const fishMaker = (hue: number) => {
         size: 2,
         column: 12,
         row: 3,
-        color: color,
+        color,
       },
       {
         size: 2,

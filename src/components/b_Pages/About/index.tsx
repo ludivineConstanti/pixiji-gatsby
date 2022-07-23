@@ -13,7 +13,7 @@ import {
   AllQuizFragmentForQuizLinkProps,
   IlluQueryProps,
 } from "src/models/models"
-import { colors } from "src/models/constants"
+import { illuColors } from "src/models/constants"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentForIllustrationsProps
@@ -69,7 +69,7 @@ const About = () => {
           ),
           arrDataIllu: {
             arrIllu: allKaguyaHimeJson.nodes,
-            colorIllu: colors.kaguyaHime.background,
+            colorIllu: illuColors.kaguyaHime.background,
           },
         }}
         textWithTitle={{

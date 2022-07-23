@@ -11,7 +11,7 @@ import Illu from "src/components/d_Illustrations/Illu"
 import Text from "src/components/f_Statics/Text"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
 import RedPanda from "src/components/d_Illustrations/_compIllus/RedPanda"
-import { colors } from "src/models/constants"
+import { illuColors } from "src/models/constants"
 import {
   KanjisJsonFragmentForIllustrationsProps,
   IlluQueryProps,
@@ -68,7 +68,7 @@ const Login = () => {
         renderIllu={data => <RedPanda data={data} />}
         arrDataIllu={{
           arrIllu: allRedPandaJson.nodes,
-          colorIllu: colors.redPanda.background,
+          colorIllu: illuColors.redPanda.background,
         }}
       />
       {email && isLoggedInOnFirstVisit ? (

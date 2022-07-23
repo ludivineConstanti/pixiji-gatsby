@@ -7,7 +7,7 @@ import {
 } from "src/helpers/formatters/kanjisArrFormatter"
 import PageWithText from "src/components/c_Partials/PageWithText"
 import RabbitOnMoon from "src/components/d_Illustrations/_compIllus/RabbitOnMoon"
-import { paths, colors } from "src/models/constants"
+import { paths, illuColors } from "src/models/constants"
 import {
   KanjisJsonFragmentForIllustrationsProps,
   IlluQueryProps,
@@ -57,7 +57,7 @@ const Home = () => {
           renderIllu: data => <RabbitOnMoon data={data} />,
           arrDataIllu: {
             arrIllu: allRabbitOnMoonJson.nodes,
-            colorIllu: colors.rabbitOnMoon.background,
+            colorIllu: illuColors.rabbitOnMoon.background,
           },
         }}
         textWithTitle={{

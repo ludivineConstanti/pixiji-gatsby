@@ -9,12 +9,12 @@ import { DataIlluProps } from "src/models/models"
 
 const returnIlluFunction = (currentQuizId: number) => {
   if (currentQuizId === 1) {
-    return data => <SnowMonkeys data={data} />
+    return (data: JSX.Element[][]) => <SnowMonkeys data={data} />
   }
   if (currentQuizId === 2) {
-    return data => <CraneSunset data={data} />
+    return (data: JSX.Element[][]) => <CraneSunset data={data} />
   }
-  return (data, kanjis, arrNumKanjis) => (
+  return (data: JSX.Element[][], kanjis: number, arrNumKanjis: number[]) => (
     <SakuraDeer data={data} kanjis={kanjis} numKanjis={arrNumKanjis} />
   )
 }

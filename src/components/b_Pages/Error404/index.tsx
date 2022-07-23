@@ -15,7 +15,7 @@ import {
   AllQuizFragmentForQuizLinkProps,
   IlluQueryProps,
 } from "src/models/models"
-import { colors } from "src/models/constants"
+import { illuColors } from "src/models/constants"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentForIllustrationsProps
@@ -70,7 +70,7 @@ const Error404 = () => {
           renderIllu: data => <CloudDragon data={data} />,
           arrDataIllu: {
             arrIllu: allCloudDragonJson.nodes,
-            colorIllu: colors.cloudDragon.background,
+            colorIllu: illuColors.cloudDragon.background,
           },
         }}
         textWithTitle={{

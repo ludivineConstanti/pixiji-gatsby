@@ -1,7 +1,7 @@
 import { DataIlluRawProps } from "../../src/models/models"
-import { colors } from "../../src/models/constants"
+import { illuColors } from "../../src/models/constants"
 
-const { colorMoon } = colors.kaguyaHime
+const { colorMoon } = illuColors.kaguyaHime
 
 const moon = [
   [

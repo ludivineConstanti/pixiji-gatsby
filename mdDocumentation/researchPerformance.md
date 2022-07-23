@@ -108,3 +108,7 @@ export const SStar = styled(motion.div).attrs<Attrs>(props => ({
   }
 `
 ```
+
+## Converting the illustration data to json files, instead of javascript
+
+This does not seem to make a huge difference, the performance improved only by one point, after making the change, and I am not sure how reliable that information is, since the lighthouse are not always 100% consistent between the builds, so it could also have had no impact on the performance, which surprised me, since I thought that even if the file size was not really reduced, by going from javascript to json, having less javascript to execute would make a difference... but maybe the files were just not large enough to have a real impact.

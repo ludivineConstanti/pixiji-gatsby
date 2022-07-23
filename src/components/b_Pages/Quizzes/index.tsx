@@ -7,7 +7,6 @@ import ButtonBig from "src/components/e_Interactives/ButtonBig"
 import TextWithTitle from "src/components/c_Partials/TextWithTitle"
 import IlluQuiz from "src/components/d_Illustrations/IlluQuiz"
 import QuizzesNav from "./QuizzesNav"
-import { DataIlluProps } from "src/models/models"
 
 interface QueryProps {
   allKanjisJson: {
@@ -21,7 +20,6 @@ interface QueryProps {
       slug: string
     }[]
   }
-  allIlluQuizJson: { nodes: { color: string; data: DataIlluProps[] }[] }
 }
 
 interface QuizzesProps {
@@ -33,22 +31,21 @@ interface QuizzesProps {
 }
 
 const Quizzes = ({ currentQuiz }: QuizzesProps) => {
-  const { allKanjisJson, allQuiz, allIlluQuizJson } =
-    useStaticQuery<QueryProps>(graphql`
-      query {
-        allKanjisJson {
-          nodes {
-            quizId
-          }
-        }
-        allQuiz {
-          nodes {
-            quizId
-            slug
-          }
+  const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
+    query {
+      allKanjisJson {
+        nodes {
+          quizId
         }
       }
-    `)
+      allQuiz {
+        nodes {
+          quizId
+          slug
+        }
+      }
+    }
+  `)
 
   const totalOptions = useMemo(
     () => allKanjisJson.nodes.filter(e => e.quizId === currentQuiz.id).length,

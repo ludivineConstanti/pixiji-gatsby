@@ -16,7 +16,7 @@ import DeleteAccount from "./DeleteAccount"
 import UpdateEmail from "./UpdateEmail"
 import UpdatePassword from "./UpdatePassword"
 import { uiStateOptions } from "./basics"
-import { paths, colors } from "src/models/constants"
+import { paths, illuColors } from "src/models/constants"
 import {
   KanjisJsonFragmentForIllustrationsProps,
   IlluQueryProps,
@@ -76,7 +76,7 @@ const MyProfile = () => {
         renderIllu={data => <SeaTurtles data={data} />}
         arrDataIllu={{
           arrIllu: allSeaTurtlesJson.nodes,
-          colorIllu: colors.seaTurtles.background,
+          colorIllu: illuColors.seaTurtles.background,
         }}
       />
       {!email && isLoggedOutOnFirstVisit ? (

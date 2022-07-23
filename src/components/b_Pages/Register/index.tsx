@@ -17,7 +17,7 @@ import {
 } from "src/models/models"
 import DefaultState from "./DefaultState"
 import { updateEmail } from "src/reducer/slices/globalSlice"
-import { colors } from "src/models/constants"
+import { illuColors } from "src/models/constants"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentForIllustrationsProps
@@ -73,7 +73,7 @@ const Register = () => {
         renderIllu={data => <SakuraBirds data={data} />}
         arrDataIllu={{
           arrIllu: allSakuraBirdsJson.nodes,
-          colorIllu: colors.sakuraBirds.background,
+          colorIllu: illuColors.sakuraBirds.background,
         }}
       />
       {email && isLoggedInOnFirstVisit ? (

@@ -1,5 +1,5 @@
 import { writeFileSync } from "fs"
-import { colors } from "../src/models/constants"
+import { illuColors } from "../src/models/constants"
 
 import { DataIlluProps, DataIlluRawProps } from "../src/models/models"
 import cloudDragon from "./data/cloudDragon"
@@ -77,11 +77,22 @@ const main = () => {
   writeFileSync(
     "../src/content/json/illuQuiz.json",
     JSON.stringify([
-      { data: flattenIllu(snowMonkeys), color: colors.snowMonkeys.background },
-      { data: flattenIllu(craneSunset), color: colors.craneSunset.background },
-      { data: flattenIllu(sakuraDeer), color: colors.sakuraDeer.background },
+      {
+        data: flattenIllu(snowMonkeys),
+        color: illuColors.snowMonkeys.background,
+      },
+      {
+        data: flattenIllu(craneSunset),
+        color: illuColors.craneSunset.background,
+      },
+      {
+        data: flattenIllu(sakuraDeer),
+        color: illuColors.sakuraDeer.background,
+      },
     ])
   )
+
+  // tslint:disable-next-line:no-console
   console.log("done")
 }
 

@@ -1,9 +1,9 @@
 import { DataIlluRawProps } from "../../src/models/models"
-import { colors } from "../../src/models/constants"
+import { illuColors } from "../../src/models/constants"
 
 const orangeL4 = "#FFDFD9"
 const orangeL3 = "#FFBFB3"
-const { orangeL2 } = colors.cloudDragon
+const { orangeL2 } = illuColors.cloudDragon
 const orangeL1 = "#FF9A86"
 const orange = "#FF866F"
 const orangeD1 = "#F76C52"
