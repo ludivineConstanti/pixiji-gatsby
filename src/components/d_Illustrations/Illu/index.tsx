@@ -47,12 +47,10 @@ const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
     const arrIlluFormatted = []
     // need the number at the end so that it doesn't always start from 0
     // while pushing the groups in the squareContainer array
-    let beginAtIndex = 0
-    for (let i = 0; i < arrIllu.length; i += 1) {
-      arrIlluFormatted.push(
-        createIllustration(arrIllu[i], i, beginAtIndex, kanjisArr)
-      )
-      beginAtIndex += arrIllu[i].length
+
+    for (let i = 0; i <= arrIllu[arrIllu.length - 1].indexIllu; i += 1) {
+      const currentIllu = arrIllu.filter(e => e.indexIllu === i)
+      arrIlluFormatted.push(createIllustration(currentIllu, kanjisArr))
     }
 
     const arrNumKanjis = []

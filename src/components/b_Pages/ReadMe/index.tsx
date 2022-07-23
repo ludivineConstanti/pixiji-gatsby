@@ -7,32 +7,43 @@ import {
   getKanjisNum,
 } from "src/helpers/formatters/kanjisArrFormatter"
 import KodomoNoHi from "src/components/d_Illustrations/_compIllus/KodomoNoHi"
-import {
-  arrIllu,
-  colorIllu,
-} from "src/components/d_Illustrations/_data/kodomoNoHi"
 import PageWithText from "src/components/c_Partials/PageWithText"
 import {
   KanjisJsonFragmentForIllustrationsProps,
   AllQuizFragmentForQuizLinkProps,
+  IlluQueryProps,
 } from "src/models/models"
+import { colors } from "src/models/constants"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentForIllustrationsProps
   allQuiz: AllQuizFragmentForQuizLinkProps
+  allKodomoNoHiJson: IlluQueryProps
 }
 
 const ReadMe = () => {
-  const { allKanjisJson, allQuiz } = useStaticQuery<QueryProps>(graphql`
-    query {
-      allKanjisJson {
-        ...kanjisJsonFragmentForIllustrations
+  const { allKanjisJson, allQuiz, allKodomoNoHiJson } =
+    useStaticQuery<QueryProps>(graphql`
+      query {
+        allKanjisJson {
+          ...kanjisJsonFragmentForIllustrations
+        }
+        allQuiz {
+          ...quizFragmentForQuizLink
+        }
+        allKodomoNoHiJson {
+          nodes {
+            main
+            color
+            column
+            indexIllu
+            indexKanjiGroup
+            row
+            size
+          }
+        }
       }
-      allQuiz {
-        ...quizFragmentForQuizLink
-      }
-    }
-  `)
+    `)
 
   const currentQuizId = useAppSelector(state => state.quiz.currentQuizId)
   const quizzesSlug = allQuiz.nodes.filter(
@@ -40,8 +51,12 @@ const ReadMe = () => {
   )[0].slug
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
-    [arrIllu]
+    () =>
+      kanjisArrFormatter(
+        allKanjisJson.nodes,
+        getKanjisNum(allKodomoNoHiJson.nodes)
+      ),
+    [allKanjisJson, allKodomoNoHiJson]
   )
 
   return (
@@ -52,7 +67,10 @@ const ReadMe = () => {
           renderIllu: (data, kanjis, arrNumKanjis) => (
             <KodomoNoHi data={data} kanjis={kanjis} numKanjis={arrNumKanjis} />
           ),
-          arrDataIllu: { arrIllu, colorIllu },
+          arrDataIllu: {
+            arrIllu: allKodomoNoHiJson.nodes,
+            colorIllu: colors.kodomoNoHi.background,
+          },
         }}
         textWithTitle={{
           title: "Read me",

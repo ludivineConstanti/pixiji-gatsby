@@ -26,6 +26,10 @@ e_Statics => Small elements that are not interactive
 
 I first thought about removing the "Reducer" or "Actions" at the end of the file name, to make it shorter, since they were in the reducers and actions folder anyways, but I changed my mind after clicking a few times on the files in the reducer folder, thinking I was going to find the component.
 
+## Naming variables, properties...
+
+I first used a lot of individual letters for my names. ex: `t.map(e => e.split(""))`, since I felt that the code is more readable, since it's shorter. I then changed my mind, after working on the project during a few months and seeing how easy it is to forget the structure and names of the website, and decided to use names that are more descriptive-
+
 ### Update
 
 This stopped being relevant after I started using redux-toolkit

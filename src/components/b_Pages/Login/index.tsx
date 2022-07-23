@@ -11,23 +11,35 @@ import Illu from "src/components/d_Illustrations/Illu"
 import Text from "src/components/f_Statics/Text"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
 import RedPanda from "src/components/d_Illustrations/_compIllus/RedPanda"
+import { colors } from "src/models/constants"
 import {
-  arrIllu,
-  colorIllu,
-} from "src/components/d_Illustrations/_data/redPanda"
-import { KanjisJsonFragmentForIllustrationsProps } from "src/models/models"
+  KanjisJsonFragmentForIllustrationsProps,
+  IlluQueryProps,
+} from "src/models/models"
 import { updateEmail } from "src/reducer/slices/globalSlice"
 import DefaultState from "./DefaultState"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentForIllustrationsProps
+  allRedPandaJson: IlluQueryProps
 }
 
 const Login = () => {
-  const { allKanjisJson } = useStaticQuery<QueryProps>(graphql`
+  const { allKanjisJson, allRedPandaJson } = useStaticQuery<QueryProps>(graphql`
     query {
       allKanjisJson {
         ...kanjisJsonFragmentForIllustrations
+      }
+      allRedPandaJson {
+        nodes {
+          main
+          color
+          column
+          indexIllu
+          indexKanjiGroup
+          row
+          size
+        }
       }
     }
   `)
@@ -38,7 +50,7 @@ const Login = () => {
   const email = useAppSelector(state => state.global.email)
 
   const kanjisArr = useMemo(() => {
-    const kanjisNum = getKanjisNum(arrIllu)
+    const kanjisNum = getKanjisNum(allRedPandaJson.nodes)
     return kanjisArrFormatter(allKanjisJson.nodes, kanjisNum)
   }, [])
 
@@ -53,7 +65,10 @@ const Login = () => {
       <Illu
         kanjisArr={kanjisArr}
         renderIllu={data => <RedPanda data={data} />}
-        arrDataIllu={{ arrIllu, colorIllu }}
+        arrDataIllu={{
+          arrIllu: allRedPandaJson.nodes,
+          colorIllu: colors.redPanda.background,
+        }}
       />
       {email && isLoggedInOnFirstVisit ? (
         <TextWrapper>

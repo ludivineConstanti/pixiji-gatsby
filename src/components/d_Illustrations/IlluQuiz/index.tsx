@@ -1,21 +1,27 @@
 import React, { memo } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import Illu from "src/components/d_Illustrations/Illu"
-import {
-  arrSnowMonkeys,
-  colorSnowMonkeys,
-} from "src/components/d_Illustrations/_data/snowMonkeys"
 import SnowMonkeys from "src/components/d_Illustrations/_compIllus/SnowMonkeys"
-import {
-  arrCraneSunset,
-  colorCraneSunset,
-} from "src/components/d_Illustrations/_data/craneSunset"
 import CraneSunset from "src/components/d_Illustrations/_compIllus/CraneSunset"
-import {
-  arrSakuraDeer,
-  colorSakuraDeer,
-} from "src/components/d_Illustrations/_data/sakuraDeer"
 import SakuraDeer from "src/components/d_Illustrations/_compIllus/SakuraDeer"
+import { DataIlluProps } from "src/models/models"
+
+const returnIlluFunction = (currentQuizId: number) => {
+  if (currentQuizId === 1) {
+    return data => <SnowMonkeys data={data} />
+  }
+  if (currentQuizId === 2) {
+    return data => <CraneSunset data={data} />
+  }
+  return (data, kanjis, arrNumKanjis) => (
+    <SakuraDeer data={data} kanjis={kanjis} numKanjis={arrNumKanjis} />
+  )
+}
+
+interface QueryProps {
+  allIlluQuizJson: { nodes: { color: string; data: DataIlluProps[] }[] }
+}
 
 interface IlluQuizProps {
   currentQuizId: number
@@ -23,31 +29,33 @@ interface IlluQuizProps {
 }
 
 const IlluQuiz = ({ currentQuizId, kanjisArr }: IlluQuizProps) => {
-  if (currentQuizId === 1) {
-    return (
-      <Illu
-        kanjisArr={kanjisArr}
-        renderIllu={data => <SnowMonkeys data={data} />}
-        arrDataIllu={{ arrIllu: arrSnowMonkeys, colorIllu: colorSnowMonkeys }}
-      />
-    )
-  }
-  if (currentQuizId === 2) {
-    return (
-      <Illu
-        kanjisArr={kanjisArr}
-        renderIllu={data => <CraneSunset data={data} />}
-        arrDataIllu={{ arrIllu: arrCraneSunset, colorIllu: colorCraneSunset }}
-      />
-    )
-  }
+  const { allIlluQuizJson } = useStaticQuery<QueryProps>(graphql`
+    query {
+      allIlluQuizJson {
+        nodes {
+          color
+          data {
+            color
+            column
+            indexIllu
+            indexKanjiGroup
+            main
+            position
+            row
+            size
+          }
+        }
+      }
+    }
+  `)
   return (
     <Illu
       kanjisArr={kanjisArr}
-      renderIllu={(data, kanjis, arrNumKanjis) => (
-        <SakuraDeer data={data} kanjis={kanjis} numKanjis={arrNumKanjis} />
-      )}
-      arrDataIllu={{ arrIllu: arrSakuraDeer, colorIllu: colorSakuraDeer }}
+      renderIllu={returnIlluFunction(currentQuizId)}
+      arrDataIllu={{
+        arrIllu: allIlluQuizJson.nodes[currentQuizId - 1].data,
+        colorIllu: allIlluQuizJson.nodes[currentQuizId - 1].color,
+      }}
     />
   )
 }

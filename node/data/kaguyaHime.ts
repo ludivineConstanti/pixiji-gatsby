@@ -1,14 +1,15 @@
-import { DataIllu } from "src/models/models"
+import { DataIlluRawProps } from "../../src/models/models"
+import { colors } from "../../src/models/constants"
 
-export const colorMoon = "#EFC491"
+const { colorMoon } = colors.kaguyaHime
 
 const moon = [
   [
     {
-      s: 4,
+      size: 4,
       column: 1,
       row: 1,
-      c: colorMoon,
+      color: colorMoon,
       main: true,
     },
   ],
@@ -34,195 +35,194 @@ const hime = [
   [
     {
       // hair
-      s: 2,
+      size: 2,
       column: 11,
       row: 1,
-      c: brownD1,
+      color: brownD1,
     },
     {
-      s: 2,
+      size: 2,
       column: 13,
       row: 1,
-      c: brownD2,
+      color: brownD2,
     },
     {
-      s: 2,
+      size: 2,
       column: 9,
       row: 3,
-      c: brown,
+      color: brown,
     },
     {
-      s: 2,
+      size: 2,
       column: 11,
       row: 3,
-      c: brown,
+      color: brown,
     },
     {
-      s: 2,
+      size: 2,
       column: 13,
       row: 3,
-      c: brownD1,
+      color: brownD1,
     },
     {
-      s: 2,
+      size: 2,
       column: 15,
       row: 3,
-      c: brownD1,
+      color: brownD1,
     },
     {
-      s: 2,
+      size: 2,
       column: 9,
       row: 5,
-      c: brown,
+      color: brown,
     },
     {
-      s: 2,
+      size: 2,
       column: 9,
       row: 7,
-      c: brown,
+      color: brown,
     },
     {
-      s: 2,
+      size: 2,
       column: 15,
       row: 5,
-      c: brownD1,
+      color: brownD1,
     },
     {
-      s: 2,
+      size: 2,
       column: 15,
       row: 7,
-      c: brownD1,
+      color: brownD1,
     },
     {
       // face
-      s: 4,
+      size: 4,
       column: 11,
       row: 5,
-      c: pinkL2,
+      color: pinkL2,
       main: true,
     },
     {
-      s: 2,
+      size: 2,
       column: 11,
       row: 9,
-      c: greenL1,
+      color: greenL1,
     },
     {
-      s: 2,
+      size: 2,
       column: 13,
       row: 9,
-      c: green,
+      color: green,
     },
   ],
   [
     {
-      s: 2,
+      size: 2,
       column: 9,
       row: 9,
-      c: pinkL2,
+      color: pinkL2,
     },
     {
-      s: 4,
+      size: 4,
       column: 7,
       row: 11,
-      c: pinkL1,
+      color: pinkL1,
       main: true,
     },
   ],
   [
     {
-      s: 4,
+      size: 4,
       column: 11,
       row: 11,
-      c: pinkL2,
+      color: pinkL2,
       main: true,
     },
   ],
   [
     {
-      s: 2,
+      size: 2,
       column: 15,
       row: 9,
-      c: pinkL1,
+      color: pinkL1,
     },
     {
-      s: 4,
+      size: 4,
       column: 15,
       row: 11,
-      c: pink,
+      color: pink,
       main: true,
     },
   ],
   [
     {
-      s: 4,
+      size: 4,
       column: 1,
       row: 15,
-      c: pinkL2,
+      color: pinkL2,
       main: true,
     },
   ],
   [
     {
-      s: 4,
+      size: 4,
       column: 5,
       row: 15,
-      c: pink,
+      color: pink,
       main: true,
     },
     {
-      s: 2,
+      size: 2,
       column: 9,
       row: 15,
-      c: pinkD1,
+      color: pinkD1,
     },
   ],
   [
     {
-      s: 2,
+      size: 2,
       column: 9,
       row: 17,
-      c: pinkD2,
+      color: pinkD2,
     },
     {
-      s: 4,
+      size: 4,
       column: 11,
       row: 15,
-      c: pinkD4,
+      color: pinkD4,
       main: true,
     },
     {
-      s: 2,
+      size: 2,
       column: 15,
       row: 17,
-      c: pinkD3,
+      color: pinkD3,
     },
   ],
   [
     {
-      s: 2,
+      size: 2,
       column: 15,
       row: 15,
-      c: pinkD2,
+      color: pinkD2,
     },
     {
-      s: 4,
+      size: 4,
       column: 17,
       row: 15,
-      c: pinkD1,
+      color: pinkD1,
       main: true,
     },
   ],
   [
     {
-      s: 4,
+      size: 4,
       column: 21,
       row: 15,
-      c: pinkL1,
+      color: pinkL1,
       main: true,
     },
   ],
 ]
 
-export const arrIllu: DataIllu[][][] = [moon, hime]
-export const colorIllu = "#02312E"
+export default [moon, hime] as DataIlluRawProps[][][]

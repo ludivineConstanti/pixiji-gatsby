@@ -6,8 +6,6 @@ This website helps you to train your kanjis (characters from the Japanese writin
 
 The ⚡⚡⚡ mdDocumentation folder ⚡⚡⚡ contains some observations made during the project (bugs, research...). Other observations are made in the code itself as comment.
 
-You can see the previous git history of this project on [this repository](https://github.com/ludivineConstanti/Pixiji), which contains the 1st version of this website.
-
 ### This is a portfolio project, so some feature were created, just to make the website easier to go through:
 
 - A "Use Dummy email" button (in the menu) allows you to log in a pre-existing account (which already has some scores, from the quizzes).
@@ -23,6 +21,15 @@ You can see the previous git history of this project on [this repository](https:
 - The pixel art on the right (when you play the quiz) show you the answers again (and their translation), if you want to spend more time looking at them.
 - You can see japanese characters (and their pronunciation + translation) on every page of the website (it reacts on hover).
 - If you click on the japanese characters that are displayed in the illustrations, more details will be shown (translation and use cases, and your scores, for this character, if you are logged in).
+
+## Previous version
+
+You can see the previous git history of this project on [this repository](https://github.com/ludivineConstanti/Pixiji), which contains the 1st version of this website.
+
+## What changed since version n°1
+
+- There's now a back-end that offers the option to create an account or login.
+- The performance improved.
 
 ## ✏️ Related projects
 

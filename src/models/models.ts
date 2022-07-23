@@ -1,11 +1,19 @@
-export interface DataIllu {
-  s: number
+export interface DataIlluRawProps {
+  size: number
   column: number
   row: number
-  c: string
-  main?: "bottom" | boolean
+  color: string
+  main?: true
   position?: "right" | "left" | "top" | "bottom"
-  animationCase?: string
+}
+
+export interface DataIlluProps extends DataIlluRawProps {
+  indexIllu: number
+  indexKanjiGroup: number
+}
+
+export interface IlluQueryProps {
+  nodes: DataIlluProps[]
 }
 
 export interface KanjisJsonFragmentForIllustrationsProps {
@@ -36,7 +44,7 @@ export interface IlluProps {
     arrNumKanjis: number[]
   ) => JSX.Element
   arrDataIllu: {
-    arrIllu: DataIllu[][][]
+    arrIllu: DataIlluProps[]
     colorIllu: string
   }
 }

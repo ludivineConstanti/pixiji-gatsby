@@ -6,30 +6,47 @@ import {
   getKanjisNum,
 } from "src/helpers/formatters/kanjisArrFormatter"
 import SeaTurtles from "src/components/d_Illustrations/_compIllus/SeaTurtles"
-import {
-  arrIllu,
-  colorIllu,
-} from "src/components/d_Illustrations/_data/seaTurtles"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
 import Illu from "src/components/d_Illustrations/Illu"
 import ButtonInText from "src/components/e_Interactives/ButtonInText"
 import { useAppSelector } from "src/store"
 import Text from "src/components/f_Statics/Text"
-import { paths } from "src/models/constants"
 import DefaultState from "./DefaultState"
 import DeleteAccount from "./DeleteAccount"
 import UpdateEmail from "./UpdateEmail"
 import UpdatePassword from "./UpdatePassword"
 import { uiStateOptions } from "./basics"
+import { paths, colors } from "src/models/constants"
+import {
+  KanjisJsonFragmentForIllustrationsProps,
+  IlluQueryProps,
+} from "src/models/models"
+
+interface QueryProps {
+  allKanjisJson: KanjisJsonFragmentForIllustrationsProps
+  allSeaTurtlesJson: IlluQueryProps
+}
 
 const MyProfile = () => {
-  const { allKanjisJson } = useStaticQuery(graphql`
-    query {
-      allKanjisJson {
-        ...kanjisJsonFragmentForIllustrations
+  const { allKanjisJson, allSeaTurtlesJson } =
+    useStaticQuery<QueryProps>(graphql`
+      query {
+        allKanjisJson {
+          ...kanjisJsonFragmentForIllustrations
+        }
+        allSeaTurtlesJson {
+          nodes {
+            main
+            color
+            column
+            indexIllu
+            indexKanjiGroup
+            row
+            size
+          }
+        }
       }
-    }
-  `)
+    `)
 
   const email = useAppSelector(state => state.global.email)
 
@@ -37,8 +54,12 @@ const MyProfile = () => {
   const [uiState, setUiState] = useState(uiStateOptions.default)
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
-    [arrIllu]
+    () =>
+      kanjisArrFormatter(
+        allKanjisJson.nodes,
+        getKanjisNum(allSeaTurtlesJson.nodes)
+      ),
+    [allKanjisJson, allSeaTurtlesJson]
   )
 
   useEffect(() => {
@@ -52,7 +73,10 @@ const MyProfile = () => {
       <Illu
         kanjisArr={kanjisArr}
         renderIllu={data => <SeaTurtles data={data} />}
-        arrDataIllu={{ arrIllu, colorIllu }}
+        arrDataIllu={{
+          arrIllu: allSeaTurtlesJson.nodes,
+          colorIllu: colors.seaTurtles.background,
+        }}
       />
       {!email && isLoggedOutOnFirstVisit ? (
         <TextWrapper>

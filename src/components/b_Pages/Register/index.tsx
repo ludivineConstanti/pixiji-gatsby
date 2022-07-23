@@ -8,29 +8,43 @@ import {
 } from "src/helpers/formatters/kanjisArrFormatter"
 import Illu from "src/components/d_Illustrations/Illu"
 import SakuraBirds from "src/components/d_Illustrations/_compIllus/SakuraBirds"
-import {
-  arrIllu,
-  colorIllu,
-} from "src/components/d_Illustrations/_data/sakuraBirds"
 import TextWrapper from "src/components/f_Statics/TextWrapper"
 import Text from "src/components/f_Statics/Text"
 import ButtonInText from "src/components/e_Interactives/ButtonInText"
-import { KanjisJsonFragmentForIllustrationsProps } from "src/models/models"
+import {
+  KanjisJsonFragmentForIllustrationsProps,
+  IlluQueryProps,
+} from "src/models/models"
 import DefaultState from "./DefaultState"
 import { updateEmail } from "src/reducer/slices/globalSlice"
+import { colors } from "src/models/constants"
 
 interface QueryProps {
   allKanjisJson: KanjisJsonFragmentForIllustrationsProps
+  allSakuraBirdsJson: IlluQueryProps
 }
 
 const Register = () => {
-  const { allKanjisJson } = useStaticQuery<QueryProps>(graphql`
-    query {
-      allKanjisJson {
-        ...kanjisJsonFragmentForIllustrations
+  const { allKanjisJson, allSakuraBirdsJson } =
+    useStaticQuery<QueryProps>(graphql`
+      query {
+        allKanjisJson {
+          ...kanjisJsonFragmentForIllustrations
+        }
+        allSakuraBirdsJson {
+          nodes {
+            main
+            color
+            column
+            indexIllu
+            indexKanjiGroup
+            row
+            size
+            position
+          }
+        }
       }
-    }
-  `)
+    `)
 
   const dispatch = useAppDispatch()
 
@@ -38,8 +52,12 @@ const Register = () => {
   const email = useAppSelector(state => state.global.email)
 
   const kanjisArr = useMemo(
-    () => kanjisArrFormatter(allKanjisJson.nodes, getKanjisNum(arrIllu)),
-    []
+    () =>
+      kanjisArrFormatter(
+        allKanjisJson.nodes,
+        getKanjisNum(allSakuraBirdsJson.nodes)
+      ),
+    [allKanjisJson, allSakuraBirdsJson]
   )
 
   useEffect(() => {
@@ -53,7 +71,10 @@ const Register = () => {
       <Illu
         kanjisArr={kanjisArr}
         renderIllu={data => <SakuraBirds data={data} />}
-        arrDataIllu={{ arrIllu, colorIllu }}
+        arrDataIllu={{
+          arrIllu: allSakuraBirdsJson.nodes,
+          colorIllu: colors.sakuraBirds.background,
+        }}
       />
       {email && isLoggedInOnFirstVisit ? (
         <TextWrapper>

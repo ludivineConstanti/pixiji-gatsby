@@ -1,5 +1,5 @@
 import { shuffle } from "../shuffle"
-import { DataIllu } from "src/models/models"
+import { DataIlluProps } from "src/models/models"
 
 export const kanjisArrFormatter = (
   kanjis: { kanjiId: number }[],
@@ -21,10 +21,7 @@ export const kanjisArrFormatter = (
   return kanjisArr
 }
 
-export const getKanjisNum = (arrOfArrs: DataIllu[][][]) => {
-  let length = 0
-  arrOfArrs.forEach(arr => {
-    length += arr.length
-  })
-  return length
+export const getKanjisNum = (dataIllus: DataIlluProps[]) => {
+  const lastElement = dataIllus[dataIllus.length - 1]
+  return lastElement.indexKanjiGroup + lastElement.indexIllu + 1
 }
