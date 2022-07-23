@@ -42,6 +42,7 @@ const Error404 = () => {
             indexKanjiGroup
             row
             size
+            position
           }
         }
       }

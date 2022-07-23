@@ -43,6 +43,7 @@ const MyProfile = () => {
             indexKanjiGroup
             row
             size
+            position
           }
         }
       }

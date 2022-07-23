@@ -39,6 +39,7 @@ const Login = () => {
           indexKanjiGroup
           row
           size
+          position
         }
       }
     }

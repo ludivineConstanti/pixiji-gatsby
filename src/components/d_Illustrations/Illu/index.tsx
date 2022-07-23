@@ -45,19 +45,15 @@ const Illu = ({ kanjisArr = [], renderIllu, arrDataIllu }: IlluProps) => {
     const { arrIllu } = arrDataIllu
 
     const arrIlluFormatted = []
-    // need the number at the end so that it doesn't always start from 0
-    // while pushing the groups in the squareContainer array
-
+    // arrNumKanji keeps track of how many kanjis are in one illustration
+    // (to decide if a decorative element linked to this illustration should be displayed or not)
+    const arrNumKanjis = []
     for (let i = 0; i <= arrIllu[arrIllu.length - 1].indexIllu; i += 1) {
+      // create illustration for one element (plant, animal...)
       const currentIllu = arrIllu.filter(e => e.indexIllu === i)
       arrIlluFormatted.push(createIllustration(currentIllu, kanjisArr))
-    }
-
-    const arrNumKanjis = []
-    let numKanjisCounter = 0
-    for (const illu of arrIllu) {
-      numKanjisCounter += illu.length
-      arrNumKanjis.push(numKanjisCounter)
+      // keeps track of how many kanjis are in this element
+      arrNumKanjis.push(currentIllu[currentIllu.length - 1].indexKanjiGroup + 1)
     }
 
     return { illuFormatted: arrIlluFormatted, numKanjis: arrNumKanjis }

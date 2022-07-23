@@ -18,7 +18,7 @@ export const createIllustration = (
           columnStart={square.column}
           rowStart={square.row}
           color={square.color}
-          kanjiIndex={square.indexIllu + square.indexKanjiGroup}
+          kanjiIndex={square.indexKanjiGroup}
           position={square.position || ""}
           kanjisArr={kanjisArr}
         />
@@ -31,7 +31,7 @@ export const createIllustration = (
           columnStart={square.column}
           rowStart={square.row}
           color={square.color}
-          kanjiIndex={square.indexIllu + square.indexKanjiGroup}
+          kanjiIndex={square.indexKanjiGroup}
           kanjisArrLength={kanjisArr.length}
         />
       )

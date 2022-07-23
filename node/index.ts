@@ -15,19 +15,28 @@ import snowMonkeys from "./data/snowMonkeys"
 
 const flattenIllu = (illu: DataIlluRawProps[][][]) => {
   let illustrationElementArr: DataIlluProps[] = []
+  let kanjiCounter = 0
 
   illu.forEach((illustrationElement, illustrationElementIndex: number) => {
     let KanjiGroupArr: DataIlluProps[] = []
-    illustrationElement.forEach((kanjiGroup, kanjiGroupIndex: number) => {
+    illustrationElement.forEach(kanjiGroup => {
+      let increasedKanjiCounter = false
       kanjiGroup.forEach(square => {
         KanjiGroupArr = [
           ...KanjiGroupArr,
           {
             ...square,
             indexIllu: illustrationElementIndex,
-            indexKanjiGroup: kanjiGroupIndex,
+            indexKanjiGroup: increasedKanjiCounter
+              ? kanjiCounter - 1
+              : kanjiCounter,
           },
         ]
+
+        if (square.main === true) {
+          kanjiCounter++
+          increasedKanjiCounter = true
+        }
       })
     })
     illustrationElementArr = [...illustrationElementArr, ...KanjiGroupArr]
